@@ -1,4 +1,4 @@
 package com.globallogic.dc.model;
 
-public class Section {
+public class Item {
 }

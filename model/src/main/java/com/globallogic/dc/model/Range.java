@@ -1,4 +1,6 @@
 package com.globallogic.dc.model;
 
-public class RangeItem {
+public class Range {
+
+    Item item;
 }
