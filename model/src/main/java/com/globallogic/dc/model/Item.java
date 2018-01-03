@@ -1,18 +1,20 @@
 package com.globallogic.dc.model;
 
+import java.util.List;
+
 public class Item {
 
-    private Item items;
+    private List<Item> items;
 
-    public Item(Item items) {
+    public Item(List<Item> items) {
         this.items = items;
     }
 
-    public Item getItem() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItem(Item items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 }
