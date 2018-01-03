@@ -1,10 +1,22 @@
 package com.globallogic.dc.model;
 
+import java.util.List;
+
 public class Range {
 
     private Item item;
     private Range range;
-    private Section sections;
+    private List<Section> sections;
+
+    public Range(Item item, Range range, List<Section> sections) {
+        this.item = item;
+        this.range = range;
+        this.sections = sections;
+    }
+
+    public Range(List<Section> sections) {
+        this.sections = sections;
+    }
 
     public Range(Item item, Range range) {
         this.item = item;
@@ -17,14 +29,6 @@ public class Range {
 
     public Range(Range range) {
         this.range = range;
-    }
-
-    public Section getSections() {
-        return sections;
-    }
-
-    public void setSections(Section sections) {
-        this.sections = sections;
     }
 
     public Item getItem() {
@@ -41,5 +45,13 @@ public class Range {
 
     public void setRange(Range range) {
         this.range = range;
+    }
+
+    public List<Section> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
     }
 }
