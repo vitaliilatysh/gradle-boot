@@ -1,36 +1,40 @@
 package com.globallogic.dc.model;
 
+import java.util.List;
+
 public class SubChapter {
 
-    private Section section;
-    private Range range;
+    private Chapter chapter;
+    private List<Section> sections;
+    private List<Range> ranges;
 
-    public SubChapter(Section section) {
-        this.section = section;
+    public SubChapter(final Chapter chapter, final List<Section> sections, final List<Range> ranges) {
+        this.chapter = chapter;
+        this.sections = sections;
+        this.ranges = ranges;
     }
 
-    public SubChapter(Range range) {
-        this.range = range;
+    public Chapter getChapter() {
+        return chapter;
     }
 
-    public SubChapter(Section section, Range range) {
-        this.section = section;
-        this.range = range;
+    public void setChapter(final Chapter chapter) {
+        this.chapter = chapter;
     }
 
-    public Section getSection() {
-        return section;
+    public List<Section> getSections() {
+        return sections;
     }
 
-    public void setSection(Section section) {
-        this.section = section;
+    public void setSections(final List<Section> sections) {
+        this.sections = sections;
     }
 
-    public Range getRange() {
-        return range;
+    public List<Range> getRanges() {
+        return ranges;
     }
 
-    public void setRange(Range range) {
-        this.range = range;
+    public void setRanges(final List<Range> ranges) {
+        this.ranges = ranges;
     }
 }

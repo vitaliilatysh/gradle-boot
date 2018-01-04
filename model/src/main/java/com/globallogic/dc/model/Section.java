@@ -4,35 +4,22 @@ import java.util.List;
 
 public class Section {
 
-    private List<Chapter> chapters;
-    private Range range;
+    private SubChapter chapter;
+    private List<Range> ranges;
 
-    public Section(Range range) {
-        this.range = range;
+    public List<Range> getRanges() {
+        return ranges;
     }
 
-    public Section(List<Chapter> chapters) {
-        this.chapters = chapters;
+    public void setRanges(final List<Range> ranges) {
+        this.ranges = ranges;
     }
 
-    public Section(List<Chapter> chapters, Range range) {
-        this.chapters = chapters;
-        this.range = range;
+    public SubChapter getChapter() {
+        return chapter;
     }
 
-    public List<Chapter> getChapters() {
-        return chapters;
-    }
-
-    public void setChapters(List<Chapter> chapters) {
-        this.chapters = chapters;
-    }
-
-    public Range getRange() {
-        return range;
-    }
-
-    public void setRange(Range range) {
-        this.range = range;
+    public void setChapter(final SubChapter chapter) {
+        this.chapter = chapter;
     }
 }

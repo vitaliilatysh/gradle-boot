@@ -1,18 +1,20 @@
 package com.globallogic.dc.model;
 
+import java.util.List;
+
 public class Chapter {
 
-    private SubChapter subChapter;
+    private List<SubChapter> subChapters;
 
-    public Chapter(SubChapter subChapter) {
-        this.subChapter = subChapter;
+    public Chapter(final List<SubChapter> subChapters) {
+        this.subChapters = subChapters;
     }
 
-    public SubChapter getSubChapter() {
-        return subChapter;
+    public List<SubChapter> getSubChapters() {
+        return subChapters;
     }
 
-    public void setSubChapter(SubChapter subChapter) {
-        this.subChapter = subChapter;
+    public void setSubChapters(final List<SubChapter> subChapters) {
+        this.subChapters = subChapters;
     }
 }
