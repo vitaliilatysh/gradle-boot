@@ -33,11 +33,28 @@ public abstract class RangeBase extends ProductBase {
         this.items = items;
     }
 
-    abstract public void addSubChapters(final Collection<SubChapter> subChapters);
-    abstract public void addSubChapter(final Collection<SubChapter> subChapter);
-    abstract public void addItems(final Collection<Item> items);
-    abstract public void addItem(final Collection<Item> item);
-    abstract public void addSections(final Collection<Section> sections);
-    abstract public void addSection(final Collection<Section> section);
+    public void addSubChapters(final Collection<SubChapter> subChapters) {
+        this.subChapters.addAll(subChapters);
+    }
+
+    public void addSubChapter(final SubChapter subChapter) {
+        this.subChapters.add(subChapter);
+    }
+
+    public void addItems(final Collection<Item> items) {
+        this.items.addAll(items);
+    }
+
+    public void addItem(final Item item) {
+        this.items.add(item);
+    }
+
+    public void addSections(final Collection<Section> sections) {
+        this.sections.addAll(sections);
+    }
+
+    public void addSection(final Section section) {
+        this.sections.add(section);
+    }
 
 }

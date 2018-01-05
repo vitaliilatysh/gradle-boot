@@ -33,9 +33,20 @@ public abstract class ItemBase extends ProductBase {
         return items;
     }
 
-    abstract public void addItems(final Collection<Item> items);
-    abstract public void addItem(final Collection<Item> item);
-    abstract public void addRelatedItems(final Collection<Item> relatedItems);
-    abstract public void addRelatedItem(final Collection<Item> relatedItem);
+    public void addItems(final Collection<Item> items){
+        this.items.addAll(items);
+    }
+
+    public void addItem(final Item item){
+        this.items.add(item);
+    }
+
+    public void addRelatedItems(final Collection<Item> relatedItems){
+        this.relatedItems.addAll(relatedItems);
+    }
+
+    public void addRelatedItem(final Item relatedItem){
+        this.relatedItems.add(relatedItem);
+    }
 
 }

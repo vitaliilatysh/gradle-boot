@@ -15,7 +15,12 @@ public abstract class ChapterBase extends ProductBase {
         this.subChapters = subChapters;
     }
 
-    abstract public void addSubChapters(final Collection<SubChapter> subChapters);
-    abstract public void addSubChapter(final Collection<SubChapter> subChapter);
+    public void addSubChapters(final Collection<SubChapter> subChapters){
+        this.subChapters.addAll(subChapters);
+    }
+
+    public void addSubChapter(final SubChapter subChapter){
+        this.subChapters.add(subChapter);
+    }
 
 }

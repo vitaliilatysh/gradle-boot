@@ -24,7 +24,12 @@ public abstract class SectionBase extends ProductBase {
         this.chapter = chapter;
     }
 
-    abstract public void addRanges(Collection<Range> ranges);
-    abstract public void addRange(Collection<Range> range);
+    public void addRanges(Collection<Range> ranges){
+        this.ranges.addAll(ranges);
+    }
+
+    public void addRange(Range range){
+        this.ranges.add(range);
+    }
 
 }

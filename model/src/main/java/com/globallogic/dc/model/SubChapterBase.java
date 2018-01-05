@@ -34,9 +34,20 @@ public abstract class SubChapterBase extends ProductBase {
         this.ranges = ranges;
     }
 
-    abstract public void addSections(Collection<Section> sections);
-    abstract public void addSection(Collection<Section> section);
-    abstract public void addRanges(Collection<Range> ranges);
-    abstract public void addRange(Collection<Range> range);
+    public void addSections(Collection<Section> sections){
+        this.sections.addAll(sections);
+    }
+
+    public void addSection(Section section){
+        this.sections.add(section);
+    }
+
+    public void addRanges(Collection<Range> ranges){
+        this.ranges.addAll(ranges);
+    }
+
+    public void addRange(Range range){
+        this.ranges.add(range);
+    }
 
 }
