@@ -3,7 +3,7 @@ package com.globallogic.dc.model;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class RangeBase extends ProductBase {
+public abstract class RangeBase extends Product {
 
     private List<SubChapter> subChapters;
     private List<Item> items;
