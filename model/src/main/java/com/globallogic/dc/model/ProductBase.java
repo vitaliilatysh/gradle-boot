@@ -1,23 +1,19 @@
 package com.globallogic.dc.model;
 
-public abstract class Base {
+public abstract class ProductBase extends Product {
 
     private String key;
     private String title;
     private String description;
 
-    abstract public boolean hasKey();
-
-    abstract public boolean hasTitle();
-
-    abstract public boolean hasDescription();
-
     public String getKey() {
         return key;
     }
-
     public void setKey(final String key) {
         this.key = key;
+    }
+    public boolean hasKey() {
+        return this.getKey() != null;
     }
 
     public String getTitle() {
@@ -28,6 +24,10 @@ public abstract class Base {
         this.title = title;
     }
 
+    public boolean hasTitle() {
+        return this.getTitle() != null;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -35,4 +35,12 @@ public abstract class Base {
     public void setDescription(final String description) {
         this.description = description;
     }
+
+    public boolean hasDescription() {
+        return this.getDescription() != null;
+    }
+
+
+
+
 }
