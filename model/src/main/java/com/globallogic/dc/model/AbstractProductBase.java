@@ -1,6 +1,6 @@
 package com.globallogic.dc.model;
 
-public abstract class ProductBase {
+public abstract class AbstractProductBase {
 
     private String key;
     private String title;
