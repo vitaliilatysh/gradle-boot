@@ -3,9 +3,9 @@ package com.globallogic.dc.model;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class SectionBase extends Product {
+public abstract class SectionBase extends AbstractProduct {
 
-    private SubChapter chapter;
+    private SubChapter subChapter;
     private List<Range> ranges;
 
     public List<Range> getRanges() {
@@ -16,12 +16,20 @@ public abstract class SectionBase extends Product {
         this.ranges = ranges;
     }
 
-    public SubChapter getChapter() {
-        return chapter;
+    public boolean hasRanges() {
+        return this.getRanges().isEmpty();
     }
 
-    public void setChapter(final SubChapter chapter) {
-        this.chapter = chapter;
+    public SubChapter getSubChapter() {
+        return subChapter;
+    }
+
+    public void setSubChapter(final SubChapter subChapter) {
+        this.subChapter = subChapter;
+    }
+
+    public boolean hasSubChapter() {
+        return this.getSubChapter() != null;
     }
 
     public void addRanges(Collection<Range> ranges){

@@ -3,7 +3,7 @@ package com.globallogic.dc.model;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class ItemBase extends Product {
+public abstract class ItemBase extends AbstractProduct {
 
     private Range range;
     private List<Item> items;
@@ -17,6 +17,10 @@ public abstract class ItemBase extends Product {
         this.relatedItems = relatedItems;
     }
 
+    public boolean hasRelatedItems(){
+        return this.getRelatedItems().isEmpty();
+    }
+
     public Range getRange() {
         return range;
     }
@@ -25,12 +29,20 @@ public abstract class ItemBase extends Product {
         this.range = range;
     }
 
-    public void setItems(final List<Item> items) {
-        this.items = items;
+    public boolean hasRange(){
+        return this.getRange() != null;
     }
 
     public List<Item> getItems() {
         return items;
+    }
+
+    public void setItems(final List<Item> items) {
+        this.items = items;
+    }
+
+    public boolean hasItems(){
+        return this.items.isEmpty();
     }
 
     public void addItems(final Collection<Item> items){
