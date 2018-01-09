@@ -18,7 +18,7 @@ public abstract class ItemBase extends AbstractProduct {
     }
 
     public boolean hasRelatedItems() {
-        return this.relatedItems != null;
+        return (this.relatedItems != null) && !(this.relatedItems.isEmpty());
     }
 
     public Range getRange() {
@@ -42,23 +42,23 @@ public abstract class ItemBase extends AbstractProduct {
     }
 
     public boolean hasItems() {
-        return this.items != null;
+        return (this.items != null) && !(this.items.isEmpty());
     }
 
     public void addItems(final Collection<Item> items) {
-        this.items.addAll(items);
+        if (this.items != null) this.items.addAll(items);
     }
 
     public void addItem(final Item item) {
-        this.items.add(item);
+        if (this.items != null) this.items.add(item);
     }
 
     public void addRelatedItems(final Collection<Item> relatedItems) {
-        this.relatedItems.addAll(relatedItems);
+        if (this.relatedItems != null) this.relatedItems.addAll(relatedItems);
     }
 
     public void addRelatedItem(final Item relatedItem) {
-        this.relatedItems.add(relatedItem);
+        if (this.relatedItems != null) this.relatedItems.add(relatedItem);
     }
 
 }

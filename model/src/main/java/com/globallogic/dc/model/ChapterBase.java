@@ -16,15 +16,15 @@ public abstract class ChapterBase extends AbstractProduct {
     }
 
     public boolean hasSubChapters() {
-        return this.subChapters != null;
+        return (this.subChapters != null) && !(this.subChapters.isEmpty());
     }
 
     public void addSubChapters(final Collection<SubChapter> subChapters) {
-        this.subChapters.addAll(subChapters);
+        if (this.subChapters != null) this.subChapters.addAll(subChapters);
     }
 
     public void addSubChapter(final SubChapter subChapter) {
-        this.subChapters.add(subChapter);
+        if (this.subChapters != null) this.subChapters.add(subChapter);
     }
 
 }

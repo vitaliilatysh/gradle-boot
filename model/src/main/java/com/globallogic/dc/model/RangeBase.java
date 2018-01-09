@@ -18,7 +18,7 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public boolean hasSubChapters() {
-        return this.subChapters != null;
+        return (this.subChapters != null) && !(this.subChapters.isEmpty());
     }
 
     public List<Section> getSections() {
@@ -30,7 +30,7 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public boolean hasSections() {
-        return this.sections != null;
+        return (this.sections != null) && !(this.sections.isEmpty());
     }
 
     public List<Item> getItems() {
@@ -42,31 +42,31 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public boolean hasItems() {
-        return this.items != null;
+        return (this.items != null) && !(this.items.isEmpty());
     }
 
     public void addSubChapters(final Collection<SubChapter> subChapters) {
-        this.subChapters.addAll(subChapters);
+        if (this.subChapters != null) this.subChapters.addAll(subChapters);
     }
 
     public void addSubChapter(final SubChapter subChapter) {
-        this.subChapters.add(subChapter);
+        if (this.subChapters != null) this.subChapters.add(subChapter);
     }
 
     public void addItems(final Collection<Item> items) {
-        this.items.addAll(items);
+        if (this.items != null) this.items.addAll(items);
     }
 
     public void addItem(final Item item) {
-        this.items.add(item);
+        if (this.items != null) this.items.add(item);
     }
 
     public void addSections(final Collection<Section> sections) {
-        this.sections.addAll(sections);
+        if (this.sections != null) this.sections.addAll(sections);
     }
 
     public void addSection(final Section section) {
-        this.sections.add(section);
+        if (this.sections != null) this.sections.add(section);
     }
 
 }

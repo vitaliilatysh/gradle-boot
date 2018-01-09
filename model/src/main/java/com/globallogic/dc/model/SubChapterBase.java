@@ -31,7 +31,7 @@ public abstract class SubChapterBase extends AbstractProduct {
     }
 
     public boolean hasSections() {
-        return this.sections != null;
+        return (this.sections != null) && !(this.sections.isEmpty());
     }
 
     public List<Range> getRanges() {
@@ -43,23 +43,23 @@ public abstract class SubChapterBase extends AbstractProduct {
     }
 
     public boolean hasRanges() {
-        return this.ranges != null;
+        return (this.ranges != null) && !(this.ranges.isEmpty());
     }
 
     public void addSections(final Collection<Section> sections) {
-        this.sections.addAll(sections);
+        if (this.sections != null) this.sections.addAll(sections);
     }
 
     public void addSection(final Section section) {
-        this.sections.add(section);
+        if (this.sections != null) this.sections.add(section);
     }
 
     public void addRanges(final Collection<Range> ranges) {
-        this.ranges.addAll(ranges);
+        if (this.ranges != null) this.ranges.addAll(ranges);
     }
 
     public void addRange(final Range range) {
-        this.ranges.add(range);
+        if (this.ranges != null) this.ranges.add(range);
     }
 
 }

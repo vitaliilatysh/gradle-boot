@@ -17,7 +17,7 @@ public abstract class SectionBase extends AbstractProduct {
     }
 
     public boolean hasRanges() {
-        return this.ranges != null;
+        return (this.ranges != null) && !(this.ranges.isEmpty());
     }
 
     public SubChapter getSubChapter() {
@@ -33,11 +33,11 @@ public abstract class SectionBase extends AbstractProduct {
     }
 
     public void addRanges(final Collection<Range> ranges) {
-        this.ranges.addAll(ranges);
+        if (this.ranges != null) this.ranges.addAll(ranges);
     }
 
     public void addRange(final Range range) {
-        this.ranges.add(range);
+        if (this.ranges != null) this.ranges.add(range);
     }
 
 }
