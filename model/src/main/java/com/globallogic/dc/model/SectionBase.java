@@ -9,7 +9,7 @@ public abstract class SectionBase extends AbstractProduct {
     private List<Range> ranges;
 
     public List<Range> getRanges() {
-        return ranges;
+        return this.ranges;
     }
 
     public void setRanges(final List<Range> ranges) {
@@ -17,11 +17,11 @@ public abstract class SectionBase extends AbstractProduct {
     }
 
     public boolean hasRanges() {
-        return this.getRanges().isEmpty();
+        return this.ranges != null;
     }
 
     public SubChapter getSubChapter() {
-        return subChapter;
+        return this.subChapter;
     }
 
     public void setSubChapter(final SubChapter subChapter) {
@@ -29,14 +29,14 @@ public abstract class SectionBase extends AbstractProduct {
     }
 
     public boolean hasSubChapter() {
-        return this.getSubChapter() != null;
+        return this.subChapter != null;
     }
 
-    public void addRanges(Collection<Range> ranges){
+    public void addRanges(final Collection<Range> ranges) {
         this.ranges.addAll(ranges);
     }
 
-    public void addRange(Range range){
+    public void addRange(final Range range) {
         this.ranges.add(range);
     }
 

@@ -8,22 +8,22 @@ public abstract class ChapterBase extends AbstractProduct {
     private List<SubChapter> subChapters;
 
     public List<SubChapter> getSubChapters() {
-        return subChapters;
+        return this.subChapters;
     }
 
     public void setSubChapters(final List<SubChapter> subChapters) {
         this.subChapters = subChapters;
     }
 
-    public boolean hasSubChapters(){
-        return this.getSubChapters().isEmpty();
+    public boolean hasSubChapters() {
+        return this.subChapters != null;
     }
 
-    public void addSubChapters(final Collection<SubChapter> subChapters){
+    public void addSubChapters(final Collection<SubChapter> subChapters) {
         this.subChapters.addAll(subChapters);
     }
 
-    public void addSubChapter(final SubChapter subChapter){
+    public void addSubChapter(final SubChapter subChapter) {
         this.subChapters.add(subChapter);
     }
 

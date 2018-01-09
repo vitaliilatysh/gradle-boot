@@ -11,7 +11,7 @@ public abstract class SubChapterBase extends AbstractProduct {
 
 
     public Chapter getChapter() {
-        return chapter;
+        return this.chapter;
     }
 
     public void setChapter(final Chapter chapter) {
@@ -19,11 +19,11 @@ public abstract class SubChapterBase extends AbstractProduct {
     }
 
     public boolean hasChapter() {
-        return this.getChapter() != null;
+        return this.chapter != null;
     }
 
     public List<Section> getSections() {
-        return sections;
+        return this.sections;
     }
 
     public void setSections(final List<Section> sections) {
@@ -31,11 +31,11 @@ public abstract class SubChapterBase extends AbstractProduct {
     }
 
     public boolean hasSections() {
-        return this.getSections().isEmpty();
+        return this.sections != null;
     }
 
     public List<Range> getRanges() {
-        return ranges;
+        return this.ranges;
     }
 
     public void setRanges(final List<Range> ranges) {
@@ -43,22 +43,22 @@ public abstract class SubChapterBase extends AbstractProduct {
     }
 
     public boolean hasRanges() {
-        return this.getRanges().isEmpty();
+        return this.ranges != null;
     }
 
-    public void addSections(Collection<Section> sections){
+    public void addSections(final Collection<Section> sections) {
         this.sections.addAll(sections);
     }
 
-    public void addSection(Section section){
+    public void addSection(final Section section) {
         this.sections.add(section);
     }
 
-    public void addRanges(Collection<Range> ranges){
+    public void addRanges(final Collection<Range> ranges) {
         this.ranges.addAll(ranges);
     }
 
-    public void addRange(Range range){
+    public void addRange(final Range range) {
         this.ranges.add(range);
     }
 

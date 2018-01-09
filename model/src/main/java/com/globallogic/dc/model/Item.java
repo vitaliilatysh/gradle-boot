@@ -1,5 +1,5 @@
 package com.globallogic.dc.model;
 
-public class Item extends ItemBase{
+public class Item extends ItemBase {
 
 }

@@ -10,7 +10,7 @@ public abstract class RangeBase extends AbstractProduct {
     private List<Section> sections;
 
     public List<SubChapter> getSubChapters() {
-        return subChapters;
+        return this.subChapters;
     }
 
     public void setSubChapters(final List<SubChapter> subChapters) {
@@ -18,11 +18,11 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public boolean hasSubChapters() {
-        return this.getSubChapters().isEmpty();
+        return this.subChapters != null;
     }
 
     public List<Section> getSections() {
-        return sections;
+        return this.sections;
     }
 
     public void setSections(final List<Section> sections) {
@@ -30,11 +30,11 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public boolean hasSections() {
-        return this.getSections().isEmpty();
+        return this.sections != null;
     }
 
     public List<Item> getItems() {
-        return items;
+        return this.items;
     }
 
     public void setItems(final List<Item> items) {
@@ -42,7 +42,7 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public boolean hasItems() {
-        return this.getItems().isEmpty();
+        return this.items != null;
     }
 
     public void addSubChapters(final Collection<SubChapter> subChapters) {
