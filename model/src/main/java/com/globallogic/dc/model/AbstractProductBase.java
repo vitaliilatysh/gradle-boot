@@ -6,6 +6,12 @@ public abstract class AbstractProductBase {
     private String title;
     private String description;
 
+    public AbstractProductBase(final String key, final String title, final String description) {
+        this.key = key;
+        this.title = title;
+        this.description = description;
+    }
+
     public String getKey() {
         return this.key;
     }
@@ -15,7 +21,7 @@ public abstract class AbstractProductBase {
     }
 
     public boolean hasKey() {
-        return this.key != null;
+        return (this.key != null) && !(this.key.trim().isEmpty());
     }
 
     public String getTitle() {
@@ -27,7 +33,7 @@ public abstract class AbstractProductBase {
     }
 
     public boolean hasTitle() {
-        return this.title != null;
+        return (this.title != null) && !(this.title.trim().isEmpty());
     }
 
     public String getDescription() {
@@ -39,6 +45,6 @@ public abstract class AbstractProductBase {
     }
 
     public boolean hasDescription() {
-        return this.description != null;
+        return (this.description != null) && !(this.description.trim().isEmpty());
     }
 }

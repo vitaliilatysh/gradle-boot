@@ -1,42 +1,100 @@
 package com.globallogic.dc.model;
 
+import org.junit.Before;
 import org.junit.Test;
 
-public class AbstractProductBaseTest{
+import static org.junit.Assert.*;
 
-    @Test
-    public void testGetKey() {
+public class AbstractProductBaseTest {
+
+    Chapter chapter;
+
+    @Before
+    public void setUpTestObject() {
+        chapter = new Chapter("1", "Title", "Desc");
     }
 
     @Test
-    public void testSetKey() {
+    public void getKey() {
+        assertEquals("1", chapter.getKey());
     }
 
     @Test
-    public void testHasKey() {
+    public void setKey() {
+        chapter.setKey("2");
+        assertEquals("2", chapter.getKey());
     }
 
     @Test
-    public void testGetTitle() {
+    public void hasKey() {
+        assertTrue(chapter.hasKey());
     }
 
     @Test
-    public void testSetTitle() {
+    public void hasKey_NullKey() {
+        chapter.setKey(null);
+        assertFalse(chapter.hasKey());
     }
 
     @Test
-    public void testHasTitle() {
+    public void hasKey_EmptyKey() {
+        chapter.setKey("");
+        assertFalse(chapter.hasKey());
     }
 
     @Test
-    public void testGetDescription() {
+    public void getTitle() {
+        assertEquals("Title", chapter.getTitle());
     }
 
     @Test
-    public void testSetDescription() {
+    public void setTitle() {
+        chapter.setTitle("TitleNew");
+        assertEquals("TitleNew", chapter.getTitle());
     }
 
     @Test
-    public void testHasDescription() {
+    public void hasTitle() {
+        assertTrue(chapter.hasTitle());
+    }
+
+    @Test
+    public void hasTitle_NullTitle() {
+        chapter.setTitle(null);
+        assertFalse(chapter.hasTitle());
+    }
+
+    @Test
+    public void hasTitle_EmptyTitle() {
+        chapter.setTitle("");
+        assertFalse(chapter.hasTitle());
+    }
+
+    @Test
+    public void getDescription() {
+        assertEquals("Desc", chapter.getDescription());
+    }
+
+    @Test
+    public void setDescription() {
+        chapter.setDescription("DescNew");
+        assertEquals("DescNew", chapter.getDescription());
+    }
+
+    @Test
+    public void hasDescription() {
+        assertTrue(chapter.hasDescription());
+    }
+
+    @Test
+    public void hasDescription_NullDescription() {
+        chapter.setDescription(null);
+        assertFalse(chapter.hasDescription());
+    }
+
+    @Test
+    public void hasDescription_EmptyDescription() {
+        chapter.setDescription(" ");
+        assertFalse(chapter.hasDescription());
     }
 }
