@@ -9,6 +9,17 @@ public abstract class RangeBase extends AbstractProduct {
     private List<Item> items;
     private List<Section> sections;
 
+    public RangeBase(final String key, final String title, final String description) {
+        super(key, title, description);
+    }
+
+    public RangeBase(final String key, final String title, final String description, final List<SubChapter> subChapters, final List<Item> items, final List<Section> sections) {
+        super(key, title, description);
+        this.subChapters = subChapters;
+        this.items = items;
+        this.sections = sections;
+    }
+
     public List<SubChapter> getSubChapters() {
         return this.subChapters;
     }

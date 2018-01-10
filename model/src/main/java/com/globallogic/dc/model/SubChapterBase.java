@@ -9,6 +9,9 @@ public abstract class SubChapterBase extends AbstractProduct {
     private List<Section> sections;
     private List<Range> ranges;
 
+    public SubChapterBase(final String key, final String title, final String description) {
+        super(key, title, description);
+    }
 
     public Chapter getChapter() {
         return this.chapter;
