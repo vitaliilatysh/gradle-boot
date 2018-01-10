@@ -7,94 +7,78 @@ import static org.junit.Assert.*;
 
 public class AbstractProductBaseTest {
 
-    Chapter chapter;
+    private AbstractProductBase target;
 
     @Before
-    public void setUpTestObject() {
-        chapter = new Chapter("1", "Title", "Desc");
+    public void init() {
+        target = new AbstractProductBase("1", "Title", "Desc") {
+        };
     }
 
     @Test
     public void getKey() {
-        assertEquals("1", chapter.getKey());
+        assertEquals("1", target.getKey());
     }
 
     @Test
     public void setKey() {
-        chapter.setKey("2");
-        assertEquals("2", chapter.getKey());
+        target.setKey("2");
+        assertEquals("2", target.getKey());
     }
 
     @Test
     public void hasKey() {
-        assertTrue(chapter.hasKey());
-    }
+        assertTrue(target.hasKey());
 
-    @Test
-    public void hasKey_NullKey() {
-        chapter.setKey(null);
-        assertFalse(chapter.hasKey());
-    }
+        target.setKey(null);
+        assertFalse(target.hasKey());
 
-    @Test
-    public void hasKey_EmptyKey() {
-        chapter.setKey("");
-        assertFalse(chapter.hasKey());
+        target.setKey("");
+        assertFalse(target.hasKey());
     }
 
     @Test
     public void getTitle() {
-        assertEquals("Title", chapter.getTitle());
+        assertEquals("Title", target.getTitle());
     }
 
     @Test
     public void setTitle() {
-        chapter.setTitle("TitleNew");
-        assertEquals("TitleNew", chapter.getTitle());
+        target.setTitle("TitleNew");
+        assertEquals("TitleNew", target.getTitle());
     }
 
     @Test
     public void hasTitle() {
-        assertTrue(chapter.hasTitle());
-    }
+        assertTrue(target.hasTitle());
 
-    @Test
-    public void hasTitle_NullTitle() {
-        chapter.setTitle(null);
-        assertFalse(chapter.hasTitle());
-    }
+        target.setTitle(null);
+        assertFalse(target.hasTitle());
 
-    @Test
-    public void hasTitle_EmptyTitle() {
-        chapter.setTitle("");
-        assertFalse(chapter.hasTitle());
+        target.setTitle("");
+        assertFalse(target.hasTitle());
     }
 
     @Test
     public void getDescription() {
-        assertEquals("Desc", chapter.getDescription());
+        assertEquals("Desc", target.getDescription());
     }
 
     @Test
     public void setDescription() {
-        chapter.setDescription("DescNew");
-        assertEquals("DescNew", chapter.getDescription());
+        target.setDescription("DescNew");
+        assertEquals("DescNew", target.getDescription());
     }
 
     @Test
     public void hasDescription() {
-        assertTrue(chapter.hasDescription());
+        assertTrue(target.hasDescription());
+
+        target.setDescription(null);
+        assertFalse(target.hasDescription());
+
+        target.setDescription(" ");
+        assertFalse(target.hasDescription());
     }
 
-    @Test
-    public void hasDescription_NullDescription() {
-        chapter.setDescription(null);
-        assertFalse(chapter.hasDescription());
-    }
-
-    @Test
-    public void hasDescription_EmptyDescription() {
-        chapter.setDescription(" ");
-        assertFalse(chapter.hasDescription());
-    }
 }
