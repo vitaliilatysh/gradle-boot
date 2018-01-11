@@ -1,5 +1,6 @@
 package com.globallogic.dc.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,17 +27,22 @@ public abstract class ChapterBase extends AbstractProduct {
     }
 
     public boolean hasSubChapters() {
-        return (this.subChapters != null) && !(this.subChapters.isEmpty());
+        return this.subChapters != null && !this.subChapters.isEmpty();
     }
 
     public void addSubChapters(final Collection<SubChapter> subChapters) {
-        if (this.subChapters != null && subChapters != null)
-            this.subChapters.addAll(subChapters);
+        if (this.subChapters == null) {
+            this.subChapters = new ArrayList<>();
+        }
+        this.subChapters.addAll(subChapters);
     }
 
     public void addSubChapter(final SubChapter subChapter) {
-        if (this.subChapters != null && subChapter != null)
-            this.subChapters.add(subChapter);
+        if (this.subChapters == null) {
+            this.subChapters = new ArrayList<>();
+        }
+        this.subChapters.add(subChapter);
+
     }
 
 }
