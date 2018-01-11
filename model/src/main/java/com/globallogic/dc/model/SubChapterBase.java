@@ -13,6 +13,14 @@ public abstract class SubChapterBase extends AbstractProduct {
         super(key, title, description);
     }
 
+    public SubChapterBase(final String key, final String title, final String description, final Chapter chapter,
+                          final List<Section> sections, final List<Range> ranges) {
+        super(key, title, description);
+        this.chapter = chapter;
+        this.sections = sections;
+        this.ranges = ranges;
+    }
+
     public Chapter getChapter() {
         return this.chapter;
     }
@@ -50,19 +58,19 @@ public abstract class SubChapterBase extends AbstractProduct {
     }
 
     public void addSections(final Collection<Section> sections) {
-        if (this.sections != null) this.sections.addAll(sections);
+        if (this.sections != null && sections != null) this.sections.addAll(sections);
     }
 
     public void addSection(final Section section) {
-        if (this.sections != null) this.sections.add(section);
+        if (this.sections != null && section != null) this.sections.add(section);
     }
 
     public void addRanges(final Collection<Range> ranges) {
-        if (this.ranges != null) this.ranges.addAll(ranges);
+        if (this.ranges != null && ranges !=null) this.ranges.addAll(ranges);
     }
 
     public void addRange(final Range range) {
-        if (this.ranges != null) this.ranges.add(range);
+        if (this.ranges != null && range !=null) this.ranges.add(range);
     }
 
 }
