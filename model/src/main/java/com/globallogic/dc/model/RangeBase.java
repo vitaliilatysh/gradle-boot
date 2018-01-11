@@ -13,11 +13,17 @@ public abstract class RangeBase extends AbstractProduct {
         super(key, title, description);
     }
 
-    public RangeBase(final String key, final String title, final String description, final List<SubChapter> subChapters, final List<Item> items, final List<Section> sections) {
+    public RangeBase(final String key, final String title, final String description, final List<SubChapter> subChapters,
+                     final List<Item> items, final List<Section> sections) {
         super(key, title, description);
         this.subChapters = subChapters;
         this.items = items;
         this.sections = sections;
+    }
+
+    public RangeBase(final String key, final String title, final String description, final List<Item> items) {
+        super(key, title, description);
+        this.items = items;
     }
 
     public List<SubChapter> getSubChapters() {
@@ -57,27 +63,27 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public void addSubChapters(final Collection<SubChapter> subChapters) {
-        if (this.subChapters != null) this.subChapters.addAll(subChapters);
+        if (this.subChapters != null && subChapters != null) this.subChapters.addAll(subChapters);
     }
 
     public void addSubChapter(final SubChapter subChapter) {
-        if (this.subChapters != null) this.subChapters.add(subChapter);
+        if (this.subChapters != null && subChapter != null) this.subChapters.add(subChapter);
     }
 
     public void addItems(final Collection<Item> items) {
-        if (this.items != null) this.items.addAll(items);
+        if (this.items != null && items != null) this.items.addAll(items);
     }
 
     public void addItem(final Item item) {
-        if (this.items != null) this.items.add(item);
+        if (this.items != null && item != null) this.items.add(item);
     }
 
     public void addSections(final Collection<Section> sections) {
-        if (this.sections != null) this.sections.addAll(sections);
+        if (this.sections != null && sections != null) this.sections.addAll(sections);
     }
 
     public void addSection(final Section section) {
-        if (this.sections != null) this.sections.add(section);
+        if (this.sections != null && section != null) this.sections.add(section);
     }
 
 }
