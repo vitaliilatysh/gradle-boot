@@ -49,11 +49,11 @@ public abstract class SectionBase extends AbstractProduct {
     }
 
     public void addRanges(final Collection<Range> ranges) {
-        if (this.ranges != null) this.ranges.addAll(ranges);
+        if (this.ranges != null && ranges != null) this.ranges.addAll(ranges);
     }
 
     public void addRange(final Range range) {
-        if (this.ranges != null) this.ranges.add(range);
+        if (this.ranges != null && range != null) this.ranges.add(range);
     }
 
 }
