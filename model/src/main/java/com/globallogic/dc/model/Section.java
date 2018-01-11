@@ -8,7 +8,12 @@ public class Section extends SectionBase {
         super(key, title, description);
     }
 
-    public Section(final String key, final String title, final String description, final SubChapter subChapter, final List<Range> ranges) {
+    public Section(final String key, final String title, final String description, final SubChapter subChapter,
+                   final List<Range> ranges) {
         super(key, title, description, subChapter, ranges);
+    }
+
+    public Section(final String key, final String title, final String description, final SubChapter subChapter) {
+        super(key, title, description, subChapter);
     }
 }
