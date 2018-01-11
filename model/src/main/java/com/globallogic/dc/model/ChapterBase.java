@@ -11,7 +11,8 @@ public abstract class ChapterBase extends AbstractProduct {
         super(key, title, description);
     }
 
-    public ChapterBase(final String key, final String title, final String description, final List<SubChapter> subChapters) {
+    public ChapterBase(final String key, final String title, final String description,
+                       final List<SubChapter> subChapters) {
         super(key, title, description);
         this.subChapters = subChapters;
     }
@@ -29,11 +30,13 @@ public abstract class ChapterBase extends AbstractProduct {
     }
 
     public void addSubChapters(final Collection<SubChapter> subChapters) {
-        if (this.subChapters != null) this.subChapters.addAll(subChapters);
+        if (this.subChapters != null && (subChapters != null) && !(this.subChapters.isEmpty()))
+            this.subChapters.addAll(subChapters);
     }
 
     public void addSubChapter(final SubChapter subChapter) {
-        if (this.subChapters != null) this.subChapters.add(subChapter);
+        if (this.subChapters != null && (subChapter != null) && !(this.subChapters.isEmpty()))
+            this.subChapters.add(subChapter);
     }
 
 }
