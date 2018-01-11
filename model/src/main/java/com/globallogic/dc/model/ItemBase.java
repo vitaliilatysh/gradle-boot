@@ -13,10 +13,18 @@ public abstract class ItemBase extends AbstractProduct {
         super(key, title, description);
     }
 
-    public ItemBase(final String key, final String title, final String description, final Range range, final List<Item> items, final List<Item> relatedItems) {
+    public ItemBase(final String key, final String title, final String description, final Range range,
+                    final List<Item> items, final List<Item> relatedItems) {
         super(key, title, description);
         this.range = range;
         this.items = items;
+        this.relatedItems = relatedItems;
+    }
+
+    public ItemBase(final String key, final String title, final String description, final Range range,
+                    final List<Item> relatedItems) {
+        super(key, title, description);
+        this.range = range;
         this.relatedItems = relatedItems;
     }
 
@@ -57,19 +65,19 @@ public abstract class ItemBase extends AbstractProduct {
     }
 
     public void addItems(final Collection<Item> items) {
-        if (this.items != null) this.items.addAll(items);
+        if (this.items != null && items != null) this.items.addAll(items);
     }
 
     public void addItem(final Item item) {
-        if (this.items != null) this.items.add(item);
+        if (this.items != null && item != null) this.items.add(item);
     }
 
     public void addRelatedItems(final Collection<Item> relatedItems) {
-        if (this.relatedItems != null) this.relatedItems.addAll(relatedItems);
+        if (this.relatedItems != null && relatedItems != null) this.relatedItems.addAll(relatedItems);
     }
 
     public void addRelatedItem(final Item relatedItem) {
-        if (this.relatedItems != null) this.relatedItems.add(relatedItem);
+        if (this.relatedItems != null && relatedItem != null) this.relatedItems.add(relatedItem);
     }
 
 }
