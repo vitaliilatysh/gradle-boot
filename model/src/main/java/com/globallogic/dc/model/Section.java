@@ -2,24 +2,29 @@ package com.globallogic.dc.model;
 
 import java.util.List;
 
-public class Section {
+public class Section extends SectionBase {
 
-    private SubChapter chapter;
-    private List<Range> ranges;
-
-    public List<Range> getRanges() {
-        return ranges;
+    public Section(
+            final String key,
+            final String title,
+            final String description) {
+        super(key, title, description);
     }
 
-    public void setRanges(final List<Range> ranges) {
-        this.ranges = ranges;
+    public Section(
+            final String key,
+            final String title,
+            final String description,
+            final SubChapter subChapter,
+            final List<Range> ranges) {
+        super(key, title, description, subChapter, ranges);
     }
 
-    public SubChapter getChapter() {
-        return chapter;
-    }
-
-    public void setChapter(final SubChapter chapter) {
-        this.chapter = chapter;
+    public Section(
+            final String key,
+            final String title,
+            final String description,
+            final SubChapter subChapter) {
+        super(key, title, description, subChapter);
     }
 }

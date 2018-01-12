@@ -2,39 +2,30 @@ package com.globallogic.dc.model;
 
 import java.util.List;
 
-public class Range {
+public class Range extends RangeBase {
 
-    private List<SubChapter> subChapters;
-    private List<Item> items;
-    private List<Section> sections;
-
-    public Range(final List<SubChapter> subChapters, final List<Item> items, final List<Section> sections) {
-        this.subChapters = subChapters;
-        this.items = items;
-        this.sections = sections;
+    public Range(
+            final String key,
+            final String title,
+            final String description) {
+        super(key, title, description);
     }
 
-    public List<SubChapter> getSubChapters() {
-        return subChapters;
+    public Range(
+            final String key,
+            final String title,
+            final String description,
+            final List<SubChapter> subChapters,
+            final List<Item> items,
+            final List<Section> sections) {
+        super(key, title, description, subChapters, items, sections);
     }
 
-    public void setSubChapters(final List<SubChapter> subChapters) {
-        this.subChapters = subChapters;
-    }
-
-    public void setSections(final List<Section> sections) {
-        this.sections = sections;
-    }
-
-    public List<Section> getSections() {
-        return sections;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(final List<Item> items) {
-        this.items = items;
+    public Range(
+            final String key,
+            final String title,
+            final String description,
+            final List<Item> items) {
+        super(key, title, description, items);
     }
 }

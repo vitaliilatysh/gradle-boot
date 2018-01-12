@@ -2,19 +2,30 @@ package com.globallogic.dc.model;
 
 import java.util.List;
 
-public class Chapter {
+public class Chapter extends ChapterBase {
 
-    private List<SubChapter> subChapters;
-
-    public Chapter(final List<SubChapter> subChapters) {
-        this.subChapters = subChapters;
+    public Chapter(
+            final String key,
+            final String title,
+            final String description) {
+        super(key, title, description);
     }
 
-    public List<SubChapter> getSubChapters() {
-        return subChapters;
+    public Chapter(
+            final String key,
+            final String title,
+            final String description,
+            final List<SubChapter> subChapters) {
+        super(key, title, description, subChapters);
     }
 
-    public void setSubChapters(final List<SubChapter> subChapters) {
-        this.subChapters = subChapters;
+    @Override
+    public String toString() {
+        return "ChapterBase{" +
+                "key=" + super.getKey() + ", " +
+                "title=" + super.getTitle() + ", " +
+                "description=" + super.getDescription() + ", " +
+                "subChapters=" + super.getSubChapters() +
+                '}';
     }
 }

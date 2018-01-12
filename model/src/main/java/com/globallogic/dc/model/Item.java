@@ -2,39 +2,31 @@ package com.globallogic.dc.model;
 
 import java.util.List;
 
-public class Item {
+public class Item extends ItemBase {
 
-    private Range range;
-    private List<Item> items;
-    private List<Item> relatedItems;
-
-    public Item(final Range range, final List<Item> items, final List<Item> relatedItems) {
-        this.range = range;
-        this.items = items;
-        this.relatedItems = relatedItems;
+    public Item(
+            final String key,
+            final String title,
+            final String description) {
+        super(key, title, description);
     }
 
-    public List<Item> getRelatedItems() {
-        return relatedItems;
+    public Item(
+            final String key,
+            final String title,
+            final String description,
+            final Range range,
+            final List<Item> items,
+            final List<Item> relatedItems) {
+        super(key, title, description, range, items, relatedItems);
     }
 
-    public void setRelatedItems(List<Item> relatedItems) {
-        this.relatedItems = relatedItems;
-    }
-
-    public Range getRange() {
-        return range;
-    }
-
-    public void setRange(final Range range) {
-        this.range = range;
-    }
-
-    public void setItems(final List<Item> items) {
-        this.items = items;
-    }
-
-    public List<Item> getItems() {
-        return items;
+    public Item(
+            final String key,
+            final String title,
+            final String description,
+            final Range range,
+            final List<Item> relatedItems) {
+        super(key, title, description, range, relatedItems);
     }
 }
