@@ -3,6 +3,6 @@ group 'com.globallogic.dc'
 apply plugin: 'java'
 
 dependencies {
-    testImplementation 'junit:junit'
-    implementation 'org.apache.commons:commons-lang3'
+    testImplementation group:'junit', name:'junit'
+    implementation group: 'org.apache.commons', name:'commons-lang3'
 }
