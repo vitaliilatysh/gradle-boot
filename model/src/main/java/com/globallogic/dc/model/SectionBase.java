@@ -9,18 +9,29 @@ public abstract class SectionBase extends AbstractProduct {
     private SubChapter subChapter;
     private List<Range> ranges;
 
-    public SectionBase(final String key, final String title, final String description) {
+    public SectionBase(
+            final String key,
+            final String title,
+            final String description) {
         super(key, title, description);
     }
 
-    public SectionBase(final String key, final String title, final String description, final SubChapter subChapter,
-                       final List<Range> ranges) {
+    public SectionBase(
+            final String key,
+            final String title,
+            final String description,
+            final SubChapter subChapter,
+            final List<Range> ranges) {
         super(key, title, description);
         this.subChapter = subChapter;
         this.ranges = ranges;
     }
 
-    public SectionBase(final String key, final String title, final String description, final SubChapter subChapter) {
+    public SectionBase(
+            final String key,
+            final String title,
+            final String description,
+            final SubChapter subChapter) {
         super(key, title, description);
         this.subChapter = subChapter;
     }

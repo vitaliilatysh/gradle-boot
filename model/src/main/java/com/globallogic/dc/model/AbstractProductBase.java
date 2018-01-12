@@ -6,7 +6,10 @@ public abstract class AbstractProductBase {
     private String title;
     private String description;
 
-    public AbstractProductBase(final String key, final String title, final String description) {
+    public AbstractProductBase(
+            final String key,
+            final String title,
+            final String description) {
         this.key = key;
         this.title = title;
         this.description = description;

@@ -10,20 +10,32 @@ public abstract class ItemBase extends AbstractProduct {
     private List<Item> items;
     private List<Item> relatedItems;
 
-    public ItemBase(final String key, final String title, final String description) {
+    public ItemBase(
+            final String key,
+            final String title,
+            final String description) {
         super(key, title, description);
     }
 
-    public ItemBase(final String key, final String title, final String description, final Range range,
-                    final List<Item> items, final List<Item> relatedItems) {
+    public ItemBase(
+            final String key,
+            final String title,
+            final String description,
+            final Range range,
+            final List<Item> items,
+            final List<Item> relatedItems) {
         super(key, title, description);
         this.range = range;
         this.items = items;
         this.relatedItems = relatedItems;
     }
 
-    public ItemBase(final String key, final String title, final String description, final Range range,
-                    final List<Item> relatedItems) {
+    public ItemBase(
+            final String key,
+            final String title,
+            final String description,
+            final Range range,
+            final List<Item> relatedItems) {
         super(key, title, description);
         this.range = range;
         this.relatedItems = relatedItems;

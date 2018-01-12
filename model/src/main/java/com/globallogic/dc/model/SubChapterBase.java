@@ -10,12 +10,20 @@ public abstract class SubChapterBase extends AbstractProduct {
     private List<Section> sections;
     private List<Range> ranges;
 
-    public SubChapterBase(final String key, final String title, final String description) {
+    public SubChapterBase(
+            final String key,
+            final String title,
+            final String description) {
         super(key, title, description);
     }
 
-    public SubChapterBase(final String key, final String title, final String description, final Chapter chapter,
-                          final List<Section> sections, final List<Range> ranges) {
+    public SubChapterBase(
+            final String key,
+            final String title,
+            final String description,
+            final Chapter chapter,
+            final List<Section> sections,
+            final List<Range> ranges) {
         super(key, title, description);
         this.chapter = chapter;
         this.sections = sections;
