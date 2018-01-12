@@ -19,7 +19,9 @@ public class ChapterTest {
     @Test
     public void testAddSubChapter() {
         assertFalse(target.hasSubChapters());
+
         target.addSubChapter(new SubChapter("2", "2", "2"));
+
         assertTrue(target.hasSubChapters());
         assertEquals(1, target.getSubChapters().size());
     }
@@ -27,9 +29,11 @@ public class ChapterTest {
     @Test
     public void testAddSubChapters() {
         assertFalse(target.hasSubChapters());
+
         target.addSubChapters(Arrays.asList(
                 new SubChapter("2", "2", "2"),
                 new SubChapter("3", "3", "3")));
+
         assertTrue(target.hasSubChapters());
         assertEquals(2, target.getSubChapters().size());
     }

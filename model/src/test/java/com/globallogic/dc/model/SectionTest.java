@@ -19,7 +19,9 @@ public class SectionTest {
     @Test
     public void testAddRanges() {
         assertFalse(target.hasRanges());
+
         target.addRange(new Range("1", "Title", "Desc"));
+
         assertTrue(target.hasRanges());
         assertEquals(1, target.getRanges().size());
     }
@@ -27,9 +29,11 @@ public class SectionTest {
     @Test
     public void testAddRange() {
         assertFalse(target.hasRanges());
+
         target.addRanges(Arrays.asList(
                 new Range("2", "2", "2"),
                 new Range("3", "3", "3")));
+
         assertTrue(target.hasRanges());
         assertEquals(2, target.getRanges().size());
     }

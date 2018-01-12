@@ -1,3 +1,9 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
 plugins {
     id 'io.spring.dependency-management' version '1.0.4.RELEASE'
     id 'java'
@@ -6,16 +12,19 @@ plugins {
 }
 
 group 'com.globallogic.dc'
-version '0.0.1'
 
-repositories {
-    jcenter()
-}
+allprojects {
+    version '0.0.1'
 
-dependencyManagement {
-    dependencies {
-        dependency group:'junit', name:'junit', version:'4.12'
-        dependency group: 'org.apache.commons', name:'commons-lang3', version: '3.7'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencyManagement {
+        dependencies {
+            dependency group: 'junit', name: 'junit', version: '4.12'
+
+            dependency group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+        }
     }
 }
+
 
