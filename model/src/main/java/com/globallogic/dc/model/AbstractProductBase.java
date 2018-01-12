@@ -21,7 +21,7 @@ public abstract class AbstractProductBase {
     }
 
     public boolean hasKey() {
-        return (this.key != null) && !(this.key.trim().isEmpty());
+        return this.key != null && !this.key.trim().isEmpty();
     }
 
     public String getTitle() {
@@ -33,7 +33,7 @@ public abstract class AbstractProductBase {
     }
 
     public boolean hasTitle() {
-        return (this.title != null) && !(this.title.trim().isEmpty());
+        return this.title != null && !this.title.trim().isEmpty();
     }
 
     public String getDescription() {
@@ -45,6 +45,6 @@ public abstract class AbstractProductBase {
     }
 
     public boolean hasDescription() {
-        return (this.description != null) && !(this.description.trim().isEmpty());
+        return this.description != null && !this.description.trim().isEmpty();
     }
 }
