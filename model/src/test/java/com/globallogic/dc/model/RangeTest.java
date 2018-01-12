@@ -17,66 +17,89 @@ public class RangeTest {
     }
 
     @Test
-    public void testAddItems() {
-        assertFalse(target.hasItems());
-
-        target.addItem(new Item("1", "Title", "Desc"));
-
-        assertTrue(target.hasItems());
-        assertEquals(1, target.getItems().size());
-    }
-
-    @Test
-    public void testAddItem() {
-        assertFalse(target.hasItems());
-
-        target.addItems(Arrays.asList(
-                new Item("2", "2", "2"),
-                new Item("3", "3", "3")));
-
-        assertTrue(target.hasItems());
-        assertEquals(2, target.getItems().size());
-    }
-
-    @Test
-    public void testAddSubChapters() {
+    public void testHasSubChapters(){
         assertFalse(target.hasSubChapters());
 
         target.addSubChapter(new SubChapter("1", "Title", "Desc"));
 
         assertTrue(target.hasSubChapters());
-        assertEquals(1, target.getSubChapters().size());
-    }
 
-    @Test
-    public void testAddSubChapter() {
+        target.getSubChapters().clear();
+
         assertFalse(target.hasSubChapters());
-
-        target.addSubChapters(Arrays.asList(
-                new SubChapter("2", "2", "2"),
-                new SubChapter("3", "3", "3")));
-
-        assertTrue(target.hasSubChapters());
-        assertEquals(2, target.getSubChapters().size());
     }
 
     @Test
-    public void testAddSections() {
+    public void testHasItems(){
+        assertFalse(target.hasItems());
+
+        target.addItem(new Item("1", "Title", "Desc"));
+
+        assertTrue(target.hasItems());
+
+        target.getItems().clear();
+
+        assertFalse(target.hasItems());
+    }
+
+    @Test
+    public void testHasSections(){
         assertFalse(target.hasSections());
 
         target.addSection(new Section("1", "Title", "Desc"));
 
         assertTrue(target.hasSections());
+
+        target.getSections().clear();
+
+        assertFalse(target.hasSections());
+    }
+
+    @Test
+    public void testAddItems() {
+        target.addItem(new Item("1", "Title", "Desc"));
+
+        assertEquals(1, target.getItems().size());
+    }
+
+    @Test
+    public void testAddItem() {
+        target.addItems(Arrays.asList(
+                new Item("2", "2", "2"),
+                new Item("3", "3", "3")));
+
+        assertEquals(2, target.getItems().size());
+    }
+
+    @Test
+    public void testAddSubChapters() {
+        target.addSubChapter(new SubChapter("1", "Title", "Desc"));
+
+        assertEquals(1, target.getSubChapters().size());
+    }
+
+    @Test
+    public void testAddSubChapter() {
+        target.addSubChapters(Arrays.asList(
+                new SubChapter("2", "2", "2"),
+                new SubChapter("3", "3", "3")));
+
+        assertEquals(2, target.getSubChapters().size());
+    }
+
+    @Test
+    public void testAddSections() {
+        target.addSection(new Section("1", "Title", "Desc"));
+
         assertEquals(1, target.getSections().size());
     }
 
     @Test
     public void testAddSection() {
-        assertFalse(target.hasSections());
         target.addSections(Arrays.asList(
                 new Section("2", "2", "2"),
                 new Section("3", "3", "3")));
-        assertTrue(target.hasSections());
+
         assertEquals(2, target.getSections().size());
     }
 
