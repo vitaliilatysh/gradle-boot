@@ -19,9 +19,7 @@ public class ItemTest {
     @Test
     public void testAddRelatedItems() {
         assertFalse(target.hasRelatedItems());
-
         target.addRelatedItem(new Item("2", "2", "2"));
-
         assertTrue(target.hasRelatedItems());
         assertEquals(1, target.getRelatedItems().size());
     }
@@ -29,11 +27,9 @@ public class ItemTest {
     @Test
     public void testAddRelatedItem() {
         assertFalse(target.hasRelatedItems());
-
         target.addRelatedItems(Arrays.asList(
                 new Item("2", "2", "2"),
                 new Item("3", "3", "3")));
-
         assertTrue(target.hasRelatedItems());
         assertEquals(2, target.getRelatedItems().size());
     }
@@ -41,9 +37,7 @@ public class ItemTest {
     @Test
     public void testAddItems() {
         assertFalse(target.hasItems());
-
         target.addItem(new Item("2", "2", "2"));
-
         assertTrue(target.hasItems());
         assertEquals(1, target.getItems().size());
     }
@@ -51,11 +45,9 @@ public class ItemTest {
     @Test
     public void testAddItem() {
         assertFalse(target.hasItems());
-
         target.addItems(Arrays.asList(
                 new Item("2", "2", "2"),
                 new Item("3", "3", "3")));
-
         assertTrue(target.hasItems());
         assertEquals(2, target.getItems().size());
     }
