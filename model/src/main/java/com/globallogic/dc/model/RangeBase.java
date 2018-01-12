@@ -1,5 +1,6 @@
 package com.globallogic.dc.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public boolean hasSubChapters() {
-        return (this.subChapters != null) && !(this.subChapters.isEmpty());
+        return this.subChapters != null && !this.subChapters.isEmpty();
     }
 
     public List<Section> getSections() {
@@ -47,7 +48,7 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public boolean hasSections() {
-        return (this.sections != null) && !(this.sections.isEmpty());
+        return this.sections != null && !this.sections.isEmpty();
     }
 
     public List<Item> getItems() {
@@ -59,31 +60,50 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public boolean hasItems() {
-        return (this.items != null) && !(this.items.isEmpty());
+        return this.items != null && !this.items.isEmpty();
     }
 
     public void addSubChapters(final Collection<SubChapter> subChapters) {
-        if (this.subChapters != null && subChapters != null) this.subChapters.addAll(subChapters);
+        if (this.subChapters == null) {
+            this.subChapters = new ArrayList<>();
+        }
+        this.subChapters.addAll(subChapters);
     }
 
     public void addSubChapter(final SubChapter subChapter) {
-        if (this.subChapters != null && subChapter != null) this.subChapters.add(subChapter);
+        if (this.subChapters == null) {
+            this.subChapters = new ArrayList<>();
+        }
+        this.subChapters.add(subChapter);
     }
 
     public void addItems(final Collection<Item> items) {
-        if (this.items != null && items != null) this.items.addAll(items);
+        if (this.items == null) {
+            this.items = new ArrayList<>();
+        }
+        this.items.addAll(items);
     }
 
     public void addItem(final Item item) {
-        if (this.items != null && item != null) this.items.add(item);
+        if (this.items == null) {
+            this.items = new ArrayList<>();
+        }
+        this.items.add(item);
     }
 
     public void addSections(final Collection<Section> sections) {
-        if (this.sections != null && sections != null) this.sections.addAll(sections);
+        if (this.sections == null) {
+            this.sections = new ArrayList<>();
+        }
+        this.sections.addAll(sections);
     }
 
     public void addSection(final Section section) {
-        if (this.sections != null && section != null) this.sections.add(section);
+        if (this.sections == null) {
+            this.sections = new ArrayList<>();
+        }
+        this.sections.add(section);
+
     }
 
 }

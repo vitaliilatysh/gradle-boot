@@ -42,7 +42,6 @@ public abstract class ChapterBase extends AbstractProduct {
             this.subChapters = new ArrayList<>();
         }
         this.subChapters.add(subChapter);
-
     }
 
 }

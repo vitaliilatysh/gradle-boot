@@ -18,29 +18,25 @@ public class ChapterTest {
 
     @Test
     public void testAddSubChapter() {
-        final Chapter c = new Chapter("1", "2", "3");
 
-        assertFalse(c.hasSubChapters());
+        assertFalse(target.hasSubChapters());
 
-        c.addSubChapter(new SubChapter("2", "2", "2"));
+        target.addSubChapter(new SubChapter("2", "2", "2"));
 
-        assertTrue(c.hasSubChapters());
-        assertNotNull(c.getSubChapters());
-        assertEquals(1, c.getSubChapters().size());
+        assertTrue(target.hasSubChapters());
+        assertEquals(1, target.getSubChapters().size());
     }
 
     @Test
     public void testAddSubChapters() {
-        final Chapter c = new Chapter("1", "2", "3");
 
-        assertFalse(c.hasSubChapters());
+        assertFalse(target.hasSubChapters());
 
-        c.addSubChapters(Arrays.asList(
+        target.addSubChapters(Arrays.asList(
                 new SubChapter("2", "2", "2"),
                 new SubChapter("3", "3", "3")));
 
-        assertTrue(c.hasSubChapters());
-        assertNotNull(c.getSubChapters());
-        assertEquals(2, c.getSubChapters().size());
+        assertTrue(target.hasSubChapters());
+        assertEquals(2, target.getSubChapters().size());
     }
 }

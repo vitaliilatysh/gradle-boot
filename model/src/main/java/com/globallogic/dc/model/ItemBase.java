@@ -1,5 +1,6 @@
 package com.globallogic.dc.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public abstract class ItemBase extends AbstractProduct {
     }
 
     public boolean hasRelatedItems() {
-        return (this.relatedItems != null) && !(this.relatedItems.isEmpty());
+        return this.relatedItems != null && !this.relatedItems.isEmpty();
     }
 
     public Range getRange() {
@@ -61,23 +62,35 @@ public abstract class ItemBase extends AbstractProduct {
     }
 
     public boolean hasItems() {
-        return (this.items != null) && !(this.items.isEmpty());
+        return this.items != null && !this.items.isEmpty();
     }
 
     public void addItems(final Collection<Item> items) {
-        if (this.items != null && items != null) this.items.addAll(items);
+        if (this.items == null) {
+            this.items = new ArrayList<>();
+        }
+        this.items.addAll(items);
     }
 
     public void addItem(final Item item) {
-        if (this.items != null && item != null) this.items.add(item);
+        if (this.items == null) {
+            this.items = new ArrayList<>();
+        }
+        this.items.add(item);
     }
 
     public void addRelatedItems(final Collection<Item> relatedItems) {
-        if (this.relatedItems != null && relatedItems != null) this.relatedItems.addAll(relatedItems);
+        if (this.relatedItems == null) {
+            this.relatedItems = new ArrayList<>();
+        }
+        this.relatedItems.addAll(relatedItems);
     }
 
     public void addRelatedItem(final Item relatedItem) {
-        if (this.relatedItems != null && relatedItem != null) this.relatedItems.add(relatedItem);
+        if (this.relatedItems == null) {
+            this.relatedItems = new ArrayList<>();
+        }
+        this.relatedItems.add(relatedItem);
     }
 
 }

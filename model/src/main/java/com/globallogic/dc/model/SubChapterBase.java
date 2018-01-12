@@ -1,5 +1,6 @@
 package com.globallogic.dc.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public abstract class SubChapterBase extends AbstractProduct {
     }
 
     public boolean hasSections() {
-        return (this.sections != null) && !(this.sections.isEmpty());
+        return this.sections != null && !this.sections.isEmpty();
     }
 
     public List<Range> getRanges() {
@@ -54,23 +55,35 @@ public abstract class SubChapterBase extends AbstractProduct {
     }
 
     public boolean hasRanges() {
-        return (this.ranges != null) && !(this.ranges.isEmpty());
+        return this.ranges != null && !this.ranges.isEmpty();
     }
 
     public void addSections(final Collection<Section> sections) {
-        if (this.sections != null && sections != null) this.sections.addAll(sections);
+        if (this.sections == null) {
+            this.sections = new ArrayList<>();
+        }
+        this.sections.addAll(sections);
     }
 
     public void addSection(final Section section) {
-        if (this.sections != null && section != null) this.sections.add(section);
+        if (this.sections == null) {
+            this.sections = new ArrayList<>();
+        }
+        this.sections.add(section);
     }
 
     public void addRanges(final Collection<Range> ranges) {
-        if (this.ranges != null && ranges !=null) this.ranges.addAll(ranges);
+        if (this.ranges == null) {
+            this.ranges = new ArrayList<>();
+        }
+        this.ranges.addAll(ranges);
     }
 
     public void addRange(final Range range) {
-        if (this.ranges != null && range !=null) this.ranges.add(range);
+        if (this.ranges == null) {
+            this.ranges = new ArrayList<>();
+        }
+        this.ranges.add(range);
     }
 
 }
