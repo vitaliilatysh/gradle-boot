@@ -3,6 +3,7 @@ package com.globallogic.dc.model;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
@@ -18,23 +19,27 @@ public class SectionTest {
 
     @Test
     public void testHasRanges(){
+        assertNull(target.getRanges());
+        assertFalse(target.hasRanges());
+
+        target.addRanges(new ArrayList<>());
+
         assertFalse(target.hasRanges());
 
         target.addRange(new Range("1", "Title", "Desc"));
 
+        assertNotNull(target.getRanges());
         assertTrue(target.hasRanges());
-
-        target.getRanges().clear();
-
-        assertFalse(target.hasRanges());
     }
 
     @Test
     public void testHasSubChapter(){
+        assertNull(target.getSubChapter());
         assertFalse(target.hasSubChapter());
 
         target.setSubChapter(new SubChapter("1", "Title", "Desc"));
 
+        assertNotNull(target.getSubChapter());
         assertTrue(target.hasSubChapter());
     }
 

@@ -3,6 +3,7 @@ package com.globallogic.dc.model;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
@@ -18,32 +19,43 @@ public class ItemTest {
 
     @Test
     public void testHasRelatedItems(){
+        assertNull(target.getRelatedItems());
+        assertFalse(target.hasRelatedItems());
+
+        target.addRelatedItems(new ArrayList<>());
+
         assertFalse(target.hasRelatedItems());
 
         target.addRelatedItem(new Item("2", "2", "2"));
 
+        assertNotNull(target.getRelatedItems());
         assertTrue(target.hasRelatedItems());
 
-        target.getRelatedItems().clear();
-
-        assertFalse(target.hasRelatedItems());
     }
 
     @Test
     public void testHasRange(){
+        assertNull(target.getRange());
         assertFalse(target.hasRange());
 
         target.setRange(new Range("1", "Title", "Desc"));
 
+        assertNotNull(target.getRange());
         assertTrue(target.hasRange());
     }
 
     @Test
     public void testHasItems(){
+        assertNull(target.getItems());
         assertFalse(target.hasItems());
 
-        target.addItem(new Item("1", "Title", "Desc"));
+        target.addItems(new ArrayList<>());
 
+        assertFalse(target.hasItems());
+
+        target.addItem(new Item("2", "Title", "Desc"));
+
+        assertNotNull(target.getItems());
         assertTrue(target.hasItems());
     }
 

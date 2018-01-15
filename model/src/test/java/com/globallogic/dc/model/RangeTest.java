@@ -3,6 +3,7 @@ package com.globallogic.dc.model;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
@@ -17,42 +18,48 @@ public class RangeTest {
     }
 
     @Test
-    public void testHasSubChapters(){
+    public void testHasSubChapters() {
+        assertNull(target.getSubChapters());
+        assertFalse(target.hasSubChapters());
+
+        target.addSubChapters(new ArrayList<>());
+
         assertFalse(target.hasSubChapters());
 
         target.addSubChapter(new SubChapter("1", "Title", "Desc"));
 
+        assertNotNull(target.getSubChapters());
         assertTrue(target.hasSubChapters());
-
-        target.getSubChapters().clear();
-
-        assertFalse(target.hasSubChapters());
     }
 
     @Test
-    public void testHasItems(){
+    public void testHasItems() {
+        assertNull(target.getItems());
+        assertFalse(target.hasItems());
+
+        target.addItems(new ArrayList<>());
+
         assertFalse(target.hasItems());
 
         target.addItem(new Item("1", "Title", "Desc"));
 
+        assertNotNull(target.getItems());
         assertTrue(target.hasItems());
-
-        target.getItems().clear();
-
-        assertFalse(target.hasItems());
     }
 
     @Test
-    public void testHasSections(){
+    public void testHasSections() {
+        assertNull(target.getSections());
+        assertFalse(target.hasSections());
+
+        target.addSections(new ArrayList<>());
+
         assertFalse(target.hasSections());
 
         target.addSection(new Section("1", "Title", "Desc"));
 
+        assertNotNull(target.getSections());
         assertTrue(target.hasSections());
-
-        target.getSections().clear();
-
-        assertFalse(target.hasSections());
     }
 
     @Test
