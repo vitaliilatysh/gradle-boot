@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+
 public abstract class ChapterBase extends AbstractProduct {
 
     private List<SubChapter> subChapters;
@@ -33,7 +35,7 @@ public abstract class ChapterBase extends AbstractProduct {
     }
 
     public boolean hasSubChapters() {
-        return this.subChapters != null && !this.subChapters.isEmpty();
+        return isNotEmpty(this.subChapters);
     }
 
     public void addSubChapters(final Collection<SubChapter> subChapters) {

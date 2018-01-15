@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+
 public abstract class ItemBase extends AbstractProduct {
 
     private Range range;
@@ -50,7 +52,7 @@ public abstract class ItemBase extends AbstractProduct {
     }
 
     public boolean hasRelatedItems() {
-        return this.relatedItems != null && !this.relatedItems.isEmpty();
+        return isNotEmpty(this.relatedItems);
     }
 
     public Range getRange() {
@@ -74,7 +76,7 @@ public abstract class ItemBase extends AbstractProduct {
     }
 
     public boolean hasItems() {
-        return this.items != null && !this.items.isEmpty();
+        return isNotEmpty(this.items);
     }
 
     public void addItems(final Collection<Item> items) {

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+
 public abstract class RangeBase extends AbstractProduct {
 
     private List<SubChapter> subChapters;
@@ -48,7 +50,7 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public boolean hasSubChapters() {
-        return this.subChapters != null && !this.subChapters.isEmpty();
+        return isNotEmpty(this.subChapters);
     }
 
     public List<Section> getSections() {
@@ -60,7 +62,7 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public boolean hasSections() {
-        return this.sections != null && !this.sections.isEmpty();
+        return isNotEmpty(this.sections);
     }
 
     public List<Item> getItems() {
@@ -72,7 +74,7 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public boolean hasItems() {
-        return this.items != null && !this.items.isEmpty();
+        return isNotEmpty(this.items);
     }
 
     public void addSubChapters(final Collection<SubChapter> subChapters) {
