@@ -98,6 +98,6 @@ public abstract class ItemBase extends AbstractProduct {
     public void addRelatedItem(final Item relatedItem) {
         if (isEmpty(this.relatedItems)) this.relatedItems = new ArrayList<>();
         this.relatedItems.add(relatedItem);
-}
+    }
 
 }
