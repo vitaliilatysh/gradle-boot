@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+
 public abstract class ItemBase extends AbstractProduct {
 
     private Range range;
@@ -50,7 +53,7 @@ public abstract class ItemBase extends AbstractProduct {
     }
 
     public boolean hasRelatedItems() {
-        return this.relatedItems != null && !this.relatedItems.isEmpty();
+        return isNotEmpty(this.relatedItems);
     }
 
     public Range getRange() {
@@ -74,35 +77,27 @@ public abstract class ItemBase extends AbstractProduct {
     }
 
     public boolean hasItems() {
-        return this.items != null && !this.items.isEmpty();
+        return isNotEmpty(this.items);
     }
 
     public void addItems(final Collection<Item> items) {
-        if (this.items == null) {
-            this.items = new ArrayList<>();
-        }
+        if (isEmpty(this.items)) this.items = new ArrayList<>();
         this.items.addAll(items);
     }
 
     public void addItem(final Item item) {
-        if (this.items == null) {
-            this.items = new ArrayList<>();
-        }
+        if (isEmpty(this.items)) this.items = new ArrayList<>();
         this.items.add(item);
     }
 
     public void addRelatedItems(final Collection<Item> relatedItems) {
-        if (this.relatedItems == null) {
-            this.relatedItems = new ArrayList<>();
-        }
+        if (isEmpty(this.relatedItems)) this.relatedItems = new ArrayList<>();
         this.relatedItems.addAll(relatedItems);
     }
 
     public void addRelatedItem(final Item relatedItem) {
-        if (this.relatedItems == null) {
-            this.relatedItems = new ArrayList<>();
-        }
+        if (isEmpty(this.relatedItems)) this.relatedItems = new ArrayList<>();
         this.relatedItems.add(relatedItem);
-    }
+}
 
 }

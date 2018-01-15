@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+
 public abstract class SectionBase extends AbstractProduct {
 
     private SubChapter subChapter;
@@ -45,7 +48,7 @@ public abstract class SectionBase extends AbstractProduct {
     }
 
     public boolean hasRanges() {
-        return this.ranges != null && !this.ranges.isEmpty();
+        return isNotEmpty(this.ranges);
     }
 
     public SubChapter getSubChapter() {
@@ -61,16 +64,12 @@ public abstract class SectionBase extends AbstractProduct {
     }
 
     public void addRanges(final Collection<Range> ranges) {
-        if (this.ranges == null) {
-            this.ranges = new ArrayList<>();
-        }
+        if (isEmpty(this.ranges)) this.ranges = new ArrayList<>();
         this.ranges.addAll(ranges);
     }
 
     public void addRange(final Range range) {
-        if (this.ranges == null) {
-            this.ranges = new ArrayList<>();
-        }
+        if (isEmpty(this.ranges)) this.ranges = new ArrayList<>();
         this.ranges.add(range);
     }
 
