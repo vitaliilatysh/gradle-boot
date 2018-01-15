@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 public abstract class ChapterBase extends AbstractProduct {
@@ -39,16 +40,12 @@ public abstract class ChapterBase extends AbstractProduct {
     }
 
     public void addSubChapters(final Collection<SubChapter> subChapters) {
-        if (this.subChapters == null) {
-            this.subChapters = new ArrayList<>();
-        }
+        if (isEmpty(this.subChapters)) this.subChapters = new ArrayList<>();
         this.subChapters.addAll(subChapters);
     }
 
     public void addSubChapter(final SubChapter subChapter) {
-        if (this.subChapters == null) {
-            this.subChapters = new ArrayList<>();
-        }
+        if (isEmpty(this.subChapters)) this.subChapters = new ArrayList<>();
         this.subChapters.add(subChapter);
     }
 

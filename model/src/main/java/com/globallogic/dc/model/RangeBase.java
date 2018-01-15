@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 public abstract class RangeBase extends AbstractProduct {
@@ -78,46 +79,33 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public void addSubChapters(final Collection<SubChapter> subChapters) {
-        if (this.subChapters == null) {
-            this.subChapters = new ArrayList<>();
-        }
+        if (isEmpty(this.subChapters)) this.subChapters = new ArrayList<>();
         this.subChapters.addAll(subChapters);
     }
 
     public void addSubChapter(final SubChapter subChapter) {
-        if (this.subChapters == null) {
-            this.subChapters = new ArrayList<>();
-        }
+        if (isEmpty(this.subChapters)) this.subChapters = new ArrayList<>();
         this.subChapters.add(subChapter);
     }
 
     public void addItems(final Collection<Item> items) {
-        if (this.items == null) {
-            this.items = new ArrayList<>();
-        }
+        if (isEmpty(this.items)) this.items = new ArrayList<>();
         this.items.addAll(items);
     }
 
     public void addItem(final Item item) {
-        if (this.items == null) {
-            this.items = new ArrayList<>();
-        }
+        if (isEmpty(this.items)) this.items = new ArrayList<>();
         this.items.add(item);
     }
 
     public void addSections(final Collection<Section> sections) {
-        if (this.sections == null) {
-            this.sections = new ArrayList<>();
-        }
+        if (isEmpty(this.sections)) this.sections = new ArrayList<>();
         this.sections.addAll(sections);
     }
 
     public void addSection(final Section section) {
-        if (this.sections == null) {
-            this.sections = new ArrayList<>();
-        }
+        if (isEmpty(this.sections)) this.sections = new ArrayList<>();
         this.sections.add(section);
-
     }
 
 }
