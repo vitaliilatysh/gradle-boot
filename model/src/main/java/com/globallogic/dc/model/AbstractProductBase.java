@@ -1,7 +1,6 @@
 package com.globallogic.dc.model;
 
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
-import static org.apache.commons.lang3.StringUtils.trim;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public abstract class AbstractProductBase {
 
@@ -27,7 +26,7 @@ public abstract class AbstractProductBase {
     }
 
     public boolean hasKey() {
-        return isNotEmpty(trim(this.key));
+        return isNotBlank(this.key);
     }
 
     public String getTitle() {
@@ -39,7 +38,7 @@ public abstract class AbstractProductBase {
     }
 
     public boolean hasTitle() {
-        return isNotEmpty(trim(this.title));
+        return isNotBlank(this.title);
     }
 
     public String getDescription() {
@@ -51,6 +50,6 @@ public abstract class AbstractProductBase {
     }
 
     public boolean hasDescription() {
-        return isNotEmpty(trim(this.description));
+        return isNotBlank(this.description);
     }
 }
