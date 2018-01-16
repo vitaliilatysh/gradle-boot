@@ -34,7 +34,7 @@ public class Item extends ItemBase {
     }
 
     @Override
-    protected void doEquals(EqualsBuilder equalsBuilder, Object obj) {
+    protected void doEquals(EqualsBuilder equalsBuilder, Entity obj) {
         Item item = (Item) obj;
         equalsBuilder
                 .append(this.getKey(), item.getKey())

@@ -32,7 +32,7 @@ public class Section extends SectionBase {
     }
 
     @Override
-    protected void doEquals(EqualsBuilder equalsBuilder, Object obj) {
+    protected void doEquals(EqualsBuilder equalsBuilder, Entity obj) {
         Section section = (Section) obj;
         equalsBuilder
                 .append(this.getKey(), section.getKey())

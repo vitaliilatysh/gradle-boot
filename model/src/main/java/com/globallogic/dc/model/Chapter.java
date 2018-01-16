@@ -23,7 +23,7 @@ public class Chapter extends ChapterBase {
     }
 
     @Override
-    protected void doEquals(EqualsBuilder equalsBuilder, Object obj) {
+    protected void doEquals(EqualsBuilder equalsBuilder, Entity obj) {
         Chapter chapter = (Chapter) obj;
         equalsBuilder
                 .append(this.getKey(), chapter.getKey())

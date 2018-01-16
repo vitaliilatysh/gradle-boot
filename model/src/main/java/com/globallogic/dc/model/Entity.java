@@ -6,9 +6,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public abstract class Entity <T> extends Aggregate implements Identifiable <T> {
 
     @Override
-    protected void doEquals(final EqualsBuilder equalsBuilder, final Object obj){
+    protected void doEquals(final EqualsBuilder equalsBuilder, final Entity obj){
         equalsBuilder
-                .append(getIdentifier(), getIdentifier());
+                .append(this.getIdentifier(), obj.getIdentifier());
     }
 
     @Override

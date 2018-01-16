@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public abstract class Aggregate {
 
-    protected abstract void doEquals(final EqualsBuilder equalsBuilder, final Object obj);
+    protected abstract void doEquals(final EqualsBuilder equalsBuilder, final Entity obj);
 
     protected abstract void doHashCode(final HashCodeBuilder hashCodeBuilder);
 
@@ -19,7 +19,7 @@ public abstract class Aggregate {
             return false;
         }
         final EqualsBuilder equalsBuilder = new EqualsBuilder();
-        doEquals(equalsBuilder, obj);
+        doEquals(equalsBuilder, (Entity) obj);
         return equalsBuilder.isEquals();
     }
 

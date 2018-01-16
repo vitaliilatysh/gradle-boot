@@ -33,7 +33,7 @@ public class Range extends RangeBase {
     }
 
     @Override
-    protected void doEquals(EqualsBuilder equalsBuilder, Object obj) {
+    protected void doEquals(EqualsBuilder equalsBuilder, Entity obj) {
         Range range = (Range) obj;
         equalsBuilder
                 .append(this.getKey(), range.getKey())

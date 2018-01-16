@@ -25,7 +25,7 @@ public class SubChapter extends SubChapterBase {
     }
 
     @Override
-    protected void doEquals(EqualsBuilder equalsBuilder, Object obj) {
+    protected void doEquals(EqualsBuilder equalsBuilder, Entity obj) {
         SubChapter subChapter = (SubChapter) obj;
         equalsBuilder
                 .append(this.getKey(), subChapter.getKey())
