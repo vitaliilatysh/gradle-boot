@@ -1,5 +1,5 @@
 package com.globallogic.dc.model;
 
-public abstract class Entity implements Identifiable {
+public abstract class Entity extends Aggregate implements Identifiable {
 
 }
