@@ -1,27 +1,32 @@
 package com.globallogic.dc.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 public abstract class Aggregate {
 
-    protected abstract boolean doEquals(final Object obj);
+    protected abstract void doEquals(final EqualsBuilder equalsBuilder, final Object obj);
 
-    protected abstract int doHashCode();
+    protected abstract void doHashCode(final HashCodeBuilder hashCodeBuilder);
 
     @Override
     public boolean equals(final Object obj) {
         if (obj == null) {
             return false;
-        }
-        if (obj == this) {
+        } else if (obj == this) {
             return true;
-        }
-        if (obj.getClass() != getClass()) {
+        } else if (obj.getClass() != getClass()) {
             return false;
         }
-        return doEquals(obj);
+        final EqualsBuilder equalsBuilder = new EqualsBuilder();
+        doEquals(equalsBuilder, obj);
+        return equalsBuilder.isEquals();
     }
 
     @Override
     public int hashCode() {
-        return doHashCode();
+        final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder(17, 37);
+        doHashCode(hashCodeBuilder);
+        return hashCodeBuilder.toHashCode();
     }
 }
