@@ -64,12 +64,16 @@ public abstract class SectionBase extends AbstractProduct {
     }
 
     public void addRanges(final Collection<Range> ranges) {
-        if (isEmpty(this.ranges)) this.ranges = new ArrayList<>();
+        if (isEmpty(this.ranges)) {
+            this.ranges = new ArrayList<>();
+        }
         this.ranges.addAll(ranges);
     }
 
     public void addRange(final Range range) {
-        if (isEmpty(this.ranges)) this.ranges = new ArrayList<>();
+        if (isEmpty(this.ranges)) {
+            this.ranges = new ArrayList<>();
+        }
         this.ranges.add(range);
     }
 
