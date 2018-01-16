@@ -10,6 +10,6 @@ public abstract class AbstractProduct extends AbstractProductBase {
     }
 
     public String getIdentifier() {
-        return super.getKey();
+        return this.getKey();
     }
 }
