@@ -32,25 +32,23 @@ public class Section extends SectionBase {
     }
 
     @Override
-    protected boolean doEquals(final Object obj) {
+    protected void doEquals(EqualsBuilder equalsBuilder, Object obj) {
         Section section = (Section) obj;
-        return new EqualsBuilder()
+        equalsBuilder
                 .append(this.getKey(), section.getKey())
                 .append(this.getTitle(), section.getTitle())
                 .append(this.getDescription(), section.getDescription())
                 .append(this.getSubChapter(), section.getSubChapter())
-                .append(this.getRanges(), section.getRanges())
-                .isEquals();
+                .append(this.getRanges(), section.getRanges());
     }
 
     @Override
-    protected int doHashCode() {
-        return new HashCodeBuilder(17, 37)
+    protected void doHashCode(HashCodeBuilder hashCodeBuilder) {
+        hashCodeBuilder
                 .append(this.getKey())
                 .append(this.getTitle())
                 .append(this.getDescription())
                 .append(this.getSubChapter())
-                .append(this.getRanges())
-                .toHashCode();
+                .append(this.getRanges());
     }
 }

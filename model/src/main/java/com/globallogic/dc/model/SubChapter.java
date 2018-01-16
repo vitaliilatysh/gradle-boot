@@ -25,27 +25,25 @@ public class SubChapter extends SubChapterBase {
     }
 
     @Override
-    protected boolean doEquals(final Object obj) {
+    protected void doEquals(EqualsBuilder equalsBuilder, Object obj) {
         SubChapter subChapter = (SubChapter) obj;
-        return new EqualsBuilder()
+        equalsBuilder
                 .append(this.getKey(), subChapter.getKey())
                 .append(this.getTitle(), subChapter.getTitle())
                 .append(this.getDescription(), subChapter.getDescription())
                 .append(this.getChapter(), subChapter.getChapter())
                 .append(this.getSections(), subChapter.getSections())
-                .append(this.getRanges(), subChapter.getRanges())
-                .isEquals();
+                .append(this.getRanges(), subChapter.getRanges());
     }
 
     @Override
-    protected int doHashCode() {
-        return new HashCodeBuilder(17,37)
+    protected void doHashCode(HashCodeBuilder hashCodeBuilder) {
+        hashCodeBuilder
                 .append(this.getKey())
                 .append(this.getTitle())
                 .append(this.getDescription())
                 .append(this.getChapter())
                 .append(this.getSections())
-                .append(this.getRanges())
-                .toHashCode();
+                .append(this.getRanges());
     }
 }

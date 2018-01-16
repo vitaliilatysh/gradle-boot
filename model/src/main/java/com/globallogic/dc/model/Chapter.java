@@ -23,19 +23,18 @@ public class Chapter extends ChapterBase {
     }
 
     @Override
-    protected boolean doEquals(final Object obj) {
+    protected void doEquals(EqualsBuilder equalsBuilder, Object obj) {
         Chapter chapter = (Chapter) obj;
-        return new EqualsBuilder()
+        equalsBuilder
                 .append(this.getKey(), chapter.getKey())
                 .append(this.getTitle(), chapter.getTitle())
                 .append(this.getDescription(), chapter.getDescription())
-                .append(this.getSubChapters(), chapter.getSubChapters())
-                .isEquals();
+                .append(this.getSubChapters(), chapter.getSubChapters());
     }
 
     @Override
-    protected int doHashCode() {
-        return new HashCodeBuilder(17, 37)
+    protected void doHashCode(HashCodeBuilder hashCodeBuilder) {
+        hashCodeBuilder
                 .append(this.getKey())
                 .append(this.getTitle())
                 .append(this.getDescription())

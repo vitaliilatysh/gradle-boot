@@ -34,27 +34,25 @@ public class Item extends ItemBase {
     }
 
     @Override
-    protected boolean doEquals(final Object obj) {
+    protected void doEquals(EqualsBuilder equalsBuilder, Object obj) {
         Item item = (Item) obj;
-        return new EqualsBuilder()
+        equalsBuilder
                 .append(this.getKey(), item.getKey())
                 .append(this.getTitle(), item.getTitle())
                 .append(this.getDescription(), item.getDescription())
                 .append(this.getRange(), item.getRange())
                 .append(this.getItems(), item.getItems())
-                .append(this.getRelatedItems(), item.getRelatedItems())
-                .isEquals();
+                .append(this.getRelatedItems(), item.getRelatedItems());
     }
 
     @Override
-    protected int doHashCode() {
-        return new HashCodeBuilder(17, 37)
+    protected void doHashCode(HashCodeBuilder hashCodeBuilder) {
+        hashCodeBuilder
                 .append(this.getKey())
                 .append(this.getTitle())
                 .append(this.getDescription())
                 .append(this.getRange())
                 .append(this.getItems())
-                .append(this.getRelatedItems())
-                .toHashCode();
+                .append(this.getRelatedItems());
     }
 }

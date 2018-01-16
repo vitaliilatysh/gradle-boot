@@ -33,27 +33,25 @@ public class Range extends RangeBase {
     }
 
     @Override
-    protected boolean doEquals(final Object obj) {
+    protected void doEquals(EqualsBuilder equalsBuilder, Object obj) {
         Range range = (Range) obj;
-        return new EqualsBuilder()
+        equalsBuilder
                 .append(this.getKey(), range.getKey())
                 .append(this.getTitle(), range.getTitle())
                 .append(this.getDescription(), range.getDescription())
                 .append(this.getSubChapters(), range.getSubChapters())
                 .append(this.getItems(), range.getItems())
-                .append(this.getSections(), range.getSections())
-                .isEquals();
+                .append(this.getSections(), range.getSections());
     }
 
     @Override
-    protected int doHashCode() {
-        return new HashCodeBuilder(17, 37)
+    protected void doHashCode(HashCodeBuilder hashCodeBuilder) {
+        hashCodeBuilder
                 .append(this.getKey())
                 .append(this.getTitle())
                 .append(this.getDescription())
                 .append(this.getSubChapters())
                 .append(this.getItems())
-                .append(this.getSections())
-                .toHashCode();
+                .append(this.getSections());
     }
 }
