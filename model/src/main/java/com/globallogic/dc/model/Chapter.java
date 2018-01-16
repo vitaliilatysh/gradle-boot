@@ -1,5 +1,8 @@
 package com.globallogic.dc.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.util.List;
 
 public class Chapter extends ChapterBase {
@@ -17,5 +20,26 @@ public class Chapter extends ChapterBase {
             final String description,
             final List<SubChapter> subChapters) {
         super(key, title, description, subChapters);
+    }
+
+    @Override
+    protected boolean doEquals(final Object obj) {
+        Chapter chapter = (Chapter) obj;
+        return new EqualsBuilder()
+                .append(this.getKey(), chapter.getKey())
+                .append(this.getTitle(), chapter.getTitle())
+                .append(this.getDescription(), chapter.getDescription())
+                .append(this.getSubChapters(), chapter.getSubChapters())
+                .isEquals();
+    }
+
+    @Override
+    protected int doHashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(this.getKey())
+                .append(this.getTitle())
+                .append(this.getDescription())
+                .append(this.getSubChapters())
+                .toHashCode();
     }
 }
