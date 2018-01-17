@@ -38,7 +38,6 @@ public class Chapter extends ChapterBase {
                 .append(this.getKey())
                 .append(this.getTitle())
                 .append(this.getDescription())
-                .append(this.getSubChapters())
-                .toHashCode();
+                .append(this.getSubChapters());
     }
 }
