@@ -1,5 +1,6 @@
 package com.globallogic.dc.model;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,46 +50,61 @@ public class ChapterTest {
     }
 
     @Test
-    public void testEqualsAndHashCode(){
-        final Chapter chapter1 = new Chapter("1", "Title", "Desc");
-        final Chapter chapter2 = new Chapter("1", "Title1", "Desc");
-        final Chapter chapter3 = new Chapter("1", "Title", "Desc1");
+    public void testEquals_WithKeyTitleDesc() {
+        final Chapter chapter = new Chapter("1", "Title", "Desc");
 
-        assertTrue(chapter1.equals(target));
-        assertEquals(chapter1.hashCode(), target.hashCode());
-        assertFalse(chapter2.equals(target));
-        assertNotEquals(chapter2.hashCode(), target.hashCode());
-        assertFalse(chapter3.equals(target));
-        assertNotEquals(chapter3.hashCode(), target.hashCode());
+        assertTrue(chapter.equals(target));
 
-        chapter1.addSubChapters(new ArrayList<>());
+        chapter.setKey("2");
 
-        assertFalse(chapter1.equals(target));
-        assertNotEquals(chapter1.hashCode(), target.hashCode());
+        assertFalse(chapter.equals(target));
+
+        chapter.setKey("1");
+        chapter.setTitle("NewTitle");
+
+        assertFalse(chapter.equals(target));
+
+        chapter.setTitle("Title");
+        chapter.setDescription("NewDesc");
+
+        assertFalse(chapter.equals(target));
+    }
+
+    @Test
+    public void testEquals_WithSubChaptersList() {
+        final Chapter chapter = new Chapter("1", "Title", "Desc");
+
+        chapter.addSubChapters(new ArrayList<>());
+
+        assertFalse(chapter.equals(target));
 
         target.addSubChapters(new ArrayList<>());
 
-        assertTrue(chapter1.equals(target));
-        assertEquals(chapter1.hashCode(), target.hashCode());
+        assertTrue(chapter.equals(target));
+        chapter.addSubChapter(new SubChapter("1","Title","Desc"));
 
-        chapter1.addSubChapter(new SubChapter("1", "Title", "Desc"));
+        assertFalse(chapter.equals(target));
 
-        assertFalse(chapter1.equals(target));
-        assertNotEquals(chapter1.hashCode(), target.hashCode());
+        target.addSubChapter(new SubChapter("1","Title","Desc"));
 
-        target.addSubChapter(new SubChapter("1", "Title", "Desc"));
+        assertTrue(chapter.equals(target));
 
-        assertTrue(chapter1.equals(target));
-        assertEquals(chapter1.hashCode(), target.hashCode());
+        chapter.addSubChapter(new SubChapter("1","Title","Desc"));
+        target.addSubChapter(new SubChapter("2","Title","Desc"));
 
-        chapter1.addSubChapter(new SubChapter("1", "Title", "Desc"));
+        assertFalse(chapter.equals(target));
+    }
 
-        assertFalse(chapter1.equals(target));
-        assertNotEquals(chapter1.hashCode(), target.hashCode());
+    @Test
+    public void testHashCode(){
+        final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
 
-        target.addSubChapter(new SubChapter("2", "Title", "Desc"));
+        hashCodeBuilder
+                .append(target.getKey())
+                .append(target.getTitle())
+                .append(target.getDescription())
+                .append(target.getSubChapters());
 
-        assertFalse(chapter1.equals(target));
-        assertNotEquals(chapter1.hashCode(), target.hashCode());
+        assertEquals(target.hashCode(), hashCodeBuilder.toHashCode());
     }
 }
