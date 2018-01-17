@@ -79,32 +79,44 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public void addSubChapters(final Collection<SubChapter> subChapters) {
-        if (isEmpty(this.subChapters)) this.subChapters = new ArrayList<>();
+        if (isEmpty(this.subChapters)) {
+            this.subChapters = new ArrayList<>();
+        }
         this.subChapters.addAll(subChapters);
     }
 
     public void addSubChapter(final SubChapter subChapter) {
-        if (isEmpty(this.subChapters)) this.subChapters = new ArrayList<>();
+        if (isEmpty(this.subChapters)) {
+            this.subChapters = new ArrayList<>();
+        }
         this.subChapters.add(subChapter);
     }
 
     public void addItems(final Collection<Item> items) {
-        if (isEmpty(this.items)) this.items = new ArrayList<>();
+        if (isEmpty(this.items)) {
+            this.items = new ArrayList<>();
+        }
         this.items.addAll(items);
     }
 
     public void addItem(final Item item) {
-        if (isEmpty(this.items)) this.items = new ArrayList<>();
+        if (isEmpty(this.items)) {
+            this.items = new ArrayList<>();
+        }
         this.items.add(item);
     }
 
     public void addSections(final Collection<Section> sections) {
-        if (isEmpty(this.sections)) this.sections = new ArrayList<>();
+        if (isEmpty(this.sections)) {
+            this.sections = new ArrayList<>();
+        }
         this.sections.addAll(sections);
     }
 
     public void addSection(final Section section) {
-        if (isEmpty(this.sections)) this.sections = new ArrayList<>();
+        if (isEmpty(this.sections)) {
+            this.sections = new ArrayList<>();
+        }
         this.sections.add(section);
     }
 

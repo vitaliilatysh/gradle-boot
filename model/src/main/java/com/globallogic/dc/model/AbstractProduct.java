@@ -8,4 +8,8 @@ public abstract class AbstractProduct extends AbstractProductBase {
             final String description) {
         super(key, title, description);
     }
+
+    public String getIdentifier() {
+        return this.getKey();
+    }
 }

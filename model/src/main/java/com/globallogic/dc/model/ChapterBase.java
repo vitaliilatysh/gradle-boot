@@ -40,13 +40,16 @@ public abstract class ChapterBase extends AbstractProduct {
     }
 
     public void addSubChapters(final Collection<SubChapter> subChapters) {
-        if (isEmpty(this.subChapters)) this.subChapters = new ArrayList<>();
+        if (isEmpty(this.subChapters)) {
+            this.subChapters = new ArrayList<>();
+        }
         this.subChapters.addAll(subChapters);
     }
 
     public void addSubChapter(final SubChapter subChapter) {
-        if (isEmpty(this.subChapters)) this.subChapters = new ArrayList<>();
+        if (isEmpty(this.subChapters)) {
+            this.subChapters = new ArrayList<>();
+        }
         this.subChapters.add(subChapter);
     }
-
 }

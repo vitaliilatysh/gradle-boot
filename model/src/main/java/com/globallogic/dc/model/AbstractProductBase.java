@@ -2,7 +2,7 @@ package com.globallogic.dc.model;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public abstract class AbstractProductBase {
+public abstract class AbstractProductBase extends Entity<String> {
 
     private String key;
     private String title;

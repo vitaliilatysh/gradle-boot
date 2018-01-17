@@ -86,18 +86,24 @@ public abstract class ItemBase extends AbstractProduct {
     }
 
     public void addItem(final Item item) {
-        if (isEmpty(this.items)) this.items = new ArrayList<>();
+        if (isEmpty(this.items)) {
+            this.items = new ArrayList<>();
+        }
         this.items.add(item);
     }
 
     public void addRelatedItems(final Collection<Item> relatedItems) {
-        if (isEmpty(this.relatedItems)) this.relatedItems = new ArrayList<>();
+        if (isEmpty(this.relatedItems)) {
+            this.relatedItems = new ArrayList<>();
+        }
         this.relatedItems.addAll(relatedItems);
     }
 
     public void addRelatedItem(final Item relatedItem) {
-        if (isEmpty(this.relatedItems)) this.relatedItems = new ArrayList<>();
+        if (isEmpty(this.relatedItems)) {
+            this.relatedItems = new ArrayList<>();
+        }
         this.relatedItems.add(relatedItem);
-}
+    }
 
 }

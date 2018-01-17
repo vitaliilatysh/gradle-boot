@@ -70,22 +70,30 @@ public abstract class SubChapterBase extends AbstractProduct {
     }
 
     public void addSections(final Collection<Section> sections) {
-        if (isEmpty(this.sections)) this.sections = new ArrayList<>();
+        if (isEmpty(this.sections)) {
+            this.sections = new ArrayList<>();
+        }
         this.sections.addAll(sections);
     }
 
     public void addSection(final Section section) {
-        if (isEmpty(this.sections)) this.sections = new ArrayList<>();
+        if (isEmpty(this.sections)) {
+            this.sections = new ArrayList<>();
+        }
         this.sections.add(section);
     }
 
     public void addRanges(final Collection<Range> ranges) {
-        if (isEmpty(this.ranges)) this.ranges = new ArrayList<>();
+        if (isEmpty(this.ranges)) {
+            this.ranges = new ArrayList<>();
+        }
         this.ranges.addAll(ranges);
     }
 
     public void addRange(final Range range) {
-        if (isEmpty(this.ranges)) this.ranges = new ArrayList<>();
+        if (isEmpty(this.ranges)) {
+            this.ranges = new ArrayList<>();
+        }
         this.ranges.add(range);
     }
 

@@ -1,5 +1,8 @@
 package com.globallogic.dc.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.util.List;
 
 public class Section extends SectionBase {
@@ -26,5 +29,26 @@ public class Section extends SectionBase {
             final String description,
             final SubChapter subChapter) {
         super(key, title, description, subChapter);
+    }
+
+    @Override
+    protected void doEquals(final EqualsBuilder equalsBuilder, final Aggregate obj) {
+        final Section section = (Section) obj;
+        equalsBuilder
+                .append(this.getKey(), section.getKey())
+                .append(this.getTitle(), section.getTitle())
+                .append(this.getDescription(), section.getDescription())
+                .append(this.getSubChapter(), section.getSubChapter())
+                .append(this.getRanges(), section.getRanges());
+    }
+
+    @Override
+    protected void doHashCode(final HashCodeBuilder hashCodeBuilder) {
+        hashCodeBuilder
+                .append(this.getKey())
+                .append(this.getTitle())
+                .append(this.getDescription())
+                .append(this.getSubChapter())
+                .append(this.getRanges());
     }
 }
