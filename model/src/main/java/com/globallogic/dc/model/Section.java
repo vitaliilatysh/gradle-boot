@@ -32,8 +32,8 @@ public class Section extends SectionBase {
     }
 
     @Override
-    protected void doEquals(EqualsBuilder equalsBuilder, Entity obj) {
-        Section section = (Section) obj;
+    protected void doEquals(final EqualsBuilder equalsBuilder, final Aggregate obj) {
+        final Section section = (Section) obj;
         equalsBuilder
                 .append(this.getKey(), section.getKey())
                 .append(this.getTitle(), section.getTitle())
@@ -43,7 +43,7 @@ public class Section extends SectionBase {
     }
 
     @Override
-    protected void doHashCode(HashCodeBuilder hashCodeBuilder) {
+    protected void doHashCode(final HashCodeBuilder hashCodeBuilder) {
         hashCodeBuilder
                 .append(this.getKey())
                 .append(this.getTitle())

@@ -25,8 +25,8 @@ public class SubChapter extends SubChapterBase {
     }
 
     @Override
-    protected void doEquals(EqualsBuilder equalsBuilder, Entity obj) {
-        SubChapter subChapter = (SubChapter) obj;
+    protected void doEquals(final EqualsBuilder equalsBuilder, final Aggregate obj) {
+        final SubChapter subChapter = (SubChapter) obj;
         equalsBuilder
                 .append(this.getKey(), subChapter.getKey())
                 .append(this.getTitle(), subChapter.getTitle())
@@ -37,7 +37,7 @@ public class SubChapter extends SubChapterBase {
     }
 
     @Override
-    protected void doHashCode(HashCodeBuilder hashCodeBuilder) {
+    protected void doHashCode(final HashCodeBuilder hashCodeBuilder) {
         hashCodeBuilder
                 .append(this.getKey())
                 .append(this.getTitle())

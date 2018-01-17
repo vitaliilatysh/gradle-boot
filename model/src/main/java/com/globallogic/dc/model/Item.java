@@ -34,8 +34,8 @@ public class Item extends ItemBase {
     }
 
     @Override
-    protected void doEquals(EqualsBuilder equalsBuilder, Entity obj) {
-        Item item = (Item) obj;
+    protected void doEquals(final EqualsBuilder equalsBuilder, final Aggregate obj) {
+        final Item item = (Item) obj;
         equalsBuilder
                 .append(this.getKey(), item.getKey())
                 .append(this.getTitle(), item.getTitle())
@@ -46,7 +46,7 @@ public class Item extends ItemBase {
     }
 
     @Override
-    protected void doHashCode(HashCodeBuilder hashCodeBuilder) {
+    protected void doHashCode(final HashCodeBuilder hashCodeBuilder) {
         hashCodeBuilder
                 .append(this.getKey())
                 .append(this.getTitle())

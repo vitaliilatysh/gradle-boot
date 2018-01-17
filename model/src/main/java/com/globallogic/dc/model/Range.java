@@ -33,8 +33,8 @@ public class Range extends RangeBase {
     }
 
     @Override
-    protected void doEquals(EqualsBuilder equalsBuilder, Entity obj) {
-        Range range = (Range) obj;
+    protected void doEquals(final EqualsBuilder equalsBuilder, final Aggregate obj) {
+       final Range range = (Range) obj;
         equalsBuilder
                 .append(this.getKey(), range.getKey())
                 .append(this.getTitle(), range.getTitle())
@@ -45,7 +45,7 @@ public class Range extends RangeBase {
     }
 
     @Override
-    protected void doHashCode(HashCodeBuilder hashCodeBuilder) {
+    protected void doHashCode(final HashCodeBuilder hashCodeBuilder) {
         hashCodeBuilder
                 .append(this.getKey())
                 .append(this.getTitle())

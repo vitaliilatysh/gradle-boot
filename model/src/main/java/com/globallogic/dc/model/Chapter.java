@@ -23,8 +23,8 @@ public class Chapter extends ChapterBase {
     }
 
     @Override
-    protected void doEquals(EqualsBuilder equalsBuilder, Entity obj) {
-        Chapter chapter = (Chapter) obj;
+    protected void doEquals(final EqualsBuilder equalsBuilder, final Aggregate obj) {
+        final Chapter chapter = (Chapter) obj;
         equalsBuilder
                 .append(this.getKey(), chapter.getKey())
                 .append(this.getTitle(), chapter.getTitle())
@@ -33,7 +33,7 @@ public class Chapter extends ChapterBase {
     }
 
     @Override
-    protected void doHashCode(HashCodeBuilder hashCodeBuilder) {
+    protected void doHashCode(final HashCodeBuilder hashCodeBuilder) {
         hashCodeBuilder
                 .append(this.getKey())
                 .append(this.getTitle())
