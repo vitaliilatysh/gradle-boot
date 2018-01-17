@@ -1,5 +1,6 @@
 package com.globallogic.dc.model;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -108,6 +109,119 @@ public class RangeTest {
                 new Section("3", "3", "3")));
 
         assertEquals(2, target.getSections().size());
+    }
+
+    @Test
+    public void testEquals_WithKeyTitleDesc() {
+        final Range range = new Range("1", "Title", "Desc");
+
+        assertTrue(range.equals(target));
+
+        range.setKey("2");
+
+        assertFalse(range.equals(target));
+
+        range.setKey("1");
+        range.setTitle("NewTitle");
+
+        assertFalse(range.equals(target));
+
+        range.setTitle("Title");
+        range.setDescription("NewDesc");
+
+        assertFalse(range.equals(target));
+    }
+
+    @Test
+    public void testEquals_WithSubChaptersList() {
+        final Range range = new Range("1", "Title", "Desc");
+
+        range.addSubChapters(new ArrayList<>());
+
+        assertFalse(range.equals(target));
+
+        target.addSubChapters(new ArrayList<>());
+
+        assertTrue(range.equals(target));
+        range.addSubChapter(new SubChapter("2","Title","Desc"));
+
+        assertFalse(range.equals(target));
+
+        target.addSubChapter(new SubChapter("2","Title","Desc"));
+
+        assertTrue(range.equals(target));
+
+        range.addSubChapter(new SubChapter("3","Title","Desc"));
+        target.addSubChapter(new SubChapter("4","Title","Desc"));
+
+        assertFalse(range.equals(target));
+    }
+
+    @Test
+    public void testEquals_WithItemsList() {
+        final Range range = new Range("1", "Title", "Desc");
+
+        range.addItems(new ArrayList<>());
+
+        assertFalse(range.equals(target));
+
+        target.addItems(new ArrayList<>());
+
+        assertTrue(range.equals(target));
+
+        range.addItem(new Item("1", "Title", "Desc"));
+
+        assertFalse(range.equals(target));
+
+        target.addItem(new Item("1", "Title", "Desc"));
+
+        assertTrue(range.equals(target));
+
+        range.addItem(new Item("1", "Title", "Desc"));
+        target.addItem(new Item("2", "Title", "Desc"));
+
+        assertFalse(range.equals(target));
+
+    }
+
+    @Test
+    public void testEquals_WithSectionsList() {
+        final Range range = new Range("1", "Title", "Desc");
+
+        range.addSections(new ArrayList<>());
+
+        assertFalse(range.equals(target));
+
+        target.addSections(new ArrayList<>());
+
+        assertTrue(range.equals(target));
+        range.addSection(new Section("1","Title","Desc"));
+
+        assertFalse(range.equals(target));
+
+        target.addSection(new Section("1","Title","Desc"));
+
+        assertTrue(range.equals(target));
+
+        range.addSection(new Section("1","Title","Desc"));
+        target.addSection(new Section("2","Title","Desc"));
+
+        assertFalse(range.equals(target));
+    }
+
+    @Test
+    public void testHashCode(){
+        final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
+
+        hashCodeBuilder
+                .append(target.getKey())
+                .append(target.getTitle())
+                .append(target.getDescription())
+                .append(target.getSections())
+                .append(target.getItems())
+                .append(target.getSubChapters());
+
+        assertEquals(target.hashCode(), hashCodeBuilder.toHashCode());
     }
 
 }

@@ -1,5 +1,6 @@
 package com.globallogic.dc.model;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -57,6 +58,84 @@ public class SectionTest {
                 new Range("3", "3", "3")));
 
         assertEquals(2, target.getRanges().size());
+    }
+
+    @Test
+    public void testEquals_WithKeyTitleDesc() {
+        final Section section = new Section("1", "Title", "Desc");
+
+        assertTrue(section.equals(target));
+
+        section.setKey("2");
+
+        assertFalse(section.equals(target));
+
+        section.setKey("1");
+        section.setTitle("NewTitle");
+
+        assertFalse(section.equals(target));
+
+        section.setTitle("Title");
+        section.setDescription("NewDesc");
+
+        assertFalse(section.equals(target));
+    }
+
+    @Test
+    public void testEquals_WithSubChapter() {
+        final Section section = new Section("1", "Title", "Desc");
+
+        section.setSubChapter(new SubChapter("1", "Title", "Desc"));
+
+        assertFalse(section.equals(target));
+
+        target.setSubChapter(new SubChapter("1", "Title", "Desc"));
+
+        assertTrue(section.equals(target));
+
+        section.setSubChapter(new SubChapter("1", "Title", "Desc"));
+        target.setSubChapter(new SubChapter("2", "Title", "Desc"));
+
+        assertFalse(section.equals(target));
+    }
+
+    @Test
+    public void testEquals_WithRangesList() {
+        final Section section = new Section("1", "Title", "Desc");
+
+        section.addRanges(new ArrayList<>());
+
+        assertFalse(section.equals(target));
+
+        target.addRanges(new ArrayList<>());
+
+        assertTrue(section.equals(target));
+        section.addRange(new Range("1","Title","Desc"));
+
+        assertFalse(section.equals(target));
+
+        target.addRange(new Range("1","Title","Desc"));
+
+        assertTrue(section.equals(target));
+
+        section.addRange(new Range("1","Title","Desc"));
+        target.addRange(new Range("2","Title","Desc"));
+
+        assertFalse(section.equals(target));
+    }
+
+    @Test
+    public void testHashCode(){
+        final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
+
+        hashCodeBuilder
+                .append(target.getKey())
+                .append(target.getTitle())
+                .append(target.getDescription())
+                .append(target.getRanges())
+                .append(target.getSubChapter());
+
+        assertEquals(target.hashCode(), hashCodeBuilder.toHashCode());
     }
 
 }
