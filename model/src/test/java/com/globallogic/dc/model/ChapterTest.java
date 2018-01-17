@@ -47,4 +47,48 @@ public class ChapterTest {
 
         assertEquals(2, target.getSubChapters().size());
     }
+
+    @Test
+    public void testEqualsAndHashCode(){
+        final Chapter chapter1 = new Chapter("1", "Title", "Desc");
+        final Chapter chapter2 = new Chapter("1", "Title1", "Desc");
+        final Chapter chapter3 = new Chapter("1", "Title", "Desc1");
+
+        assertTrue(chapter1.equals(target));
+        assertEquals(chapter1.hashCode(), target.hashCode());
+        assertFalse(chapter2.equals(target));
+        assertNotEquals(chapter2.hashCode(), target.hashCode());
+        assertFalse(chapter3.equals(target));
+        assertNotEquals(chapter3.hashCode(), target.hashCode());
+
+        chapter1.addSubChapters(new ArrayList<>());
+
+        assertFalse(chapter1.equals(target));
+        assertNotEquals(chapter1.hashCode(), target.hashCode());
+
+        target.addSubChapters(new ArrayList<>());
+
+        assertTrue(chapter1.equals(target));
+        assertEquals(chapter1.hashCode(), target.hashCode());
+
+        chapter1.addSubChapter(new SubChapter("1", "Title", "Desc"));
+
+        assertFalse(chapter1.equals(target));
+        assertNotEquals(chapter1.hashCode(), target.hashCode());
+
+        target.addSubChapter(new SubChapter("1", "Title", "Desc"));
+
+        assertTrue(chapter1.equals(target));
+        assertEquals(chapter1.hashCode(), target.hashCode());
+
+        chapter1.addSubChapter(new SubChapter("1", "Title", "Desc"));
+
+        assertFalse(chapter1.equals(target));
+        assertNotEquals(chapter1.hashCode(), target.hashCode());
+
+        target.addSubChapter(new SubChapter("2", "Title", "Desc"));
+
+        assertFalse(chapter1.equals(target));
+        assertNotEquals(chapter1.hashCode(), target.hashCode());
+    }
 }
