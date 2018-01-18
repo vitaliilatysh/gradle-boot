@@ -11,11 +11,13 @@ import static org.junit.Assert.*;
 
 public class ItemTest {
 
-    private Item target;
+    private Item target, item;
 
     @Before
     public void setup() {
         target = new Item("1", "Title", "Desc");
+        item = new Item("1", "Title", "Desc");
+
     }
 
     @Test
@@ -94,30 +96,40 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_WithKeyTitleDesc() {
-        final Item item = new Item("1", "Title", "Desc");
-
-        assertTrue(item.equals(target));
-
+    public void testEqualsKey() {
         item.setKey("2");
 
         assertFalse(item.equals(target));
 
         item.setKey("1");
+
+        assertTrue(item.equals(target));
+    }
+
+    @Test
+    public void testEqualsTitle() {
         item.setTitle("NewTitle");
 
         assertFalse(item.equals(target));
 
         item.setTitle("Title");
-        item.setDescription("NewDesc");
 
-        assertFalse(item.equals(target));
+        assertTrue(item.equals(target));
     }
 
     @Test
-    public void testEquals_WithRange() {
-        final Item item = new Item("1", "Title", "Desc");
+    public void testEqualsDesc() {
+        item.setDescription("NewDesc");
 
+        assertFalse(item.equals(target));
+
+        item.setDescription("Desc");
+
+        assertTrue(item.equals(target));
+    }
+
+    @Test
+    public void testEqualsSameRangeInside() {
         item.setRange(new Range("1", "Title", "Desc"));
 
         assertFalse(item.equals(target));
@@ -125,17 +137,21 @@ public class ItemTest {
         target.setRange(new Range("1", "Title", "Desc"));
 
         assertTrue(item.equals(target));
+    }
 
+    @Test
+    public void testEqualsDiffRangeInside() {
         item.setRange(new Range("1", "Title", "Desc"));
+
+        assertFalse(item.equals(target));
+
         target.setRange(new Range("2", "Title", "Desc"));
 
         assertFalse(item.equals(target));
     }
 
     @Test
-    public void testEquals_WithItemsList() {
-        final Item item = new Item("1", "Title", "Desc");
-
+    public void testEqualsEmptyItemsList() {
         item.addItems(new ArrayList<>());
 
         assertFalse(item.equals(target));
@@ -143,7 +159,10 @@ public class ItemTest {
         target.addItems(new ArrayList<>());
 
         assertTrue(item.equals(target));
+    }
 
+    @Test
+    public void testEqualsSameItemsInsideList() {
         item.addItem(new Item("1", "Title", "Desc"));
 
         assertFalse(item.equals(target));
@@ -151,17 +170,21 @@ public class ItemTest {
         target.addItem(new Item("1", "Title", "Desc"));
 
         assertTrue(item.equals(target));
+    }
 
+    @Test
+    public void testEqualsDiffItemsInsideList() {
         item.addItem(new Item("1", "Title", "Desc"));
+
+        assertFalse(item.equals(target));
+
         target.addItem(new Item("2", "Title", "Desc"));
 
         assertFalse(item.equals(target));
     }
 
     @Test
-    public void testEquals_WithRelatedItemsList() {
-        final Item item = new Item("1", "Title", "Desc");
-
+    public void testEqualsEmptyRelatedItemsList() {
         item.addRelatedItems(new ArrayList<>());
 
         assertFalse(item.equals(target));
@@ -169,7 +192,10 @@ public class ItemTest {
         target.addRelatedItems(new ArrayList<>());
 
         assertTrue(item.equals(target));
+    }
 
+    @Test
+    public void testEqualsSameRelatedItemsInsideList() {
         item.addRelatedItem(new Item("1", "Title", "Desc"));
 
         assertFalse(item.equals(target));
@@ -177,8 +203,14 @@ public class ItemTest {
         target.addRelatedItem(new Item("1", "Title", "Desc"));
 
         assertTrue(item.equals(target));
+    }
 
+    @Test
+    public void testEqualsDiffRelatedItemsInsideList() {
         item.addRelatedItem(new Item("1", "Title", "Desc"));
+
+        assertFalse(item.equals(target));
+
         target.addRelatedItem(new Item("2", "Title", "Desc"));
 
         assertFalse(item.equals(target));

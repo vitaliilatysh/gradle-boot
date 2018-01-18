@@ -11,11 +11,12 @@ import static org.junit.Assert.*;
 
 public class RangeTest {
 
-    private Range target;
+    private Range target, range;
 
     @Before
     public void setup() {
         target = new Range("1", "Title", "Desc");
+        range = new Range("1", "Title", "Desc");
     }
 
     @Test
@@ -112,30 +113,41 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_WithKeyTitleDesc() {
-        final Range range = new Range("1", "Title", "Desc");
-
-        assertTrue(range.equals(target));
+    public void testEqualsKey() {
 
         range.setKey("2");
 
         assertFalse(range.equals(target));
 
         range.setKey("1");
+
+        assertTrue(range.equals(target));
+    }
+
+    @Test
+    public void testEqualsTitle() {
         range.setTitle("NewTitle");
 
         assertFalse(range.equals(target));
 
         range.setTitle("Title");
-        range.setDescription("NewDesc");
 
-        assertFalse(range.equals(target));
+        assertTrue(range.equals(target));
     }
 
     @Test
-    public void testEquals_WithSubChaptersList() {
-        final Range range = new Range("1", "Title", "Desc");
+    public void testEqualsDesc() {
+        range.setDescription("NewDesc");
 
+        assertFalse(range.equals(target));
+
+        range.setDescription("Desc");
+
+        assertTrue(range.equals(target));
+    }
+
+    @Test
+    public void testEqualsEmptySubChaptersList() {
         range.addSubChapters(new ArrayList<>());
 
         assertFalse(range.equals(target));
@@ -143,24 +155,32 @@ public class RangeTest {
         target.addSubChapters(new ArrayList<>());
 
         assertTrue(range.equals(target));
-        range.addSubChapter(new SubChapter("2","Title","Desc"));
+    }
+
+    @Test
+    public void testEqualsSameSubChaptersInsideList() {
+        range.addSubChapter(new SubChapter("1", "Title", "Desc"));
 
         assertFalse(range.equals(target));
 
-        target.addSubChapter(new SubChapter("2","Title","Desc"));
+        target.addSubChapter(new SubChapter("1", "Title", "Desc"));
 
         assertTrue(range.equals(target));
+    }
 
-        range.addSubChapter(new SubChapter("3","Title","Desc"));
-        target.addSubChapter(new SubChapter("4","Title","Desc"));
+    @Test
+    public void testEqualsDiffSubChaptersInsideList() {
+        range.addSubChapter(new SubChapter("1", "Title", "Desc"));
+
+        assertFalse(range.equals(target));
+
+        target.addSubChapter(new SubChapter("2", "Title", "Desc"));
 
         assertFalse(range.equals(target));
     }
 
     @Test
-    public void testEquals_WithItemsList() {
-        final Range range = new Range("1", "Title", "Desc");
-
+    public void testEqualsEmptyItemsList() {
         range.addItems(new ArrayList<>());
 
         assertFalse(range.equals(target));
@@ -168,7 +188,10 @@ public class RangeTest {
         target.addItems(new ArrayList<>());
 
         assertTrue(range.equals(target));
+    }
 
+    @Test
+    public void testEqualsSameItemsInsideList() {
         range.addItem(new Item("1", "Title", "Desc"));
 
         assertFalse(range.equals(target));
@@ -176,18 +199,21 @@ public class RangeTest {
         target.addItem(new Item("1", "Title", "Desc"));
 
         assertTrue(range.equals(target));
-
-        range.addItem(new Item("1", "Title", "Desc"));
-        target.addItem(new Item("2", "Title", "Desc"));
-
-        assertFalse(range.equals(target));
-
     }
 
     @Test
-    public void testEquals_WithSectionsList() {
-        final Range range = new Range("1", "Title", "Desc");
+    public void testEqualsDiffItemsInsideList() {
+        range.addItem(new Item("1", "Title", "Desc"));
 
+        assertFalse(range.equals(target));
+
+        target.addItem(new Item("2", "Title", "Desc"));
+
+        assertFalse(range.equals(target));
+    }
+
+    @Test
+    public void testEqualsEmptySectionsList() {
         range.addSections(new ArrayList<>());
 
         assertFalse(range.equals(target));
@@ -195,22 +221,33 @@ public class RangeTest {
         target.addSections(new ArrayList<>());
 
         assertTrue(range.equals(target));
-        range.addSection(new Section("1","Title","Desc"));
+    }
+
+    @Test
+    public void testEqualsSameSectionsInsideList() {
+        range.addSection(new Section("1", "Title", "Desc"));
 
         assertFalse(range.equals(target));
 
-        target.addSection(new Section("1","Title","Desc"));
+        target.addSection(new Section("1", "Title", "Desc"));
 
         assertTrue(range.equals(target));
+    }
 
-        range.addSection(new Section("1","Title","Desc"));
-        target.addSection(new Section("2","Title","Desc"));
+    @Test
+    public void testEqualsDiffSectionsInsideList()
+    {
+        range.addSection(new Section("1", "Title", "Desc"));
+
+        assertFalse(range.equals(target));
+
+        target.addSection(new Section("2", "Title", "Desc"));
 
         assertFalse(range.equals(target));
     }
 
     @Test
-    public void testHashCode(){
+    public void testHashCode() {
         final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
 
         hashCodeBuilder
@@ -223,5 +260,4 @@ public class RangeTest {
 
         assertEquals(target.hashCode(), hashCodeBuilder.toHashCode());
     }
-
 }
