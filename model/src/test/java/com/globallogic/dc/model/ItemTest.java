@@ -27,14 +27,15 @@ public class ItemTest {
     }
 
     @Test
-    public void testHasRange() {
+    public void testHasRange_NotSet() {
         final Item target = buildItem(false, false, false);
 
         assertFalse(target.hasRange());
+    }
 
-        target.setRange(new Range("1", "Title", "Desc"));
-
-        assertTrue(target.hasRange());
+    @Test
+    public void testHasRange() {
+        assertTrue(buildItem(false,false,true).hasRange());
     }
 
     @Test
