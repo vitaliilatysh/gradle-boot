@@ -12,11 +12,17 @@ import static org.junit.Assert.*;
 public class ChapterTest {
 
     private Chapter target, chapter;
+    private SubChapter subChapter1, subChapter2;
 
     @Before
     public void setup() {
         target = new Chapter("1", "Title", "Desc");
+
         chapter = new Chapter("1", "Title", "Desc");
+        subChapter1 = new SubChapter("1", "Title", "Desc");
+        subChapter2 = new SubChapter("2", "Title", "Desc");
+
+        chapter.addSubChapters(Arrays.asList(subChapter1, subChapter2));
     }
 
     @Test
@@ -27,7 +33,7 @@ public class ChapterTest {
         target.addSubChapters(new ArrayList<>());
         assertFalse(target.hasSubChapters());
 
-        target.addSubChapter(new SubChapter("2", "2", "2"));
+        target.addSubChapter(subChapter1);
 
         assertNotNull(target.getSubChapters());
         assertTrue(target.hasSubChapters());
@@ -36,84 +42,65 @@ public class ChapterTest {
 
     @Test
     public void testAddSubChapter() {
-        target.addSubChapter(new SubChapter("2", "2", "2"));
+        target.addSubChapter(subChapter1);
 
         assertEquals(1, target.getSubChapters().size());
     }
 
     @Test
     public void testAddSubChapters() {
-        target.addSubChapters(Arrays.asList(
-                new SubChapter("2", "2", "2"),
-                new SubChapter("3", "3", "3")));
+        target.addSubChapters(Arrays.asList(subChapter1, subChapter2));
 
         assertEquals(2, target.getSubChapters().size());
     }
 
     @Test
-    public void testEqualsKey() {
+    public void testEquals_NotEqualKey() {
         chapter.setKey("2");
 
-        assertFalse(chapter.equals(target));
-
-        chapter.setKey("1");
-
-        assertTrue(chapter.equals(target));
+        assertFalse(chapter.getKey().equals(target.getKey()));
     }
 
     @Test
-    public void testEqualsTitle() {
+    public void testEquals_NotEqualTitle() {
         chapter.setTitle("NewTitle");
 
-        assertFalse(chapter.equals(target));
-
-        chapter.setTitle("Title");
-
-        assertTrue(chapter.equals(target));
+        assertFalse(chapter.getTitle().equals(target.getTitle()));
     }
 
     @Test
-    public void testEqualsDesc() {
+    public void testEquals_NotEqualDesc() {
         chapter.setDescription("NewDesc");
 
-        assertFalse(chapter.equals(target));
-
-        chapter.setDescription("Desc");
-
-        assertTrue(chapter.equals(target));
+        assertFalse(chapter.getDescription().equals(target.getDescription()));
     }
 
     @Test
-    public void testEqualsEmptySubChaptersList() {
-        chapter.addSubChapters(new ArrayList<>());
-
-        assertFalse(chapter.equals(target));
-
+    public void testEquals_NotEqualSubChapterListEmpty() {
         target.addSubChapters(new ArrayList<>());
 
-        assertTrue(chapter.equals(target));
+        assertFalse(chapter.getSubChapters().equals(target.getSubChapters()));
     }
 
     @Test
-    public void testEqualsSameSubChaptersInsideList() {
-        chapter.addSubChapter(new SubChapter("1", "Title", "Desc"));
+    public void testEquals_NotEqualSubChaptersListContains1SubChapter() {
+        target.addSubChapter(subChapter1);
 
-        assertFalse(chapter.equals(target));
-
-        target.addSubChapter(new SubChapter("1", "Title", "Desc"));
-
-        assertTrue(chapter.equals(target));
+        assertFalse(chapter.getSubChapters().equals(target.getSubChapters()));
     }
 
     @Test
-    public void testEqualsDiffSubChaptersInsideList() {
-        chapter.addSubChapter(new SubChapter("1", "Title", "Desc"));
+    public void testEquals_NotEqualSubChaptersListContainsTheSameNumberOfSubChapters() {
+        target.addSubChapters(Arrays.asList(subChapter1, subChapter1));
 
-        assertFalse(chapter.equals(target));
+        assertFalse(chapter.getSubChapters().equals(target.getSubChapters()));
+    }
 
-        target.addSubChapter(new SubChapter("2", "Title", "Desc"));
+    @Test
+    public void testEquals_EqualAllFields() {
+        target.addSubChapters(Arrays.asList(subChapter1, subChapter2));
 
-        assertFalse(chapter.equals(target));
+        assertTrue(chapter.equals(target));
     }
 
     @Test
