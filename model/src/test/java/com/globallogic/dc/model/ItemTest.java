@@ -12,12 +12,13 @@ public class ItemTest {
 
     @Test
     public void testHasRelatedItems() {
-        assertTrue(this.buildItem(false, true, false).hasRelatedItems());
+        assertTrue(buildItem(false, true, false).hasRelatedItems());
     }
 
     @Test
     public void testHasRelatedItems_Empty() {
-        final Item target = this.buildItem(false, false, false);
+        final Item target = buildItem(false, false, false);
+
         assertFalse(target.hasRelatedItems());
 
         target.addRelatedItems(new ArrayList<>());
@@ -27,7 +28,7 @@ public class ItemTest {
 
     @Test
     public void testHasRange() {
-        final Item target = this.buildItem(false, false, false);
+        final Item target = buildItem(false, false, false);
 
         assertFalse(target.hasRange());
 
@@ -38,12 +39,12 @@ public class ItemTest {
 
     @Test
     public void testHasItems() {
-        assertTrue(this.buildItem(true, false, false).hasItems());
+        assertTrue(buildItem(true, false, false).hasItems());
     }
 
     @Test
     public void testHasItems_Empty() {
-        final Item target = this.buildItem(false, false, false);
+        final Item target = buildItem(false, false, false);
 
         assertFalse(target.hasItems());
 
@@ -54,7 +55,7 @@ public class ItemTest {
 
     @Test
     public void testAddRelatedItem() {
-        final Item target = this.buildItem(false, false, false);
+        final Item target = buildItem(false, false, false);
 
         target.addRelatedItem(new Item("2", "2", "2"));
 
@@ -63,7 +64,7 @@ public class ItemTest {
 
     @Test
     public void testAddRelatedItems() {
-        final Item target = this.buildItem(false, false, false);
+        final Item target = buildItem(false, false, false);
 
         target.addRelatedItems(Arrays.asList(
                 new Item("2", "2", "2"),
@@ -74,7 +75,7 @@ public class ItemTest {
 
     @Test
     public void testAddItem() {
-        final Item target = this.buildItem(false, false, false);
+        final Item target = buildItem(false, false, false);
 
         target.addItem(new Item("2", "2", "2"));
 
@@ -83,7 +84,7 @@ public class ItemTest {
 
     @Test
     public void testAddItems() {
-        final Item target = this.buildItem(false, false, false);
+        final Item target = buildItem(false, false, false);
 
         target.addItems(Arrays.asList(
                 new Item("2", "2", "2"),
@@ -93,7 +94,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals(){
+    public void testEquals() {
         final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
@@ -111,7 +112,7 @@ public class ItemTest {
     @Test
     public void testEquals_NotEqual_Title() {
         final Item target = buildItem("1", "NewTitle", "Desc", true, true, true);
-        final Item anotherItem = buildItem("1", "Title", "Desc", true, true,true);
+        final Item anotherItem = buildItem("1", "Title", "Desc", true, true, true);
 
         assertFalse(target.equals(anotherItem));
     }
@@ -138,6 +139,7 @@ public class ItemTest {
         final Item anotherItem = buildItem(true, true, true);
 
         target.setRange(new Range("2", "Title", "Desc"));
+
         assertFalse(target.equals(anotherItem));
     }
 
@@ -262,7 +264,7 @@ public class ItemTest {
                     new Item("1", "Title", "Desc"),
                     new Item("2", "Title", "Desc")));
 
-        if(fillRange)
+        if (fillRange)
             result.setRange(new Range("1", "Title", "Desc"));
 
         return result;
