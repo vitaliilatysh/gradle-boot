@@ -138,11 +138,11 @@ public class ChapterTest {
     }
 
     private Chapter buildChapter(
-            final String id,
+            final String key,
             final String title,
             final String description,
             final boolean fillSubChapters) {
-        final Chapter result = new Chapter(id, title, description);
+        final Chapter result = new Chapter(key, title, description);
 
         if (fillSubChapters) {
             result.addSubChapters(Arrays.asList(

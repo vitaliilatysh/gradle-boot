@@ -18,6 +18,7 @@ public class RangeTest {
     @Test
     public void testHasSubChapters_Empty() {
         final Range target = buildRange(false, false, false);
+
         assertFalse(target.hasSubChapters());
 
         target.addSubChapters(new ArrayList<>());
@@ -290,13 +291,13 @@ public class RangeTest {
     }
 
     private Range buildRange(
-            final String id,
+            final String key,
             final String title,
             final String description,
             final boolean fillSubChapters,
             final boolean fillItems,
             final boolean fillSections) {
-        final Range result = new Range(id, title, description);
+        final Range result = new Range(key, title, description);
 
         if (fillSubChapters) {
             result.addSubChapters(Arrays.asList(

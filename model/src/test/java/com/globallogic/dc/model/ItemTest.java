@@ -244,13 +244,13 @@ public class ItemTest {
     }
 
     private Item buildItem(
-            final String id,
+            final String key,
             final String title,
             final String description,
             final boolean fillItems,
             final boolean fillRelatedItems,
             final boolean fillRange) {
-        final Item result = new Item(id, title, description);
+        final Item result = new Item(key, title, description);
 
         if (fillItems) {
             result.addItems(Arrays.asList(

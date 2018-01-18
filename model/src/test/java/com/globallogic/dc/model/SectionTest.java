@@ -166,12 +166,12 @@ public class SectionTest {
     }
 
     private Section buildSection(
-            final String Key,
-            final String Title,
-            final String Description,
+            final String key,
+            final String title,
+            final String description,
             final boolean fillSubChapter,
             final boolean fillRanges) {
-        final Section result = new Section(Key, Title, Description);
+        final Section result = new Section(key, title, description);
 
         if (fillRanges) {
             result.addRanges(Arrays.asList(
