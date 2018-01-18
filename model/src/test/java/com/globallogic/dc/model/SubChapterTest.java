@@ -183,38 +183,46 @@ public class SubChapterTest {
         assertFalse(target.equals(anotherSubChapter));
     }
 
-//    @Test
-//    public void testEqualsEmptyRangesList() {
-//        subChapter.addRanges(new ArrayList<>());
-//
-//        assertFalse(subChapter.equals(target));
-//
-//        target.addRanges(new ArrayList<>());
-//
-//        assertTrue(subChapter.equals(target));
-//    }
-//
-//    @Test
-//    public void testEqualsSameRangesInsideList() {
-//        subChapter.addRange(new Range("1", "Title", "Desc"));
-//
-//        assertFalse(subChapter.equals(target));
-//
-//        target.addRange(new Range("1", "Title", "Desc"));
-//
-//        assertTrue(subChapter.equals(target));
-//    }
-//
-//    @Test
-//    public void testEqualsDiffRangesInsideList() {
-//        subChapter.addRange(new Range("1", "Title", "Desc"));
-//
-//        assertFalse(subChapter.equals(target));
-//
-//        target.addRange(new Range("2", "Title", "Desc"));
-//
-//        assertFalse(subChapter.equals(target));
-//    }
+    @Test
+    public void testEquals_NotEqual_RangesListNotSet() {
+        final SubChapter target = buildSubChapter(true, true, false);
+        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
+
+        assertFalse(target.equals(anotherSubChapter));
+    }
+
+    @Test
+            public void testEquals_NotEqual_RangesListEmpty()
+    {
+        final SubChapter target = buildSubChapter(true, true, false);
+        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
+
+        target.addRanges(new ArrayList<>());
+
+        assertFalse(target.equals(anotherSubChapter));
+    }
+
+    @Test
+    public void testEquals_NotEqual_RangesListContainsDiffNumberOfRanges() {
+        final SubChapter target = buildSubChapter(true, true, false);
+        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
+
+        target.addRange(new Range("1", "Title", "Desc"));
+
+        assertFalse(target.equals(anotherSubChapter));
+    }
+
+    @Test
+    public void testEquals_NotEqual_RangesListContainsSameNumberOfRangesButDiff() {
+        final SubChapter target = buildSubChapter(true, true, false);
+        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
+
+        target.addRanges(Arrays.asList(
+                new Range("1", "Title", "Desc"),
+                new Range("1", "Title", "Desc")));
+
+        assertFalse(target.equals(anotherSubChapter));
+    }
 
     @Test
     public void testHashCode() {
