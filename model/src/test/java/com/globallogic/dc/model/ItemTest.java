@@ -1,7 +1,6 @@
 package com.globallogic.dc.model;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,67 +10,61 @@ import static org.junit.Assert.*;
 
 public class ItemTest {
 
-    private Item target, item;
-
-    @Before
-    public void setup() {
-        target = new Item("1", "Title", "Desc");
-        item = new Item("1", "Title", "Desc");
-
+    @Test
+    public void testHasRelatedItems() {
+        assertTrue(this.buildItem(false, true, false).hasRelatedItems());
     }
 
     @Test
-    public void testHasRelatedItems() {
-        assertNull(target.getRelatedItems());
+    public void testHasRelatedItems_Empty() {
+        final Item target = this.buildItem(false, false, false);
         assertFalse(target.hasRelatedItems());
 
         target.addRelatedItems(new ArrayList<>());
 
         assertFalse(target.hasRelatedItems());
-
-        target.addRelatedItem(new Item("2", "2", "2"));
-
-        assertNotNull(target.getRelatedItems());
-        assertTrue(target.hasRelatedItems());
-
     }
 
     @Test
     public void testHasRange() {
-        assertNull(target.getRange());
+        final Item target = this.buildItem(false, false, false);
+
         assertFalse(target.hasRange());
 
         target.setRange(new Range("1", "Title", "Desc"));
 
-        assertNotNull(target.getRange());
         assertTrue(target.hasRange());
     }
 
     @Test
     public void testHasItems() {
-        assertNull(target.getItems());
+        assertTrue(this.buildItem(true, false, false).hasItems());
+    }
+
+    @Test
+    public void testHasItems_Empty() {
+        final Item target = this.buildItem(false, false, false);
+
         assertFalse(target.hasItems());
 
         target.addItems(new ArrayList<>());
 
         assertFalse(target.hasItems());
-
-        target.addItem(new Item("2", "Title", "Desc"));
-
-        assertNotNull(target.getItems());
-        assertTrue(target.hasItems());
     }
 
-
     @Test
-    public void testAddRelatedItems() {
+    public void testAddRelatedItem() {
+        final Item target = this.buildItem(false, false, false);
+
         target.addRelatedItem(new Item("2", "2", "2"));
 
         assertEquals(1, target.getRelatedItems().size());
     }
 
     @Test
-    public void testAddRelatedItem() {
+    public void testAddRelatedItems() {
+        final Item target = this.buildItem(false, false, false);
+
         target.addRelatedItems(Arrays.asList(
                 new Item("2", "2", "2"),
                 new Item("3", "3", "3")));
@@ -80,14 +73,18 @@ public class ItemTest {
     }
 
     @Test
-    public void testAddItems() {
+    public void testAddItem() {
+        final Item target = this.buildItem(false, false, false);
+
         target.addItem(new Item("2", "2", "2"));
 
         assertEquals(1, target.getItems().size());
     }
 
     @Test
-    public void testAddItem() {
+    public void testAddItems() {
+        final Item target = this.buildItem(false, false, false);
+
         target.addItems(Arrays.asList(
                 new Item("2", "2", "2"),
                 new Item("3", "3", "3")));
@@ -96,138 +93,178 @@ public class ItemTest {
     }
 
     @Test
-    public void testEqualsKey() {
-        item.setKey("2");
+    public void testEquals(){
+        final Item target = buildItem(true, true, true);
+        final Item anotherItem = buildItem(true, true, true);
 
-        assertFalse(item.equals(target));
-
-        item.setKey("1");
-
-        assertTrue(item.equals(target));
+        assertTrue(target.equals(anotherItem));
     }
 
     @Test
-    public void testEqualsTitle() {
-        item.setTitle("NewTitle");
+    public void testEquals_NotEqual_Key() {
+        final Item target = buildItem("2", "Title", "Desc", true, true, true);
+        final Item anotherItem = buildItem("1", "Title", "Desc", true, true, true);
 
-        assertFalse(item.equals(target));
-
-        item.setTitle("Title");
-
-        assertTrue(item.equals(target));
+        assertFalse(target.equals(anotherItem));
     }
 
     @Test
-    public void testEqualsDesc() {
-        item.setDescription("NewDesc");
+    public void testEquals_NotEqual_Title() {
+        final Item target = buildItem("1", "NewTitle", "Desc", true, true, true);
+        final Item anotherItem = buildItem("1", "Title", "Desc", true, true,true);
 
-        assertFalse(item.equals(target));
-
-        item.setDescription("Desc");
-
-        assertTrue(item.equals(target));
+        assertFalse(target.equals(anotherItem));
     }
 
     @Test
-    public void testEqualsSameRangeInside() {
-        item.setRange(new Range("1", "Title", "Desc"));
+    public void testEquals_NotEqual_Desc() {
+        final Item target = buildItem("1", "Title", "NewDesc", true, true, true);
+        final Item anotherItem = buildItem("1", "Title", "Desc", true, true, true);
 
-        assertFalse(item.equals(target));
-
-        target.setRange(new Range("1", "Title", "Desc"));
-
-        assertTrue(item.equals(target));
+        assertFalse(target.equals(anotherItem));
     }
 
     @Test
-    public void testEqualsDiffRangeInside() {
-        item.setRange(new Range("1", "Title", "Desc"));
+    public void testEquals_NotEqual_RangeNotSet() {
+        final Item target = buildItem(true, true, false);
+        final Item anotherItem = buildItem(true, true, true);
 
-        assertFalse(item.equals(target));
+        assertFalse(target.equals(anotherItem));
+    }
+
+    @Test
+    public void testEquals_NotEqual_DiffRange() {
+        final Item target = buildItem(true, true, true);
+        final Item anotherItem = buildItem(true, true, true);
 
         target.setRange(new Range("2", "Title", "Desc"));
-
-        assertFalse(item.equals(target));
+        assertFalse(target.equals(anotherItem));
     }
 
     @Test
-    public void testEqualsEmptyItemsList() {
-        item.addItems(new ArrayList<>());
+    public void testEquals_NotEqual_ItemsListNotSet() {
+        final Item target = buildItem(false, true, true);
+        final Item anotherItem = buildItem(true, true, true);
 
-        assertFalse(item.equals(target));
+        assertFalse(target.equals(anotherItem));
+    }
+
+    @Test
+    public void testEquals_NotEqual_ItemsListEmpty() {
+        final Item target = buildItem(false, true, true);
+        final Item anotherItem = buildItem(true, true, true);
 
         target.addItems(new ArrayList<>());
 
-        assertTrue(item.equals(target));
+        assertFalse(target.equals(anotherItem));
     }
 
     @Test
-    public void testEqualsSameItemsInsideList() {
-        item.addItem(new Item("1", "Title", "Desc"));
-
-        assertFalse(item.equals(target));
+    public void testEquals_NotEqual_ItemsListContainsDiffNumberOfItems() {
+        final Item target = buildItem(false, true, true);
+        final Item anotherItem = buildItem(true, true, true);
 
         target.addItem(new Item("1", "Title", "Desc"));
 
-        assertTrue(item.equals(target));
+        assertFalse(target.equals(anotherItem));
     }
 
     @Test
-    public void testEqualsDiffItemsInsideList() {
-        item.addItem(new Item("1", "Title", "Desc"));
+    public void testEquals_NotEqual_ItemsListContainsTheSameNumberOfItemsButDiff() {
+        final Item target = buildItem(false, true, true);
+        final Item anotherItem = buildItem(true, true, true);
 
-        assertFalse(item.equals(target));
+        target.addItems(Arrays.asList(
+                new Item("1", "Title", "Desc"),
+                new Item("1", "Title", "Desc")));
 
-        target.addItem(new Item("2", "Title", "Desc"));
-
-        assertFalse(item.equals(target));
+        assertFalse(target.equals(anotherItem));
     }
 
     @Test
-    public void testEqualsEmptyRelatedItemsList() {
-        item.addRelatedItems(new ArrayList<>());
+    public void testEquals_NotEqual_RelatedItemsListNotSet() {
+        final Item target = buildItem(true, false, true);
+        final Item anotherItem = buildItem(true, true, true);
 
-        assertFalse(item.equals(target));
+        assertFalse(target.equals(anotherItem));
+    }
+
+    @Test
+    public void testEquals_NotEqual_RelatedItemsListEmpty() {
+        final Item target = buildItem(true, false, true);
+        final Item anotherItem = buildItem(true, true, true);
 
         target.addRelatedItems(new ArrayList<>());
 
-        assertTrue(item.equals(target));
+        assertFalse(target.equals(anotherItem));
     }
 
     @Test
-    public void testEqualsSameRelatedItemsInsideList() {
-        item.addRelatedItem(new Item("1", "Title", "Desc"));
-
-        assertFalse(item.equals(target));
+    public void testEquals_NotEqual_RelatedItemsListContainsDiffNumberOfRelatedItems() {
+        final Item target = buildItem(true, false, true);
+        final Item anotherItem = buildItem(true, true, true);
 
         target.addRelatedItem(new Item("1", "Title", "Desc"));
 
-        assertTrue(item.equals(target));
+        assertFalse(target.equals(anotherItem));
     }
 
     @Test
-    public void testEqualsDiffRelatedItemsInsideList() {
-        item.addRelatedItem(new Item("1", "Title", "Desc"));
+    public void testEquals_NotEqual_RelatedItemsListContainsTheSameNumberOfItemsButDiff() {
+        final Item target = buildItem(true, false, true);
+        final Item anotherItem = buildItem(true, true, true);
 
-        assertFalse(item.equals(target));
+        target.addRelatedItems(Arrays.asList(
+                new Item("1", "Title", "Desc"),
+                new Item("1", "Title", "Desc")));
 
-        target.addRelatedItem(new Item("2", "Title", "Desc"));
-
-        assertFalse(item.equals(target));
+        assertFalse(target.equals(anotherItem));
     }
 
     @Test
     public void testHashCode() {
+        final Item target = buildItem(true, true, true);
         final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
 
         hashCodeBuilder
                 .append(target.getKey())
                 .append(target.getTitle())
                 .append(target.getDescription())
-                .append(target.getRelatedItems())
+                .append(target.getRange())
                 .append(target.getItems())
-                .append(target.getRange());
+                .append(target.getRelatedItems());
+
 
         assertEquals(target.hashCode(), hashCodeBuilder.toHashCode());
+    }
+
+    private Item buildItem(final boolean fillItems, final boolean fillRelatedItems, final boolean fillRange) {
+        return this.buildItem("1", "Title", "Desc", fillItems, fillRelatedItems, fillRange);
+    }
+
+    private Item buildItem(
+            final String id,
+            final String title,
+            final String description,
+            final boolean fillItems,
+            final boolean fillRelatedItems,
+            final boolean fillRange) {
+        final Item result = new Item(id, title, description);
+
+        if (fillItems) {
+            result.addItems(Arrays.asList(
+                    new Item("1", "Title", "Desc"),
+                    new Item("2", "Title", "Desc")));
+        }
+
+        if (fillRelatedItems)
+            result.addRelatedItems(Arrays.asList(
+                    new Item("1", "Title", "Desc"),
+                    new Item("2", "Title", "Desc")));
+
+        if(fillRange)
+            result.setRange(new Range("1", "Title", "Desc"));
+
+        return result;
     }
 }
