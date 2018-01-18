@@ -16,7 +16,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testHasRanges_Empty(){
+    public void testHasRanges_Empty() {
         final Section target = buildSection(false, false);
 
         assertFalse(target.hasRanges());
@@ -27,14 +27,13 @@ public class SectionTest {
     }
 
     @Test
+    public void testHasSubChapter_NotSet() {
+        assertFalse(buildSection(false, false).hasSubChapter());
+    }
+
+    @Test
     public void testHasSubChapter() {
-        final Section target = buildSection(false, false);
-
-        assertFalse(target.hasSubChapter());
-
-        target.setSubChapter(new SubChapter("1", "Title", "Desc"));
-
-        assertTrue(target.hasSubChapter());
+        assertTrue(buildSection(true, false).hasSubChapter());
     }
 
     @Test
@@ -58,7 +57,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testEquals(){
+    public void testEquals() {
         final Section target = buildSection(true, true);
         final Section anotherSection = buildSection(true, true);
 
@@ -92,15 +91,15 @@ public class SectionTest {
     @Test
     public void testEquals_NotEqual_SubChapterNotSet() {
         final Section target = buildSection(false, true);
-        final Section anotherSection = buildSection( true, true);
+        final Section anotherSection = buildSection(true, true);
 
         assertFalse(target.equals(anotherSection));
     }
 
     @Test
     public void testEquals_NotEqual_DiffSubChapter() {
-        final Section target = buildSection(false, true);
-        final Section anotherSection = buildSection( true, true);
+        final Section target = buildSection(true, true);
+        final Section anotherSection = buildSection(true, true);
 
         target.setSubChapter(new SubChapter("2", "Title", "Desc"));
 
@@ -110,7 +109,7 @@ public class SectionTest {
     @Test
     public void testEquals_NotEqual_RangesListNotSet() {
         final Section target = buildSection(true, false);
-        final Section anotherSection = buildSection( true, true);
+        final Section anotherSection = buildSection(true, true);
 
         assertFalse(target.equals(anotherSection));
     }
@@ -118,7 +117,7 @@ public class SectionTest {
     @Test
     public void testEquals_NotEqual_RangesListEmpty() {
         final Section target = buildSection(true, false);
-        final Section anotherSection = buildSection( true, true);
+        final Section anotherSection = buildSection(true, true);
 
         target.setRanges(new ArrayList<>());
 
@@ -128,7 +127,7 @@ public class SectionTest {
     @Test
     public void testEquals_NotEqual_RangesListContainsDiffNumberOfRanges() {
         final Section target = buildSection(true, false);
-        final Section anotherSection = buildSection( true, true);
+        final Section anotherSection = buildSection(true, true);
 
         target.addRange(new Range("1", "Title", "Desc"));
 
@@ -138,7 +137,7 @@ public class SectionTest {
     @Test
     public void testEquals_NotEqual_RangesListContainsSameNumberOfRangesButDiff() {
         final Section target = buildSection(true, false);
-        final Section anotherSection = buildSection( true, true);
+        final Section anotherSection = buildSection(true, true);
 
         target.addRanges(Arrays.asList(
                 new Range("1", "Title", "Desc"),
@@ -181,7 +180,7 @@ public class SectionTest {
             ));
         }
 
-        if(fillSubChapter){
+        if (fillSubChapter) {
             result.setSubChapter(new SubChapter("1", "Title", "Desc"));
         }
         return result;
