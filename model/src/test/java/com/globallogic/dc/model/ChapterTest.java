@@ -1,7 +1,6 @@
 package com.globallogic.dc.model;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,100 +10,118 @@ import static org.junit.Assert.*;
 
 public class ChapterTest {
 
-    private Chapter target, chapter;
-    private SubChapter subChapter1, subChapter2;
-
-    @Before
-    public void setup() {
-        target = new Chapter("1", "Title", "Desc");
-
-        chapter = new Chapter("1", "Title", "Desc");
-        subChapter1 = new SubChapter("1", "Title", "Desc");
-        subChapter2 = new SubChapter("2", "Title", "Desc");
-
-        chapter.addSubChapters(Arrays.asList(subChapter1, subChapter2));
+    @Test
+    public void testHasSubChapters() {
+        assertTrue(buildChapter(true).hasSubChapters());
     }
 
     @Test
-    public void testHasSubChapters() {
-        assertNull(target.getSubChapters());
+    public void testHasSubChapters_Empty() {
+        final Chapter target = this.buildChapter(false);
+
         assertFalse(target.hasSubChapters());
 
-        target.addSubChapters(new ArrayList<>());
+        target.setSubChapters(new ArrayList<>());
+
         assertFalse(target.hasSubChapters());
-
-        target.addSubChapter(subChapter1);
-
-        assertNotNull(target.getSubChapters());
-        assertTrue(target.hasSubChapters());
-
     }
 
     @Test
     public void testAddSubChapter() {
-        target.addSubChapter(subChapter1);
+        final Chapter target = this.buildChapter(false);
+
+        target.addSubChapter(new SubChapter("1", "Title", "Desc"));
 
         assertEquals(1, target.getSubChapters().size());
     }
 
     @Test
     public void testAddSubChapters() {
-        target.addSubChapters(Arrays.asList(subChapter1, subChapter2));
+        final Chapter target = this.buildChapter(false);
+
+        target.addSubChapters(Arrays.asList(
+                new SubChapter("1", "Title", "Desc"),
+                new SubChapter("1", "Title", "Desc")));
 
         assertEquals(2, target.getSubChapters().size());
     }
 
     @Test
-    public void testEquals_NotEqualKey() {
-        chapter.setKey("2");
+    public void testEquals() {
+        final Chapter target = buildChapter(true);
+        final Chapter anotherChapter = buildChapter(true);
 
-        assertFalse(chapter.getKey().equals(target.getKey()));
+        assertTrue(target.equals(anotherChapter));
     }
 
     @Test
-    public void testEquals_NotEqualTitle() {
-        chapter.setTitle("NewTitle");
+    public void testEquals_NotEqual_Key() {
+        final Chapter target = buildChapter("2", "Title", "Desc", true);
+        final Chapter anotherChapter = buildChapter("1", "Title", "Desc", true);
 
-        assertFalse(chapter.getTitle().equals(target.getTitle()));
+        assertFalse(target.equals(anotherChapter));
     }
 
     @Test
-    public void testEquals_NotEqualDesc() {
-        chapter.setDescription("NewDesc");
+    public void testEquals_NotEqual_Title() {
+        final Chapter target = buildChapter("1", "NewTitle", "Desc", true);
+        final Chapter anotherChapter = buildChapter("1", "Title", "Desc", true);
 
-        assertFalse(chapter.getDescription().equals(target.getDescription()));
+        assertFalse(target.equals(anotherChapter));
     }
 
     @Test
-    public void testEquals_NotEqualSubChapterListEmpty() {
-        target.addSubChapters(new ArrayList<>());
+    public void testEquals_NotEqual_Desc() {
+        final Chapter target = buildChapter("1", "Title", "NewDesc", true);
+        final Chapter anotherChapter = buildChapter("1", "Title", "Desc", true);
 
-        assertFalse(chapter.getSubChapters().equals(target.getSubChapters()));
+        assertFalse(target.equals(anotherChapter));
     }
 
     @Test
-    public void testEquals_NotEqualSubChaptersListContains1SubChapter() {
-        target.addSubChapter(subChapter1);
+    public void testEquals_NotEqual_SubChaptersListNotSet() {
+        final Chapter target = buildChapter(false);
+        final Chapter anotherChapter = buildChapter(true);
 
-        assertFalse(chapter.getSubChapters().equals(target.getSubChapters()));
+        assertFalse(target.equals(anotherChapter));
     }
 
     @Test
-    public void testEquals_NotEqualSubChaptersListContainsTheSameNumberOfSubChapters() {
-        target.addSubChapters(Arrays.asList(subChapter1, subChapter1));
+    public void testEquals_NotEqual_SubChaptersListEmpty(){
+        final Chapter target = buildChapter( false);
+        final Chapter anotherChapter = buildChapter(true);
 
-        assertFalse(chapter.getSubChapters().equals(target.getSubChapters()));
+        target.setSubChapters(new ArrayList<>());
+
+        assertFalse(target.equals(anotherChapter));
     }
 
     @Test
-    public void testEquals_EqualAllFields() {
-        target.addSubChapters(Arrays.asList(subChapter1, subChapter2));
+    public void testEquals_NotEqual_SubChaptersListContainsDiffNumberOfSubChapters(){
+        final Chapter target = buildChapter( false);
+        final Chapter anotherChapter = buildChapter(true);
 
-        assertTrue(chapter.equals(target));
+        target.addSubChapter(new SubChapter("1", "Title", "Desc"));
+
+        assertFalse(target.equals(anotherChapter));
+    }
+
+    @Test
+    public void testEquals_NotEqual_SubChaptersListContainsTheSameNumberOfSubChaptersButDiff(){
+        final Chapter target = buildChapter( false);
+        final Chapter anotherChapter = buildChapter(true);
+
+        target.addSubChapters(Arrays.asList(
+                new SubChapter("1", "Title", "Desc"),
+                new SubChapter("1", "Title", "Desc")));
+
+        assertFalse(target.equals(anotherChapter));
     }
 
     @Test
     public void testHashCode() {
+        final Chapter target = buildChapter( true);
+
         final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
 
         hashCodeBuilder
@@ -115,4 +132,26 @@ public class ChapterTest {
 
         assertEquals(target.hashCode(), hashCodeBuilder.toHashCode());
     }
+
+    private Chapter buildChapter(final boolean fillSubChapters) {
+        return this.buildChapter("1", "Title", "Desc", fillSubChapters);
+    }
+
+    private Chapter buildChapter(
+            final String id,
+            final String title,
+            final String description,
+            final boolean fillSubChapters) {
+        final Chapter result = new Chapter(id, title, description);
+
+        if (fillSubChapters) {
+            result.addSubChapters(Arrays.asList(
+                    new SubChapter("1", "Title", "Desc"),
+                    new SubChapter("2", "Title", "Desc")));
+        }
+
+        return result;
+    }
+
+
 }
