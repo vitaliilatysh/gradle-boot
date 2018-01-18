@@ -17,7 +17,7 @@ public class ChapterTest {
 
     @Test
     public void testHasSubChapters_Empty() {
-        final Chapter target = this.buildChapter(false);
+        final Chapter target = buildChapter(false);
 
         assertFalse(target.hasSubChapters());
 
@@ -28,7 +28,7 @@ public class ChapterTest {
 
     @Test
     public void testAddSubChapter() {
-        final Chapter target = this.buildChapter(false);
+        final Chapter target = buildChapter(false);
 
         target.addSubChapter(new SubChapter("1", "Title", "Desc"));
 
@@ -37,7 +37,7 @@ public class ChapterTest {
 
     @Test
     public void testAddSubChapters() {
-        final Chapter target = this.buildChapter(false);
+        final Chapter target = buildChapter(false);
 
         target.addSubChapters(Arrays.asList(
                 new SubChapter("1", "Title", "Desc"),
