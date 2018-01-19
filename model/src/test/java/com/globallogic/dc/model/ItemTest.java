@@ -152,17 +152,17 @@ public class ItemTest {
 
     @Test
     public void testEquals_NotEqual_ItemsListEmpty() {
-        final Item target = buildItem(false, true, true);
+        final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
-        target.addItems(new ArrayList<>());
+        target.setItems(new ArrayList<>());
 
         assertFalse(target.equals(anotherItem));
     }
 
     @Test
     public void testEquals_NotEqual_ItemsListContainsDiffNumberOfItems() {
-        final Item target = buildItem(false, true, true);
+        final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
         target.addItem(new Item("1", "Title", "Desc"));
@@ -172,12 +172,11 @@ public class ItemTest {
 
     @Test
     public void testEquals_NotEqual_ItemsListContainsTheSameNumberOfItemsButDiff() {
-        final Item target = buildItem(false, true, true);
+        final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
-        target.addItems(Arrays.asList(
-                new Item("1", "Title", "Desc"),
-                new Item("1", "Title", "Desc")));
+        target.addItem(new Item("1", "Title", "Desc"));
+        anotherItem.addItem(new Item("2", "Title", "Desc"));
 
         assertFalse(target.equals(anotherItem));
     }
@@ -192,17 +191,17 @@ public class ItemTest {
 
     @Test
     public void testEquals_NotEqual_RelatedItemsListEmpty() {
-        final Item target = buildItem(true, false, true);
+        final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
-        target.addRelatedItems(new ArrayList<>());
+        target.setRelatedItems(new ArrayList<>());
 
         assertFalse(target.equals(anotherItem));
     }
 
     @Test
     public void testEquals_NotEqual_RelatedItemsListContainsDiffNumberOfRelatedItems() {
-        final Item target = buildItem(true, false, true);
+        final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
         target.addRelatedItem(new Item("1", "Title", "Desc"));
@@ -212,12 +211,11 @@ public class ItemTest {
 
     @Test
     public void testEquals_NotEqual_RelatedItemsListContainsTheSameNumberOfItemsButDiff() {
-        final Item target = buildItem(true, false, true);
+        final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
-        target.addRelatedItems(Arrays.asList(
-                new Item("1", "Title", "Desc"),
-                new Item("1", "Title", "Desc")));
+        target.addRelatedItem(new Item("1", "Title", "Desc"));
+        anotherItem.addRelatedItem(new Item("1", "Title", "Desc"));
 
         assertFalse(target.equals(anotherItem));
     }

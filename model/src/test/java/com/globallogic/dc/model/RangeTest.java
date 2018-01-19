@@ -160,17 +160,17 @@ public class RangeTest {
 
     @Test
     public void testEquals_NotEqual_SubChaptersListEmpty() {
-        final Range target = buildRange(false, true, true);
+        final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
-        target.addSubChapters(new ArrayList<>());
+        target.setSubChapters(new ArrayList<>());
 
         assertFalse(target.equals(anotherRange));
     }
 
     @Test
     public void testEquals_NotEqual_SubChaptersListContainsDiffNumberOfSubChapters() {
-        final Range target = buildRange(false, true, true);
+        final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
         target.addSubChapter(new SubChapter("1", "Title", "Desc"));
@@ -180,12 +180,11 @@ public class RangeTest {
 
     @Test
     public void testEquals_NotEqual_SubChaptersListContainsTheSameNumberOfSubChaptersButDiff() {
-        final Range target = buildRange(false, true, true);
+        final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
-        target.addSubChapters(Arrays.asList(
-                new SubChapter("1", "Title", "Desc"),
-                new SubChapter("1", "Title", "Desc")));
+        target.addSubChapter(new SubChapter("1", "Title", "Desc"));
+        anotherRange.addSubChapter(new SubChapter("2", "Title", "Desc"));
 
         assertFalse(target.equals(anotherRange));
     }
@@ -200,17 +199,17 @@ public class RangeTest {
 
     @Test
     public void testEquals_NotEqual_ItemsListEmpty() {
-        final Range target = buildRange(true, false, true);
+        final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
-        target.addItems(new ArrayList<>());
+        target.setItems(new ArrayList<>());
 
         assertFalse(target.equals(anotherRange));
     }
 
     @Test
     public void testEquals_NotEqual_ItemsListContainsDiffNumberOfItems() {
-        final Range target = buildRange(true, false, true);
+        final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
         target.addItem(new Item("1", "Title", "Desc"));
@@ -220,12 +219,11 @@ public class RangeTest {
 
     @Test
     public void testEquals_NotEqual_ItemsListContainsTheSameNumberOfItemsButDiff() {
-        final Range target = buildRange(true, false, true);
+        final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
-        target.addItems(Arrays.asList(
-                new Item("1", "Title", "Desc"),
-                new Item("1", "Title", "Desc")));
+        target.addItem(new Item("1", "Title", "Desc"));
+        anotherRange.addItem(new Item("2", "Title", "Desc"));
 
         assertFalse(target.equals(anotherRange));
     }
@@ -240,17 +238,17 @@ public class RangeTest {
 
     @Test
     public void testEquals_NotEqual_SectionsListEmpty() {
-        final Range target = buildRange(true, true, false);
+        final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
-        target.addSections(new ArrayList<>());
+        target.setSections(new ArrayList<>());
 
         assertFalse(target.equals(anotherRange));
     }
 
     @Test
     public void testEquals_NotEqual_SectionsListContainsDiffNumberOfSections() {
-        final Range target = buildRange(true, true, false);
+        final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
         target.addSection(new Section("1", "Title", "Desc"));
@@ -260,12 +258,11 @@ public class RangeTest {
 
     @Test
     public void testEquals_NotEqual_SectionsListContainsSameNumberOfSectionsButDiff() {
-        final Range target = buildRange(true, true, false);
+        final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
-        target.addSections(Arrays.asList(
-                new Section("1", "Title", "Desc"),
-                new Section("1", "Title", "Desc")));
+        target.addSection(new Section("1", "Title", "Desc"));
+        anotherRange.addSection(new Section("2", "Title", "Desc"));
 
         assertFalse(target.equals(anotherRange));
     }

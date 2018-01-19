@@ -116,7 +116,7 @@ public class SectionTest {
 
     @Test
     public void testEquals_NotEqual_RangesListEmpty() {
-        final Section target = buildSection(true, false);
+        final Section target = buildSection(true, true);
         final Section anotherSection = buildSection(true, true);
 
         target.setRanges(new ArrayList<>());
@@ -126,7 +126,7 @@ public class SectionTest {
 
     @Test
     public void testEquals_NotEqual_RangesListContainsDiffNumberOfRanges() {
-        final Section target = buildSection(true, false);
+        final Section target = buildSection(true, true);
         final Section anotherSection = buildSection(true, true);
 
         target.addRange(new Range("1", "Title", "Desc"));
@@ -136,12 +136,11 @@ public class SectionTest {
 
     @Test
     public void testEquals_NotEqual_RangesListContainsSameNumberOfRangesButDiff() {
-        final Section target = buildSection(true, false);
+        final Section target = buildSection(true, true);
         final Section anotherSection = buildSection(true, true);
 
-        target.addRanges(Arrays.asList(
-                new Range("1", "Title", "Desc"),
-                new Range("1", "Title", "Desc")));
+        target.addRange(new Range("1", "Title", "Desc"));
+        anotherSection.addRange(new Range("2", "Title", "Desc"));
 
         assertFalse(target.equals(anotherSection));
     }

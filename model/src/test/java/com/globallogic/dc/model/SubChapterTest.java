@@ -1,7 +1,6 @@
 package com.globallogic.dc.model;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -135,7 +134,7 @@ public class SubChapterTest {
 
     @Test
     public void testEquals_NotEqual_DiffChapter() {
-        final SubChapter target = buildSubChapter(false, true, true);
+        final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
         target.setChapter(new Chapter("2", "Title", "Desc"));
@@ -153,17 +152,17 @@ public class SubChapterTest {
 
     @Test
     public void testEquals_NotEqual_SectionsListEmpty() {
-        final SubChapter target = buildSubChapter(true, false, true);
+        final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
-        target.addSections(new ArrayList<>());
+        target.setSections(new ArrayList<>());
 
         assertFalse(target.equals(anotherSubChapter));
     }
 
     @Test
     public void testEquals_NotEqual_SectionsListContainsDiffNumberOfSections() {
-        final SubChapter target = buildSubChapter(true, false, true);
+        final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
         target.addSection(new Section("1", "Title", "Desc"));
@@ -173,12 +172,11 @@ public class SubChapterTest {
 
     @Test
     public void testEquals_NotEqual_SectionsListContainsSameNumberOfSectionsButDiff() {
-        final SubChapter target = buildSubChapter(true, false, true);
+        final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
-        target.addSections(Arrays.asList(
-                new Section("1", "Title", "Desc"),
-                new Section("1", "Title", "Desc")));
+        target.addSection(new Section("1", "Title", "Desc"));
+        anotherSubChapter.addSection(new Section("2", "Title", "Desc"));
 
         assertFalse(target.equals(anotherSubChapter));
     }
@@ -192,19 +190,18 @@ public class SubChapterTest {
     }
 
     @Test
-            public void testEquals_NotEqual_RangesListEmpty()
-    {
-        final SubChapter target = buildSubChapter(true, true, false);
+    public void testEquals_NotEqual_RangesListEmpty() {
+        final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
-        target.addRanges(new ArrayList<>());
+        target.setRanges(new ArrayList<>());
 
         assertFalse(target.equals(anotherSubChapter));
     }
 
     @Test
     public void testEquals_NotEqual_RangesListContainsDiffNumberOfRanges() {
-        final SubChapter target = buildSubChapter(true, true, false);
+        final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
         target.addRange(new Range("1", "Title", "Desc"));
@@ -214,12 +211,11 @@ public class SubChapterTest {
 
     @Test
     public void testEquals_NotEqual_RangesListContainsSameNumberOfRangesButDiff() {
-        final SubChapter target = buildSubChapter(true, true, false);
+        final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
-        target.addRanges(Arrays.asList(
-                new Range("1", "Title", "Desc"),
-                new Range("1", "Title", "Desc")));
+        target.addRange(new Range("1", "Title", "Desc"));
+        anotherSubChapter.addRange(new Range("2", "Title", "Desc"));
 
         assertFalse(target.equals(anotherSubChapter));
     }

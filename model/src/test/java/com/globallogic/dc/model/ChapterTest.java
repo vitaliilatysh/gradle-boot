@@ -88,7 +88,7 @@ public class ChapterTest {
 
     @Test
     public void testEquals_NotEqual_SubChaptersListEmpty(){
-        final Chapter target = buildChapter( false);
+        final Chapter target = buildChapter( true);
         final Chapter anotherChapter = buildChapter(true);
 
         target.setSubChapters(new ArrayList<>());
@@ -98,7 +98,7 @@ public class ChapterTest {
 
     @Test
     public void testEquals_NotEqual_SubChaptersListContainsDiffNumberOfSubChapters(){
-        final Chapter target = buildChapter( false);
+        final Chapter target = buildChapter( true);
         final Chapter anotherChapter = buildChapter(true);
 
         target.addSubChapter(new SubChapter("1", "Title", "Desc"));
@@ -108,12 +108,11 @@ public class ChapterTest {
 
     @Test
     public void testEquals_NotEqual_SubChaptersListContainsTheSameNumberOfSubChaptersButDiff(){
-        final Chapter target = buildChapter( false);
+        final Chapter target = buildChapter( true);
         final Chapter anotherChapter = buildChapter(true);
 
-        target.addSubChapters(Arrays.asList(
-                new SubChapter("1", "Title", "Desc"),
-                new SubChapter("1", "Title", "Desc")));
+        target.addSubChapter(new SubChapter("1", "Title", "Desc"));
+        anotherChapter.addSubChapter(new SubChapter("2", "Title", "Desc"));
 
         assertFalse(target.equals(anotherChapter));
     }
