@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -32,20 +33,28 @@ public class ChapterTest {
     @Test
     public void testAddSubChapter() {
         final Chapter target = buildChapter(false);
+        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
 
-        target.addSubChapter(new SubChapter("1", "Title", "Desc"));
+        target.addSubChapter(subChapter);
 
+        assertTrue(subChapter.hasChapter());
+        assertTrue(subChapter.getChapter().equals(target));
         assertEquals(1, target.getSubChapters().size());
     }
 
     @Test
     public void testAddSubChapters() {
         final Chapter target = buildChapter(false);
-
-        target.addSubChapters(Arrays.asList(
+        final List<SubChapter> subChapters = Arrays.asList(
                 new SubChapter("1", "Title", "Desc"),
-                new SubChapter("1", "Title", "Desc")));
+                new SubChapter("1", "Title", "Desc"));
 
+        target.addSubChapters(subChapters);
+
+        for (SubChapter subChapter: subChapters) {
+            assertTrue(subChapter.hasChapter());
+            assertTrue(subChapter.getChapter().equals(target));
+        }
         assertEquals(2, target.getSubChapters().size());
     }
 
