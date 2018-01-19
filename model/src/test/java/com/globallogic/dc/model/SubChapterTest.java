@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class SubChapterTest {
 
     @Test
-    public void testHasSubChapter_NotSet() {
+    public void testHasChapter_NotSet() {
         final SubChapter target = buildSubChapter(false, false, false);
 
         assertNull(target.getChapter());
@@ -19,7 +19,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testHasSubChapter() {
+    public void testHasChapter() {
         final SubChapter target = buildSubChapter(true, false, false);
 
         assertNotNull(target.getChapter());
