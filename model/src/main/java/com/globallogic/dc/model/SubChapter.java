@@ -46,4 +46,12 @@ public class SubChapter extends SubChapterBase {
                 .append(this.getSections())
                 .append(this.getRanges());
     }
+
+
+    @Override
+    public void setChapter(final Chapter chapter) {
+        if (this.getChapter() != chapter) {
+            super.setChapter(chapter);
+        }
+    }
 }

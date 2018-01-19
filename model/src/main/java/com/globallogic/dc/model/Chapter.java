@@ -3,6 +3,7 @@ package com.globallogic.dc.model;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.util.Collection;
 import java.util.List;
 
 public class Chapter extends ChapterBase {
@@ -39,5 +40,19 @@ public class Chapter extends ChapterBase {
                 .append(this.getTitle())
                 .append(this.getDescription())
                 .append(this.getSubChapters());
+    }
+
+    @Override
+    public void addSubChapter(final SubChapter subChapter) {
+        subChapter.setChapter(this);
+        super.addSubChapter(subChapter);
+    }
+
+    @Override
+    public void addSubChapters(final Collection<SubChapter> subChapters) {
+        for (SubChapter subChapter : subChapters) {
+            subChapter.setChapter(this);
+        }
+        super.addSubChapters(subChapters);
     }
 }
