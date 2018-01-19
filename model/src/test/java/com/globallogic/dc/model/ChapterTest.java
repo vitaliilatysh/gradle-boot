@@ -11,19 +11,22 @@ import static org.junit.Assert.*;
 public class ChapterTest {
 
     @Test
-    public void testHasSubChapters() {
-        assertTrue(buildChapter(true).hasSubChapters());
-    }
-
-    @Test
     public void testHasSubChapters_Empty() {
         final Chapter target = buildChapter(false);
 
+        assertNull(target.getSubChapters());
         assertFalse(target.hasSubChapters());
 
-        target.setSubChapters(new ArrayList<>());
+        target.addSubChapters(new ArrayList<>());
 
         assertFalse(target.hasSubChapters());
+    }
+    @Test
+    public void testHasSubChapters() {
+        final Chapter target = buildChapter(true);
+
+        assertNotNull(target.getSubChapters());
+        assertTrue(target.hasSubChapters());
     }
 
     @Test

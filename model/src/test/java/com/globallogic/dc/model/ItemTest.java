@@ -11,14 +11,10 @@ import static org.junit.Assert.*;
 public class ItemTest {
 
     @Test
-    public void testHasRelatedItems() {
-        assertTrue(buildItem(false, true, false).hasRelatedItems());
-    }
-
-    @Test
     public void testHasRelatedItems_Empty() {
         final Item target = buildItem(false, false, false);
 
+        assertNull(target.getRelatedItems());
         assertFalse(target.hasRelatedItems());
 
         target.addRelatedItems(new ArrayList<>());
@@ -27,29 +23,47 @@ public class ItemTest {
     }
 
     @Test
+    public void testHasRelatedItems() {
+        final Item target = buildItem(false, true, false);
+
+        assertNotNull(target.getRelatedItems());
+        assertTrue(target.hasRelatedItems());
+    }
+
+    @Test
     public void testHasRange_NotSet() {
-        assertFalse(buildItem(false, false, false).hasRange());
+        final Item target = buildItem(false, false, false);
+
+        assertNull(target.getRange());
+        assertFalse(target.hasRange());
     }
 
     @Test
     public void testHasRange() {
-        assertTrue(buildItem(false, false, true).hasRange());
-    }
+        final Item target = buildItem(false, false, true);
 
-    @Test
-    public void testHasItems() {
-        assertTrue(buildItem(true, false, false).hasItems());
+        assertNotNull(target.getRange());
+        assertTrue(target.hasRange());
     }
 
     @Test
     public void testHasItems_Empty() {
         final Item target = buildItem(false, false, false);
 
+        assertNull(target.getItems());
         assertFalse(target.hasItems());
 
         target.addItems(new ArrayList<>());
 
         assertFalse(target.hasItems());
+    }
+
+    @Test
+    public void testHasItems() {
+        final Item target = buildItem(true, false, false);
+
+        assertNotNull(target.getItems());
+        assertTrue(target.hasItems());
     }
 
     @Test
@@ -215,7 +229,7 @@ public class ItemTest {
         final Item anotherItem = buildItem(true, true, true);
 
         target.addRelatedItem(new Item("1", "Title", "Desc"));
-        anotherItem.addRelatedItem(new Item("1", "Title", "Desc"));
+        anotherItem.addRelatedItem(new Item("2", "Title", "Desc"));
 
         assertFalse(target.equals(anotherItem));
     }

@@ -11,14 +11,10 @@ import static org.junit.Assert.*;
 public class RangeTest {
 
     @Test
-    public void testHasSubChapters() {
-        assertTrue(buildRange(true, false, false).hasSubChapters());
-    }
-
-    @Test
     public void testHasSubChapters_Empty() {
         final Range target = buildRange(false, false, false);
 
+        assertNull(target.getSubChapters());
         assertFalse(target.hasSubChapters());
 
         target.addSubChapters(new ArrayList<>());
@@ -27,14 +23,18 @@ public class RangeTest {
     }
 
     @Test
-    public void testHasItems() {
-        assertTrue(buildRange(false, true, false).hasItems());
+    public void testHasSubChapters() {
+        final Range target = buildRange(true, false, false);
+
+        assertNotNull(target.getSubChapters());
+        assertTrue(target.hasSubChapters());
     }
 
     @Test
     public void testHasItems_Empty() {
         final Range target = buildRange(false, false, false);
 
+        assertNull(target.getItems());
         assertFalse(target.hasItems());
 
         target.addItems(new ArrayList<>());
@@ -43,19 +43,31 @@ public class RangeTest {
     }
 
     @Test
-    public void testHasSections() {
-        assertTrue(buildRange(false, false, true).hasSections());
+    public void testHasItems() {
+        final Range target = buildRange(false, true, false);
+
+        assertNotNull(target.getItems());
+        assertTrue(target.hasItems());
     }
 
     @Test
     public void testHasSections_Empty() {
         final Range target = buildRange(false, false, false);
 
+        assertNull(target.getSections());
         assertFalse(target.hasSections());
 
         target.addSections(new ArrayList<>());
 
         assertFalse(target.hasSections());
+    }
+
+    @Test
+    public void testHasSections() {
+        final Range target = buildRange(false, false, true);
+
+        assertNotNull(target.getSections());
+        assertTrue(target.hasSections());
     }
 
     @Test

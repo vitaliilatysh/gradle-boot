@@ -12,23 +12,25 @@ public class SubChapterTest {
 
     @Test
     public void testHasSubChapter_NotSet() {
-        assertFalse(buildSubChapter(false, false, false).hasChapter());
+        final SubChapter target = buildSubChapter(false, false, false);
+
+        assertNull(target.getChapter());
+        assertFalse(target.hasChapter());
     }
 
     @Test
     public void testHasSubChapter() {
-        assertTrue(buildSubChapter(true, false, false).hasChapter());
-    }
+        final SubChapter target = buildSubChapter(true, false, false);
 
-    @Test
-    public void testHasSections() {
-        assertTrue(buildSubChapter(false, true, false).hasSections());
+        assertNotNull(target.getChapter());
+        assertTrue(target.hasChapter());
     }
 
     @Test
     public void testHasSections_Empty() {
         final SubChapter target = buildSubChapter(false, false, false);
 
+        assertNull(target.getSections());
         assertFalse(target.hasSections());
 
         target.addSections(new ArrayList<>());
@@ -37,19 +39,31 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testHasRanges() {
-        assertTrue(buildSubChapter(false, false, true).hasRanges());
+    public void testHasSections() {
+        final SubChapter target = buildSubChapter(false, true, false);
+
+        assertNotNull(target.getSections());
+        assertTrue(target.hasSections());
     }
 
     @Test
     public void testHasRanges_Empty() {
         final SubChapter target = buildSubChapter(false, false, false);
 
+        assertNull(target.getRanges());
         assertFalse(target.hasRanges());
 
         target.addRanges(new ArrayList<>());
 
         assertFalse(target.hasRanges());
+    }
+
+    @Test
+    public void testHasRanges() {
+        final SubChapter target = buildSubChapter(false, false, true);
+
+        assertNotNull(target.getRanges());
+        assertTrue(target.hasRanges());
     }
 
     @Test

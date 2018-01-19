@@ -11,14 +11,10 @@ import static org.junit.Assert.*;
 public class SectionTest {
 
     @Test
-    public void testHasRanges() {
-        assertTrue(buildSection(false, true).hasRanges());
-    }
-
-    @Test
     public void testHasRanges_Empty() {
         final Section target = buildSection(false, false);
 
+        assertNull(target.getRanges());
         assertFalse(target.hasRanges());
 
         target.addRanges(new ArrayList<>());
@@ -27,13 +23,27 @@ public class SectionTest {
     }
 
     @Test
+    public void testHasRanges() {
+        final Section target = buildSection(false, true);
+
+        assertNotNull(target.getRanges());
+        assertTrue(target.hasRanges());
+    }
+
+    @Test
     public void testHasSubChapter_NotSet() {
-        assertFalse(buildSection(false, false).hasSubChapter());
+        final Section target = buildSection(false, false);
+
+        assertNull(target.getSubChapter());
+        assertFalse(target.hasSubChapter());
     }
 
     @Test
     public void testHasSubChapter() {
-        assertTrue(buildSection(true, false).hasSubChapter());
+        final Section target = buildSection(true, false);
+
+        assertNotNull(target.getSubChapter());
+        assertTrue(target.hasSubChapter());
     }
 
     @Test
