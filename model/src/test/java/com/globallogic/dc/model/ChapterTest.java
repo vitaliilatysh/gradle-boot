@@ -58,7 +58,7 @@ public class ChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Key() {
+    public void testEquals_DifferentKeys() {
         final Chapter target = buildChapter("2", "Title", "Desc", true);
         final Chapter anotherChapter = buildChapter("1", "Title", "Desc", true);
 
@@ -66,7 +66,7 @@ public class ChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Title() {
+    public void testEquals_DifferentTitles() {
         final Chapter target = buildChapter("1", "NewTitle", "Desc", true);
         final Chapter anotherChapter = buildChapter("1", "Title", "Desc", true);
 
@@ -74,7 +74,7 @@ public class ChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Desc() {
+    public void testEquals_DifferentDesc() {
         final Chapter target = buildChapter("1", "Title", "NewDesc", true);
         final Chapter anotherChapter = buildChapter("1", "Title", "Desc", true);
 
@@ -82,7 +82,7 @@ public class ChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SubChaptersListNotSet() {
+    public void testEquals_TargetSubChaptersListNotSet() {
         final Chapter target = buildChapter(false);
         final Chapter anotherChapter = buildChapter(true);
 
@@ -90,7 +90,7 @@ public class ChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SubChaptersListEmpty(){
+    public void testEquals_TargetSubChaptersListEmpty(){
         final Chapter target = buildChapter( true);
         final Chapter anotherChapter = buildChapter(true);
 
@@ -100,7 +100,7 @@ public class ChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SubChaptersListContainsDiffNumberOfSubChapters(){
+    public void testEquals_TargetSubChaptersListContainsDiffNumberOfSubChapters(){
         final Chapter target = buildChapter( true);
         final Chapter anotherChapter = buildChapter(true);
 
@@ -110,7 +110,7 @@ public class ChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SubChaptersListContainsTheSameNumberOfSubChaptersButDiff(){
+    public void testEquals_TargetSubChaptersListContainsTheSameNumberOfSubChaptersButDiff(){
         final Chapter target = buildChapter( true);
         final Chapter anotherChapter = buildChapter(true);
 

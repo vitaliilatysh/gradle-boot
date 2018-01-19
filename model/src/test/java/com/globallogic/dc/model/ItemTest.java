@@ -115,7 +115,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Key() {
+    public void testEquals_DifferentKeys() {
         final Item target = buildItem("2", "Title", "Desc", true, true, true);
         final Item anotherItem = buildItem("1", "Title", "Desc", true, true, true);
 
@@ -123,7 +123,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Title() {
+    public void testEquals_DifferentTitles() {
         final Item target = buildItem("1", "NewTitle", "Desc", true, true, true);
         final Item anotherItem = buildItem("1", "Title", "Desc", true, true, true);
 
@@ -131,7 +131,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Desc() {
+    public void testEquals_DifferentDesc() {
         final Item target = buildItem("1", "Title", "NewDesc", true, true, true);
         final Item anotherItem = buildItem("1", "Title", "Desc", true, true, true);
 
@@ -139,7 +139,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_NotEqual_RangeNotSet() {
+    public void testEquals_TargetRangeNotSet() {
         final Item target = buildItem(true, true, false);
         final Item anotherItem = buildItem(true, true, true);
 
@@ -147,7 +147,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_NotEqual_DiffRange() {
+    public void testEquals_TargetDiffRange() {
         final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
@@ -157,7 +157,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_NotEqual_ItemsListNotSet() {
+    public void testEquals_TargetItemsListNotSet() {
         final Item target = buildItem(false, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
@@ -165,7 +165,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_NotEqual_ItemsListEmpty() {
+    public void testEquals_TargetItemsListEmpty() {
         final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
@@ -175,7 +175,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_NotEqual_ItemsListContainsDiffNumberOfItems() {
+    public void testEquals_TargetItemsListContainsDiffNumberOfItems() {
         final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
@@ -185,7 +185,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_NotEqual_ItemsListContainsTheSameNumberOfItemsButDiff() {
+    public void testEquals_TargetItemsListContainsTheSameNumberOfItemsButDiff() {
         final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
@@ -196,7 +196,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_NotEqual_RelatedItemsListNotSet() {
+    public void testEquals_TargetRelatedItemsListNotSet() {
         final Item target = buildItem(true, false, true);
         final Item anotherItem = buildItem(true, true, true);
 
@@ -204,7 +204,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_NotEqual_RelatedItemsListEmpty() {
+    public void testEquals_TargetRelatedItemsListEmpty() {
         final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
@@ -214,7 +214,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_NotEqual_RelatedItemsListContainsDiffNumberOfRelatedItems() {
+    public void testEquals_TargetRelatedItemsListContainsDiffNumberOfRelatedItems() {
         final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 
@@ -224,7 +224,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testEquals_NotEqual_RelatedItemsListContainsTheSameNumberOfItemsButDiff() {
+    public void testEquals_TargetRelatedItemsListContainsTheSameNumberOfItemsButDiff() {
         final Item target = buildItem(true, true, true);
         final Item anotherItem = buildItem(true, true, true);
 

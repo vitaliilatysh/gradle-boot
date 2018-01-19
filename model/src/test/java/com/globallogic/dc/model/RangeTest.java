@@ -139,7 +139,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Key() {
+    public void testEquals_DifferentKeys() {
         final Range target = buildRange("2", "Title", "Desc", true, true, true);
         final Range anotherRange = buildRange("1", "Title", "Desc", true, true, true);
 
@@ -147,7 +147,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Title() {
+    public void testEquals_DifferentTitles() {
         final Range target = buildRange("1", "NewTitle", "Desc", true, true, true);
         final Range anotherRange = buildRange("1", "Title", "Desc", true, true, true);
 
@@ -155,7 +155,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Desc() {
+    public void testEquals_DifferentDesc() {
         final Range target = buildRange("1", "Title", "NewDesc", true, true, true);
         final Range anotherRange = buildRange("1", "Title", "Desc", true, true, true);
 
@@ -163,7 +163,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SubChaptersListNotSet() {
+    public void testEquals_TargetSubChaptersListNotSet() {
         final Range target = buildRange(false, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
@@ -171,7 +171,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SubChaptersListEmpty() {
+    public void testEquals_TargetSubChaptersListEmpty() {
         final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
@@ -181,7 +181,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SubChaptersListContainsDiffNumberOfSubChapters() {
+    public void testEquals_TargetSubChaptersListContainsDiffNumberOfSubChapters() {
         final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
@@ -191,7 +191,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SubChaptersListContainsTheSameNumberOfSubChaptersButDiff() {
+    public void testEquals_TargetSubChaptersListContainsTheSameNumberOfSubChaptersButDiff() {
         final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
@@ -202,7 +202,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_ItemsListNotSet() {
+    public void testEquals_TargetItemsListNotSet() {
         final Range target = buildRange(true, false, true);
         final Range anotherRange = buildRange(true, true, true);
 
@@ -210,7 +210,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_ItemsListEmpty() {
+    public void testEquals_TargetItemsListEmpty() {
         final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
@@ -220,7 +220,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_ItemsListContainsDiffNumberOfItems() {
+    public void testEquals_TargetItemsListContainsDiffNumberOfItems() {
         final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
@@ -230,7 +230,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_ItemsListContainsTheSameNumberOfItemsButDiff() {
+    public void testEquals_TargetItemsListContainsTheSameNumberOfItemsButDiff() {
         final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
@@ -241,7 +241,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SectionsListNotSet() {
+    public void testEquals_TargetSectionsListNotSet() {
         final Range target = buildRange(true, true, false);
         final Range anotherRange = buildRange(true, true, true);
 
@@ -249,7 +249,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SectionsListEmpty() {
+    public void testEquals_TargetSectionsListEmpty() {
         final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
@@ -259,7 +259,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SectionsListContainsDiffNumberOfSections() {
+    public void testEquals_TargetSectionsListContainsDiffNumberOfSections() {
         final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 
@@ -269,7 +269,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SectionsListContainsSameNumberOfSectionsButDiff() {
+    public void testEquals_TargetSectionsListContainsTheSameNumberOfSectionsButDiff() {
         final Range target = buildRange(true, true, true);
         final Range anotherRange = buildRange(true, true, true);
 

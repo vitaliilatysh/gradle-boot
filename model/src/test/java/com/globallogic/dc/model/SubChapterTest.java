@@ -107,7 +107,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Key() {
+    public void testEquals_DifferentKeys() {
         final SubChapter target = buildSubChapter("2", "Title", "Desc", false, false, false);
         final SubChapter anotherSubChapter = buildSubChapter("1", "Title", "Desc", false, false, false);
 
@@ -115,7 +115,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Title() {
+    public void testEquals_DifferentTitles() {
         final SubChapter target = buildSubChapter("1", "NewTitle", "Desc", false, false, false);
         final SubChapter anotherSubChapter = buildSubChapter("1", "Title", "Desc", false, false, false);
 
@@ -123,7 +123,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Desc() {
+    public void testEquals_DifferentDesc() {
         final SubChapter target = buildSubChapter("1", "Title", "NewDesc", false, false, false);
         final SubChapter anotherSubChapter = buildSubChapter("1", "Title", "Desc", false, false, false);
 
@@ -139,7 +139,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqualChapterNotSet() {
+    public void testEquals_TargetChapterNotSet() {
         final SubChapter target = buildSubChapter(false, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
@@ -147,7 +147,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_DiffChapter() {
+    public void testEquals_TargetDiffChapter() {
         final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
@@ -157,7 +157,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SectionsListNotSet() {
+    public void testEquals_TargetSectionsListNotSet() {
         final SubChapter target = buildSubChapter(true, false, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
@@ -165,7 +165,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SectionsListEmpty() {
+    public void testEquals_TargetSectionsListEmpty() {
         final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
@@ -175,7 +175,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SectionsListContainsDiffNumberOfSections() {
+    public void testEquals_TargetSectionsListContainsDiffNumberOfSections() {
         final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
@@ -185,7 +185,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SectionsListContainsSameNumberOfSectionsButDiff() {
+    public void testEquals_TargetSectionsListContainsTheSameNumberOfSectionsButDiff() {
         final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
@@ -196,7 +196,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_RangesListNotSet() {
+    public void testEquals_TargetRangesListNotSet() {
         final SubChapter target = buildSubChapter(true, true, false);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
@@ -204,7 +204,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_RangesListEmpty() {
+    public void testEquals_TargetRangesListEmpty() {
         final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
@@ -214,7 +214,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_RangesListContainsDiffNumberOfRanges() {
+    public void testEquals_TargetRangesListContainsDiffNumberOfRanges() {
         final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 
@@ -224,7 +224,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testEquals_NotEqual_RangesListContainsSameNumberOfRangesButDiff() {
+    public void testEquals_TargetRangesListContainsTheSameNumberOfRangesButDiff() {
         final SubChapter target = buildSubChapter(true, true, true);
         final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
 

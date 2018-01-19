@@ -75,7 +75,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Key() {
+    public void testEquals_DifferentKeys() {
         final Section target = buildSection("2", "Title", "Desc", true, true);
         final Section anotherSection = buildSection("1", "Title", "Desc", true, true);
 
@@ -83,7 +83,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Title() {
+    public void testEquals_DifferentTitles() {
         final Section target = buildSection("1", "NewTitle", "Desc", true, true);
         final Section anotherSection = buildSection("1", "Title", "Desc", true, true);
 
@@ -91,7 +91,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testEquals_NotEqual_Desc() {
+    public void testEquals_DifferentDesc() {
         final Section target = buildSection("1", "Title", "NewDesc", true, true);
         final Section anotherSection = buildSection("1", "Title", "Desc", true, true);
 
@@ -99,7 +99,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testEquals_NotEqual_SubChapterNotSet() {
+    public void testEquals_TargetSubChapterNotSet() {
         final Section target = buildSection(false, true);
         final Section anotherSection = buildSection(true, true);
 
@@ -107,7 +107,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testEquals_NotEqual_DiffSubChapter() {
+    public void testEquals_TargetDiffSubChapter() {
         final Section target = buildSection(true, true);
         final Section anotherSection = buildSection(true, true);
 
@@ -117,7 +117,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testEquals_NotEqual_RangesListNotSet() {
+    public void testEquals_TargetRangesListNotSet() {
         final Section target = buildSection(true, false);
         final Section anotherSection = buildSection(true, true);
 
@@ -125,7 +125,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testEquals_NotEqual_RangesListEmpty() {
+    public void testEquals_TargetRangesListEmpty() {
         final Section target = buildSection(true, true);
         final Section anotherSection = buildSection(true, true);
 
@@ -135,7 +135,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testEquals_NotEqual_RangesListContainsDiffNumberOfRanges() {
+    public void testEquals_TargetRangesListContainsDiffNumberOfRanges() {
         final Section target = buildSection(true, true);
         final Section anotherSection = buildSection(true, true);
 
@@ -145,7 +145,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testEquals_NotEqual_RangesListContainsSameNumberOfRangesButDiff() {
+    public void testEquals_TargetRangesListContainsTheSameNumberOfRangesButDiff() {
         final Section target = buildSection(true, true);
         final Section anotherSection = buildSection(true, true);
 
