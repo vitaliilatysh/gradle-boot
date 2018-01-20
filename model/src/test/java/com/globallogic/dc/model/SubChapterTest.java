@@ -11,6 +11,16 @@ import static org.junit.Assert.*;
 public class SubChapterTest {
 
     @Test
+    public void testSetChapter(){
+        final SubChapter target = buildSubChapter(false, false,false);
+        final Chapter chapter = new Chapter("1", "Title", "Desc");
+
+        target.setChapter(chapter);
+
+        assertTrue(target.getChapter().equals(chapter));
+    }
+
+    @Test
     public void testHasChapter_NotSet() {
         final SubChapter target = buildSubChapter(false, false, false);
 

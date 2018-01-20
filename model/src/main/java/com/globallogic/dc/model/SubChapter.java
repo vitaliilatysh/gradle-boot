@@ -50,8 +50,6 @@ public class SubChapter extends SubChapterBase {
 
     @Override
     public void setChapter(final Chapter chapter) {
-        if (this.getChapter() != chapter) {
-            super.setChapter(chapter);
-        }
+        super.setChapter(chapter);
     }
 }
