@@ -31,7 +31,7 @@ public class ChapterTest {
     }
 
     @Test
-    public void testAddSubChapter() {
+    public void testAddSubChapter_IfChapterWithoutSubChapter() {
         final Chapter target = buildChapter(false);
         final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
 
@@ -39,9 +39,27 @@ public class ChapterTest {
 
         assertTrue(subChapter.hasChapter());
         assertTrue(subChapter.getChapter().equals(target));
+        assertTrue(target.getSubChapters().contains(subChapter));
         assertEquals(1, target.getSubChapters().size());
     }
 
+    @Test
+    public void testAddSubChapter_IfChapterAlreadyHasSubChapter() {
+        final Chapter target = buildChapter(false);
+        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+        final SubChapter anotherSubChapter = new SubChapter("1", "Title", "Desc");
+
+        target.addSubChapter(subChapter);
+        target.addSubChapter(anotherSubChapter);
+
+        assertTrue(subChapter.hasChapter());
+        assertTrue(subChapter.getChapter().equals(target));
+        assertTrue(target.getSubChapters().contains(subChapter));
+        assertTrue(anotherSubChapter.hasChapter());
+        assertTrue(anotherSubChapter.getChapter().equals(target));
+        assertTrue(target.getSubChapters().contains(anotherSubChapter));
+        assertEquals(2, target.getSubChapters().size());
+    }
     @Test
     public void testAddSubChapters() {
         final Chapter target = buildChapter(false);

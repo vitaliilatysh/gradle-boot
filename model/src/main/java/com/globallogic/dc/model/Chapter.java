@@ -6,6 +6,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import java.util.Collection;
 import java.util.List;
 
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+
 public class Chapter extends ChapterBase {
 
     public Chapter(
@@ -44,8 +46,17 @@ public class Chapter extends ChapterBase {
 
     @Override
     public void addSubChapter(final SubChapter subChapter) {
-        subChapter.setChapter(this);
-        super.addSubChapter(subChapter);
+        if (isEmpty(this.getSubChapters())) {
+            super.addSubChapter(subChapter);
+            if (subChapter.getChapter() == null) {
+                subChapter.setChapter(this);
+            }
+        } else {
+            if (subChapter.getChapter() == null) {
+                this.getSubChapters().add(subChapter);
+                subChapter.setChapter(this);
+            }
+        }
     }
 
     @Override
