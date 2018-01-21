@@ -11,13 +11,63 @@ import static org.junit.Assert.*;
 public class SubChapterTest {
 
     @Test
-    public void testSetChapter(){
-        final SubChapter target = buildSubChapter(false, false,false);
+    public void testSetChapter_IfSubChapterNotAssignedToChapterBefore() {
+        final SubChapter target = buildSubChapter(false, false, false);
         final Chapter chapter = new Chapter("1", "Title", "Desc");
 
         target.setChapter(chapter);
 
+        assertTrue(target.hasChapter());
         assertTrue(target.getChapter().equals(chapter));
+        assertTrue(chapter.getSubChapters().contains(target));
+    }
+
+    @Test
+    public void testSetChapter_IfAnotherSubChapterAlreadyAssignedToChapter() {
+        final SubChapter target = buildSubChapter(false, false, true);
+        final SubChapter anotherSubChapter = buildSubChapter(false, false, false);
+        final Chapter chapter = new Chapter("1", "Title", "Desc");
+
+        target.setChapter(chapter);
+        anotherSubChapter.setChapter(chapter);
+
+        assertTrue(chapter.hasSubChapters());
+        assertTrue(target.getChapter().equals(chapter));
+        assertTrue(anotherSubChapter.getChapter().equals(chapter));
+        assertTrue(chapter.getSubChapters().contains(target));
+        assertTrue(chapter.getSubChapters().contains(anotherSubChapter));
+    }
+
+    @Test
+    public void testSetChapter_IfSubChapterWasAssignedAndThenReassignedToAnotherChapter(){
+        final SubChapter target = buildSubChapter(false, false, false);
+        final Chapter chapter = new Chapter("1", "Title", "Desc");
+        final Chapter anotherChapter = new Chapter("1", "Title", "Desc");
+
+        target.setChapter(chapter);
+        target.setChapter(anotherChapter);
+
+        assertFalse(chapter.hasSubChapters());
+        assertTrue(anotherChapter.getSubChapters().contains(target));
+        assertTrue(target.getChapter().equals(anotherChapter));
+    }
+
+    @Test
+    public void testSetChapter_IfChapterContainsTwoSubChaptersAndThenOneSubChapterReassignedToAnother(){
+        final SubChapter target = buildSubChapter(false, false, true);
+        final SubChapter anotherSubChapter = buildSubChapter(false, false, false);
+        final Chapter chapter = new Chapter("1", "Title", "Desc");
+        final Chapter anotherChapter = new Chapter("1", "Title", "Desc");
+
+        target.setChapter(chapter);
+        anotherSubChapter.setChapter(chapter);
+        target.setChapter(anotherChapter);
+
+        assertTrue(chapter.getSubChapters().contains(anotherSubChapter));
+        assertTrue(anotherSubChapter.getChapter().equals(chapter));
+        assertTrue(anotherChapter.getSubChapters().contains(target));
+        assertTrue(target.getChapter().equals(anotherChapter));
+
     }
 
     @Test
