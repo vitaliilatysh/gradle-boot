@@ -48,7 +48,7 @@ public class Chapter extends ChapterBase {
     public void addSubChapter(final SubChapter subChapter) {
         if (isEmpty(this.getSubChapters())) {
             super.addSubChapter(subChapter);
-            if (subChapter.getChapter() == null) {
+            if (subChapter.getChapter() == null || !subChapter.getChapter().getSubChapters().isEmpty()) {
                 subChapter.setChapter(this);
             }
         } else {
