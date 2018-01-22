@@ -22,6 +22,7 @@ public class ChapterTest {
 
         assertFalse(target.hasSubChapters());
     }
+
     @Test
     public void testHasSubChapters() {
         final Chapter target = buildChapter(true);
@@ -60,6 +61,46 @@ public class ChapterTest {
         assertTrue(target.getSubChapters().contains(anotherSubChapter));
         assertEquals(2, target.getSubChapters().size());
     }
+
+    @Test
+    public void testAddSubChapter_IfChapterContainsSubChapterAndThisSubChapterAddedToAnotherChapter() {
+        final Chapter target = buildChapter(false);
+        final Chapter anotherChapter = buildChapter(false);
+        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+
+        target.addSubChapter(subChapter);
+        anotherChapter.addSubChapter(subChapter);
+
+        assertFalse(target.hasSubChapters());
+        assertTrue(anotherChapter.hasSubChapters());
+        assertTrue(anotherChapter.getSubChapters().contains(subChapter));
+        assertTrue(subChapter.getChapter().equals(anotherChapter));
+        assertEquals(0, target.getSubChapters().size());
+        assertEquals(1, anotherChapter.getSubChapters().size());
+    }
+
+    @Test
+    public void testAddSubChapter_IfChapterContains2SubChaptersAndThenOneSubChapterAddedToAnotherChapter(){
+        final Chapter target = buildChapter(false);
+        final Chapter anotherChapter = buildChapter(false);
+        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+        final SubChapter anotherSubChapter = new SubChapter("2", "Title", "Desc");
+
+        target.addSubChapter(subChapter);
+        target.addSubChapter(anotherSubChapter);
+        anotherChapter.addSubChapter(subChapter);
+        anotherChapter.addSubChapter(anotherSubChapter);
+
+        assertFalse(target.hasSubChapters());
+        assertFalse(target.getSubChapters().contains(anotherSubChapter));
+        assertFalse(target.getSubChapters().contains(subChapter));
+        assertTrue(anotherSubChapter.getChapter().equals(target));
+        assertTrue(anotherChapter.getSubChapters().contains(subChapter));
+        assertTrue(subChapter.getChapter().equals(anotherChapter));
+        assertEquals(1, target.getSubChapters().size());
+        assertEquals(1, anotherChapter.getSubChapters().size());
+    }
+
     @Test
     public void testAddSubChapters() {
         final Chapter target = buildChapter(false);
@@ -69,7 +110,7 @@ public class ChapterTest {
 
         target.addSubChapters(subChapters);
 
-        for (SubChapter subChapter: subChapters) {
+        for (SubChapter subChapter : subChapters) {
             assertTrue(subChapter.hasChapter());
             assertTrue(subChapter.getChapter().equals(target));
         }
@@ -117,8 +158,8 @@ public class ChapterTest {
     }
 
     @Test
-    public void testEquals_TargetSubChaptersListEmpty(){
-        final Chapter target = buildChapter( true);
+    public void testEquals_TargetSubChaptersListEmpty() {
+        final Chapter target = buildChapter(true);
         final Chapter anotherChapter = buildChapter(true);
 
         target.setSubChapters(new ArrayList<>());
@@ -127,8 +168,8 @@ public class ChapterTest {
     }
 
     @Test
-    public void testEquals_TargetSubChaptersListContainsDiffNumberOfSubChapters(){
-        final Chapter target = buildChapter( true);
+    public void testEquals_TargetSubChaptersListContainsDiffNumberOfSubChapters() {
+        final Chapter target = buildChapter(true);
         final Chapter anotherChapter = buildChapter(true);
 
         target.addSubChapter(new SubChapter("1", "Title", "Desc"));
@@ -137,8 +178,8 @@ public class ChapterTest {
     }
 
     @Test
-    public void testEquals_TargetSubChaptersListContainsTheSameNumberOfSubChaptersButDiff(){
-        final Chapter target = buildChapter( true);
+    public void testEquals_TargetSubChaptersListContainsTheSameNumberOfSubChaptersButDiff() {
+        final Chapter target = buildChapter(true);
         final Chapter anotherChapter = buildChapter(true);
 
         target.addSubChapter(new SubChapter("1", "Title", "Desc"));
@@ -149,7 +190,7 @@ public class ChapterTest {
 
     @Test
     public void testHashCode() {
-        final Chapter target = buildChapter( true);
+        final Chapter target = buildChapter(true);
 
         final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
 
