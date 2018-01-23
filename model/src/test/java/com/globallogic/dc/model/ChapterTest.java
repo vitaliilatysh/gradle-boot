@@ -15,7 +15,7 @@ public class ChapterTest {
     public void testHasSubChapters_Empty() {
         final Chapter target = buildChapter(false);
 
-        assertNull(target.getSubChapters());
+        assertNotNull(target.getSubChapters());
         assertFalse(target.hasSubChapters());
 
         target.addSubChapters(new ArrayList<>());
@@ -38,7 +38,7 @@ public class ChapterTest {
 
         target.addSubChapter(subChapter);
 
-        assertTrue(subChapter.hasChapter());
+        assertTrue(target.hasSubChapters());
         assertTrue(subChapter.getChapter().equals(target));
         assertTrue(target.getSubChapters().contains(subChapter));
         assertEquals(1, target.getSubChapters().size());
@@ -53,10 +53,9 @@ public class ChapterTest {
         target.addSubChapter(subChapter);
         target.addSubChapter(anotherSubChapter);
 
-        assertTrue(subChapter.hasChapter());
+        assertTrue(target.hasSubChapters());
         assertTrue(subChapter.getChapter().equals(target));
         assertTrue(target.getSubChapters().contains(subChapter));
-        assertTrue(anotherSubChapter.hasChapter());
         assertTrue(anotherSubChapter.getChapter().equals(target));
         assertTrue(target.getSubChapters().contains(anotherSubChapter));
         assertEquals(2, target.getSubChapters().size());
@@ -75,7 +74,6 @@ public class ChapterTest {
         assertTrue(anotherChapter.hasSubChapters());
         assertTrue(anotherChapter.getSubChapters().contains(subChapter));
         assertTrue(subChapter.getChapter().equals(anotherChapter));
-        assertEquals(0, target.getSubChapters().size());
         assertEquals(1, anotherChapter.getSubChapters().size());
     }
 
@@ -89,12 +87,11 @@ public class ChapterTest {
         target.addSubChapter(subChapter);
         target.addSubChapter(anotherSubChapter);
         anotherChapter.addSubChapter(subChapter);
-        anotherChapter.addSubChapter(anotherSubChapter);
 
-        assertFalse(target.hasSubChapters());
-        assertFalse(target.getSubChapters().contains(anotherSubChapter));
-        assertFalse(target.getSubChapters().contains(subChapter));
+        assertTrue(target.hasSubChapters());
         assertTrue(anotherSubChapter.getChapter().equals(target));
+        assertTrue(target.getSubChapters().contains(anotherSubChapter));
+        assertTrue(anotherChapter.hasSubChapters());
         assertTrue(anotherChapter.getSubChapters().contains(subChapter));
         assertTrue(subChapter.getChapter().equals(anotherChapter));
         assertEquals(1, target.getSubChapters().size());
