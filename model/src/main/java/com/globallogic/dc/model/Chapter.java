@@ -45,25 +45,16 @@ public class Chapter extends ChapterBase {
     }
 
     @Override
-    public void addSubChapter(final SubChapter subChapter) {
-        if (isEmpty(this.getSubChapters())) {
-            super.addSubChapter(subChapter);
-            if (subChapter.getChapter() == null || !subChapter.getChapter().getSubChapters().isEmpty()) {
-                subChapter.setChapter(this);
-            }
+    protected void doAddSubChapter(final SubChapter subChapter) {
+        if(!subChapter.hasChapter() || subChapter.getChapter() != this){
+            subChapter.setChapter(this);
         } else {
-            if (subChapter.getChapter() == null) {
-                this.getSubChapters().add(subChapter);
-                subChapter.setChapter(this);
-            }
+            super.doAddSubChapter(subChapter);
         }
     }
 
     @Override
     public void addSubChapters(final Collection<SubChapter> subChapters) {
-        for (SubChapter subChapter : subChapters) {
-            subChapter.setChapter(this);
-        }
         super.addSubChapters(subChapters);
     }
 }

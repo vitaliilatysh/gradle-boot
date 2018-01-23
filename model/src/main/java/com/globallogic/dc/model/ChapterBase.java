@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 public abstract class ChapterBase extends AbstractProduct {
@@ -28,7 +27,18 @@ public abstract class ChapterBase extends AbstractProduct {
     }
 
     public List<SubChapter> getSubChapters() {
-        return this.subChapters;
+        return getSubChaptersSafe();
+    }
+
+    private List<SubChapter> getSubChaptersSafe(){
+        if(subChapters == null){
+            synchronized (this){
+                if(subChapters == null){
+                    subChapters = new ArrayList<>();
+                }
+            }
+        }
+        return subChapters;
     }
 
     public void setSubChapters(final List<SubChapter> subChapters) {
@@ -39,15 +49,19 @@ public abstract class ChapterBase extends AbstractProduct {
         return isNotEmpty(this.subChapters);
     }
 
-    public void addSubChapters(final Collection<SubChapter> subChapters) {
-        if (isEmpty(this.subChapters)) {
-            this.subChapters = new ArrayList<>();
+    protected void addSubChapters(final Collection<SubChapter> subChapters) {
+        if (subChapters == null) {
+            throw new IllegalArgumentException();
         }
-        this.subChapters.addAll(subChapters);
+        subChapters.forEach(this::doAddSubChapter);
     }
 
     public void addSubChapter(final SubChapter subChapter) {
-        if (isEmpty(this.subChapters)) {
+        doAddSubChapter(subChapter);
+    }
+
+    protected void doAddSubChapter(final SubChapter subChapter) {
+        if (!hasSubChapters()) {
             this.subChapters = new ArrayList<>();
         }
         this.subChapters.add(subChapter);
