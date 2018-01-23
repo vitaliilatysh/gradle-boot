@@ -5,8 +5,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.List;
 
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-
 public class SubChapter extends SubChapterBase {
 
     public SubChapter(
@@ -49,21 +47,12 @@ public class SubChapter extends SubChapterBase {
                 .append(this.getRanges());
     }
 
-
     @Override
     public void setChapter(final Chapter chapter) {
-        if (this.getChapter() == null) {
-            super.setChapter(chapter);
-            if (isEmpty(chapter.getSubChapters())) {
-                chapter.addSubChapter(this);
-            } else {
-                if (!chapter.getSubChapters().contains(this))
-                    chapter.getSubChapters().add(this);
-            }
-        } else {
-            this.getChapter().getSubChapters().remove(this);
-            chapter.addSubChapter(this);
-            super.setChapter(chapter);
+        if (hasChapter() && chapter.getSubChapters().contains(this)) {
+            chapter.getSubChapters().remove(this);
         }
+        super.setChapter(chapter);
+        chapter.addSubChapter(this);
     }
 }
