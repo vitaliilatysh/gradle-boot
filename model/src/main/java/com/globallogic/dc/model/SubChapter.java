@@ -49,8 +49,8 @@ public class SubChapter extends SubChapterBase {
 
     @Override
     public void setChapter(final Chapter chapter) {
-        if (hasChapter() && chapter.getSubChapters().contains(this)) {
-            chapter.getSubChapters().remove(this);
+        if (hasChapter() && this.getChapter().getSubChapters().contains(this)) {
+            this.getChapter().getSubChapters().remove(this);
         }
         super.setChapter(chapter);
         chapter.addSubChapter(this);
