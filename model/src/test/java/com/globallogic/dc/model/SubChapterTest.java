@@ -1,6 +1,5 @@
 package com.globallogic.dc.model;
 
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testSetChapter_IfSubChapterWasAssignedAndThenReassignedToAnotherChapter(){
+    public void testSetChapter_IfSubChapterWasAssignedAndThenReassignedToAnotherChapter() {
         final SubChapter target = buildSubChapter(false, false, false);
         final Chapter chapter = new Chapter("1", "Title", "Desc");
         final Chapter anotherChapter = new Chapter("1", "Title", "Desc");
@@ -51,15 +50,13 @@ public class SubChapterTest {
         target.setChapter(anotherChapter);
 
         assertTrue(target.hasChapter());
-        assertFalse(chapter.getSubChapters().contains(target));
-        assertFalse(target.getChapter().equals(chapter));
         assertTrue(target.getChapter().equals(anotherChapter));
         assertTrue(anotherChapter.getSubChapters().contains(target));
         assertEquals(1, anotherChapter.getSubChapters().size());
     }
 
     @Test
-    public void testSetChapter_IfChapterContainsTwoSubChaptersAndThenOneSubChapterReassignedToAnother(){
+    public void testSetChapter_IfChapterContainsTwoSubChaptersAndThenOneSubChapterReassignedToAnother() {
         final SubChapter target = buildSubChapter(false, false, true);
         final SubChapter anotherSubChapter = buildSubChapter(false, false, false);
         final Chapter chapter = new Chapter("1", "Title", "Desc");
@@ -179,150 +176,6 @@ public class SubChapterTest {
                 new Range("3", "3", "3")));
 
         assertEquals(2, target.getRanges().size());
-    }
-
-    @Test
-    public void testEquals_DifferentKeys() {
-        final SubChapter target = buildSubChapter("2", "Title", "Desc", false, false, false);
-        final SubChapter anotherSubChapter = buildSubChapter("1", "Title", "Desc", false, false, false);
-
-        assertFalse(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testEquals_DifferentTitles() {
-        final SubChapter target = buildSubChapter("1", "NewTitle", "Desc", false, false, false);
-        final SubChapter anotherSubChapter = buildSubChapter("1", "Title", "Desc", false, false, false);
-
-        assertFalse(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testEquals_DifferentDesc() {
-        final SubChapter target = buildSubChapter("1", "Title", "NewDesc", false, false, false);
-        final SubChapter anotherSubChapter = buildSubChapter("1", "Title", "Desc", false, false, false);
-
-        assertFalse(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testEquals() {
-        final SubChapter target = buildSubChapter(true, true, true);
-        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
-
-        assertTrue(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testEquals_TargetChapterNotSet() {
-        final SubChapter target = buildSubChapter(false, true, true);
-        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
-
-        assertFalse(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testEquals_TargetDiffChapter() {
-        final SubChapter target = buildSubChapter(true, true, true);
-        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
-
-        target.setChapter(new Chapter("2", "Title", "Desc"));
-
-        assertFalse(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testEquals_TargetSectionsListNotSet() {
-        final SubChapter target = buildSubChapter(true, false, true);
-        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
-
-        assertFalse(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testEquals_TargetSectionsListEmpty() {
-        final SubChapter target = buildSubChapter(true, true, true);
-        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
-
-        target.setSections(new ArrayList<>());
-
-        assertFalse(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testEquals_TargetSectionsListContainsDiffNumberOfSections() {
-        final SubChapter target = buildSubChapter(true, true, true);
-        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
-
-        target.addSection(new Section("1", "Title", "Desc"));
-
-        assertFalse(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testEquals_TargetSectionsListContainsTheSameNumberOfSectionsButDiff() {
-        final SubChapter target = buildSubChapter(true, true, true);
-        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
-
-        target.addSection(new Section("1", "Title", "Desc"));
-        anotherSubChapter.addSection(new Section("2", "Title", "Desc"));
-
-        assertFalse(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testEquals_TargetRangesListNotSet() {
-        final SubChapter target = buildSubChapter(true, true, false);
-        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
-
-        assertFalse(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testEquals_TargetRangesListEmpty() {
-        final SubChapter target = buildSubChapter(true, true, true);
-        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
-
-        target.setRanges(new ArrayList<>());
-
-        assertFalse(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testEquals_TargetRangesListContainsDiffNumberOfRanges() {
-        final SubChapter target = buildSubChapter(true, true, true);
-        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
-
-        target.addRange(new Range("1", "Title", "Desc"));
-
-        assertFalse(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testEquals_TargetRangesListContainsTheSameNumberOfRangesButDiff() {
-        final SubChapter target = buildSubChapter(true, true, true);
-        final SubChapter anotherSubChapter = buildSubChapter(true, true, true);
-
-        target.addRange(new Range("1", "Title", "Desc"));
-        anotherSubChapter.addRange(new Range("2", "Title", "Desc"));
-
-        assertFalse(target.equals(anotherSubChapter));
-    }
-
-    @Test
-    public void testHashCode() {
-        final SubChapter target = buildSubChapter(true, true, true);
-        final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
-
-        hashCodeBuilder
-                .append(target.getKey())
-                .append(target.getTitle())
-                .append(target.getDescription())
-                .append(target.getChapter())
-                .append(target.getSections())
-                .append(target.getRanges());
-
-        assertEquals(target.hashCode(), hashCodeBuilder.toHashCode());
     }
 
     private SubChapter buildSubChapter(final boolean fillChapter, final boolean fillSections, final boolean fillRanges) {
