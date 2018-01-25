@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -139,22 +140,84 @@ public class SubChapterTest {
     }
 
     @Test
-    public void addSection() {
+    public void testAddSection_IfSubChapterWithoutSection() {
         final SubChapter target = buildSubChapter(false, false, false);
+        final Section section = new Section("1", "Title", "Desc");
 
-        target.addSection(new Section("1", "Title", "Desc"));
+        target.addSection(section);
 
+        assertTrue(target.hasSections());
+        assertTrue(section.getSubChapter().equals(target));
+        assertTrue(target.getSections().contains(section));
         assertEquals(1, target.getSections().size());
     }
 
     @Test
-    public void addSections() {
+    public void testAddSection_IfSubChapterAlreadyHasSection() {
         final SubChapter target = buildSubChapter(false, false, false);
+        final Section section = new Section("1", "Title", "Desc");
+        final Section anotherSection = new Section("1", "Title", "Desc");
 
-        target.addSections(Arrays.asList(
-                new Section("2", "2", "2"),
-                new Section("3", "3", "3")));
+        target.addSection(section);
+        target.addSection(anotherSection);
 
+        assertTrue(target.hasSections());
+        assertTrue(section.getSubChapter().equals(target));
+        assertTrue(target.getSections().contains(section));
+        assertTrue(anotherSection.getSubChapter().equals(target));
+        assertTrue(target.getSections().contains(anotherSection));
+        assertEquals(2, target.getSections().size());
+    }
+
+    @Test
+    public void testAddSection_IfSubChapterContainsSectionAndThisSectionAddedToAnotherSubChapter() {
+        final SubChapter target = buildSubChapter(false, false, false);
+        final SubChapter anotherSubChapter = buildSubChapter(false, false, false);
+        final Section section = new Section("1", "Title", "Desc");
+
+        target.addSection(section);
+        anotherSubChapter.addSection(section);
+
+        assertFalse(target.hasSections());
+        assertTrue(anotherSubChapter.hasSections());
+        assertTrue(anotherSubChapter.getSections().contains(section));
+        assertTrue(section.getSubChapter().equals(anotherSubChapter));
+        assertEquals(1, anotherSubChapter.getSections().size());
+    }
+
+    @Test
+    public void testAddSection_IfSubChapterContains2SectionsAndThenOneSectionAddedToAnotherSubChapter() {
+        final SubChapter target = buildSubChapter(false, false, false);
+        final SubChapter anotherSubChapter = buildSubChapter(false, false, false);
+        final Section section = new Section("1", "Title", "Desc");
+        final Section anotherSection = new Section("2", "Title", "Desc");
+
+        target.addSection(section);
+        target.addSection(anotherSection);
+        anotherSubChapter.addSection(section);
+
+        assertTrue(target.hasSections());
+        assertFalse(target.getSections().contains(section));
+        assertTrue(anotherSubChapter.hasSections());
+        assertTrue(anotherSubChapter.getSections().contains(section));
+        assertTrue(section.getSubChapter().equals(anotherSubChapter));
+        assertEquals(1, target.getSections().size());
+        assertEquals(1, anotherSubChapter.getSections().size());
+    }
+
+    @Test
+    public void testAddSections() {
+        final SubChapter target = buildSubChapter(false, false, false);
+        final List<Section> sections = Arrays.asList(
+                new Section("1", "Title", "Desc"),
+                new Section("1", "Title", "Desc"));
+
+        target.addSections(sections);
+
+        for (Section section : sections) {
+            assertTrue(section.hasSubChapter());
+            assertTrue(section.getSubChapter().equals(target));
+        }
         assertEquals(2, target.getSections().size());
     }
 

@@ -1,8 +1,6 @@
 package com.globallogic.dc.model;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
+import java.util.Collection;
 import java.util.List;
 
 public class SubChapter extends SubChapterBase {
@@ -25,32 +23,26 @@ public class SubChapter extends SubChapterBase {
     }
 
     @Override
-    protected void doEquals(final EqualsBuilder equalsBuilder, final Aggregate obj) {
-        final SubChapter subChapter = (SubChapter) obj;
-        equalsBuilder
-                .append(this.getKey(), subChapter.getKey())
-                .append(this.getTitle(), subChapter.getTitle())
-                .append(this.getDescription(), subChapter.getDescription())
-                .append(this.getChapter(), subChapter.getChapter())
-                .append(this.getSections(), subChapter.getSections())
-                .append(this.getRanges(), subChapter.getRanges());
+    protected void doAddSection(final Section section) {
+        if (!section.hasSubChapter() || section.getSubChapter() != this) {
+            if (section.hasSubChapter() && section.getSubChapter().containsSection(section)) {
+                section.getSubChapter().removeSection(section);
+            }
+            section.setSubChapter(this);
+        } else {
+            super.doAddSection(section);
+        }
     }
 
     @Override
-    protected void doHashCode(final HashCodeBuilder hashCodeBuilder) {
-        hashCodeBuilder
-                .append(this.getKey())
-                .append(this.getTitle())
-                .append(this.getDescription())
-                .append(this.getChapter())
-                .append(this.getSections())
-                .append(this.getRanges());
+    protected void addSections(final Collection<Section> sections) {
+        super.addSections(sections);
     }
 
     @Override
     public void setChapter(final Chapter chapter) {
-        if (hasChapter() && this.getChapter().getSubChapters().contains(this)) {
-            this.getChapter().getSubChapters().remove(this);
+        if (hasChapter() && this.getChapter().containsSubChapter(this)) {
+            this.getChapter().removeSubChapter(this);
         }
         super.setChapter(chapter);
         chapter.addSubChapter(this);

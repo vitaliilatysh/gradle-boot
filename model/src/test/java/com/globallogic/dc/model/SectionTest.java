@@ -1,6 +1,5 @@
 package com.globallogic.dc.model;
 
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -9,6 +8,79 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 public class SectionTest {
+
+    @Test
+    public void testSetSubChapter_IfSectionNotAssignedToSubChapterBefore() {
+        final Section target = buildSection(false, false);
+        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+
+        target.setSubChapter(subChapter);
+
+        assertTrue(target.hasSubChapter());
+        assertTrue(target.getSubChapter().equals(subChapter));
+        assertTrue(subChapter.getSections().contains(target));
+        assertEquals(1, subChapter.getSections().size());
+    }
+
+    @Test
+    public void testSetSubChapter_IfAnotherSectionAlreadyAssignedToSubChapter() {
+        final Section target = buildSection( false, true);
+        final Section anotherSection = buildSection( false, false);
+        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+
+        target.setSubChapter(subChapter);
+        anotherSection.setSubChapter(subChapter);
+
+        assertTrue(target.hasSubChapter());
+        assertTrue(target.getSubChapter().equals(subChapter));
+        assertTrue(subChapter.getSections().contains(target));
+        assertTrue(anotherSection.hasSubChapter());
+        assertTrue(anotherSection.getSubChapter().equals(subChapter));
+        assertTrue(subChapter.getSections().contains(anotherSection));
+        assertEquals(2, subChapter.getSections().size());
+    }
+
+    @Test
+    public void testSetSubChapter_IfSectionWasAssignedAndThenReassignedToAnotherSubChapter() {
+        final Section target = buildSection( false, false);
+        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+        final SubChapter anotherSubChapter = new SubChapter("1", "Title", "Desc");
+
+        target.setSubChapter(subChapter);
+        target.setSubChapter(anotherSubChapter);
+
+        assertTrue(target.hasSubChapter());
+        assertTrue(target.getSubChapter().equals(anotherSubChapter));
+        assertTrue(anotherSubChapter.getSections().contains(target));
+        assertEquals(1, anotherSubChapter.getSections().size());
+    }
+
+    @Test
+    public void testSetSubChapter_IfSubChapterContains2SectionsAndThen1SectionReassignedToAnotherSubChapter() {
+        final Section target = buildSection( false, true);
+        final Section anotherSection = buildSection( false, false);
+        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+        final SubChapter anotherSubChapter = new SubChapter("1", "Title", "Desc");
+
+        target.setSubChapter(subChapter);
+        anotherSection.setSubChapter(subChapter);
+
+        assertTrue(target.hasSubChapter());
+        assertTrue(target.getSubChapter().equals(subChapter));
+        assertTrue(subChapter.getSections().contains(target));
+        assertTrue(anotherSection.hasSubChapter());
+        assertEquals(2, subChapter.getSections().size());
+
+        target.setSubChapter(anotherSubChapter);
+
+        assertTrue(subChapter.getSections().contains(anotherSection));
+        assertTrue(anotherSection.getSubChapter().equals(subChapter));
+        assertTrue(anotherSubChapter.getSections().contains(target));
+        assertTrue(target.getSubChapter().equals(anotherSubChapter));
+        assertEquals(1, subChapter.getSections().size());
+        assertEquals(1, anotherSubChapter.getSections().size());
+
+    }
 
     @Test
     public void testHasRanges_Empty() {
