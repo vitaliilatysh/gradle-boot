@@ -1,6 +1,5 @@
 package com.globallogic.dc.model;
 
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -9,6 +8,78 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 public class ItemTest {
+
+    @Test
+    public void testSetRange_IfItemNotAssignedToRangeBefore() {
+        final Item target = buildItem(false, false, false);
+        final Range range = new Range("1", "Title", "Desc");
+
+        target.setRange(range);
+
+        assertTrue(target.hasRange());
+        assertTrue(target.getRange().equals(range));
+        assertTrue(range.getItems().contains(target));
+        assertEquals(1, range.getItems().size());
+    }
+
+    @Test
+    public void testSetRange_IfAnotherItemAlreadyAssignedToRange() {
+        final Item target = buildItem(false, false, true);
+        final Item anotherItem = buildItem(false, false, false);
+        final Range range = new Range("1", "Title", "Desc");
+
+        target.setRange(range);
+        anotherItem.setRange(range);
+
+        assertTrue(target.hasRange());
+        assertTrue(target.getRange().equals(range));
+        assertTrue(range.getItems().contains(target));
+        assertTrue(anotherItem.hasRange());
+        assertTrue(anotherItem.getRange().equals(range));
+        assertTrue(range.getItems().contains(anotherItem));
+        assertEquals(2, range.getItems().size());
+    }
+
+    @Test
+    public void testSetRange_IfItemWasAssignedAndThenReassignedToAnotherRange() {
+        final Item target = buildItem(false, false, false);
+        final Range range = new Range("1", "Title", "Desc");
+        final Range anotherRange = new Range("1", "Title", "Desc");
+
+        target.setRange(range);
+        target.setRange(anotherRange);
+
+        assertTrue(target.hasRange());
+        assertTrue(target.getRange().equals(anotherRange));
+        assertTrue(anotherRange.getItems().contains(target));
+        assertEquals(1, anotherRange.getItems().size());
+    }
+
+    @Test
+    public void testSetRange_IfRangeContains2ItemsAndThen1ItemReassignedToAnotherRange() {
+        final Item target = buildItem(false, false, true);
+        final Item anotherItem = buildItem(false, false, false);
+        final Range range = new Range("1", "Title", "Desc");
+        final Range anotherRange = new Range("1", "Title", "Desc");
+
+        target.setRange(range);
+        anotherItem.setRange(range);
+
+        assertTrue(target.hasRange());
+        assertTrue(target.getRange().equals(range));
+        assertTrue(range.getItems().contains(target));
+        assertTrue(anotherItem.hasRange());
+        assertEquals(2, range.getItems().size());
+
+        target.setRange(anotherRange);
+
+        assertTrue(range.getItems().contains(anotherItem));
+        assertTrue(anotherItem.getRange().equals(range));
+        assertTrue(anotherRange.getItems().contains(target));
+        assertTrue(target.getRange().equals(anotherRange));
+        assertEquals(1, range.getItems().size());
+        assertEquals(1, anotherRange.getItems().size());
+    }
 
     @Test
     public void testHasRelatedItems_Empty() {

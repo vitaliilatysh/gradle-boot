@@ -2,9 +2,9 @@ package com.globallogic.dc.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 public abstract class RangeBase extends AbstractProduct {
@@ -43,81 +43,140 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public List<SubChapter> getSubChapters() {
-        return this.subChapters;
+        return hasSubChapters() ? Collections.unmodifiableList(this.subChapters) : null;
     }
 
     public void setSubChapters(final List<SubChapter> subChapters) {
         this.subChapters = subChapters;
     }
 
+    private List<SubChapter> getSubChaptersSafe() {
+        if (subChapters == null) {
+            synchronized (this) {
+                if (subChapters == null) {
+                    subChapters = new ArrayList<>();
+                }
+            }
+        }
+        return subChapters;
+    }
+
     public boolean hasSubChapters() {
         return isNotEmpty(this.subChapters);
     }
 
+    public void addSubChapter(final SubChapter subChapter) {
+        doAddSubChapter(subChapter);
+    }
+
+    public void addSubChapters(final Collection<SubChapter> subChapters) {
+        if (subChapters == null) {
+            throw new IllegalArgumentException();
+        }
+        subChapters.forEach(this::doAddSubChapter);
+    }
+
+    protected void doAddSubChapter(final SubChapter subChapter) {
+        getSubChaptersSafe().add(subChapter);
+    }
+
+    public boolean containsSubChapter(final SubChapter subChapter) {
+        return getSubChaptersSafe().contains(subChapter);
+    }
+
+    public void removeSubChapter(final SubChapter subChapter) {
+        getSubChaptersSafe().remove(subChapter);
+    }
+
     public List<Section> getSections() {
-        return this.sections;
+        return hasSections() ? Collections.unmodifiableList(this.sections) : null;
     }
 
     public void setSections(final List<Section> sections) {
         this.sections = sections;
     }
 
+    private List<Section> getSectionsSafe() {
+        if (sections == null) {
+            synchronized (this) {
+                if (sections == null) {
+                    sections = new ArrayList<>();
+                }
+            }
+        }
+        return sections;
+    }
+
     public boolean hasSections() {
         return isNotEmpty(this.sections);
     }
 
+    public void addSection(final Section section) {
+        doAddSection(section);
+    }
+
+    public void addSections(final Collection<Section> sections) {
+        if (sections == null) {
+            throw new IllegalArgumentException();
+        }
+        sections.forEach(this::doAddSection);
+    }
+
+    protected void doAddSection(final Section section) {
+        getSectionsSafe().add(section);
+    }
+
+    public boolean containsSection(final Section section) {
+        return getSectionsSafe().contains(section);
+    }
+
+    public void removeSection(final Section section) {
+        getSectionsSafe().remove(section);
+    }
+
     public List<Item> getItems() {
-        return this.items;
+        return hasItems() ? Collections.unmodifiableList(this.items) : null;
     }
 
     public void setItems(final List<Item> items) {
         this.items = items;
     }
 
+    private List<Item> getItemsSafe() {
+        if (items == null) {
+            synchronized (this) {
+                if (items == null) {
+                    items = new ArrayList<>();
+                }
+            }
+        }
+        return items;
+    }
+
     public boolean hasItems() {
         return isNotEmpty(this.items);
     }
 
-    public void addSubChapters(final Collection<SubChapter> subChapters) {
-        if (isEmpty(this.subChapters)) {
-            this.subChapters = new ArrayList<>();
-        }
-        this.subChapters.addAll(subChapters);
-    }
-
-    public void addSubChapter(final SubChapter subChapter) {
-        if (isEmpty(this.subChapters)) {
-            this.subChapters = new ArrayList<>();
-        }
-        this.subChapters.add(subChapter);
+    public void addItem(final Item item) {
+        doAddItem(item);
     }
 
     public void addItems(final Collection<Item> items) {
-        if (isEmpty(this.items)) {
-            this.items = new ArrayList<>();
+        if (items == null) {
+            throw new IllegalArgumentException();
         }
-        this.items.addAll(items);
+        items.forEach(this::doAddItem);
     }
 
-    public void addItem(final Item item) {
-        if (isEmpty(this.items)) {
-            this.items = new ArrayList<>();
-        }
-        this.items.add(item);
+    protected void doAddItem(final Item item) {
+        getItemsSafe().add(item);
     }
 
-    public void addSections(final Collection<Section> sections) {
-        if (isEmpty(this.sections)) {
-            this.sections = new ArrayList<>();
-        }
-        this.sections.addAll(sections);
+    public boolean containsItem(final Item item) {
+        return getItemsSafe().contains(item);
     }
 
-    public void addSection(final Section section) {
-        if (isEmpty(this.sections)) {
-            this.sections = new ArrayList<>();
-        }
-        this.sections.add(section);
+    public void removeItem(final Item item) {
+        getItemsSafe().remove(item);
     }
-
 }

@@ -1,10 +1,10 @@
 package com.globallogic.dc.model;
 
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -71,22 +71,87 @@ public class RangeTest {
     }
 
     @Test
-    public void testAddItem() {
+    public void testAddItem_IfRangeWithoutItem() {
         final Range target = buildRange(false, false, false);
+        final Item item = new Item("1", "Title", "Desc");
 
-        target.addItem(new Item("1", "Title", "Desc"));
+        target.addItem(item);
 
+        assertTrue(target.hasItems());
+        assertTrue(item.getRange().equals(target));
+        assertTrue(target.getItems().contains(item));
         assertEquals(1, target.getItems().size());
+    }
+
+    @Test
+    public void testAddItem_IfRangeAlreadyHasItem() {
+        final Range target = buildRange(false, false, false);
+        final Item item = new Item("1", "Title", "Desc");
+        final Item anotherItem = new Item("1", "Title", "Desc");
+
+        target.addItem(item);
+        target.addItem(anotherItem);
+
+        assertTrue(target.hasItems());
+        assertTrue(item.getRange().equals(target));
+        assertTrue(target.getItems().contains(item));
+        assertTrue(anotherItem.getRange().equals(target));
+        assertTrue(target.getItems().contains(anotherItem));
+        assertEquals(2, target.getItems().size());
+    }
+
+    @Test
+    public void testAddItem_IfRangeContainsItemAndThisItemAddedToAnotherRange() {
+        final Range target = buildRange(false, false, false);
+        final Range anotherRange = buildRange(false, false, false);
+        final Item item = new Item("1", "Title", "Desc");
+
+        target.addItem(item);
+        anotherRange.addItem(item);
+
+        assertFalse(target.hasItems());
+        assertTrue(anotherRange.hasItems());
+        assertTrue(anotherRange.getItems().contains(item));
+        assertTrue(item.getRange().equals(anotherRange));
+        assertEquals(1, anotherRange.getItems().size());
+    }
+
+    @Test
+    public void testAddItem_IfRangeContains2ItemsAndThen1ItemAddedToAnotherRange() {
+        final Range target = buildRange(false, false,false);
+        final Range anotherRange = buildRange(false, false, false);
+        final Item item = new Item("1", "Title", "Desc");
+        final Item anotherItem = new Item("2", "Title", "Desc");
+
+        target.addItem(item);
+        target.addItem(anotherItem);
+        anotherRange.addItem(item);
+
+        assertTrue(target.hasItems());
+        assertFalse(target.getItems().contains(item));
+        assertTrue(item.getRange().equals(anotherRange));
+        assertTrue(anotherItem.getRange().equals(target));
+        assertTrue(target.getItems().contains(anotherItem));
+        assertTrue(anotherRange.hasItems());
+        assertTrue(anotherRange.getItems().contains(item));
+        assertTrue(item.getRange().equals(anotherRange));
+        assertEquals(1, target.getItems().size());
+        assertEquals(1, anotherRange.getItems().size());
     }
 
     @Test
     public void testAddItems() {
         final Range target = buildRange(false, false, false);
+        final List<Item> items = Arrays.asList(
+                new Item("1", "Title", "Desc"),
+                new Item("1", "Title", "Desc"));
 
-        target.addItems(Arrays.asList(
-                new Item("2", "2", "2"),
-                new Item("3", "3", "3")));
+        target.addItems(items);
 
+        for (Item item : items) {
+            assertTrue(item.hasRange());
+            assertTrue(item.getRange().equals(target));
+        }
         assertEquals(2, target.getItems().size());
     }
 

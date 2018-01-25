@@ -1,8 +1,6 @@
 package com.globallogic.dc.model;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
+import java.util.Collection;
 import java.util.List;
 
 public class Range extends RangeBase {
@@ -33,25 +31,19 @@ public class Range extends RangeBase {
     }
 
     @Override
-    protected void doEquals(final EqualsBuilder equalsBuilder, final Aggregate obj) {
-       final Range range = (Range) obj;
-        equalsBuilder
-                .append(this.getKey(), range.getKey())
-                .append(this.getTitle(), range.getTitle())
-                .append(this.getDescription(), range.getDescription())
-                .append(this.getSubChapters(), range.getSubChapters())
-                .append(this.getItems(), range.getItems())
-                .append(this.getSections(), range.getSections());
+    protected void doAddItem(final Item item) {
+        if (!item.hasRange() || item.getRange() != this) {
+            if (item.hasRange() && item.getRange().containsItem(item)) {
+                item.getRange().removeItem(item);
+            }
+            item.setRange(this);
+        } else {
+            super.doAddItem(item);
+        }
     }
 
     @Override
-    protected void doHashCode(final HashCodeBuilder hashCodeBuilder) {
-        hashCodeBuilder
-                .append(this.getKey())
-                .append(this.getTitle())
-                .append(this.getDescription())
-                .append(this.getSubChapters())
-                .append(this.getItems())
-                .append(this.getSections());
+    public void addItems(final Collection<Item> items) {
+        super.addItems(items);
     }
 }

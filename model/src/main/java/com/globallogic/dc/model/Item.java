@@ -34,25 +34,11 @@ public class Item extends ItemBase {
     }
 
     @Override
-    protected void doEquals(final EqualsBuilder equalsBuilder, final Aggregate obj) {
-        final Item item = (Item) obj;
-        equalsBuilder
-                .append(this.getKey(), item.getKey())
-                .append(this.getTitle(), item.getTitle())
-                .append(this.getDescription(), item.getDescription())
-                .append(this.getRange(), item.getRange())
-                .append(this.getItems(), item.getItems())
-                .append(this.getRelatedItems(), item.getRelatedItems());
-    }
-
-    @Override
-    protected void doHashCode(final HashCodeBuilder hashCodeBuilder) {
-        hashCodeBuilder
-                .append(this.getKey())
-                .append(this.getTitle())
-                .append(this.getDescription())
-                .append(this.getRange())
-                .append(this.getItems())
-                .append(this.getRelatedItems());
+    public void setRange(final Range range) {
+        if (hasRange() && this.getRange().containsItem(this)) {
+            this.getRange().removeItem(this);
+        }
+        super.setRange(range);
+        range.addItem(this);
     }
 }
