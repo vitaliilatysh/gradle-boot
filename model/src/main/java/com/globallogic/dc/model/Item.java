@@ -1,8 +1,5 @@
 package com.globallogic.dc.model;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import java.util.List;
 
 public class Item extends ItemBase {

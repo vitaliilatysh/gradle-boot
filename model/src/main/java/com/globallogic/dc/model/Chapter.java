@@ -23,9 +23,6 @@ public class Chapter extends ChapterBase {
     @Override
     protected void doAddSubChapter(final SubChapter subChapter) {
         if (!subChapter.hasChapter() || subChapter.getChapter() != this) {
-            if (subChapter.hasChapter() && subChapter.getChapter().containsSubChapter(subChapter)) {
-                subChapter.getChapter().removeSubChapter(subChapter);
-            }
             subChapter.setChapter(this);
         } else {
             super.doAddSubChapter(subChapter);

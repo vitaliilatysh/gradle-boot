@@ -25,9 +25,6 @@ public class SubChapter extends SubChapterBase {
     @Override
     protected void doAddSection(final Section section) {
         if (!section.hasSubChapter() || section.getSubChapter() != this) {
-            if (section.hasSubChapter() && section.getSubChapter().containsSection(section)) {
-                section.getSubChapter().removeSection(section);
-            }
             section.setSubChapter(this);
         } else {
             super.doAddSection(section);

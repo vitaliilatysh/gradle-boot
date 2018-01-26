@@ -33,9 +33,6 @@ public class Range extends RangeBase {
     @Override
     protected void doAddItem(final Item item) {
         if (!item.hasRange() || item.getRange() != this) {
-            if (item.hasRange() && item.getRange().containsItem(item)) {
-                item.getRange().removeItem(item);
-            }
             item.setRange(this);
         } else {
             super.doAddItem(item);
