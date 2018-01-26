@@ -1,5 +1,6 @@
 package com.globallogic.dc.model;
 
+import java.util.Collection;
 import java.util.List;
 
 public class Section extends SectionBase {
@@ -26,6 +27,19 @@ public class Section extends SectionBase {
             final String description,
             final SubChapter subChapter) {
         super(key, title, description, subChapter);
+    }
+
+    @Override
+    protected void doAddRange(final Range range) {
+        super.doAddRange(range);
+        if (!range.hasSections()) {
+            range.addSection(this);
+        }
+    }
+
+    @Override
+    public void addRanges(final Collection<Range> ranges) {
+        super.addRanges(ranges);
     }
 
     @Override
