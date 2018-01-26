@@ -23,6 +23,19 @@ public class SubChapter extends SubChapterBase {
     }
 
     @Override
+    protected void doAddRange(final Range range) {
+        super.doAddRange(range);
+        if (!range.hasSubChapters()) {
+            range.addSubChapter(this);
+        }
+    }
+
+    @Override
+    public void addRanges(final Collection<Range> ranges) {
+        super.addRanges(ranges);
+    }
+
+    @Override
     protected void doAddSection(final Section section) {
         if (!section.hasSubChapter() || section.getSubChapter() != this) {
             section.setSubChapter(this);
