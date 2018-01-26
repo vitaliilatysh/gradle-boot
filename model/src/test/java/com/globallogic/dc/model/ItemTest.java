@@ -141,7 +141,7 @@ public class ItemTest {
     public void testAddRelatedItem() {
         final Item target = buildItem(false, false, false);
 
-        target.addRelatedItem(new Item("2", "2", "2"));
+        target.addRelatedItem(new Item("2", "2", "2").toString());
 
         assertEquals(1, target.getRelatedItems().size());
     }
@@ -151,8 +151,8 @@ public class ItemTest {
         final Item target = buildItem(false, false, false);
 
         target.addRelatedItems(Arrays.asList(
-                new Item("2", "2", "2"),
-                new Item("3", "3", "3")));
+                new Item("2", "2", "2").toString(),
+                new Item("3", "3", "3").toString()));
 
         assertEquals(2, target.getRelatedItems().size());
     }
@@ -198,8 +198,8 @@ public class ItemTest {
 
         if (fillRelatedItems)
             result.addRelatedItems(Arrays.asList(
-                    new Item("1", "Title", "Desc"),
-                    new Item("2", "Title", "Desc")));
+                    new Item("1", "Title", "Desc").toString(),
+                    new Item("2", "Title", "Desc").toString()));
 
         if (fillRange)
             result.setRange(new Range("1", "Title", "Desc"));

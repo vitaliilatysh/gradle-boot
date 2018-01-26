@@ -17,17 +17,17 @@ public class Range extends RangeBase {
             final String title,
             final String description,
             final List<SubChapter> subChapters,
-            final List<Item> items,
+            final List<Item> relatedItems,
             final List<Section> sections) {
-        super(key, title, description, subChapters, items, sections);
+        super(key, title, description, subChapters, relatedItems, sections);
     }
 
     public Range(
             final String key,
             final String title,
             final String description,
-            final List<Item> items) {
-        super(key, title, description, items);
+            final List<Item> relatedItems) {
+        super(key, title, description, relatedItems);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class Range extends RangeBase {
     }
 
     @Override
-    public void addItems(final Collection<Item> items) {
-        super.addItems(items);
+    public void addItems(final Collection<Item> relatedItems) {
+        super.addItems(relatedItems);
     }
 }

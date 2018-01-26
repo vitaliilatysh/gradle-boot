@@ -10,7 +10,7 @@ import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 public abstract class RangeBase extends AbstractProduct {
 
     private List<SubChapter> subChapters;
-    private List<Item> items;
+    private List<Item> relatedItems;
     private List<Section> sections;
 
     public RangeBase(
@@ -25,11 +25,11 @@ public abstract class RangeBase extends AbstractProduct {
             final String title,
             final String description,
             final List<SubChapter> subChapters,
-            final List<Item> items,
+            final List<Item> relatedItems,
             final List<Section> sections) {
         super(key, title, description);
         this.subChapters = subChapters;
-        this.items = items;
+        this.relatedItems = relatedItems;
         this.sections = sections;
     }
 
@@ -37,9 +37,9 @@ public abstract class RangeBase extends AbstractProduct {
             final String key,
             final String title,
             final String description,
-            final List<Item> items) {
+            final List<Item> relatedItems) {
         super(key, title, description);
-        this.items = items;
+        this.relatedItems = relatedItems;
     }
 
     public List<SubChapter> getSubChapters() {
@@ -135,37 +135,37 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public List<Item> getItems() {
-        return hasItems() ? Collections.unmodifiableList(this.items) : null;
+        return hasItems() ? Collections.unmodifiableList(this.relatedItems) : null;
     }
 
-    public void setItems(final List<Item> items) {
-        this.items = items;
+    public void setItems(final List<Item> relatedItems) {
+        this.relatedItems = relatedItems;
     }
 
     private List<Item> getItemsSafe() {
-        if (items == null) {
+        if (relatedItems == null) {
             synchronized (this) {
-                if (items == null) {
-                    items = new ArrayList<>();
+                if (relatedItems == null) {
+                    relatedItems = new ArrayList<>();
                 }
             }
         }
-        return items;
+        return relatedItems;
     }
 
     public boolean hasItems() {
-        return isNotEmpty(this.items);
+        return isNotEmpty(this.relatedItems);
     }
 
     public void addItem(final Item item) {
         doAddItem(item);
     }
 
-    public void addItems(final Collection<Item> items) {
-        if (items == null) {
+    public void addItems(final Collection<Item> relatedItems) {
+        if (relatedItems == null) {
             throw new IllegalArgumentException();
         }
-        items.forEach(this::doAddItem);
+        relatedItems.forEach(this::doAddItem);
     }
 
     protected void doAddItem(final Item item) {
