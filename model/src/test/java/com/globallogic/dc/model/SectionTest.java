@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -18,14 +19,14 @@ public class SectionTest {
 
         assertTrue(target.hasSubChapter());
         assertTrue(target.getSubChapter().equals(subChapter));
-        assertTrue(subChapter.getSections().contains(target));
+        assertTrue(subChapter.containsSection(target));
         assertEquals(1, subChapter.getSections().size());
     }
 
     @Test
     public void testSetSubChapter_IfAnotherSectionAlreadyAssignedToSubChapter() {
-        final Section target = buildSection( false, true);
-        final Section anotherSection = buildSection( false, false);
+        final Section target = buildSection(false, true);
+        final Section anotherSection = buildSection(false, false);
         final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
 
         target.setSubChapter(subChapter);
@@ -33,16 +34,16 @@ public class SectionTest {
 
         assertTrue(target.hasSubChapter());
         assertTrue(target.getSubChapter().equals(subChapter));
-        assertTrue(subChapter.getSections().contains(target));
+        assertTrue(subChapter.containsSection(target));
         assertTrue(anotherSection.hasSubChapter());
         assertTrue(anotherSection.getSubChapter().equals(subChapter));
-        assertTrue(subChapter.getSections().contains(anotherSection));
+        assertTrue(subChapter.containsSection(anotherSection));
         assertEquals(2, subChapter.getSections().size());
     }
 
     @Test
     public void testSetSubChapter_IfSectionWasAssignedAndThenReassignedToAnotherSubChapter() {
-        final Section target = buildSection( false, false);
+        final Section target = buildSection(false, false);
         final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
         final SubChapter anotherSubChapter = new SubChapter("1", "Title", "Desc");
 
@@ -51,14 +52,14 @@ public class SectionTest {
 
         assertTrue(target.hasSubChapter());
         assertTrue(target.getSubChapter().equals(anotherSubChapter));
-        assertTrue(anotherSubChapter.getSections().contains(target));
+        assertTrue(anotherSubChapter.containsSection(target));
         assertEquals(1, anotherSubChapter.getSections().size());
     }
 
     @Test
     public void testSetSubChapter_IfSubChapterContains2SectionsAndThen1SectionReassignedToAnotherSubChapter() {
-        final Section target = buildSection( false, true);
-        final Section anotherSection = buildSection( false, false);
+        final Section target = buildSection(false, true);
+        final Section anotherSection = buildSection(false, false);
         final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
         final SubChapter anotherSubChapter = new SubChapter("1", "Title", "Desc");
 
@@ -67,19 +68,35 @@ public class SectionTest {
 
         assertTrue(target.hasSubChapter());
         assertTrue(target.getSubChapter().equals(subChapter));
-        assertTrue(subChapter.getSections().contains(target));
+        assertTrue(subChapter.containsSection(target));
         assertTrue(anotherSection.hasSubChapter());
         assertEquals(2, subChapter.getSections().size());
 
         target.setSubChapter(anotherSubChapter);
 
-        assertTrue(subChapter.getSections().contains(anotherSection));
+        assertTrue(subChapter.containsSection(anotherSection));
         assertTrue(anotherSection.getSubChapter().equals(subChapter));
-        assertTrue(anotherSubChapter.getSections().contains(target));
+        assertTrue(anotherSubChapter.containsSection(target));
         assertTrue(target.getSubChapter().equals(anotherSubChapter));
         assertEquals(1, subChapter.getSections().size());
         assertEquals(1, anotherSubChapter.getSections().size());
 
+    }
+
+    @Test
+    public void testHasSubChapter_NotSet() {
+        final Section target = buildSection(false, false);
+
+        assertNull(target.getSubChapter());
+        assertFalse(target.hasSubChapter());
+    }
+
+    @Test
+    public void testHasSubChapter() {
+        final Section target = buildSection(true, false);
+
+        assertNotNull(target.getSubChapter());
+        assertTrue(target.hasSubChapter());
     }
 
     @Test
@@ -103,38 +120,56 @@ public class SectionTest {
     }
 
     @Test
-    public void testHasSubChapter_NotSet() {
+    public void testAddRange_IfSectionWithoutRange() {
         final Section target = buildSection(false, false);
+        final Range range = new Range("1", "Title", "Desc");
 
-        assertNull(target.getSubChapter());
-        assertFalse(target.hasSubChapter());
+        target.addRange(range);
+
+        assertTrue(target.hasRanges());
+        assertTrue(range.hasSections());
+        assertTrue(target.containsRange(range));
+        assertTrue(range.containsSection(target));
+        assertEquals(1, target.getRanges().size());
+        assertEquals(1, range.getSections().size());
     }
 
     @Test
-    public void testHasSubChapter() {
-        final Section target = buildSection(true, false);
+    public void testAddRange_IfSectionAlreadyHasRange() {
+        final Section target = buildSection(false, false);
+        final Range range = new Range("1", "Title", "Desc");
+        final Range anotherRange = new Range("1", "Title", "Desc");
 
-        assertNotNull(target.getSubChapter());
-        assertTrue(target.hasSubChapter());
+        target.addRange(range);
+        target.addRange(anotherRange);
+
+        assertTrue(target.hasRanges());
+        assertTrue(range.hasSections());
+        assertTrue(anotherRange.hasSections());
+        assertTrue(range.containsSection(target));
+        assertTrue(target.containsRange(range));
+        assertTrue(anotherRange.containsSection(target));
+        assertTrue(target.containsRange(anotherRange));
+        assertEquals(2, target.getRanges().size());
+        assertEquals(1, range.getSections().size());
+        assertEquals(1, anotherRange.getSections().size());
     }
 
     @Test
     public void testAddRanges() {
         final Section target = buildSection(false, false);
-
-        target.addRange(new Range("1", "Title", "Desc"));
-
-        assertEquals(1, target.getRanges().size());
-    }
-
-    @Test
-    public void testAddRange() {
-        final Section target = buildSection(false, false);
-
-        target.addRanges(Arrays.asList(
+        final List<Range> ranges = Arrays.asList(
                 new Range("2", "2", "2"),
-                new Range("3", "3", "3")));
+                new Range("3", "3", "3"));
 
+        target.addRanges(ranges);
+
+        for(Range range: ranges){
+            assertTrue(target.hasRanges());
+            assertTrue(target.containsRange(range));
+            assertTrue(range.hasSections());
+            assertTrue(range.containsSection(target));
+        }
         assertEquals(2, target.getRanges().size());
     }
 
