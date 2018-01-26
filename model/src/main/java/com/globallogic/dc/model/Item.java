@@ -16,9 +16,9 @@ public class Item extends ItemBase {
             final String title,
             final String description,
             final Range range,
-            final List<Item> relatedItems,
-            final List<String> items) {
-        super(key, title, description, range, relatedItems, items);
+            final List<String> items,
+            final List<Item> relatedItems) {
+        super(key, title, description, range, items, relatedItems);
     }
 
     public Item(
@@ -26,8 +26,8 @@ public class Item extends ItemBase {
             final String title,
             final String description,
             final Range range,
-            final List<String> items) {
-        super(key, title, description, range, items);
+            final List<Item> relatedItems) {
+        super(key, title, description, range, relatedItems);
     }
 
     @Override

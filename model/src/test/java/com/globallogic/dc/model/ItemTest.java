@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -18,7 +19,7 @@ public class ItemTest {
 
         assertTrue(target.hasRange());
         assertTrue(target.getRange().equals(range));
-        assertTrue(range.getItems().contains(target));
+        assertTrue(range.containsItem(target));
         assertEquals(1, range.getItems().size());
     }
 
@@ -33,10 +34,10 @@ public class ItemTest {
 
         assertTrue(target.hasRange());
         assertTrue(target.getRange().equals(range));
-        assertTrue(range.getItems().contains(target));
+        assertTrue(range.containsItem(target));
         assertTrue(anotherItem.hasRange());
         assertTrue(anotherItem.getRange().equals(range));
-        assertTrue(range.getItems().contains(anotherItem));
+        assertTrue(range.containsItem(anotherItem));
         assertEquals(2, range.getItems().size());
     }
 
@@ -51,7 +52,7 @@ public class ItemTest {
 
         assertTrue(target.hasRange());
         assertTrue(target.getRange().equals(anotherRange));
-        assertTrue(anotherRange.getItems().contains(target));
+        assertTrue(anotherRange.containsItem(target));
         assertEquals(1, anotherRange.getItems().size());
     }
 
@@ -67,15 +68,15 @@ public class ItemTest {
 
         assertTrue(target.hasRange());
         assertTrue(target.getRange().equals(range));
-        assertTrue(range.getItems().contains(target));
+        assertTrue(range.containsItem(target));
         assertTrue(anotherItem.hasRange());
         assertEquals(2, range.getItems().size());
 
         target.setRange(anotherRange);
 
-        assertTrue(range.getItems().contains(anotherItem));
+        assertTrue(range.containsItem(anotherItem));
         assertTrue(anotherItem.getRange().equals(range));
-        assertTrue(anotherRange.getItems().contains(target));
+        assertTrue(anotherRange.containsItem(target));
         assertTrue(target.getRange().equals(anotherRange));
         assertEquals(1, range.getItems().size());
         assertEquals(1, anotherRange.getItems().size());
@@ -141,7 +142,7 @@ public class ItemTest {
     public void testAddRelatedItem() {
         final Item target = buildItem(false, false, false);
 
-        target.addRelatedItem(new Item("2", "2", "2").toString());
+        target.addRelatedItem(new Item("2", "2", "2"));
 
         assertEquals(1, target.getRelatedItems().size());
     }
@@ -151,8 +152,8 @@ public class ItemTest {
         final Item target = buildItem(false, false, false);
 
         target.addRelatedItems(Arrays.asList(
-                new Item("2", "2", "2").toString(),
-                new Item("3", "3", "3").toString()));
+                new Item("2", "2", "2"),
+                new Item("3", "3", "3")));
 
         assertEquals(2, target.getRelatedItems().size());
     }
@@ -161,7 +162,7 @@ public class ItemTest {
     public void testAddItem() {
         final Item target = buildItem(false, false, false);
 
-        target.addItem(new Item("2", "2", "2"));
+        target.addItem(new Item("2", "2", "2").toString());
 
         assertEquals(1, target.getItems().size());
     }
@@ -169,11 +170,15 @@ public class ItemTest {
     @Test
     public void testAddItems() {
         final Item target = buildItem(false, false, false);
+        final List<String> items = Arrays.asList(
+                new Item("2", "2", "2").toString(),
+                new Item("3", "3", "3").toString());
 
-        target.addItems(Arrays.asList(
-                new Item("2", "2", "2"),
-                new Item("3", "3", "3")));
+        target.addItems(items);
 
+        for (String item: items             ) {
+            assertTrue(target.hasItems());
+        }
         assertEquals(2, target.getItems().size());
     }
 
@@ -192,14 +197,14 @@ public class ItemTest {
 
         if (fillItems) {
             result.addItems(Arrays.asList(
-                    new Item("1", "Title", "Desc"),
-                    new Item("2", "Title", "Desc")));
+                    new Item("1", "Title", "Desc").toString(),
+                    new Item("2", "Title", "Desc").toString()));
         }
 
         if (fillRelatedItems)
             result.addRelatedItems(Arrays.asList(
-                    new Item("1", "Title", "Desc").toString(),
-                    new Item("2", "Title", "Desc").toString()));
+                    new Item("1", "Title", "Desc"),
+                    new Item("2", "Title", "Desc")));
 
         if (fillRange)
             result.setRange(new Range("1", "Title", "Desc"));
