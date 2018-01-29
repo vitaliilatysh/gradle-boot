@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class SubChapterTest {
 
     @Test
-    public void testSetChapter_IfSubChapterNotAssignedToChapterBefore() {
+    public void testSetChapter_NoChapterInSubChapter() {
         final SubChapter target = buildSubChapter(false, false, false);
         final Chapter chapter = new Chapter("1", "Title", "Desc");
 
@@ -24,7 +24,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testSetChapter_IfAnotherSubChapterAlreadyAssignedToChapter() {
+    public void testSetChapter_MoveChapterToAnotherSubChapter() {
         final SubChapter target = buildSubChapter(false, false, true);
         final SubChapter anotherSubChapter = buildSubChapter(false, false, false);
         final Chapter chapter = new Chapter("1", "Title", "Desc");
@@ -39,48 +39,6 @@ public class SubChapterTest {
         assertTrue(anotherSubChapter.getChapter().equals(chapter));
         assertTrue(chapter.containsSubChapter(anotherSubChapter));
         assertEquals(2, chapter.getSubChapters().size());
-    }
-
-    @Test
-    public void testSetChapter_IfSubChapterWasAssignedAndThenReassignedToAnotherChapter() {
-        final SubChapter target = buildSubChapter(false, false, false);
-        final Chapter chapter = new Chapter("1", "Title", "Desc");
-        final Chapter anotherChapter = new Chapter("1", "Title", "Desc");
-
-        target.setChapter(chapter);
-        target.setChapter(anotherChapter);
-
-        assertTrue(target.hasChapter());
-        assertTrue(target.getChapter().equals(anotherChapter));
-        assertTrue(anotherChapter.containsSubChapter(target));
-        assertEquals(1, anotherChapter.getSubChapters().size());
-    }
-
-    @Test
-    public void testSetChapter_IfChapterContainsTwoSubChaptersAndThenOneSubChapterReassignedToAnother() {
-        final SubChapter target = buildSubChapter(false, false, true);
-        final SubChapter anotherSubChapter = buildSubChapter(false, false, false);
-        final Chapter chapter = new Chapter("1", "Title", "Desc");
-        final Chapter anotherChapter = new Chapter("1", "Title", "Desc");
-
-        target.setChapter(chapter);
-        anotherSubChapter.setChapter(chapter);
-
-        assertTrue(target.hasChapter());
-        assertTrue(target.getChapter().equals(chapter));
-        assertTrue(chapter.containsSubChapter(target));
-        assertTrue(anotherSubChapter.hasChapter());
-        assertEquals(2, chapter.getSubChapters().size());
-
-        target.setChapter(anotherChapter);
-
-        assertTrue(chapter.containsSubChapter(anotherSubChapter));
-        assertTrue(anotherSubChapter.getChapter().equals(chapter));
-        assertTrue(anotherChapter.containsSubChapter(target));
-        assertTrue(target.getChapter().equals(anotherChapter));
-        assertEquals(1, chapter.getSubChapters().size());
-        assertEquals(1, anotherChapter.getSubChapters().size());
-
     }
 
     @Test
