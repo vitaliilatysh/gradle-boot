@@ -32,7 +32,7 @@ public class Range extends RangeBase {
 
     @Override
     protected void doAddSubChapter(final SubChapter subChapter) {
-        if (!hasSubChapters() || !subChapter.containsRange(this)) {
+        if (!hasSubChapters() || !this.containsSubChapter(subChapter)) {
             super.doAddSubChapter(subChapter);
         }
         if (!subChapter.hasRanges() || !subChapter.containsRange(this)) {
@@ -47,7 +47,7 @@ public class Range extends RangeBase {
 
     @Override
     protected void doAddSection(final Section section) {
-        if (!hasSections() || !section.containsRange(this)) {
+        if (!hasSections() || !this.containsSection(section)) {
             super.doAddSection(section);
         }
         if (!section.hasRanges() || !section.containsRange(this)) {

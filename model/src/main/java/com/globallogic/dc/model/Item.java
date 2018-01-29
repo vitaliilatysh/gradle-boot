@@ -33,7 +33,7 @@ public class Item extends ItemBase {
 
     @Override
     protected void doAddRelatedItem(final Item relatedItem) {
-        if (!hasRelatedItems() || !relatedItem.containsRelatedItem(this)) {
+        if (!hasRelatedItems() || !this.containsRelatedItem(relatedItem)) {
             super.doAddRelatedItem(relatedItem);
         }
         if (!relatedItem.hasRelatedItems() || !relatedItem.containsRelatedItem(this)) {
