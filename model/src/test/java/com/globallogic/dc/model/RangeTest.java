@@ -31,7 +31,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testAddSubChapter_IfRangeWithoutSubChapter() {
+    public void testAddSubChapter_NoSubChapterInRange() {
         final Range target = buildRange(false, false, false);
         final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
 
@@ -46,24 +46,22 @@ public class RangeTest {
     }
 
     @Test
-    public void testAddSubChapter_IfRangeAlreadyHasSubChapter() {
+    public void testAddSubChapter_MoveSubChapterToAnotherRange() {
         final Range target = buildRange(false, false, false);
+        final Range anotherRange = new Range("3", "Title", "Desc");
         final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
-        final SubChapter anotherSubChapter = new SubChapter("1", "Title", "Desc");
 
         target.addSubChapter(subChapter);
-        target.addSubChapter(anotherSubChapter);
+        anotherRange.addSubChapter(subChapter);
 
         assertTrue(target.hasSubChapters());
         assertTrue(subChapter.hasRanges());
-        assertTrue(anotherSubChapter.hasRanges());
-        assertTrue(subChapter.containsRange(target));
         assertTrue(target.containsSubChapter(subChapter));
-        assertTrue(anotherSubChapter.containsRange(target));
-        assertTrue(target.containsSubChapter(anotherSubChapter));
-        assertEquals(2, target.getSubChapters().size());
-        assertEquals(1, subChapter.getRanges().size());
-        assertEquals(1, anotherSubChapter.getRanges().size());
+        assertTrue(subChapter.containsRange(target));
+        assertTrue(subChapter.containsRange(anotherRange));
+        assertEquals(1, target.getSubChapters().size());
+        assertEquals(1, anotherRange.getSubChapters().size());
+        assertEquals(2, subChapter.getRanges().size());
     }
 
     @Test
@@ -106,7 +104,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testAddItem_IfRangeWithoutItem() {
+    public void testAddItem_NoItemInRange() {
         final Range target = buildRange(false, false, false);
         final Item item = new Item("1", "Title", "Desc");
 
@@ -119,24 +117,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testAddItem_IfRangeAlreadyHasItem() {
-        final Range target = buildRange(false, false, false);
-        final Item item = new Item("1", "Title", "Desc");
-        final Item anotherItem = new Item("1", "Title", "Desc");
-
-        target.addItem(item);
-        target.addItem(anotherItem);
-
-        assertTrue(target.hasItems());
-        assertTrue(item.getRange().equals(target));
-        assertTrue(target.containsItem(item));
-        assertTrue(anotherItem.getRange().equals(target));
-        assertTrue(target.containsItem(anotherItem));
-        assertEquals(2, target.getItems().size());
-    }
-
-    @Test
-    public void testAddItem_IfRangeContainsItemAndThisItemAddedToAnotherRange() {
+    public void testAddItem_MoveItemToAnotherRange() {
         final Range target = buildRange(false, false, false);
         final Range anotherRange = buildRange(false, false, false);
         final Item item = new Item("1", "Title", "Desc");
@@ -148,29 +129,6 @@ public class RangeTest {
         assertTrue(anotherRange.hasItems());
         assertTrue(anotherRange.containsItem(item));
         assertTrue(item.getRange().equals(anotherRange));
-        assertEquals(1, anotherRange.getItems().size());
-    }
-
-    @Test
-    public void testAddItem_IfRangeContains2ItemsAndThen1ItemAddedToAnotherRange() {
-        final Range target = buildRange(false, false, false);
-        final Range anotherRange = buildRange(false, false, false);
-        final Item item = new Item("1", "Title", "Desc");
-        final Item anotherItem = new Item("2", "Title", "Desc");
-
-        target.addItem(item);
-        target.addItem(anotherItem);
-        anotherRange.addItem(item);
-
-        assertTrue(target.hasItems());
-        assertFalse(target.containsItem(item));
-        assertTrue(item.getRange().equals(anotherRange));
-        assertTrue(anotherItem.getRange().equals(target));
-        assertTrue(target.containsItem(anotherItem));
-        assertTrue(anotherRange.hasItems());
-        assertTrue(anotherRange.containsItem(item));
-        assertTrue(item.getRange().equals(anotherRange));
-        assertEquals(1, target.getItems().size());
         assertEquals(1, anotherRange.getItems().size());
     }
 
@@ -213,7 +171,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testAddSection_IfRangeWithoutSection() {
+    public void testAddSection_NoSectionInRange() {
         final Range target = buildRange(false, false, false);
         final Section section = new Section("1", "Title", "Desc");
 
@@ -228,24 +186,23 @@ public class RangeTest {
     }
 
     @Test
-    public void testAddSection_IfRangeAlreadyHasSection() {
+    public void testAddSection_MoveSectionToAnotherRange() {
         final Range target = buildRange(false, false, false);
+        final Range anotherRange = new Range("3", "Title", "Desc");
         final Section section = new Section("1", "Title", "Desc");
-        final Section anotherSection = new Section("1", "Title", "Desc");
 
         target.addSection(section);
-        target.addSection(anotherSection);
+        anotherRange.addSection(section);
 
         assertTrue(target.hasSections());
         assertTrue(section.hasRanges());
-        assertTrue(anotherSection.hasRanges());
+        assertTrue(anotherRange.hasSections());
         assertTrue(target.containsSection(section));
         assertTrue(section.containsRange(target));
-        assertTrue(target.containsSection(anotherSection));
-        assertTrue(anotherSection.containsRange(target));
-        assertEquals(2, target.getSections().size());
-        assertEquals(1, section.getRanges().size());
-        assertEquals(1, anotherSection.getRanges().size());
+        assertTrue(anotherRange.containsSection(section));
+        assertEquals(1, target.getSections().size());
+        assertEquals(1, anotherRange.getSections().size());
+        assertEquals(2, section.getRanges().size());
     }
 
     @Test

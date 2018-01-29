@@ -35,7 +35,7 @@ public class Range extends RangeBase {
         if (!hasSubChapters() || !subChapter.containsRange(this)) {
             super.doAddSubChapter(subChapter);
         }
-        if (!subChapter.hasRanges()) {
+        if (!subChapter.hasRanges() || !subChapter.containsRange(this)) {
             subChapter.addRange(this);
         }
     }

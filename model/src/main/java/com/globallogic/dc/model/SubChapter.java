@@ -24,9 +24,10 @@ public class SubChapter extends SubChapterBase {
 
     @Override
     protected void doAddRange(final Range range) {
-        super.doAddRange(range);
-        if (!range.hasSubChapters()) {
+        if (!range.hasSubChapters() || !range.containsSubChapter(this)) {
             range.addSubChapter(this);
+        } else {
+            super.doAddRange(range);
         }
     }
 

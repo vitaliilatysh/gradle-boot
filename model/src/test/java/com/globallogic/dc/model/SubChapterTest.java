@@ -145,7 +145,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testAddRange_IfSubChapterWithoutRange() {
+    public void testAddRange_NoRangeInSubChapter() {
         final SubChapter target = buildSubChapter(false, false, false);
         final Range range = new Range("1", "Title", "Desc");
 
@@ -160,24 +160,23 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testAddRange_IfSubChapterAlreadyHasRange() {
+    public void testAddRange_MoveRangeToAnotherSubChapter() {
         final SubChapter target = buildSubChapter(false, false, false);
+        final SubChapter anotherSubChapter = new SubChapter("3", "Title", "Desc");
         final Range range = new Range("1", "Title", "Desc");
-        final Range anotherRange = new Range("1", "Title", "Desc");
 
         target.addRange(range);
-        target.addRange(anotherRange);
+        anotherSubChapter.addRange(range);
 
         assertTrue(target.hasRanges());
         assertTrue(range.hasSubChapters());
-        assertTrue(anotherRange.hasSubChapters());
-        assertTrue(range.containsSubChapter(target));
         assertTrue(target.containsRange(range));
-        assertTrue(anotherRange.containsSubChapter(target));
-        assertTrue(target.containsRange(anotherRange));
-        assertEquals(2, target.getRanges().size());
-        assertEquals(1, range.getSubChapters().size());
-        assertEquals(1, anotherRange.getSubChapters().size());
+        assertTrue(range.containsSubChapter(target));
+        assertTrue(range.containsSubChapter(anotherSubChapter));
+        assertTrue(anotherSubChapter.containsRange(range));
+        assertEquals(1, target.getRanges().size());
+        assertEquals(1, anotherSubChapter.getRanges().size());
+        assertEquals(2, range.getSubChapters().size());
     }
 
     @Test
