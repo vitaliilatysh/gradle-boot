@@ -1,5 +1,6 @@
 package com.globallogic.dc.model;
 
+import java.util.Collection;
 import java.util.List;
 
 public class Item extends ItemBase {
@@ -28,6 +29,21 @@ public class Item extends ItemBase {
             final Range range,
             final List<Item> relatedItems) {
         super(key, title, description, range, relatedItems);
+    }
+
+    @Override
+    protected void doAddRelatedItem(final Item relatedItem) {
+        if (!hasRelatedItems() || !relatedItem.containsRelatedItem(this)) {
+            super.doAddRelatedItem(relatedItem);
+        }
+        if (!relatedItem.hasRelatedItems() || !relatedItem.containsRelatedItem(this)) {
+            relatedItem.addRelatedItem(this);
+        }
+    }
+
+    @Override
+    public void addRelatedItems(final Collection<Item> relatedItems) {
+        super.addRelatedItems(relatedItems);
     }
 
     @Override

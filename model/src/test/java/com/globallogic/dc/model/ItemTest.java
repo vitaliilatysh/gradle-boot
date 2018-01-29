@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class ItemTest {
 
     @Test
-    public void testSetRange_IfItemNotAssignedToRangeBefore() {
+    public void testSetRange_NoRangeInItem() {
         final Item target = buildItem(false, false, false);
         final Range range = new Range("1", "Title", "Desc");
 
@@ -24,7 +24,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testSetRange_IfAnotherItemAlreadyAssignedToRange() {
+    public void testSetRange_MoveRangeToAnotherItem() {
         final Item target = buildItem(false, false, true);
         final Item anotherItem = buildItem(false, false, false);
         final Range range = new Range("1", "Title", "Desc");
@@ -39,47 +39,6 @@ public class ItemTest {
         assertTrue(anotherItem.getRange().equals(range));
         assertTrue(range.containsItem(anotherItem));
         assertEquals(2, range.getItems().size());
-    }
-
-    @Test
-    public void testSetRange_IfItemWasAssignedAndThenReassignedToAnotherRange() {
-        final Item target = buildItem(false, false, false);
-        final Range range = new Range("1", "Title", "Desc");
-        final Range anotherRange = new Range("1", "Title", "Desc");
-
-        target.setRange(range);
-        target.setRange(anotherRange);
-
-        assertTrue(target.hasRange());
-        assertTrue(target.getRange().equals(anotherRange));
-        assertTrue(anotherRange.containsItem(target));
-        assertEquals(1, anotherRange.getItems().size());
-    }
-
-    @Test
-    public void testSetRange_IfRangeContains2ItemsAndThen1ItemReassignedToAnotherRange() {
-        final Item target = buildItem(false, false, true);
-        final Item anotherItem = buildItem(false, false, false);
-        final Range range = new Range("1", "Title", "Desc");
-        final Range anotherRange = new Range("1", "Title", "Desc");
-
-        target.setRange(range);
-        anotherItem.setRange(range);
-
-        assertTrue(target.hasRange());
-        assertTrue(target.getRange().equals(range));
-        assertTrue(range.containsItem(target));
-        assertTrue(anotherItem.hasRange());
-        assertEquals(2, range.getItems().size());
-
-        target.setRange(anotherRange);
-
-        assertTrue(range.containsItem(anotherItem));
-        assertTrue(anotherItem.getRange().equals(range));
-        assertTrue(anotherRange.containsItem(target));
-        assertTrue(target.getRange().equals(anotherRange));
-        assertEquals(1, range.getItems().size());
-        assertEquals(1, anotherRange.getItems().size());
     }
 
     @Test
@@ -139,12 +98,38 @@ public class ItemTest {
     }
 
     @Test
-    public void testAddRelatedItem() {
+    public void testAddRelatedItem_NoRelatedItemInItem() {
         final Item target = buildItem(false, false, false);
+        final Item relatedItem = new Item("2", "Title", "Desc");
 
-        target.addRelatedItem(new Item("2", "2", "2"));
+        target.addRelatedItem(relatedItem);
 
+        assertTrue(target.hasRelatedItems());
+        assertTrue(relatedItem.hasRelatedItems());
+        assertTrue(target.containsRelatedItem(relatedItem));
+        assertTrue(relatedItem.containsRelatedItem(target));
         assertEquals(1, target.getRelatedItems().size());
+        assertEquals(1, relatedItem.getRelatedItems().size());
+    }
+
+    @Test
+    public void testAddRelatedItem_MoveRelatedItemToAnotherItem() {
+        final Item target = buildItem(false, false, false);
+        final Item anotherItem = new Item("4", "Title", "Desc");
+        final Item relatedItem = new Item("2", "Title", "Desc");
+
+        target.addRelatedItem(relatedItem);
+        anotherItem.addRelatedItem(relatedItem);
+
+        assertTrue(target.hasRelatedItems());
+        assertTrue(anotherItem.hasRelatedItems());
+        assertTrue(relatedItem.hasRelatedItems());
+        assertTrue(target.containsRelatedItem(relatedItem));
+        assertTrue(relatedItem.containsRelatedItem(target));
+        assertTrue(anotherItem.containsRelatedItem(relatedItem));
+        assertEquals(1, target.getRelatedItems().size());
+        assertEquals(1, anotherItem.getRelatedItems().size());
+        assertEquals(2, relatedItem.getRelatedItems().size());
     }
 
     @Test
