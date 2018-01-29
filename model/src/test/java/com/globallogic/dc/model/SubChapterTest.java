@@ -78,7 +78,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testAddSection_IfSubChapterWithoutSection() {
+    public void testAddSection_NoSectionInSubChapter() {
         final SubChapter target = buildSubChapter(false, false, false);
         final Section section = new Section("1", "Title", "Desc");
 
@@ -91,24 +91,7 @@ public class SubChapterTest {
     }
 
     @Test
-    public void testAddSection_IfSubChapterAlreadyHasSection() {
-        final SubChapter target = buildSubChapter(false, false, false);
-        final Section section = new Section("1", "Title", "Desc");
-        final Section anotherSection = new Section("1", "Title", "Desc");
-
-        target.addSection(section);
-        target.addSection(anotherSection);
-
-        assertTrue(target.hasSections());
-        assertTrue(section.getSubChapter().equals(target));
-        assertTrue(target.containsSection(section));
-        assertTrue(anotherSection.getSubChapter().equals(target));
-        assertTrue(target.containsSection(anotherSection));
-        assertEquals(2, target.getSections().size());
-    }
-
-    @Test
-    public void testAddSection_IfSubChapterContainsSectionAndThisSectionAddedToAnotherSubChapter() {
+    public void testAddSection_MoveSectionToAnotherSubChapter() {
         final SubChapter target = buildSubChapter(false, false, false);
         final SubChapter anotherSubChapter = buildSubChapter(false, false, false);
         final Section section = new Section("1", "Title", "Desc");
@@ -120,26 +103,6 @@ public class SubChapterTest {
         assertTrue(anotherSubChapter.hasSections());
         assertTrue(anotherSubChapter.containsSection(section));
         assertTrue(section.getSubChapter().equals(anotherSubChapter));
-        assertEquals(1, anotherSubChapter.getSections().size());
-    }
-
-    @Test
-    public void testAddSection_IfSubChapterContains2SectionsAndThenOneSectionAddedToAnotherSubChapter() {
-        final SubChapter target = buildSubChapter(false, false, false);
-        final SubChapter anotherSubChapter = buildSubChapter(false, false, false);
-        final Section section = new Section("1", "Title", "Desc");
-        final Section anotherSection = new Section("2", "Title", "Desc");
-
-        target.addSection(section);
-        target.addSection(anotherSection);
-        anotherSubChapter.addSection(section);
-
-        assertTrue(target.hasSections());
-        assertFalse(target.containsSection(section));
-        assertTrue(anotherSubChapter.hasSections());
-        assertTrue(anotherSubChapter.containsSection(section));
-        assertTrue(section.getSubChapter().equals(anotherSubChapter));
-        assertEquals(1, target.getSections().size());
         assertEquals(1, anotherSubChapter.getSections().size());
     }
 
