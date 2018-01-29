@@ -50,7 +50,7 @@ public class Range extends RangeBase {
         if (!hasSections() || !section.containsRange(this)) {
             super.doAddSection(section);
         }
-        if (!section.hasRanges()) {
+        if (!section.hasRanges() || !section.containsRange(this)) {
             section.addRange(this);
         }
     }

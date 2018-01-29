@@ -31,9 +31,10 @@ public class Section extends SectionBase {
 
     @Override
     protected void doAddRange(final Range range) {
-        super.doAddRange(range);
-        if (!range.hasSections()) {
+        if (!range.hasSections() || !range.containsSection(this)) {
             range.addSection(this);
+        } else {
+            super.doAddRange(range);
         }
     }
 

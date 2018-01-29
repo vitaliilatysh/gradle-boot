@@ -78,7 +78,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testAddRange_IfSectionWithoutRange() {
+    public void testAddRange_NoRangeInSection() {
         final Section target = buildSection(false, false);
         final Range range = new Range("1", "Title", "Desc");
 
@@ -93,24 +93,24 @@ public class SectionTest {
     }
 
     @Test
-    public void testAddRange_IfSectionAlreadyHasRange() {
+    public void testAddRange_MoveRangeToAnotherSection() {
         final Section target = buildSection(false, false);
+        final Section anotherSection = new Section("2", "Title", "Desc");
         final Range range = new Range("1", "Title", "Desc");
-        final Range anotherRange = new Range("1", "Title", "Desc");
 
         target.addRange(range);
-        target.addRange(anotherRange);
+        anotherSection.addRange(range);
 
         assertTrue(target.hasRanges());
         assertTrue(range.hasSections());
-        assertTrue(anotherRange.hasSections());
-        assertTrue(range.containsSection(target));
+        assertTrue(anotherSection.hasRanges());
         assertTrue(target.containsRange(range));
-        assertTrue(anotherRange.containsSection(target));
-        assertTrue(target.containsRange(anotherRange));
-        assertEquals(2, target.getRanges().size());
-        assertEquals(1, range.getSections().size());
-        assertEquals(1, anotherRange.getSections().size());
+        assertTrue(range.containsSection(target));
+        assertTrue(range.containsSection(anotherSection));
+        assertTrue(anotherSection.containsRange(range));
+        assertEquals(1, target.getRanges().size());
+        assertEquals(1, anotherSection.getRanges().size());
+        assertEquals(2, range.getSections().size());
     }
 
     @Test

@@ -199,6 +199,7 @@ public class RangeTest {
         assertTrue(anotherRange.hasSections());
         assertTrue(target.containsSection(section));
         assertTrue(section.containsRange(target));
+        assertTrue(section.containsRange(anotherRange));
         assertTrue(anotherRange.containsSection(section));
         assertEquals(1, target.getSections().size());
         assertEquals(1, anotherRange.getSections().size());
