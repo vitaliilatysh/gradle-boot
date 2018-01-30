@@ -1,3 +1,4 @@
 rootProject.name = 'java-trainee-latysh'
-include 'model'
-
+include ':model'
+include ':commons'
+include ':commons:model'
