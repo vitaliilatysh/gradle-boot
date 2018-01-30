@@ -77,6 +77,13 @@ public class SectionTest {
         assertTrue(target.hasRanges());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddRange_Null(){
+        final Section target = buildSection(false, false);
+
+        target.addRange(null);
+    }
+
     @Test
     public void testAddRange_NoRangeInSection() {
         final Section target = buildSection(false, false);
@@ -111,6 +118,13 @@ public class SectionTest {
         assertEquals(1, target.getRanges().size());
         assertEquals(1, anotherSection.getRanges().size());
         assertEquals(2, range.getSections().size());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddRanges_Null(){
+        final Section target = buildSection(false, false);
+
+        target.addRanges(null);
     }
 
     @Test

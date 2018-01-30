@@ -29,6 +29,13 @@ public class ChapterTest {
         assertTrue(target.hasSubChapters());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddSubChapter_Null(){
+        final Chapter target = buildChapter(false);
+
+        target.addSubChapter(null);
+    }
+
     @Test
     public void testAddSubChapter_NoSubChapterInChapter() {
         final Chapter target = buildChapter(false);
@@ -56,6 +63,13 @@ public class ChapterTest {
         assertTrue(anotherChapter.containsSubChapter(subChapter));
         assertTrue(subChapter.getChapter().equals(anotherChapter));
         assertEquals(1, anotherChapter.getSubChapters().size());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddSubChapters_Null(){
+        final Chapter target = buildChapter(false);
+
+        target.addSubChapters(null);
     }
 
     @Test

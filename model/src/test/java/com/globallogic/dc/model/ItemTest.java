@@ -97,6 +97,13 @@ public class ItemTest {
         assertTrue(target.hasItems());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddRelatedItem_Null(){
+        final Item target = buildItem(false, false, false);
+
+        target.addRelatedItem(null);
+    }
+
     @Test
     public void testAddRelatedItem_NoRelatedItemInItem() {
         final Item target = buildItem(false, false, false);
@@ -106,8 +113,10 @@ public class ItemTest {
 
         assertTrue(target.hasRelatedItems());
         assertTrue(relatedItem.hasRelatedItems());
+
         assertTrue(target.containsRelatedItem(relatedItem));
         assertTrue(relatedItem.containsRelatedItem(target));
+
         assertEquals(1, target.getRelatedItems().size());
         assertEquals(1, relatedItem.getRelatedItems().size());
     }
@@ -122,33 +131,52 @@ public class ItemTest {
         anotherItem.addRelatedItem(relatedItem);
 
         assertTrue(target.hasRelatedItems());
+
         assertTrue(anotherItem.hasRelatedItems());
         assertTrue(relatedItem.hasRelatedItems());
+
         assertTrue(target.containsRelatedItem(relatedItem));
         assertTrue(relatedItem.containsRelatedItem(target));
         assertTrue(anotherItem.containsRelatedItem(relatedItem));
+
         assertEquals(1, target.getRelatedItems().size());
         assertEquals(1, anotherItem.getRelatedItems().size());
         assertEquals(2, relatedItem.getRelatedItems().size());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddRelatedItems_Null(){
+        final Item target = buildItem(false, false, false);
+
+        target.addRelatedItems(null);
+    }
+
     @Test
     public void testAddRelatedItems() {
         final Item target = buildItem(false, false, false);
-        final List<Item> items = Arrays.asList(
-                new Item("2", "Title", "Desc"),
-                new Item("3", "Title", "Desc"));
 
-        target.addRelatedItems(items);
+        final Item relatedItem1 = new Item("2", "Title", "Desc");
+        final Item relatedItem2 = new Item("2", "Title", "Desc");
 
+        target.addRelatedItems(Arrays.asList(relatedItem1, relatedItem2));
 
-        for (Item item : items) {
-            assertTrue(target.hasRelatedItems());
-            assertTrue(target.containsRelatedItem(item));
-            assertTrue(item.hasRelatedItems());
-            assertTrue(item.containsRelatedItem(target));
-        }
-        assertEquals(2, target.getRelatedItems().size());
+        assertTrue(target.hasRelatedItems());
+
+        assertTrue(target.containsRelatedItem(relatedItem1));
+        assertTrue(target.containsRelatedItem(relatedItem2));
+
+        assertTrue(relatedItem1.hasRelatedItems());
+        assertTrue(relatedItem2.hasRelatedItems());
+
+        assertTrue(relatedItem1.containsRelatedItem(target));
+        assertTrue(relatedItem2.containsRelatedItem(target));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddItem_Null(){
+        final Item target = buildItem(false, false, false);
+
+        target.addItem(null);
     }
 
     @Test
@@ -161,6 +189,13 @@ public class ItemTest {
         assertTrue(target.hasItems());
         assertTrue(target.containsItem(anotherItem.toString()));
         assertEquals(1, target.getItems().size());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddItems_Null(){
+        final Item target = buildItem(false, false, false);
+
+        target.addItems(null);
     }
 
     @Test

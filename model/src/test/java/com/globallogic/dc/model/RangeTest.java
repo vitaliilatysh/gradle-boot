@@ -170,6 +170,13 @@ public class RangeTest {
         assertTrue(target.hasSections());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddSection_Null(){
+        final Range target = buildRange(false, false, false);
+
+        target.addSection(null);
+    }
+
     @Test
     public void testAddSection_NoSectionInRange() {
         final Range target = buildRange(false, false, false);
@@ -204,6 +211,13 @@ public class RangeTest {
         assertEquals(1, target.getSections().size());
         assertEquals(1, anotherRange.getSections().size());
         assertEquals(2, section.getRanges().size());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddSections_Null(){
+        final Range target = buildRange(false, false, false);
+
+        target.addSections(null);
     }
 
     @Test
