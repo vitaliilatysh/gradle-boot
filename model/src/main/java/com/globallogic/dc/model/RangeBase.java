@@ -66,7 +66,7 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public void addSubChapter(final SubChapter subChapter) {
-        if(subChapter == null){
+        if (subChapter == null) {
             throw new IllegalArgumentException();
         }
         doAddSubChapter(subChapter);
@@ -115,7 +115,7 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public void addSection(final Section section) {
-        if(section == null){
+        if (section == null) {
             throw new IllegalArgumentException();
         }
         doAddSection(section);

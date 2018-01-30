@@ -3,7 +3,7 @@ package com.globallogic.dc.model;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public abstract class Aggregate {
+public abstract class Aggregate extends BusinessObject {
 
     protected abstract void doEquals(final EqualsBuilder equalsBuilder, final Aggregate obj);
 

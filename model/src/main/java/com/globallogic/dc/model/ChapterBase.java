@@ -51,7 +51,7 @@ public abstract class ChapterBase extends AbstractProduct {
     }
 
     public void addSubChapter(final SubChapter subChapter) {
-        if(subChapter == null){
+        if (subChapter == null) {
             throw new IllegalArgumentException();
         }
         doAddSubChapter(subChapter);

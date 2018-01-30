@@ -44,7 +44,7 @@ public class Section extends SectionBase {
         }
         super.setSubChapter(subChapter);
 
-        if(hasSubChapter()) {
+        if (hasSubChapter()) {
             subChapter.addSection(this);
         }
     }
