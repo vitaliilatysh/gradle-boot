@@ -115,6 +115,9 @@ public abstract class RangeBase extends AbstractProduct {
     }
 
     public void addSection(final Section section) {
+        if(section == null){
+            throw new IllegalArgumentException();
+        }
         doAddSection(section);
     }
 
