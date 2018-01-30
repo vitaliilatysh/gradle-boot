@@ -1,8 +1,5 @@
 package com.globallogic.dc.model;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import java.util.List;
 
 public class Range extends RangeBase {
@@ -33,25 +30,31 @@ public class Range extends RangeBase {
     }
 
     @Override
-    protected void doEquals(final EqualsBuilder equalsBuilder, final Aggregate obj) {
-       final Range range = (Range) obj;
-        equalsBuilder
-                .append(this.getKey(), range.getKey())
-                .append(this.getTitle(), range.getTitle())
-                .append(this.getDescription(), range.getDescription())
-                .append(this.getSubChapters(), range.getSubChapters())
-                .append(this.getItems(), range.getItems())
-                .append(this.getSections(), range.getSections());
+    protected void doAddSubChapter(final SubChapter subChapter) {
+        if (!hasSubChapters() || !this.containsSubChapter(subChapter)) {
+            super.doAddSubChapter(subChapter);
+        }
+        if (!subChapter.hasRanges() || !subChapter.containsRange(this)) {
+            subChapter.addRange(this);
+        }
     }
 
     @Override
-    protected void doHashCode(final HashCodeBuilder hashCodeBuilder) {
-        hashCodeBuilder
-                .append(this.getKey())
-                .append(this.getTitle())
-                .append(this.getDescription())
-                .append(this.getSubChapters())
-                .append(this.getItems())
-                .append(this.getSections());
+    protected void doAddSection(final Section section) {
+        if (!hasSections() || !this.containsSection(section)) {
+            super.doAddSection(section);
+        }
+        if (!section.hasRanges() || !section.containsRange(this)) {
+            section.addRange(this);
+        }
+    }
+
+    @Override
+    protected void doAddItem(final Item item) {
+        if (!item.hasRange() || item.getRange() != this) {
+            item.setRange(this);
+        } else {
+            super.doAddItem(item);
+        }
     }
 }

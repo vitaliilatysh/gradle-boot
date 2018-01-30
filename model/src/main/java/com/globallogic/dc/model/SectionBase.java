@@ -2,9 +2,9 @@ package com.globallogic.dc.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 public abstract class SectionBase extends AbstractProduct {
@@ -40,15 +40,52 @@ public abstract class SectionBase extends AbstractProduct {
     }
 
     public List<Range> getRanges() {
-        return this.ranges;
+        return hasRanges() ? Collections.unmodifiableList(this.ranges) : null;
     }
 
     public void setRanges(final List<Range> ranges) {
         this.ranges = ranges;
     }
 
+    private List<Range> getRangesSafe() {
+        if (ranges == null) {
+            synchronized (this) {
+                if (ranges == null) {
+                    ranges = new ArrayList<>();
+                }
+            }
+        }
+        return ranges;
+    }
+
     public boolean hasRanges() {
         return isNotEmpty(this.ranges);
+    }
+
+    public void addRange(final Range range) {
+        if(range == null){
+            throw new IllegalArgumentException();
+        }
+        doAddRange(range);
+    }
+
+    public void addRanges(final Collection<Range> ranges) {
+        if (ranges == null) {
+            throw new IllegalArgumentException();
+        }
+        ranges.forEach(this::doAddRange);
+    }
+
+    protected void doAddRange(final Range range) {
+        getRangesSafe().add(range);
+    }
+
+    public boolean containsRange(final Range range) {
+        return getRangesSafe().contains(range);
+    }
+
+    public void removeRange(final Range range) {
+        getRangesSafe().remove(range);
     }
 
     public SubChapter getSubChapter() {
@@ -61,20 +98,6 @@ public abstract class SectionBase extends AbstractProduct {
 
     public boolean hasSubChapter() {
         return this.subChapter != null;
-    }
-
-    public void addRanges(final Collection<Range> ranges) {
-        if (isEmpty(this.ranges)) {
-            this.ranges = new ArrayList<>();
-        }
-        this.ranges.addAll(ranges);
-    }
-
-    public void addRange(final Range range) {
-        if (isEmpty(this.ranges)) {
-            this.ranges = new ArrayList<>();
-        }
-        this.ranges.add(range);
     }
 
 }

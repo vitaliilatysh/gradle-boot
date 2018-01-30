@@ -2,15 +2,15 @@ package com.globallogic.dc.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 public abstract class ItemBase extends AbstractProduct {
 
     private Range range;
-    private List<Item> items;
+    private List<String> items;
     private List<Item> relatedItems;
 
     public ItemBase(
@@ -25,7 +25,7 @@ public abstract class ItemBase extends AbstractProduct {
             final String title,
             final String description,
             final Range range,
-            final List<Item> items,
+            final List<String> items,
             final List<Item> relatedItems) {
         super(key, title, description);
         this.range = range;
@@ -45,7 +45,7 @@ public abstract class ItemBase extends AbstractProduct {
     }
 
     public List<Item> getRelatedItems() {
-        return this.relatedItems;
+        return hasRelatedItems() ? Collections.unmodifiableList(this.relatedItems) : null;
     }
 
     public void setRelatedItems(final List<Item> relatedItems) {
@@ -54,6 +54,42 @@ public abstract class ItemBase extends AbstractProduct {
 
     public boolean hasRelatedItems() {
         return isNotEmpty(this.relatedItems);
+    }
+
+    private List<Item> getRelatedItemsSafe() {
+        if (relatedItems == null) {
+            synchronized (this) {
+                if (relatedItems == null)
+                    relatedItems = new ArrayList<>();
+            }
+        }
+        return relatedItems;
+    }
+
+    public void addRelatedItem(final Item relatedItem) {
+        if (relatedItem == null){
+            throw new IllegalArgumentException();
+        }
+        doAddRelatedItem(relatedItem);
+    }
+
+    public void addRelatedItems(final Collection<Item> relatedItems) {
+        if (relatedItems == null) {
+            throw new IllegalArgumentException();
+        }
+        relatedItems.forEach(this::doAddRelatedItem);
+    }
+
+    protected void doAddRelatedItem(final Item relatedItem) {
+        getRelatedItemsSafe().add(relatedItem);
+    }
+
+    public boolean containsRelatedItem(final Item relatedItem) {
+        return getRelatedItemsSafe().contains(relatedItem);
+    }
+
+    public void removeRelatedItem(final Item relatedItem) {
+        getRelatedItemsSafe().remove(relatedItem);
     }
 
     public Range getRange() {
@@ -68,11 +104,11 @@ public abstract class ItemBase extends AbstractProduct {
         return this.range != null;
     }
 
-    public List<Item> getItems() {
-        return this.items;
+    public List<String> getItems() {
+        return hasItems() ? Collections.unmodifiableList(this.items) : null;
     }
 
-    public void setItems(final List<Item> items) {
+    public void setItems(final List<String> items) {
         this.items = items;
     }
 
@@ -80,30 +116,40 @@ public abstract class ItemBase extends AbstractProduct {
         return isNotEmpty(this.items);
     }
 
-    public void addItems(final Collection<Item> items) {
-        if (isEmpty(this.items)) this.items = new ArrayList<>();
-        this.items.addAll(items);
-    }
-
-    public void addItem(final Item item) {
-        if (isEmpty(this.items)) {
-            this.items = new ArrayList<>();
+    private List<String> getItemsSafe() {
+        if (items == null) {
+            synchronized (this) {
+                if (items == null) {
+                    items = new ArrayList<>();
+                }
+            }
         }
-        this.items.add(item);
+        return items;
     }
 
-    public void addRelatedItems(final Collection<Item> relatedItems) {
-        if (isEmpty(this.relatedItems)) {
-            this.relatedItems = new ArrayList<>();
+    public void addItem(final String item) {
+        if(item == null){
+            throw new IllegalArgumentException();
         }
-        this.relatedItems.addAll(relatedItems);
+        doAddItem(item);
     }
 
-    public void addRelatedItem(final Item relatedItem) {
-        if (isEmpty(this.relatedItems)) {
-            this.relatedItems = new ArrayList<>();
+    public void addItems(final Collection<String> items) {
+        if (items == null) {
+            throw new IllegalArgumentException();
         }
-        this.relatedItems.add(relatedItem);
+        items.forEach(this::doAddItem);
     }
 
+    protected void doAddItem(final String item) {
+        getItemsSafe().add(item);
+    }
+
+    public boolean containsItem(final String item) {
+        return getItemsSafe().contains(item);
+    }
+
+    public void removeItem(final String item) {
+        getItemsSafe().remove(item);
+    }
 }

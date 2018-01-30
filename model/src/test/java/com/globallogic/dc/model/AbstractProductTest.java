@@ -8,7 +8,8 @@ public class AbstractProductTest {
 
     @Test
     public void testGetIdentifier() {
-        AbstractProduct abstractProduct = new AbstractProduct("1", "Title", "Desc") {};
+        AbstractProduct abstractProduct = new AbstractProduct("1", "Title", "Desc") {
+        };
 
         assertEquals("1", abstractProduct.getIdentifier());
     }

@@ -1,14 +1,45 @@
 package com.globallogic.dc.model;
 
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class ItemTest {
+
+    @Test
+    public void testSetRange_NoRangeInItem() {
+        final Item target = buildItem(false, false, false);
+        final Range range = new Range("1", "Title", "Desc");
+
+        target.setRange(range);
+
+        assertTrue(target.hasRange());
+        assertTrue(target.getRange().equals(range));
+        assertTrue(range.containsItem(target));
+        assertEquals(1, range.getItems().size());
+    }
+
+    @Test
+    public void testSetRange_MoveRangeToAnotherItem() {
+        final Item target = buildItem(false, false, true);
+        final Item anotherItem = buildItem(false, false, false);
+        final Range range = new Range("1", "Title", "Desc");
+
+        target.setRange(range);
+        anotherItem.setRange(range);
+
+        assertTrue(target.hasRange());
+        assertTrue(target.getRange().equals(range));
+        assertTrue(range.containsItem(target));
+        assertTrue(anotherItem.hasRange());
+        assertTrue(anotherItem.getRange().equals(range));
+        assertTrue(range.containsItem(anotherItem));
+        assertEquals(2, range.getItems().size());
+    }
 
     @Test
     public void testHasRelatedItems_Empty() {
@@ -66,189 +97,121 @@ public class ItemTest {
         assertTrue(target.hasItems());
     }
 
-    @Test
-    public void testAddRelatedItem() {
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddRelatedItem_Null(){
         final Item target = buildItem(false, false, false);
 
-        target.addRelatedItem(new Item("2", "2", "2"));
+        target.addRelatedItem(null);
+    }
+
+    @Test
+    public void testAddRelatedItem_NoRelatedItemInItem() {
+        final Item target = buildItem(false, false, false);
+        final Item relatedItem = new Item("2", "Title", "Desc");
+
+        target.addRelatedItem(relatedItem);
+
+        assertTrue(target.hasRelatedItems());
+        assertTrue(relatedItem.hasRelatedItems());
+
+        assertTrue(target.containsRelatedItem(relatedItem));
+        assertTrue(relatedItem.containsRelatedItem(target));
 
         assertEquals(1, target.getRelatedItems().size());
+        assertEquals(1, relatedItem.getRelatedItems().size());
+    }
+
+    @Test
+    public void testAddRelatedItem_MoveRelatedItemToAnotherItem() {
+        final Item target = buildItem(false, false, false);
+        final Item anotherItem = new Item("4", "Title", "Desc");
+        final Item relatedItem = new Item("2", "Title", "Desc");
+
+        target.addRelatedItem(relatedItem);
+        anotherItem.addRelatedItem(relatedItem);
+
+        assertTrue(target.hasRelatedItems());
+
+        assertTrue(anotherItem.hasRelatedItems());
+        assertTrue(relatedItem.hasRelatedItems());
+
+        assertTrue(target.containsRelatedItem(relatedItem));
+        assertTrue(relatedItem.containsRelatedItem(target));
+        assertTrue(anotherItem.containsRelatedItem(relatedItem));
+
+        assertEquals(1, target.getRelatedItems().size());
+        assertEquals(1, anotherItem.getRelatedItems().size());
+        assertEquals(2, relatedItem.getRelatedItems().size());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddRelatedItems_Null(){
+        final Item target = buildItem(false, false, false);
+
+        target.addRelatedItems(null);
     }
 
     @Test
     public void testAddRelatedItems() {
         final Item target = buildItem(false, false, false);
 
-        target.addRelatedItems(Arrays.asList(
-                new Item("2", "2", "2"),
-                new Item("3", "3", "3")));
+        final Item relatedItem1 = new Item("2", "Title", "Desc");
+        final Item relatedItem2 = new Item("2", "Title", "Desc");
 
-        assertEquals(2, target.getRelatedItems().size());
+        target.addRelatedItems(Arrays.asList(relatedItem1, relatedItem2));
+
+        assertTrue(target.hasRelatedItems());
+
+        assertTrue(target.containsRelatedItem(relatedItem1));
+        assertTrue(target.containsRelatedItem(relatedItem2));
+
+        assertTrue(relatedItem1.hasRelatedItems());
+        assertTrue(relatedItem2.hasRelatedItems());
+
+        assertTrue(relatedItem1.containsRelatedItem(target));
+        assertTrue(relatedItem2.containsRelatedItem(target));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddItem_Null(){
+        final Item target = buildItem(false, false, false);
+
+        target.addItem(null);
     }
 
     @Test
-    public void testAddItem() {
+    public void testAddItem_NoItemInItem() {
+        final Item target = buildItem(false, false, false);
+        final Item anotherItem = new Item("2", "2", "2");
+
+        target.addItem(anotherItem.toString());
+
+        assertTrue(target.hasItems());
+        assertTrue(target.containsItem(anotherItem.toString()));
+        assertEquals(1, target.getItems().size());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddItems_Null(){
         final Item target = buildItem(false, false, false);
 
-        target.addItem(new Item("2", "2", "2"));
-
-        assertEquals(1, target.getItems().size());
+        target.addItems(null);
     }
 
     @Test
     public void testAddItems() {
         final Item target = buildItem(false, false, false);
+        final Item item1 = buildItem(false, false, false);
+        final Item item2 = buildItem(false, false, false);
 
-        target.addItems(Arrays.asList(
-                new Item("2", "2", "2"),
-                new Item("3", "3", "3")));
+        final List<String> items = Arrays.asList(item1.toString(), item2.toString());
 
-        assertEquals(2, target.getItems().size());
-    }
+        target.addItems(items);
 
-    @Test
-    public void testEquals() {
-        final Item target = buildItem(true, true, true);
-        final Item anotherItem = buildItem(true, true, true);
+        assertTrue(target.hasItems());
 
-        assertTrue(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testEquals_DifferentKeys() {
-        final Item target = buildItem("2", "Title", "Desc", true, true, true);
-        final Item anotherItem = buildItem("1", "Title", "Desc", true, true, true);
-
-        assertFalse(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testEquals_DifferentTitles() {
-        final Item target = buildItem("1", "NewTitle", "Desc", true, true, true);
-        final Item anotherItem = buildItem("1", "Title", "Desc", true, true, true);
-
-        assertFalse(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testEquals_DifferentDesc() {
-        final Item target = buildItem("1", "Title", "NewDesc", true, true, true);
-        final Item anotherItem = buildItem("1", "Title", "Desc", true, true, true);
-
-        assertFalse(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testEquals_TargetRangeNotSet() {
-        final Item target = buildItem(true, true, false);
-        final Item anotherItem = buildItem(true, true, true);
-
-        assertFalse(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testEquals_TargetDiffRange() {
-        final Item target = buildItem(true, true, true);
-        final Item anotherItem = buildItem(true, true, true);
-
-        target.setRange(new Range("2", "Title", "Desc"));
-
-        assertFalse(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testEquals_TargetItemsListNotSet() {
-        final Item target = buildItem(false, true, true);
-        final Item anotherItem = buildItem(true, true, true);
-
-        assertFalse(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testEquals_TargetItemsListEmpty() {
-        final Item target = buildItem(true, true, true);
-        final Item anotherItem = buildItem(true, true, true);
-
-        target.setItems(new ArrayList<>());
-
-        assertFalse(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testEquals_TargetItemsListContainsDiffNumberOfItems() {
-        final Item target = buildItem(true, true, true);
-        final Item anotherItem = buildItem(true, true, true);
-
-        target.addItem(new Item("1", "Title", "Desc"));
-
-        assertFalse(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testEquals_TargetItemsListContainsTheSameNumberOfItemsButDiff() {
-        final Item target = buildItem(true, true, true);
-        final Item anotherItem = buildItem(true, true, true);
-
-        target.addItem(new Item("1", "Title", "Desc"));
-        anotherItem.addItem(new Item("2", "Title", "Desc"));
-
-        assertFalse(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testEquals_TargetRelatedItemsListNotSet() {
-        final Item target = buildItem(true, false, true);
-        final Item anotherItem = buildItem(true, true, true);
-
-        assertFalse(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testEquals_TargetRelatedItemsListEmpty() {
-        final Item target = buildItem(true, true, true);
-        final Item anotherItem = buildItem(true, true, true);
-
-        target.setRelatedItems(new ArrayList<>());
-
-        assertFalse(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testEquals_TargetRelatedItemsListContainsDiffNumberOfRelatedItems() {
-        final Item target = buildItem(true, true, true);
-        final Item anotherItem = buildItem(true, true, true);
-
-        target.addRelatedItem(new Item("1", "Title", "Desc"));
-
-        assertFalse(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testEquals_TargetRelatedItemsListContainsTheSameNumberOfItemsButDiff() {
-        final Item target = buildItem(true, true, true);
-        final Item anotherItem = buildItem(true, true, true);
-
-        target.addRelatedItem(new Item("1", "Title", "Desc"));
-        anotherItem.addRelatedItem(new Item("2", "Title", "Desc"));
-
-        assertFalse(target.equals(anotherItem));
-    }
-
-    @Test
-    public void testHashCode() {
-        final Item target = buildItem(true, true, true);
-        final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
-
-        hashCodeBuilder
-                .append(target.getKey())
-                .append(target.getTitle())
-                .append(target.getDescription())
-                .append(target.getRange())
-                .append(target.getItems())
-                .append(target.getRelatedItems());
-
-
-        assertEquals(target.hashCode(), hashCodeBuilder.toHashCode());
+        assertTrue(target.containsItem(item1.toString()));
+        assertTrue(target.containsItem(item2.toString()));
     }
 
     private Item buildItem(final boolean fillItems, final boolean fillRelatedItems, final boolean fillRange) {
@@ -266,8 +229,8 @@ public class ItemTest {
 
         if (fillItems) {
             result.addItems(Arrays.asList(
-                    new Item("1", "Title", "Desc"),
-                    new Item("2", "Title", "Desc")));
+                    new Item("1", "Title", "Desc").toString(),
+                    new Item("2", "Title", "Desc").toString()));
         }
 
         if (fillRelatedItems)

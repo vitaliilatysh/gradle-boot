@@ -2,9 +2,9 @@ package com.globallogic.dc.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 public abstract class ChapterBase extends AbstractProduct {
@@ -28,28 +28,51 @@ public abstract class ChapterBase extends AbstractProduct {
     }
 
     public List<SubChapter> getSubChapters() {
-        return this.subChapters;
+        return hasSubChapters() ? Collections.unmodifiableList(this.subChapters) : null;
     }
 
     public void setSubChapters(final List<SubChapter> subChapters) {
         this.subChapters = subChapters;
     }
 
+    private List<SubChapter> getSubChaptersSafe() {
+        if (subChapters == null) {
+            synchronized (this) {
+                if (subChapters == null) {
+                    subChapters = new ArrayList<>();
+                }
+            }
+        }
+        return subChapters;
+    }
+
     public boolean hasSubChapters() {
         return isNotEmpty(this.subChapters);
     }
 
-    public void addSubChapters(final Collection<SubChapter> subChapters) {
-        if (isEmpty(this.subChapters)) {
-            this.subChapters = new ArrayList<>();
+    public void addSubChapter(final SubChapter subChapter) {
+        if(subChapter == null){
+            throw new IllegalArgumentException();
         }
-        this.subChapters.addAll(subChapters);
+        doAddSubChapter(subChapter);
     }
 
-    public void addSubChapter(final SubChapter subChapter) {
-        if (isEmpty(this.subChapters)) {
-            this.subChapters = new ArrayList<>();
+    public void addSubChapters(final Collection<SubChapter> subChapters) {
+        if (subChapters == null) {
+            throw new IllegalArgumentException();
         }
-        this.subChapters.add(subChapter);
+        subChapters.forEach(this::doAddSubChapter);
+    }
+
+    protected void doAddSubChapter(final SubChapter subChapter) {
+        getSubChaptersSafe().add(subChapter);
+    }
+
+    public boolean containsSubChapter(final SubChapter subChapter) {
+        return getSubChaptersSafe().contains(subChapter);
+    }
+
+    public void removeSubChapter(final SubChapter subchapter) {
+        getSubChaptersSafe().remove(subchapter);
     }
 }
