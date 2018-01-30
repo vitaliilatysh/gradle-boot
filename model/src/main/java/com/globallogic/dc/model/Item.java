@@ -47,7 +47,7 @@ public class Item extends ItemBase {
         }
         super.setRange(range);
 
-        if (hasRange()){
+        if (hasRange()) {
             range.addItem(this);
         }
     }
