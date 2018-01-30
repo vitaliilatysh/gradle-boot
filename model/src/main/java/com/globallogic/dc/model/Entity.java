@@ -3,7 +3,7 @@ package com.globallogic.dc.model;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public abstract class Entity<T> extends Aggregate implements Identifiable<T> {
+public abstract class Entity<T> extends Aggregate implements Identifiable<T>, Validatable {
 
     @Override
     protected void doEquals(final EqualsBuilder equalsBuilder, final Aggregate obj) {
@@ -16,5 +16,15 @@ public abstract class Entity<T> extends Aggregate implements Identifiable<T> {
     protected void doHashCode(final HashCodeBuilder hashCodeBuilder) {
         hashCodeBuilder
                 .append(getIdentifier());
+    }
+
+    @Override
+    public boolean isValid() {
+        return getIdentifier() != null;
+    }
+
+    @Override
+    public String asFormattedString() {
+        return isValid() ? getIdentifier().toString() : "INVALID";
     }
 }
