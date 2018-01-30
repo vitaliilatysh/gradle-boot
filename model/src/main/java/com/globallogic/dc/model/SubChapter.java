@@ -45,6 +45,10 @@ public class SubChapter extends SubChapterBase {
             this.getChapter().removeSubChapter(this);
         }
         super.setChapter(chapter);
-        chapter.addSubChapter(this);
+
+        if (hasChapter()) {
+            chapter.addSubChapter(this);
+        }
+
     }
 }

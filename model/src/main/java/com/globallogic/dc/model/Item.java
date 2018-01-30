@@ -46,6 +46,9 @@ public class Item extends ItemBase {
             this.getRange().removeItem(this);
         }
         super.setRange(range);
-        range.addItem(this);
+
+        if (hasRange()){
+            range.addItem(this);
+        }
     }
 }

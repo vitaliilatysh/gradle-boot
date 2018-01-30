@@ -43,6 +43,9 @@ public class Section extends SectionBase {
             this.getSubChapter().removeSection(this);
         }
         super.setSubChapter(subChapter);
-        subChapter.addSection(this);
+
+        if(hasSubChapter()) {
+            subChapter.addSection(this);
+        }
     }
 }
