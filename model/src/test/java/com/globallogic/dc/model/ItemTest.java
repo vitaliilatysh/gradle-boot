@@ -135,20 +135,31 @@ public class ItemTest {
     @Test
     public void testAddRelatedItems() {
         final Item target = buildItem(false, false, false);
+        final List<Item> items = Arrays.asList(
+                new Item("2", "Title", "Desc"),
+                new Item("3", "Title", "Desc"));
 
-        target.addRelatedItems(Arrays.asList(
-                new Item("2", "2", "2"),
-                new Item("3", "3", "3")));
+        target.addRelatedItems(items);
 
+
+        for (Item item : items) {
+            assertTrue(target.hasRelatedItems());
+            assertTrue(target.containsRelatedItem(item));
+            assertTrue(item.hasRelatedItems());
+            assertTrue(item.containsRelatedItem(target));
+        }
         assertEquals(2, target.getRelatedItems().size());
     }
 
     @Test
-    public void testAddItem() {
+    public void testAddItem_NoItemInItem() {
         final Item target = buildItem(false, false, false);
+        final Item anotherItem = new Item("2", "2", "2");
 
-        target.addItem(new Item("2", "2", "2").toString());
+        target.addItem(anotherItem.toString());
 
+        assertTrue(target.hasItems());
+        assertTrue(target.containsItem(anotherItem.toString()));
         assertEquals(1, target.getItems().size());
     }
 
@@ -161,8 +172,9 @@ public class ItemTest {
 
         target.addItems(items);
 
-        for (String item: items             ) {
+        for (String item : items) {
             assertTrue(target.hasItems());
+            assertTrue(target.containsItem(item));
         }
         assertEquals(2, target.getItems().size());
     }
