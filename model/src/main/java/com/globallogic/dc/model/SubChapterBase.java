@@ -69,6 +69,9 @@ public abstract class SubChapterBase extends AbstractProduct {
     }
 
     public void addSection(final Section section) {
+        if (section == null){
+            throw new IllegalArgumentException();
+        }
         doAddSection(section);
     }
 
@@ -115,6 +118,9 @@ public abstract class SubChapterBase extends AbstractProduct {
     }
 
     public void addRange(final Range range) {
+        if (range == null){
+            throw new IllegalArgumentException();
+        }
         doAddRange(range);
     }
 

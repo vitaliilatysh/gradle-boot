@@ -63,6 +63,9 @@ public abstract class SectionBase extends AbstractProduct {
     }
 
     public void addRange(final Range range) {
+        if(range == null){
+            throw new IllegalArgumentException();
+        }
         doAddRange(range);
     }
 

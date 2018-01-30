@@ -67,6 +67,9 @@ public abstract class ItemBase extends AbstractProduct {
     }
 
     public void addRelatedItem(final Item relatedItem) {
+        if (relatedItem == null){
+            throw new IllegalArgumentException();
+        }
         doAddRelatedItem(relatedItem);
     }
 
@@ -125,6 +128,9 @@ public abstract class ItemBase extends AbstractProduct {
     }
 
     public void addItem(final String item) {
+        if(item == null){
+            throw new IllegalArgumentException();
+        }
         doAddItem(item);
     }
 
