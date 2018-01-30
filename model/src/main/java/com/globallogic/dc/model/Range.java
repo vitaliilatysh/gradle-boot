@@ -1,6 +1,5 @@
 package com.globallogic.dc.model;
 
-import java.util.Collection;
 import java.util.List;
 
 public class Range extends RangeBase {
@@ -41,11 +40,6 @@ public class Range extends RangeBase {
     }
 
     @Override
-    public void addSubChapters(final Collection<SubChapter> subChapters) {
-        super.addSubChapters(subChapters);
-    }
-
-    @Override
     protected void doAddSection(final Section section) {
         if (!hasSections() || !this.containsSection(section)) {
             super.doAddSection(section);
@@ -56,21 +50,11 @@ public class Range extends RangeBase {
     }
 
     @Override
-    public void addSections(final Collection<Section> sections) {
-        super.addSections(sections);
-    }
-
-    @Override
     protected void doAddItem(final Item item) {
         if (!item.hasRange() || item.getRange() != this) {
             item.setRange(this);
         } else {
             super.doAddItem(item);
         }
-    }
-
-    @Override
-    public void addItems(final Collection<Item> items) {
-        super.addItems(items);
     }
 }

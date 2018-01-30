@@ -1,6 +1,5 @@
 package com.globallogic.dc.model;
 
-import java.util.Collection;
 import java.util.List;
 
 public class Section extends SectionBase {
@@ -36,11 +35,6 @@ public class Section extends SectionBase {
         } else {
             super.doAddRange(range);
         }
-    }
-
-    @Override
-    public void addRanges(final Collection<Range> ranges) {
-        super.addRanges(ranges);
     }
 
     @Override

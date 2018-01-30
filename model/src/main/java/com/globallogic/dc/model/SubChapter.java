@@ -1,6 +1,5 @@
 package com.globallogic.dc.model;
 
-import java.util.Collection;
 import java.util.List;
 
 public class SubChapter extends SubChapterBase {
@@ -32,22 +31,12 @@ public class SubChapter extends SubChapterBase {
     }
 
     @Override
-    public void addRanges(final Collection<Range> ranges) {
-        super.addRanges(ranges);
-    }
-
-    @Override
     protected void doAddSection(final Section section) {
         if (!section.hasSubChapter() || section.getSubChapter() != this) {
             section.setSubChapter(this);
         } else {
             super.doAddSection(section);
         }
-    }
-
-    @Override
-    protected void addSections(final Collection<Section> sections) {
-        super.addSections(sections);
     }
 
     @Override

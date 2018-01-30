@@ -1,6 +1,5 @@
 package com.globallogic.dc.model;
 
-import java.util.Collection;
 import java.util.List;
 
 public class Item extends ItemBase {
@@ -39,11 +38,6 @@ public class Item extends ItemBase {
         if (!relatedItem.hasRelatedItems() || !relatedItem.containsRelatedItem(this)) {
             relatedItem.addRelatedItem(this);
         }
-    }
-
-    @Override
-    public void addRelatedItems(final Collection<Item> relatedItems) {
-        super.addRelatedItems(relatedItems);
     }
 
     @Override

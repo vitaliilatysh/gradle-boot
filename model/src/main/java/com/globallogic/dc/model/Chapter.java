@@ -1,6 +1,5 @@
 package com.globallogic.dc.model;
 
-import java.util.Collection;
 import java.util.List;
 
 public class Chapter extends ChapterBase {
@@ -27,10 +26,5 @@ public class Chapter extends ChapterBase {
         } else {
             super.doAddSubChapter(subChapter);
         }
-    }
-
-    @Override
-    public void addSubChapters(final Collection<SubChapter> subChapters) {
-        super.addSubChapters(subChapters);
     }
 }
