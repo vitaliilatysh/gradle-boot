@@ -78,7 +78,7 @@ public class SectionTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddRange_Null(){
+    public void testAddRange_Null() {
         final Section target = buildSection(false, false);
 
         target.addRange(null);
@@ -121,7 +121,7 @@ public class SectionTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddRanges_Null(){
+    public void testAddRanges_Null() {
         final Section target = buildSection(false, false);
 
         target.addRanges(null);
@@ -130,19 +130,21 @@ public class SectionTest {
     @Test
     public void testAddRanges() {
         final Section target = buildSection(false, false);
-        final List<Range> ranges = Arrays.asList(
-                new Range("2", "2", "2"),
-                new Range("3", "3", "3"));
+        final Range range1 = new Range("2", "2", "2");
+        final Range range2 = new Range("3", "3", "3");
+        final List<Range> ranges = Arrays.asList(range1, range2);
 
         target.addRanges(ranges);
 
-        for(Range range: ranges){
-            assertTrue(target.hasRanges());
-            assertTrue(target.containsRange(range));
-            assertTrue(range.hasSections());
-            assertTrue(range.containsSection(target));
-        }
-        assertEquals(2, target.getRanges().size());
+        assertTrue(target.hasRanges());
+        assertTrue(target.containsRange(range1));
+        assertTrue(target.containsRange(range2));
+
+        assertTrue(range1.hasSections());
+        assertTrue(range2.hasSections());
+
+        assertTrue(range1.containsSection(target));
+        assertTrue(range2.containsSection(target));
     }
 
     private Section buildSection(final boolean fillSubChapter, final boolean fillRanges) {

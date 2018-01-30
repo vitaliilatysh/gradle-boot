@@ -75,19 +75,19 @@ public class ChapterTest {
     @Test
     public void testAddSubChapters() {
         final Chapter target = buildChapter(false);
-        final List<SubChapter> subChapters = Arrays.asList(
-                new SubChapter("1", "Title", "Desc"),
-                new SubChapter("1", "Title", "Desc"));
+        final SubChapter subChapter1 = new SubChapter("1", "Title", "Desc");
+        final SubChapter subChapter2 = new SubChapter("1", "Title", "Desc");
+        final List<SubChapter> subChapters = Arrays.asList(subChapter1, subChapter2);
 
         target.addSubChapters(subChapters);
 
-        for (SubChapter subChapter : subChapters) {
-            assertTrue(target.hasSubChapters());
-            assertTrue(target.containsSubChapter(subChapter));
-            assertTrue(subChapter.hasChapter());
-            assertTrue(subChapter.getChapter().equals(target));
-        }
-        assertEquals(2, target.getSubChapters().size());
+        assertTrue(target.hasSubChapters());
+
+        assertTrue(target.containsSubChapter(subChapter1));
+        assertTrue(target.containsSubChapter(subChapter2));
+
+        assertTrue(subChapter1.getChapter().equals(target));
+        assertTrue(subChapter2.getChapter().equals(target));
     }
 
     private Chapter buildChapter(final boolean fillSubChapters) {

@@ -201,17 +201,17 @@ public class ItemTest {
     @Test
     public void testAddItems() {
         final Item target = buildItem(false, false, false);
-        final List<String> items = Arrays.asList(
-                new Item("2", "2", "2").toString(),
-                new Item("3", "3", "3").toString());
+        final Item item1 = buildItem(false, false, false);
+        final Item item2 = buildItem(false, false, false);
+
+        final List<String> items = Arrays.asList(item1.toString(), item2.toString());
 
         target.addItems(items);
 
-        for (String item : items) {
-            assertTrue(target.hasItems());
-            assertTrue(target.containsItem(item));
-        }
-        assertEquals(2, target.getItems().size());
+        assertTrue(target.hasItems());
+
+        assertTrue(target.containsItem(item1.toString()));
+        assertTrue(target.containsItem(item2.toString()));
     }
 
     private Item buildItem(final boolean fillItems, final boolean fillRelatedItems, final boolean fillRange) {

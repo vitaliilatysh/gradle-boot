@@ -67,20 +67,22 @@ public class RangeTest {
     @Test
     public void testAddSubChapters() {
         final Range target = buildRange(false, false, false);
-        final List<SubChapter> subChapters = Arrays.asList(
-                new SubChapter("2", "2", "2"),
-                new SubChapter("3", "3", "3"));
+        final SubChapter subChapter1 = new SubChapter("2", "2", "2");
+        final SubChapter subChapter2 = new SubChapter("3", "3", "3");
+        final List<SubChapter> subChapters = Arrays.asList(subChapter1, subChapter2);
 
         target.addSubChapters(subChapters);
 
-        for (SubChapter subChapter : subChapters) {
-            assertTrue(target.hasSubChapters());
-            assertTrue(target.containsSubChapter(subChapter));
-            assertTrue(subChapter.hasRanges());
-            assertTrue(subChapter.containsRange(target));
-        }
+        assertTrue(target.hasSubChapters());
 
-        assertEquals(2, target.getSubChapters().size());
+        assertTrue(target.containsSubChapter(subChapter1));
+        assertTrue(target.containsSubChapter(subChapter2));
+
+        assertTrue(subChapter1.hasRanges());
+        assertTrue(subChapter2.hasRanges());
+
+        assertTrue(subChapter1.containsRange(target));
+        assertTrue(subChapter2.containsRange(target));
     }
 
     @Test
@@ -135,19 +137,22 @@ public class RangeTest {
     @Test
     public void testAddItems() {
         final Range target = buildRange(false, false, false);
-        final List<Item> items = Arrays.asList(
-                new Item("1", "Title", "Desc"),
-                new Item("1", "Title", "Desc"));
+        final Item item1 = new Item("1", "Title", "Desc");
+        final Item item2 = new Item("1", "Title", "Desc");
+        final List<Item> items = Arrays.asList(item1, item2);
 
         target.addItems(items);
 
-        for (Item item : items) {
-            assertTrue(target.hasItems());
-            assertTrue(target.containsItem(item));
-            assertTrue(item.hasRange());
-            assertTrue(item.getRange().equals(target));
-        }
-        assertEquals(2, target.getItems().size());
+        assertTrue(target.hasItems());
+
+        assertTrue(target.containsItem(item1));
+        assertTrue(target.containsItem(item2));
+
+        assertTrue(item1.hasRange());
+        assertTrue(item2.hasRange());
+
+        assertTrue(item1.getRange().equals(target));
+        assertTrue(item2.getRange().equals(target));
     }
 
     @Test
@@ -171,7 +176,7 @@ public class RangeTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddSection_Null(){
+    public void testAddSection_Null() {
         final Range target = buildRange(false, false, false);
 
         target.addSection(null);
@@ -214,7 +219,7 @@ public class RangeTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddSections_Null(){
+    public void testAddSections_Null() {
         final Range target = buildRange(false, false, false);
 
         target.addSections(null);
@@ -223,19 +228,22 @@ public class RangeTest {
     @Test
     public void testAddSections() {
         final Range target = buildRange(false, false, false);
-        final List<Section> sections = Arrays.asList(
-                new Section("2", "2", "2"),
-                new Section("3", "3", "3"));
+        final Section section1 = new Section("2", "2", "2");
+        final Section section2 = new Section("3", "3", "3");
+        final List<Section> sections = Arrays.asList(section1, section2);
 
         target.addSections(sections);
 
-        for (Section section : sections) {
-            assertTrue(target.hasSections());
-            assertTrue(target.containsSection(section));
-            assertTrue(section.hasRanges());
-            assertTrue(section.containsRange(target));
-        }
-        assertEquals(2, target.getSections().size());
+        assertTrue(target.hasSections());
+
+        assertTrue(target.containsSection(section1));
+        assertTrue(target.containsSection(section2));
+
+        assertTrue(section1.hasRanges());
+        assertTrue(section2.hasRanges());
+
+        assertTrue(section1.containsRange(target));
+        assertTrue(section2.containsRange(target));
     }
 
     private Range buildRange(final boolean fillSubChapters, final boolean fillItems, final boolean fillSections) {

@@ -109,19 +109,22 @@ public class SubChapterTest {
     @Test
     public void testAddSections() {
         final SubChapter target = buildSubChapter(false, false, false);
-        final List<Section> sections = Arrays.asList(
-                new Section("1", "Title", "Desc"),
-                new Section("1", "Title", "Desc"));
+        final Section section1 = new Section("1", "Title", "Desc");
+        final Section section2 = new Section("1", "Title", "Desc");
+        final List<Section> sections = Arrays.asList(section1,section2);
 
         target.addSections(sections);
 
-        for (Section section : sections) {
-            assertTrue(target.hasSections());
-            assertTrue(target.containsSection(section));
-            assertTrue(section.hasSubChapter());
-            assertTrue(section.getSubChapter().equals(target));
-        }
-        assertEquals(2, target.getSections().size());
+        assertTrue(target.hasSections());
+
+        assertTrue(target.containsSection(section1));
+        assertTrue(target.containsSection(section2));
+
+        assertTrue(section1.hasSubChapter());
+        assertTrue(section2.hasSubChapter());
+
+        assertTrue(section1.getSubChapter().equals(target));
+        assertTrue(section2.getSubChapter().equals(target));
     }
 
     @Test
@@ -182,20 +185,22 @@ public class SubChapterTest {
     @Test
     public void testAddRanges() {
         final SubChapter target = buildSubChapter(false, false, false);
-        final List<Range> ranges = Arrays.asList(
-                new Range("2", "2", "2"),
-                new Range("3", "3", "3"));
+        final Range range1 = new Range("2", "2", "2");
+        final Range range2 = new Range("3", "3", "3");
+        final List<Range> ranges = Arrays.asList(range1, range2);
 
         target.addRanges(ranges);
 
-        for (Range range : ranges) {
-            assertTrue(target.hasRanges());
-            assertTrue(target.containsRange(range));
-            assertTrue(range.hasSubChapters());
-            assertTrue(range.containsSubChapter(target));
-        }
+        assertTrue(target.hasRanges());
 
-        assertEquals(2, target.getRanges().size());
+        assertTrue(target.containsRange(range1));
+        assertTrue(target.containsRange(range2));
+
+        assertTrue(range1.hasSubChapters());
+        assertTrue(range2.hasSubChapters());
+
+        assertTrue(range1.containsSubChapter(target));
+        assertTrue(range2.containsSubChapter(target));
     }
 
     private SubChapter buildSubChapter(final boolean fillChapter, final boolean fillSections, final boolean fillRanges) {
