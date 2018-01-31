@@ -1,4 +1,4 @@
-package com.globallogic.dc.commons.model;
+package com.globallogic.dc.model;
 
 import org.junit.Test;
 
@@ -98,7 +98,7 @@ public class ItemTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddRelatedItem_Null(){
+    public void testAddRelatedItem_Null() {
         final Item target = buildItem(false, false, false);
 
         target.addRelatedItem(null);
@@ -145,7 +145,7 @@ public class ItemTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddRelatedItems_Null(){
+    public void testAddRelatedItems_Null() {
         final Item target = buildItem(false, false, false);
 
         target.addRelatedItems(null);
@@ -173,7 +173,7 @@ public class ItemTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddItem_Null(){
+    public void testAddItem_Null() {
         final Item target = buildItem(false, false, false);
 
         target.addItem(null);
@@ -192,7 +192,7 @@ public class ItemTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddItems_Null(){
+    public void testAddItems_Null() {
         final Item target = buildItem(false, false, false);
 
         target.addItems(null);

@@ -1,4 +1,4 @@
-package com.globallogic.dc.commons.model;
+package com.globallogic.dc.model;
 
 import org.junit.Test;
 
@@ -30,7 +30,7 @@ public class ChapterTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddSubChapter_Null(){
+    public void testAddSubChapter_Null() {
         final Chapter target = buildChapter(false);
 
         target.addSubChapter(null);
@@ -66,7 +66,7 @@ public class ChapterTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddSubChapters_Null(){
+    public void testAddSubChapters_Null() {
         final Chapter target = buildChapter(false);
 
         target.addSubChapters(null);

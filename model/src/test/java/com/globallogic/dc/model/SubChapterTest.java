@@ -1,4 +1,4 @@
-package com.globallogic.dc.commons.model;
+package com.globallogic.dc.model;
 
 import org.junit.Test;
 
@@ -111,7 +111,7 @@ public class SubChapterTest {
         final SubChapter target = buildSubChapter(false, false, false);
         final Section section1 = new Section("1", "Title", "Desc");
         final Section section2 = new Section("1", "Title", "Desc");
-        final List<Section> sections = Arrays.asList(section1,section2);
+        final List<Section> sections = Arrays.asList(section1, section2);
 
         target.addSections(sections);
 

@@ -1,4 +1,4 @@
-package com.globallogic.dc.commons.model;
+package com.globallogic.dc.model;
 
 import org.junit.Test;
 
