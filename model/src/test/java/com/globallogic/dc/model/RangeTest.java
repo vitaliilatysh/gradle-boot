@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.globallogic.dc.commons.test.RangeBuilder.buildRange;
 import static org.junit.Assert.*;
 
 public class RangeTest {
@@ -244,38 +245,5 @@ public class RangeTest {
 
         assertTrue(section1.containsRange(target));
         assertTrue(section2.containsRange(target));
-    }
-
-    private Range buildRange(final boolean fillSubChapters, final boolean fillItems, final boolean fillSections) {
-        return this.buildRange("1", "Title", "Desc", fillSubChapters, fillItems, fillSections);
-    }
-
-    private Range buildRange(
-            final String key,
-            final String title,
-            final String description,
-            final boolean fillSubChapters,
-            final boolean fillItems,
-            final boolean fillSections) {
-        final Range result = new Range(key, title, description);
-
-        if (fillSubChapters) {
-            result.addSubChapters(Arrays.asList(
-                    new SubChapter("1", "Title", "Desc"),
-                    new SubChapter("2", "Title", "Desc")));
-        }
-
-        if (fillItems) {
-            result.addItems(Arrays.asList(
-                    new Item("1", "Title", "Desc"),
-                    new Item("2", "Title", "Desc")));
-        }
-
-        if (fillSections) {
-            result.addSections(Arrays.asList(
-                    new Section("1", "Title", "Desc"),
-                    new Section("2", "Title", "Desc")));
-        }
-        return result;
     }
 }

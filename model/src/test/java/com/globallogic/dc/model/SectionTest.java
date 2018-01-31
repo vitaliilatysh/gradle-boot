@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.globallogic.dc.commons.test.SectionBuilder.buildSection;
 import static org.junit.Assert.*;
 
 public class SectionTest {
@@ -145,30 +146,5 @@ public class SectionTest {
 
         assertTrue(range1.containsSection(target));
         assertTrue(range2.containsSection(target));
-    }
-
-    private Section buildSection(final boolean fillSubChapter, final boolean fillRanges) {
-        return this.buildSection("1", "Title", "Desc", fillSubChapter, fillRanges);
-    }
-
-    private Section buildSection(
-            final String key,
-            final String title,
-            final String description,
-            final boolean fillSubChapter,
-            final boolean fillRanges) {
-        final Section result = new Section(key, title, description);
-
-        if (fillRanges) {
-            result.addRanges(Arrays.asList(
-                    new Range("1", "Title", "Desc"),
-                    new Range("2", "Title", "Desc")
-            ));
-        }
-
-        if (fillSubChapter) {
-            result.setSubChapter(new SubChapter("1", "Title", "Desc"));
-        }
-        return result;
     }
 }

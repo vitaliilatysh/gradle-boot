@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.globallogic.dc.commons.test.ItemBuilder.buildItem;
 import static org.junit.Assert.*;
 
 public class ItemTest {
@@ -212,35 +213,5 @@ public class ItemTest {
 
         assertTrue(target.containsItem(item1.toString()));
         assertTrue(target.containsItem(item2.toString()));
-    }
-
-    private Item buildItem(final boolean fillItems, final boolean fillRelatedItems, final boolean fillRange) {
-        return this.buildItem("1", "Title", "Desc", fillItems, fillRelatedItems, fillRange);
-    }
-
-    private Item buildItem(
-            final String key,
-            final String title,
-            final String description,
-            final boolean fillItems,
-            final boolean fillRelatedItems,
-            final boolean fillRange) {
-        final Item result = new Item(key, title, description);
-
-        if (fillItems) {
-            result.addItems(Arrays.asList(
-                    new Item("1", "Title", "Desc").toString(),
-                    new Item("2", "Title", "Desc").toString()));
-        }
-
-        if (fillRelatedItems)
-            result.addRelatedItems(Arrays.asList(
-                    new Item("1", "Title", "Desc"),
-                    new Item("2", "Title", "Desc")));
-
-        if (fillRange)
-            result.setRange(new Range("1", "Title", "Desc"));
-
-        return result;
     }
 }
