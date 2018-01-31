@@ -1,6 +1,4 @@
-group 'com.globallogic.dc'
-
-apply plugin: 'java'
+group 'com.globallogic.dc.commons.model'
 
 repositories {
     jcenter()

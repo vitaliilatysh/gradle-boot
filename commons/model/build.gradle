@@ -1,1 +1,11 @@
-group 'com.globallogic.dc'
+group 'com.globallogic.dc.commons.model'
+
+repositories {
+    jcenter()
+}
+dependencies {
+    compile group: 'org.apache.commons', name:'commons-lang3'
+    compile group: 'org.apache.commons', name: 'commons-collections4'
+
+    testCompile group: 'junit', name:'junit'
+}

@@ -1,4 +1,4 @@
-package com.globallogic.dc.model;
+package com.globallogic.dc.commons.model;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

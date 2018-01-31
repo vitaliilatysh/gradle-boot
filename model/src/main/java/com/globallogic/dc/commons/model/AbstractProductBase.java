@@ -1,4 +1,4 @@
-package com.globallogic.dc.model;
+package com.globallogic.dc.commons.model;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 

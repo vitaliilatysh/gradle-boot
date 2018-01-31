@@ -1,4 +1,4 @@
-package com.globallogic.dc.model;
+package com.globallogic.dc.commons.model;
 
 import java.util.List;
 
