@@ -98,7 +98,7 @@ public class ItemTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddRelatedItem_Null() {
+    public void testAddRelatedItem_IllegalArgumentException() {
         final Item target = buildItem(false, false, false);
 
         target.addRelatedItem(null);
@@ -145,7 +145,7 @@ public class ItemTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddRelatedItems_Null() {
+    public void testAddRelatedItems_IllegalArgumentException() {
         final Item target = buildItem(false, false, false);
 
         target.addRelatedItems(null);
@@ -173,7 +173,7 @@ public class ItemTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddItem_Null() {
+    public void testAddItem_IllegalArgumentException() {
         final Item target = buildItem(false, false, false);
 
         target.addItem(null);
@@ -192,7 +192,7 @@ public class ItemTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddItems_Null() {
+    public void testAddItems_IllegalArgumentException() {
         final Item target = buildItem(false, false, false);
 
         target.addItems(null);

@@ -30,7 +30,7 @@ public class ChapterTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddSubChapter_Null() {
+    public void testAddSubChapter_IllegalArgumentException() {
         final Chapter target = buildChapter(false);
 
         target.addSubChapter(null);
@@ -66,7 +66,7 @@ public class ChapterTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddSubChapters_Null() {
+    public void testAddSubChapters_IllegalArgumentException() {
         final Chapter target = buildChapter(false);
 
         target.addSubChapters(null);
