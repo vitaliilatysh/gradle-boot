@@ -1,29 +1,67 @@
 package com.globallogic.dc.commons.test;
 
-import com.globallogic.dc.model.SubChapter;
 import com.globallogic.dc.model.Chapter;
+import com.globallogic.dc.model.SubChapter;
 
-import java.util.Arrays;
+public class ChapterBuilder extends Chapter{
 
-public class ChapterBuilder {
+    private final String key;
+    private final String title;
+    private final String description;
+    private final SubChapter subChapter;
 
-    public static com.globallogic.dc.model.Chapter buildChapter(final boolean fillSubChapters) {
-        return buildChapter("1", "Title", "Desc", fillSubChapters);
+    private ChapterBuilder(final Builder builder) {
+        super();
+        this.key = builder.key;
+        this.title = builder.title;
+        this.description = builder.description;
+        this.subChapter = builder.subChapter;
     }
 
-    private static Chapter buildChapter(
-            final String key,
-            final String title,
-            final String description,
-            final boolean fillSubChapters) {
-        final Chapter result = new Chapter(key, title, description);
+    public String getKey() {
+        return key;
+    }
 
-        if (fillSubChapters) {
-            result.addSubChapters(Arrays.asList(
-                    new SubChapter("1", "Title", "Desc"),
-                    new SubChapter("2", "Title", "Desc")));
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public SubChapter getSubChapter() {
+        return subChapter;
+    }
+
+    public static class Builder {
+        private String key;
+        private String title;
+        private String description;
+        private SubChapter subChapter;
+
+        public Builder key(final String key) {
+            this.key = key;
+            return this;
         }
 
-        return result;
+        public Builder title(final String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder description(final String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder subChapter(final SubChapter subChapter) {
+            this.subChapter = subChapter;
+            return this;
+        }
+
+        public ChapterBuilder build() {
+            return new ChapterBuilder(this);
+        }
     }
 }

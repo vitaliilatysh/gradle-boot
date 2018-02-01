@@ -9,6 +9,9 @@ public abstract class AbstractProduct extends AbstractProductBase {
         super(key, title, description);
     }
 
+    public AbstractProduct() {
+    }
+
     public String getIdentifier() {
         return this.getKey();
     }

@@ -19,6 +19,9 @@ public abstract class AbstractProductBase extends Entity<String> {
         this.description = description;
     }
 
+    public AbstractProductBase() {
+    }
+
     public String getKey() {
         return this.key;
     }

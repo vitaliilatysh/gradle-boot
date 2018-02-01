@@ -19,6 +19,9 @@ public class Chapter extends ChapterBase {
         super(key, title, description, subChapters);
     }
 
+    public Chapter() {
+    }
+
     @Override
     protected void doAddSubChapter(final SubChapter subChapter) {
         if (!subChapter.hasChapter() || subChapter.getChapter() != this) {
