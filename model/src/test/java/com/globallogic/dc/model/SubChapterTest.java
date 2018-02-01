@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.globallogic.dc.commons.test.SubChapterBuilder.buildSubChapter;
 import static org.junit.Assert.*;
 
 public class SubChapterTest {
@@ -201,36 +202,5 @@ public class SubChapterTest {
 
         assertTrue(range1.containsSubChapter(target));
         assertTrue(range2.containsSubChapter(target));
-    }
-
-    private SubChapter buildSubChapter(final boolean fillChapter, final boolean fillSections, final boolean fillRanges) {
-        return this.buildSubChapter("1", "Title", "Desc", fillChapter, fillSections, fillRanges);
-    }
-
-    private SubChapter buildSubChapter(
-            final String key,
-            final String title,
-            final String description,
-            final boolean fillChapter,
-            final boolean fillSections,
-            final boolean fillRanges) {
-        final SubChapter result = new SubChapter(key, title, description);
-
-        if (fillRanges) {
-            result.addRanges(Arrays.asList(
-                    new Range("1", "Title", "Desc"),
-                    new Range("2", "Title", "Desc")
-            ));
-        }
-        if (fillSections) {
-            result.addSections(Arrays.asList(
-                    new Section("1", "Title", "Desc"),
-                    new Section("2", "Title", "Desc")
-            ));
-        }
-        if (fillChapter) {
-            result.setChapter(new Chapter("1", "Title", "Desc"));
-        }
-        return result;
     }
 }

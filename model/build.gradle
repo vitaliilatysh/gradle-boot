@@ -1,8 +1,5 @@
 group 'com.globallogic.dc.model'
 
-repositories {
-    jcenter()
-}
 dependencies {
     compile project(':commons:model')
     compile group: 'org.apache.commons', name: 'commons-collections4'

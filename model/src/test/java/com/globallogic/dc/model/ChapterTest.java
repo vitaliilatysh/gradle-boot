@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.globallogic.dc.commons.test.ChapterBuilder.buildChapter;
 import static org.junit.Assert.*;
 
 public class ChapterTest {
@@ -89,26 +90,4 @@ public class ChapterTest {
         assertTrue(subChapter1.getChapter().equals(target));
         assertTrue(subChapter2.getChapter().equals(target));
     }
-
-    private Chapter buildChapter(final boolean fillSubChapters) {
-        return this.buildChapter("1", "Title", "Desc", fillSubChapters);
-    }
-
-    private Chapter buildChapter(
-            final String key,
-            final String title,
-            final String description,
-            final boolean fillSubChapters) {
-        final Chapter result = new Chapter(key, title, description);
-
-        if (fillSubChapters) {
-            result.addSubChapters(Arrays.asList(
-                    new SubChapter("1", "Title", "Desc"),
-                    new SubChapter("2", "Title", "Desc")));
-        }
-
-        return result;
-    }
-
-
 }
