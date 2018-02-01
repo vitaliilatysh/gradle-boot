@@ -16,10 +16,10 @@ public class ChapterTest {
 
     @Before
     public void setUp() {
-        target = new ChapterBuilder.Builder()
-                .key("1")
-                .title("Title")
-                .description("Desc")
+        target = new ChapterBuilder()
+                .withKey("1")
+                .witTitle("Title")
+                .withDescription("Desc")
                 .build();
     }
 
@@ -61,10 +61,10 @@ public class ChapterTest {
 
     @Test
     public void testAddSubChapter_MoveSubChapterToAnotherChapter() {
-        final Chapter anotherChapter = new ChapterBuilder.Builder()
-                .key("1")
-                .title("Title")
-                .description("Desc")
+        final Chapter anotherChapter = new ChapterBuilder()
+                .withKey("1")
+                .witTitle("Title")
+                .withDescription("Desc")
                 .build();
         final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
 
