@@ -1,19 +1,30 @@
 package com.globallogic.dc.model;
 
+import com.globallogic.dc.commons.test.SubChapterBuilder;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.globallogic.dc.commons.test.SubChapterBuilder.buildSubChapter;
 import static org.junit.Assert.*;
 
 public class SubChapterTest {
 
+    private SubChapter target;
+
+    @Before
+    public void setUp(){
+        target = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+    }
+
     @Test
     public void testSetChapter_NoChapterInSubChapter() {
-        final SubChapter target = buildSubChapter(false, false, false);
         final Chapter chapter = new Chapter("1", "Title", "Desc");
 
         target.setChapter(chapter);
@@ -26,8 +37,8 @@ public class SubChapterTest {
 
     @Test
     public void testSetChapter_MoveChapterToAnotherSubChapter() {
-        final SubChapter target = buildSubChapter(false, false, true);
-        final SubChapter anotherSubChapter = buildSubChapter(false, false, false);
+        final SubChapter anotherSubChapter = new SubChapterBuilder()
+                .withKey("1").withTitle("Title").withDescription("Desc").build();
         final Chapter chapter = new Chapter("1", "Title", "Desc");
 
         target.setChapter(chapter);
@@ -44,15 +55,18 @@ public class SubChapterTest {
 
     @Test
     public void testHasChapter_NotSet() {
-        final SubChapter target = buildSubChapter(false, false, false);
-
         assertNull(target.getChapter());
         assertFalse(target.hasChapter());
     }
 
     @Test
     public void testHasChapter() {
-        final SubChapter target = buildSubChapter(true, false, false);
+        final SubChapter target = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .withChapter(new Chapter("1", "Title", "Desc"))
+                .build();
 
         assertNotNull(target.getChapter());
         assertTrue(target.hasChapter());
@@ -60,8 +74,6 @@ public class SubChapterTest {
 
     @Test
     public void testHasSections_Empty() {
-        final SubChapter target = buildSubChapter(false, false, false);
-
         assertNull(target.getSections());
         assertFalse(target.hasSections());
 
@@ -72,7 +84,12 @@ public class SubChapterTest {
 
     @Test
     public void testHasSections() {
-        final SubChapter target = buildSubChapter(false, true, false);
+        final SubChapter target = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .withSections(Arrays.asList(new Section("1", "Title", "Desc"), new Section("2", "Title", "Desc")))
+                .build();
 
         assertNotNull(target.getSections());
         assertTrue(target.hasSections());
@@ -80,7 +97,6 @@ public class SubChapterTest {
 
     @Test
     public void testAddSection_NoSectionInSubChapter() {
-        final SubChapter target = buildSubChapter(false, false, false);
         final Section section = new Section("1", "Title", "Desc");
 
         target.addSection(section);
@@ -93,8 +109,11 @@ public class SubChapterTest {
 
     @Test
     public void testAddSection_MoveSectionToAnotherSubChapter() {
-        final SubChapter target = buildSubChapter(false, false, false);
-        final SubChapter anotherSubChapter = buildSubChapter(false, false, false);
+        final SubChapter anotherSubChapter = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
         final Section section = new Section("1", "Title", "Desc");
 
         target.addSection(section);
@@ -109,7 +128,11 @@ public class SubChapterTest {
 
     @Test
     public void testAddSections() {
-        final SubChapter target = buildSubChapter(false, false, false);
+        final SubChapter target = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
         final Section section1 = new Section("1", "Title", "Desc");
         final Section section2 = new Section("1", "Title", "Desc");
         final List<Section> sections = Arrays.asList(section1, section2);
@@ -130,8 +153,6 @@ public class SubChapterTest {
 
     @Test
     public void testHasRanges_Empty() {
-        final SubChapter target = buildSubChapter(false, false, false);
-
         assertNull(target.getRanges());
         assertFalse(target.hasRanges());
 
@@ -142,7 +163,12 @@ public class SubChapterTest {
 
     @Test
     public void testHasRanges() {
-        final SubChapter target = buildSubChapter(false, false, true);
+        final SubChapter target = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .withRanges(Arrays.asList(new Range("1", "Title", "Desc"), new Range("2", "Title", "Desc")))
+                .build();
 
         assertNotNull(target.getRanges());
         assertTrue(target.hasRanges());
@@ -150,7 +176,6 @@ public class SubChapterTest {
 
     @Test
     public void testAddRange_NoRangeInSubChapter() {
-        final SubChapter target = buildSubChapter(false, false, false);
         final Range range = new Range("1", "Title", "Desc");
 
         target.addRange(range);
@@ -165,7 +190,6 @@ public class SubChapterTest {
 
     @Test
     public void testAddRange_MoveRangeToAnotherSubChapter() {
-        final SubChapter target = buildSubChapter(false, false, false);
         final SubChapter anotherSubChapter = new SubChapter("3", "Title", "Desc");
         final Range range = new Range("1", "Title", "Desc");
 
@@ -185,7 +209,6 @@ public class SubChapterTest {
 
     @Test
     public void testAddRanges() {
-        final SubChapter target = buildSubChapter(false, false, false);
         final Range range1 = new Range("2", "2", "2");
         final Range range2 = new Range("3", "3", "3");
         final List<Range> ranges = Arrays.asList(range1, range2);

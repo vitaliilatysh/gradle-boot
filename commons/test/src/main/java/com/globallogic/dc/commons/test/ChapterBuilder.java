@@ -20,7 +20,7 @@ public class ChapterBuilder {
         return this;
     }
 
-    public ChapterBuilder witTitle(final String title) {
+    public ChapterBuilder withTitle(final String title) {
         this.title = title;
         return this;
     }

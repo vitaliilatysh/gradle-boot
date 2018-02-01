@@ -5,37 +5,51 @@ import com.globallogic.dc.model.Range;
 import com.globallogic.dc.model.Section;
 import com.globallogic.dc.model.SubChapter;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class SubChapterBuilder {
-    public static SubChapter buildSubChapter(final boolean fillChapter, final boolean fillSections, final boolean fillRanges) {
-        return buildSubChapter("1", "Title", "Desc", fillChapter, fillSections, fillRanges);
+
+    private String key;
+    private String title;
+    private String description;
+    private Chapter chapter;
+    private List<Section> sections;
+    private List<Range> ranges;
+
+    public SubChapterBuilder() {
     }
 
-    private static SubChapter buildSubChapter(
-            final String key,
-            final String title,
-            final String description,
-            final boolean fillChapter,
-            final boolean fillSections,
-            final boolean fillRanges) {
-        final SubChapter result = new SubChapter(key, title, description);
+    public SubChapterBuilder withKey(final String key) {
+        this.key = key;
+        return this;
+    }
 
-        if (fillRanges) {
-            result.addRanges(Arrays.asList(
-                    new Range("1", "Title", "Desc"),
-                    new Range("2", "Title", "Desc")
-            ));
-        }
-        if (fillSections) {
-            result.addSections(Arrays.asList(
-                    new Section("1", "Title", "Desc"),
-                    new Section("2", "Title", "Desc")
-            ));
-        }
-        if (fillChapter) {
-            result.setChapter(new Chapter("1", "Title", "Desc"));
-        }
-        return result;
+    public SubChapterBuilder withTitle(final String title) {
+        this.title = title;
+        return this;
+    }
+
+    public SubChapterBuilder withDescription(final String description) {
+        this.description = description;
+        return this;
+    }
+
+    public SubChapterBuilder withChapter(final Chapter chapter) {
+        this.chapter = chapter;
+        return this;
+    }
+
+    public SubChapterBuilder withSections(final List<Section> sections) {
+        this.sections = sections;
+        return this;
+    }
+
+    public SubChapterBuilder withRanges(final List<Range> ranges) {
+        this.ranges = ranges;
+        return this;
+    }
+
+    public SubChapter build() {
+        return new SubChapter(key, title, description, chapter, sections, ranges);
     }
 }

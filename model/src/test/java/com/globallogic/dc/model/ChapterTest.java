@@ -1,6 +1,7 @@
 package com.globallogic.dc.model;
 
 import com.globallogic.dc.commons.test.ChapterBuilder;
+import com.globallogic.dc.commons.test.SubChapterBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +19,7 @@ public class ChapterTest {
     public void setUp() {
         target = new ChapterBuilder()
                 .withKey("1")
-                .witTitle("Title")
+                .withTitle("Title")
                 .withDescription("Desc")
                 .build();
     }
@@ -34,7 +35,11 @@ public class ChapterTest {
 
     @Test
     public void testHasSubChapters() {
-        SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+        final SubChapter subChapter = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.addSubChapter(subChapter);
 
@@ -49,7 +54,11 @@ public class ChapterTest {
 
     @Test
     public void testAddSubChapter_NoSubChapterInChapter() {
-        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+        final SubChapter subChapter = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.addSubChapter(subChapter);
 
@@ -63,10 +72,14 @@ public class ChapterTest {
     public void testAddSubChapter_MoveSubChapterToAnotherChapter() {
         final Chapter anotherChapter = new ChapterBuilder()
                 .withKey("1")
-                .witTitle("Title")
+                .withTitle("Title")
                 .withDescription("Desc")
                 .build();
-        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+        final SubChapter subChapter = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.addSubChapter(subChapter);
         anotherChapter.addSubChapter(subChapter);
@@ -85,8 +98,16 @@ public class ChapterTest {
 
     @Test
     public void testAddSubChapters() {
-        final SubChapter subChapter1 = new SubChapter("1", "Title", "Desc");
-        final SubChapter subChapter2 = new SubChapter("1", "Title", "Desc");
+        final SubChapter subChapter1 = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final SubChapter subChapter2 = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
         final List<SubChapter> subChapters = Arrays.asList(subChapter1, subChapter2);
 
         target.addSubChapters(subChapters);
