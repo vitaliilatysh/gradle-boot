@@ -1,13 +1,11 @@
-group 'com.globallogic.dc'
-
-apply plugin: 'java'
+group 'com.globallogic.dc.model'
 
 repositories {
     jcenter()
 }
 dependencies {
-    compile group: 'org.apache.commons', name:'commons-lang3'
+    compile project(':commons:model')
     compile group: 'org.apache.commons', name: 'commons-collections4'
 
-    testCompile group: 'junit', name:'junit'
+    testCompile group: 'junit', name: 'junit'
 }

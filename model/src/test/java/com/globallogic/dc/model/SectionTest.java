@@ -78,7 +78,7 @@ public class SectionTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddRange_Null() {
+    public void testAddRange_IllegalArgumentException() {
         final Section target = buildSection(false, false);
 
         target.addRange(null);
@@ -121,7 +121,7 @@ public class SectionTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddRanges_Null() {
+    public void testAddRanges_IllegalArgumentException() {
         final Section target = buildSection(false, false);
 
         target.addRanges(null);

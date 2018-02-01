@@ -176,7 +176,7 @@ public class RangeTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddSection_Null() {
+    public void testAddSection_IllegalArgumentException() {
         final Range target = buildRange(false, false, false);
 
         target.addSection(null);
@@ -219,7 +219,7 @@ public class RangeTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddSections_Null() {
+    public void testAddSections_IllegalArgumentException() {
         final Range target = buildRange(false, false, false);
 
         target.addSections(null);

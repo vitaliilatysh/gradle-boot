@@ -1,5 +1,7 @@
 package com.globallogic.dc.model;
 
+import com.globallogic.dc.commons.model.Entity;
+
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public abstract class AbstractProductBase extends Entity<String> {
