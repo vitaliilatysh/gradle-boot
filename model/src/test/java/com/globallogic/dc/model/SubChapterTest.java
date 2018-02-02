@@ -14,13 +14,13 @@ import static org.junit.Assert.*;
 
 public class SubChapterTest {
 
-    private final SubChapter target = new SubChapterBuilder().defaultInit();
-    private final SubChapter anotherSubChapter = new SubChapterBuilder().defaultInit();
-    private final Chapter chapter = new ChapterBuilder().defaultInit();
-    private final Section section = new SectionBuilder().defaultInit();
-    private final Section anotherSection = new SectionBuilder().defaultInit();
-    private final Range range = new RangeBuilder().defaultInit();
-    private final Range anotherRange = new RangeBuilder().defaultInit();
+    private final SubChapter target = new SubChapterBuilder().buildDefault();
+    private final SubChapter anotherSubChapter = new SubChapterBuilder().buildDefault();
+    private final Chapter chapter = new ChapterBuilder().buildDefault();
+    private final Section section = new SectionBuilder().buildDefault();
+    private final Section anotherSection = new SectionBuilder().buildDefault();
+    private final Range range = new RangeBuilder().buildDefault();
+    private final Range anotherRange = new RangeBuilder().buildDefault();
 
 
     @Test

@@ -39,7 +39,7 @@ public class ChapterBuilder {
         return new Chapter(key, title, description, subChapters);
     }
 
-    public Chapter defaultInit() {
+    public Chapter buildDefault() {
         return new ChapterBuilder()
                 .withKey("1")
                 .withTitle("Title")

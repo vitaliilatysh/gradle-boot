@@ -12,10 +12,10 @@ import static org.junit.Assert.*;
 
 public class ChapterTest {
 
-    private final Chapter target = new ChapterBuilder().defaultInit();
-    private final Chapter anotherChapter = new ChapterBuilder().defaultInit();
-    private final SubChapter subChapter = new SubChapterBuilder().defaultInit();
-    private final SubChapter anotherSubChapter = new SubChapterBuilder().defaultInit();
+    private final Chapter target = new ChapterBuilder().buildDefault();
+    private final Chapter anotherChapter = new ChapterBuilder().buildDefault();
+    private final SubChapter subChapter = new SubChapterBuilder().buildDefault();
+    private final SubChapter anotherSubChapter = new SubChapterBuilder().buildDefault();
 
     @Test
     public void testHasSubChapters_Empty() {

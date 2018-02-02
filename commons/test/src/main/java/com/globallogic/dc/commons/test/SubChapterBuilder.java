@@ -53,7 +53,7 @@ public class SubChapterBuilder {
         return new SubChapter(key, title, description, chapter, sections, ranges);
     }
 
-    public SubChapter defaultInit() {
+    public SubChapter buildDefault() {
         return new SubChapterBuilder()
                 .withKey("1")
                 .withTitle("Title")

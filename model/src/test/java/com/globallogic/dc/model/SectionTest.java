@@ -13,11 +13,11 @@ import static org.junit.Assert.*;
 
 public class SectionTest {
 
-    private final Section target = new SectionBuilder().defaultInit();
-    private final SubChapter subChapter = new SubChapterBuilder().defaultInit();
-    private final Section anotherSection = new SectionBuilder().defaultInit();
-    private final Range range = new RangeBuilder().defaultInit();
-    private final Range anotherRange = new RangeBuilder().defaultInit();
+    private final Section target = new SectionBuilder().buildDefault();
+    private final SubChapter subChapter = new SubChapterBuilder().buildDefault();
+    private final Section anotherSection = new SectionBuilder().buildDefault();
+    private final Range range = new RangeBuilder().buildDefault();
+    private final Range anotherRange = new RangeBuilder().buildDefault();
 
     @Test
     public void testSetSubChapter_NoSubChapterInSection() {

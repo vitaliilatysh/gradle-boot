@@ -13,13 +13,13 @@ import static org.junit.Assert.*;
 
 public class ItemTest {
 
-    private final Item target = new ItemBuilder().defaultInit();
-    private final Item anotherItem = new ItemBuilder().defaultInit();
-    private final Item item1 = new ItemBuilder().defaultInit();
-    private final Item item2 = new ItemBuilder().defaultInit();
-    private final Item relatedItem = new ItemBuilder().defaultInit();
-    private final Item anotherRelatedItem = new ItemBuilder().defaultInit();
-    private final Range range = new RangeBuilder().defaultInit();
+    private final Item target = new ItemBuilder().buildDefault();
+    private final Item anotherItem = new ItemBuilder().buildDefault();
+    private final Item item1 = new ItemBuilder().buildDefault();
+    private final Item item2 = new ItemBuilder().buildDefault();
+    private final Item relatedItem = new ItemBuilder().buildDefault();
+    private final Item anotherRelatedItem = new ItemBuilder().buildDefault();
+    private final Range range = new RangeBuilder().buildDefault();
 
     @Test
     public void testSetRange_NoRangeInItem() {

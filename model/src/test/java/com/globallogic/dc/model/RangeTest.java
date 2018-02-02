@@ -14,14 +14,14 @@ import static org.junit.Assert.*;
 
 public class RangeTest {
 
-    private final Range target = new RangeBuilder().defaultInit();
-    private final Range anotherRange = new RangeBuilder().defaultInit();
-    private final SubChapter subChapter = new SubChapterBuilder().defaultInit();
-    private final SubChapter anotherSubChapter = new SubChapterBuilder().defaultInit();
-    private final Item item = new ItemBuilder().defaultInit();
-    private final Item anotherItem = new ItemBuilder().defaultInit();
-    private final Section section = new SectionBuilder().defaultInit();
-    private final Section anotherSection = new SectionBuilder().defaultInit();
+    private final Range target = new RangeBuilder().buildDefault();
+    private final Range anotherRange = new RangeBuilder().buildDefault();
+    private final SubChapter subChapter = new SubChapterBuilder().buildDefault();
+    private final SubChapter anotherSubChapter = new SubChapterBuilder().buildDefault();
+    private final Item item = new ItemBuilder().buildDefault();
+    private final Item anotherItem = new ItemBuilder().buildDefault();
+    private final Section section = new SectionBuilder().buildDefault();
+    private final Section anotherSection = new SectionBuilder().buildDefault();
 
     @Test
     public void testHasSubChapters_Empty() {

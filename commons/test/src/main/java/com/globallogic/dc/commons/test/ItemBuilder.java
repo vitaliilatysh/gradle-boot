@@ -51,7 +51,7 @@ public class ItemBuilder {
         return new Item(key, title, description, range, items, relatedItems);
     }
 
-    public Item defaultInit() {
+    public Item buildDefault() {
         return new ItemBuilder()
                 .withKey("1")
                 .withTitle("Title")
