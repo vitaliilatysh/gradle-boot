@@ -3,37 +3,24 @@ package com.globallogic.dc.model;
 import com.globallogic.dc.commons.test.RangeBuilder;
 import com.globallogic.dc.commons.test.SectionBuilder;
 import com.globallogic.dc.commons.test.SubChapterBuilder;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class SectionTest {
 
-    private Section target;
-
-    @Before
-    public void setUp() {
-        target = new SectionBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-    }
+    private final Section target = new SectionBuilder().defaultInit();
+    private final SubChapter subChapter = new SubChapterBuilder().defaultInit();
+    private final Section anotherSection = new SectionBuilder().defaultInit();
+    private final Range range = new RangeBuilder().defaultInit();
+    private final Range anotherRange = new RangeBuilder().defaultInit();
 
     @Test
     public void testSetSubChapter_NoSubChapterInSection() {
-        final SubChapter subChapter = new SubChapterBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-
         target.setSubChapter(subChapter);
 
         assertTrue(target.hasSubChapter());
@@ -44,17 +31,6 @@ public class SectionTest {
 
     @Test
     public void testSetSubChapter_MoveSubChapterToAnotherSection() {
-        final Section anotherSection = new SectionBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final SubChapter subChapter = new SubChapterBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-
         target.setSubChapter(subChapter);
         anotherSection.setSubChapter(subChapter);
 
@@ -75,17 +51,7 @@ public class SectionTest {
 
     @Test
     public void testHasSubChapter() {
-        final SubChapter subChapter = new SubChapterBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final Section target = new SectionBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .withSubChapter(subChapter)
-                .build();
+        target.setSubChapter(subChapter);
 
         assertNotNull(target.getSubChapter());
         assertTrue(target.hasSubChapter());
@@ -103,17 +69,7 @@ public class SectionTest {
 
     @Test
     public void testHasRanges() {
-        final Range range = new RangeBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final Section target = new SectionBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .withRanges(Collections.singletonList(range))
-                .build();
+        target.addRange(range);
 
         assertNotNull(target.getRanges());
         assertTrue(target.hasRanges());
@@ -126,12 +82,6 @@ public class SectionTest {
 
     @Test
     public void testAddRange_NoRangeInSection() {
-        final Range range = new RangeBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-
         target.addRange(range);
 
         assertTrue(target.hasRanges());
@@ -144,16 +94,7 @@ public class SectionTest {
 
     @Test
     public void testAddRange_MoveRangeToAnotherSection() {
-        final Section anotherSection = new SectionBuilder()
-                .withKey("2")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final Range range = new RangeBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
+        anotherSection.setKey("2");
 
         target.addRange(range);
         anotherSection.addRange(range);
@@ -177,28 +118,18 @@ public class SectionTest {
 
     @Test
     public void testAddRanges() {
-        final Range range1 = new RangeBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final Range range2 = new RangeBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final List<Range> ranges = Arrays.asList(range1, range2);
+        final List<Range> ranges = Arrays.asList(range, anotherRange);
 
         target.addRanges(ranges);
 
         assertTrue(target.hasRanges());
-        assertTrue(target.containsRange(range1));
-        assertTrue(target.containsRange(range2));
+        assertTrue(target.containsRange(range));
+        assertTrue(target.containsRange(anotherRange));
 
-        assertTrue(range1.hasSections());
-        assertTrue(range2.hasSections());
+        assertTrue(range.hasSections());
+        assertTrue(anotherRange.hasSections());
 
-        assertTrue(range1.containsSection(target));
-        assertTrue(range2.containsSection(target));
+        assertTrue(range.containsSection(target));
+        assertTrue(anotherRange.containsSection(target));
     }
 }

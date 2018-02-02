@@ -2,7 +2,6 @@ package com.globallogic.dc.model;
 
 import com.globallogic.dc.commons.test.ItemBuilder;
 import com.globallogic.dc.commons.test.RangeBuilder;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -14,24 +13,16 @@ import static org.junit.Assert.*;
 
 public class ItemTest {
 
-    private Item target;
-
-    @Before
-    public void setUp() {
-        target = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-    }
+    private final Item target = new ItemBuilder().defaultInit();
+    private final Item anotherItem = new ItemBuilder().defaultInit();
+    private final Item item1 = new ItemBuilder().defaultInit();
+    private final Item item2 = new ItemBuilder().defaultInit();
+    private final Item relatedItem = new ItemBuilder().defaultInit();
+    private final Item anotherRelatedItem = new ItemBuilder().defaultInit();
+    private final Range range = new RangeBuilder().defaultInit();
 
     @Test
     public void testSetRange_NoRangeInItem() {
-        final Range range = new RangeBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
         target.setRange(range);
 
         assertTrue(target.hasRange());
@@ -42,24 +33,6 @@ public class ItemTest {
 
     @Test
     public void testSetRange_MoveRangeToAnotherItem() {
-        final Range range = new RangeBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final Item target = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .withRange(range)
-                .build();
-        final Item anotherItem = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-
-
         target.setRange(range);
         anotherItem.setRange(range);
 
@@ -84,17 +57,7 @@ public class ItemTest {
 
     @Test
     public void testHasRelatedItems() {
-        final Item relatedItem = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final Item target = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .withRelatedItems(Collections.singletonList(relatedItem))
-                .build();
+        target.setRelatedItems(Collections.singletonList(relatedItem));
 
         assertNotNull(target.getRelatedItems());
         assertTrue(target.hasRelatedItems());
@@ -108,17 +71,7 @@ public class ItemTest {
 
     @Test
     public void testHasRange() {
-        final Range range = new RangeBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final Item target = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .withRange(range)
-                .build();
+        target.setRange(range);
 
         assertNotNull(target.getRange());
         assertTrue(target.hasRange());
@@ -136,17 +89,7 @@ public class ItemTest {
 
     @Test
     public void testHasItems() {
-        final Item anotherItem = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final Item target = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .withItems(Arrays.asList(anotherItem.toString()))
-                .build();
+        target.setItems(Collections.singletonList(anotherItem.toString()));
 
         assertNotNull(target.getItems());
         assertTrue(target.hasItems());
@@ -159,12 +102,6 @@ public class ItemTest {
 
     @Test
     public void testAddRelatedItem_NoRelatedItemInItem() {
-        final Item relatedItem = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-
         target.addRelatedItem(relatedItem);
 
         assertTrue(target.hasRelatedItems());
@@ -179,16 +116,7 @@ public class ItemTest {
 
     @Test
     public void testAddRelatedItem_MoveRelatedItemToAnotherItem() {
-        final Item anotherItem = new ItemBuilder()
-                .withKey("2")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final Item relatedItem = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
+        anotherItem.setKey("2");
 
         target.addRelatedItem(relatedItem);
         anotherItem.addRelatedItem(relatedItem);
@@ -214,29 +142,18 @@ public class ItemTest {
 
     @Test
     public void testAddRelatedItems() {
-        final Item relatedItem1 = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final Item relatedItem2 = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-
-        target.addRelatedItems(Arrays.asList(relatedItem1, relatedItem2));
+        target.addRelatedItems(Arrays.asList(relatedItem, anotherRelatedItem));
 
         assertTrue(target.hasRelatedItems());
 
-        assertTrue(target.containsRelatedItem(relatedItem1));
-        assertTrue(target.containsRelatedItem(relatedItem2));
+        assertTrue(target.containsRelatedItem(relatedItem));
+        assertTrue(target.containsRelatedItem(anotherRelatedItem));
 
-        assertTrue(relatedItem1.hasRelatedItems());
-        assertTrue(relatedItem2.hasRelatedItems());
+        assertTrue(relatedItem.hasRelatedItems());
+        assertTrue(anotherRelatedItem.hasRelatedItems());
 
-        assertTrue(relatedItem1.containsRelatedItem(target));
-        assertTrue(relatedItem2.containsRelatedItem(target));
+        assertTrue(relatedItem.containsRelatedItem(target));
+        assertTrue(anotherRelatedItem.containsRelatedItem(target));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -246,15 +163,10 @@ public class ItemTest {
 
     @Test
     public void testAddItem_NoItemInItem() {
-        final Item anotherItem = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-
         target.addItem(anotherItem.toString());
 
         assertTrue(target.hasItems());
+
         assertTrue(target.containsItem(anotherItem.toString()));
         assertEquals(1, target.getItems().size());
     }
@@ -266,17 +178,6 @@ public class ItemTest {
 
     @Test
     public void testAddItems() {
-        final Item item1 = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final Item item2 = new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-
         final List<String> items = Arrays.asList(item1.toString(), item2.toString());
 
         target.addItems(items);

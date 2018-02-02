@@ -2,7 +2,6 @@ package com.globallogic.dc.model;
 
 import com.globallogic.dc.commons.test.ChapterBuilder;
 import com.globallogic.dc.commons.test.SubChapterBuilder;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,16 +12,10 @@ import static org.junit.Assert.*;
 
 public class ChapterTest {
 
-    private Chapter target;
-
-    @Before
-    public void setUp() {
-        target = new ChapterBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-    }
+    private final Chapter target = new ChapterBuilder().defaultInit();
+    private final Chapter anotherChapter = new ChapterBuilder().defaultInit();
+    private final SubChapter subChapter = new SubChapterBuilder().defaultInit();
+    private final SubChapter anotherSubChapter = new SubChapterBuilder().defaultInit();
 
     @Test
     public void testHasSubChapters_Empty() {
@@ -35,12 +28,6 @@ public class ChapterTest {
 
     @Test
     public void testHasSubChapters() {
-        final SubChapter subChapter = new SubChapterBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-
         target.addSubChapter(subChapter);
 
         assertNotNull(target.getSubChapters());
@@ -54,40 +41,27 @@ public class ChapterTest {
 
     @Test
     public void testAddSubChapter_NoSubChapterInChapter() {
-        final SubChapter subChapter = new SubChapterBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-
         target.addSubChapter(subChapter);
 
         assertTrue(target.hasSubChapters());
+
         assertTrue(target.containsSubChapter(subChapter));
         assertTrue(subChapter.getChapter().equals(target));
+
         assertEquals(1, target.getSubChapters().size());
     }
 
     @Test
     public void testAddSubChapter_MoveSubChapterToAnotherChapter() {
-        final Chapter anotherChapter = new ChapterBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final SubChapter subChapter = new SubChapterBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-
         target.addSubChapter(subChapter);
         anotherChapter.addSubChapter(subChapter);
 
         assertFalse(target.hasSubChapters());
         assertTrue(anotherChapter.hasSubChapters());
+
         assertTrue(anotherChapter.containsSubChapter(subChapter));
         assertTrue(subChapter.getChapter().equals(anotherChapter));
+
         assertEquals(1, anotherChapter.getSubChapters().size());
     }
 
@@ -98,26 +72,16 @@ public class ChapterTest {
 
     @Test
     public void testAddSubChapters() {
-        final SubChapter subChapter1 = new SubChapterBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final SubChapter subChapter2 = new SubChapterBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
-        final List<SubChapter> subChapters = Arrays.asList(subChapter1, subChapter2);
+        final List<SubChapter> subChapters = Arrays.asList(subChapter, anotherSubChapter);
 
         target.addSubChapters(subChapters);
 
         assertTrue(target.hasSubChapters());
 
-        assertTrue(target.containsSubChapter(subChapter1));
-        assertTrue(target.containsSubChapter(subChapter2));
+        assertTrue(target.containsSubChapter(subChapter));
+        assertTrue(target.containsSubChapter(anotherSubChapter));
 
-        assertTrue(subChapter1.getChapter().equals(target));
-        assertTrue(subChapter2.getChapter().equals(target));
+        assertTrue(subChapter.getChapter().equals(target));
+        assertTrue(anotherSubChapter.getChapter().equals(target));
     }
 }
