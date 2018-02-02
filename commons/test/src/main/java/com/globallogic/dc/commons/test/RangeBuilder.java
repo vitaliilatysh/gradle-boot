@@ -53,7 +53,7 @@ public class RangeBuilder {
         return new Range(key, title, description, subChapters, items, sections);
     }
 
-    public Range defaultInit(){
+    public Range defaultInit() {
         return new RangeBuilder()
                 .withKey("1")
                 .withTitle("Title")

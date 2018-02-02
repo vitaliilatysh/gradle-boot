@@ -46,7 +46,7 @@ public class SectionBuilder {
         return new Section(key, title, description, subChapter, ranges);
     }
 
-    public Section defaultInit(){
+    public Section defaultInit() {
         return new SectionBuilder()
                 .withKey("1")
                 .withTitle("Title")
