@@ -89,7 +89,7 @@ public class ItemTest {
 
     @Test
     public void testHasItems() {
-        target.setItems(Collections.singletonList(anotherItem.toString()));
+        target.setItems(Collections.singletonList(anotherItem.asFormattedString()));
 
         assertNotNull(target.getItems());
         assertTrue(target.hasItems());
@@ -163,11 +163,11 @@ public class ItemTest {
 
     @Test
     public void testAddItem_NoItemInItem() {
-        target.addItem(anotherItem.toString());
+        target.addItem(anotherItem.asFormattedString());
 
         assertTrue(target.hasItems());
 
-        assertTrue(target.containsItem(anotherItem.toString()));
+        assertTrue(target.containsItem(anotherItem.asFormattedString()));
         assertEquals(1, target.getItems().size());
     }
 
@@ -178,13 +178,13 @@ public class ItemTest {
 
     @Test
     public void testAddItems() {
-        final List<String> items = Arrays.asList(item1.toString(), item2.toString());
+        final List<String> items = Arrays.asList(item1.asFormattedString(), item2.asFormattedString());
 
         target.addItems(items);
 
         assertTrue(target.hasItems());
 
-        assertTrue(target.containsItem(item1.toString()));
-        assertTrue(target.containsItem(item2.toString()));
+        assertTrue(target.containsItem(item1.asFormattedString()));
+        assertTrue(target.containsItem(item2.asFormattedString()));
     }
 }
