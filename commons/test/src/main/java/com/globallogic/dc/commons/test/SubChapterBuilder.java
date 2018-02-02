@@ -52,4 +52,12 @@ public class SubChapterBuilder {
     public SubChapter build() {
         return new SubChapter(key, title, description, chapter, sections, ranges);
     }
+
+    public SubChapter defaultInit(){
+        return new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+    }
 }

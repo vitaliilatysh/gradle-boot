@@ -52,4 +52,12 @@ public class RangeBuilder {
     public Range build() {
         return new Range(key, title, description, subChapters, items, sections);
     }
+
+    public Range defaultInit(){
+        return new RangeBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+    }
 }

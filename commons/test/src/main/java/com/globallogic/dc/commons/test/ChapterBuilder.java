@@ -38,4 +38,12 @@ public class ChapterBuilder {
     public Chapter build() {
         return new Chapter(key, title, description, subChapters);
     }
+
+    public Chapter defaultInit(){
+        return new ChapterBuilder()
+        .withKey("1")
+        .withTitle("Title")
+        .withDescription("Desc")
+        .build();
+    }
 }
