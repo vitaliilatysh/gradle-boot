@@ -5,39 +5,51 @@ import com.globallogic.dc.model.Range;
 import com.globallogic.dc.model.Section;
 import com.globallogic.dc.model.SubChapter;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class RangeBuilder {
-    public static Range buildRange(final boolean fillSubChapters, final boolean fillItems, final boolean fillSections) {
-        return buildRange("1", "Title", "Desc", fillSubChapters, fillItems, fillSections);
+
+    private String key;
+    private String title;
+    private String description;
+    private List<SubChapter> subChapters;
+    private List<Section> sections;
+    private List<Item> items;
+
+    public RangeBuilder() {
     }
 
-    private static Range buildRange(
-            final String key,
-            final String title,
-            final String description,
-            final boolean fillSubChapters,
-            final boolean fillItems,
-            final boolean fillSections) {
-        final Range result = new Range(key, title, description);
+    public RangeBuilder withKey(final String key) {
+        this.key = key;
+        return this;
+    }
 
-        if (fillSubChapters) {
-            result.addSubChapters(Arrays.asList(
-                    new SubChapter("1", "Title", "Desc"),
-                    new SubChapter("2", "Title", "Desc")));
-        }
+    public RangeBuilder withTitle(final String title) {
+        this.title = title;
+        return this;
+    }
 
-        if (fillItems) {
-            result.addItems(Arrays.asList(
-                    new Item("1", "Title", "Desc"),
-                    new Item("2", "Title", "Desc")));
-        }
+    public RangeBuilder withDescription(final String description) {
+        this.description = description;
+        return this;
+    }
 
-        if (fillSections) {
-            result.addSections(Arrays.asList(
-                    new Section("1", "Title", "Desc"),
-                    new Section("2", "Title", "Desc")));
-        }
-        return result;
+    public RangeBuilder withSubChapters(final List<SubChapter> subChapters) {
+        this.subChapters = subChapters;
+        return this;
+    }
+
+    public RangeBuilder withItems(final List<Item> items) {
+        this.items = items;
+        return this;
+    }
+
+    public RangeBuilder withSections(final List<Section> sections) {
+        this.sections = sections;
+        return this;
+    }
+
+    public Range build() {
+        return new Range(key, title, description, subChapters, items, sections);
     }
 }

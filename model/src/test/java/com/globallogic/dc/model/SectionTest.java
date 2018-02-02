@@ -1,20 +1,38 @@
 package com.globallogic.dc.model;
 
+import com.globallogic.dc.commons.test.RangeBuilder;
+import com.globallogic.dc.commons.test.SectionBuilder;
+import com.globallogic.dc.commons.test.SubChapterBuilder;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static com.globallogic.dc.commons.test.SectionBuilder.buildSection;
 import static org.junit.Assert.*;
 
 public class SectionTest {
 
+    private Section target;
+
+    @Before
+    public void setUp() {
+        target = new SectionBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+    }
+
     @Test
     public void testSetSubChapter_NoSubChapterInSection() {
-        final Section target = buildSection(false, false);
-        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+        final SubChapter subChapter = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.setSubChapter(subChapter);
 
@@ -26,9 +44,16 @@ public class SectionTest {
 
     @Test
     public void testSetSubChapter_MoveSubChapterToAnotherSection() {
-        final Section target = buildSection(false, true);
-        final Section anotherSection = buildSection(false, false);
-        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+        final Section anotherSection = new SectionBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final SubChapter subChapter = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.setSubChapter(subChapter);
         anotherSection.setSubChapter(subChapter);
@@ -44,15 +69,23 @@ public class SectionTest {
 
     @Test
     public void testHasSubChapter_NotSet() {
-        final Section target = buildSection(false, false);
-
         assertNull(target.getSubChapter());
         assertFalse(target.hasSubChapter());
     }
 
     @Test
     public void testHasSubChapter() {
-        final Section target = buildSection(true, false);
+        final SubChapter subChapter = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final Section target = new SectionBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .withSubChapter(subChapter)
+                .build();
 
         assertNotNull(target.getSubChapter());
         assertTrue(target.hasSubChapter());
@@ -60,8 +93,6 @@ public class SectionTest {
 
     @Test
     public void testHasRanges_Empty() {
-        final Section target = buildSection(false, false);
-
         assertNull(target.getRanges());
         assertFalse(target.hasRanges());
 
@@ -72,7 +103,17 @@ public class SectionTest {
 
     @Test
     public void testHasRanges() {
-        final Section target = buildSection(false, true);
+        final Range range = new RangeBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final Section target = new SectionBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .withRanges(Collections.singletonList(range))
+                .build();
 
         assertNotNull(target.getRanges());
         assertTrue(target.hasRanges());
@@ -80,15 +121,16 @@ public class SectionTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddRange_IllegalArgumentException() {
-        final Section target = buildSection(false, false);
-
         target.addRange(null);
     }
 
     @Test
     public void testAddRange_NoRangeInSection() {
-        final Section target = buildSection(false, false);
-        final Range range = new Range("1", "Title", "Desc");
+        final Range range = new RangeBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.addRange(range);
 
@@ -102,9 +144,16 @@ public class SectionTest {
 
     @Test
     public void testAddRange_MoveRangeToAnotherSection() {
-        final Section target = buildSection(false, false);
-        final Section anotherSection = new Section("2", "Title", "Desc");
-        final Range range = new Range("1", "Title", "Desc");
+        final Section anotherSection = new SectionBuilder()
+                .withKey("2")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final Range range = new RangeBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.addRange(range);
         anotherSection.addRange(range);
@@ -123,16 +172,21 @@ public class SectionTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddRanges_IllegalArgumentException() {
-        final Section target = buildSection(false, false);
-
         target.addRanges(null);
     }
 
     @Test
     public void testAddRanges() {
-        final Section target = buildSection(false, false);
-        final Range range1 = new Range("2", "2", "2");
-        final Range range2 = new Range("3", "3", "3");
+        final Range range1 = new RangeBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final Range range2 = new RangeBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
         final List<Range> ranges = Arrays.asList(range1, range2);
 
         target.addRanges(ranges);

@@ -1,20 +1,34 @@
 package com.globallogic.dc.model;
 
+import com.globallogic.dc.commons.test.ItemBuilder;
+import com.globallogic.dc.commons.test.RangeBuilder;
+import com.globallogic.dc.commons.test.SectionBuilder;
+import com.globallogic.dc.commons.test.SubChapterBuilder;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static com.globallogic.dc.commons.test.RangeBuilder.buildRange;
 import static org.junit.Assert.*;
 
 public class RangeTest {
 
+    private Range target;
+
+    @Before
+    public void setUp() {
+        target = new RangeBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+    }
+
     @Test
     public void testHasSubChapters_Empty() {
-        final Range target = buildRange(false, false, false);
-
         assertNull(target.getSubChapters());
         assertFalse(target.hasSubChapters());
 
@@ -25,7 +39,17 @@ public class RangeTest {
 
     @Test
     public void testHasSubChapters() {
-        final Range target = buildRange(true, false, false);
+        final SubChapter subChapter = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final Range target = new RangeBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .withSubChapters(Collections.singletonList(subChapter))
+                .build();
 
         assertNotNull(target.getSubChapters());
         assertTrue(target.hasSubChapters());
@@ -33,8 +57,11 @@ public class RangeTest {
 
     @Test
     public void testAddSubChapter_NoSubChapterInRange() {
-        final Range target = buildRange(false, false, false);
-        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+        final SubChapter subChapter = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.addSubChapter(subChapter);
 
@@ -48,9 +75,16 @@ public class RangeTest {
 
     @Test
     public void testAddSubChapter_MoveSubChapterToAnotherRange() {
-        final Range target = buildRange(false, false, false);
-        final Range anotherRange = new Range("3", "Title", "Desc");
-        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
+        final Range anotherRange = new RangeBuilder()
+                .withKey("2")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final SubChapter subChapter = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.addSubChapter(subChapter);
         anotherRange.addSubChapter(subChapter);
@@ -67,9 +101,17 @@ public class RangeTest {
 
     @Test
     public void testAddSubChapters() {
-        final Range target = buildRange(false, false, false);
-        final SubChapter subChapter1 = new SubChapter("2", "2", "2");
-        final SubChapter subChapter2 = new SubChapter("3", "3", "3");
+        final SubChapter subChapter1 = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final SubChapter subChapter2 = new SubChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+
         final List<SubChapter> subChapters = Arrays.asList(subChapter1, subChapter2);
 
         target.addSubChapters(subChapters);
@@ -88,8 +130,6 @@ public class RangeTest {
 
     @Test
     public void testHasItems_Empty() {
-        final Range target = buildRange(false, false, false);
-
         assertNull(target.getItems());
         assertFalse(target.hasItems());
 
@@ -100,7 +140,17 @@ public class RangeTest {
 
     @Test
     public void testHasItems() {
-        final Range target = buildRange(false, true, false);
+        final Item item = new ItemBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final Range target = new RangeBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .withItems(Collections.singletonList(item))
+                .build();
 
         assertNotNull(target.getItems());
         assertTrue(target.hasItems());
@@ -108,8 +158,11 @@ public class RangeTest {
 
     @Test
     public void testAddItem_NoItemInRange() {
-        final Range target = buildRange(false, false, false);
-        final Item item = new Item("1", "Title", "Desc");
+        final Item item = new ItemBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.addItem(item);
 
@@ -121,9 +174,16 @@ public class RangeTest {
 
     @Test
     public void testAddItem_MoveItemToAnotherRange() {
-        final Range target = buildRange(false, false, false);
-        final Range anotherRange = buildRange(false, false, false);
-        final Item item = new Item("1", "Title", "Desc");
+        final Range anotherRange = new RangeBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final Item item = new ItemBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.addItem(item);
         anotherRange.addItem(item);
@@ -137,9 +197,16 @@ public class RangeTest {
 
     @Test
     public void testAddItems() {
-        final Range target = buildRange(false, false, false);
-        final Item item1 = new Item("1", "Title", "Desc");
-        final Item item2 = new Item("1", "Title", "Desc");
+        final Item item1 = new ItemBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final Item item2 = new ItemBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
         final List<Item> items = Arrays.asList(item1, item2);
 
         target.addItems(items);
@@ -158,8 +225,6 @@ public class RangeTest {
 
     @Test
     public void testHasSections_Empty() {
-        final Range target = buildRange(false, false, false);
-
         assertNull(target.getSections());
         assertFalse(target.hasSections());
 
@@ -170,7 +235,17 @@ public class RangeTest {
 
     @Test
     public void testHasSections() {
-        final Range target = buildRange(false, false, true);
+        final Section section = new SectionBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final Range target = new RangeBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .withSections(Collections.singletonList(section))
+                .build();
 
         assertNotNull(target.getSections());
         assertTrue(target.hasSections());
@@ -178,15 +253,16 @@ public class RangeTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddSection_IllegalArgumentException() {
-        final Range target = buildRange(false, false, false);
-
         target.addSection(null);
     }
 
     @Test
     public void testAddSection_NoSectionInRange() {
-        final Range target = buildRange(false, false, false);
-        final Section section = new Section("1", "Title", "Desc");
+        final Section section = new SectionBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.addSection(section);
 
@@ -200,9 +276,16 @@ public class RangeTest {
 
     @Test
     public void testAddSection_MoveSectionToAnotherRange() {
-        final Range target = buildRange(false, false, false);
-        final Range anotherRange = new Range("3", "Title", "Desc");
-        final Section section = new Section("1", "Title", "Desc");
+        final Range anotherRange = new RangeBuilder()
+                .withKey("2")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final Section section = new SectionBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.addSection(section);
         anotherRange.addSection(section);
@@ -221,16 +304,21 @@ public class RangeTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddSections_IllegalArgumentException() {
-        final Range target = buildRange(false, false, false);
-
         target.addSections(null);
     }
 
     @Test
     public void testAddSections() {
-        final Range target = buildRange(false, false, false);
-        final Section section1 = new Section("2", "2", "2");
-        final Section section2 = new Section("3", "3", "3");
+        final Section section1 = new SectionBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final Section section2 = new SectionBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
         final List<Section> sections = Arrays.asList(section1, section2);
 
         target.addSections(sections);

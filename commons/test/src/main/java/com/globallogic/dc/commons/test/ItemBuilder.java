@@ -4,36 +4,51 @@ import com.globallogic.dc.model.Item;
 import com.globallogic.dc.model.Range;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ItemBuilder {
 
-    public static Item buildItem(final boolean fillItems, final boolean fillRelatedItems, final boolean fillRange) {
-        return buildItem("1", "Title", "Desc", fillItems, fillRelatedItems, fillRange);
+    private String key;
+    private String title;
+    private String description;
+    private Range range;
+    private List<String> items;
+    private List<Item> relatedItems;
+
+    public ItemBuilder() {
     }
 
-    private static Item buildItem(
-            final String key,
-            final String title,
-            final String description,
-            final boolean fillItems,
-            final boolean fillRelatedItems,
-            final boolean fillRange) {
-        final Item result = new Item(key, title, description);
+    public ItemBuilder withKey(final String key) {
+        this.key = key;
+        return this;
+    }
 
-        if (fillItems) {
-            result.addItems(Arrays.asList(
-                    new Item("1", "Title", "Desc").getIdentifier(),
-                    new Item("2", "Title", "Desc").getIdentifier()));
-        }
+    public ItemBuilder withTitle(final String title) {
+        this.title = title;
+        return this;
+    }
 
-        if (fillRelatedItems)
-            result.addRelatedItems(Arrays.asList(
-                    new Item("1", "Title", "Desc"),
-                    new Item("2", "Title", "Desc")));
+    public ItemBuilder withDescription(final String description) {
+        this.description = description;
+        return this;
+    }
 
-        if (fillRange)
-            result.setRange(new Range("1", "Title", "Desc"));
+    public ItemBuilder withRange(final Range range) {
+        this.range = range;
+        return this;
+    }
 
-        return result;
+    public ItemBuilder withItems(final List<String> items) {
+        this.items = items;
+        return this;
+    }
+
+    public ItemBuilder withRelatedItems(final List<Item> relatedItems) {
+        this.relatedItems = relatedItems;
+        return this;
+    }
+
+    public Item build() {
+        return new Item(key, title, description, range, items, relatedItems);
     }
 }

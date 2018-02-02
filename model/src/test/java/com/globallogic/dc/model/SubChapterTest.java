@@ -1,5 +1,6 @@
 package com.globallogic.dc.model;
 
+import com.globallogic.dc.commons.test.ChapterBuilder;
 import com.globallogic.dc.commons.test.SubChapterBuilder;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +16,7 @@ public class SubChapterTest {
     private SubChapter target;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         target = new SubChapterBuilder()
                 .withKey("1")
                 .withTitle("Title")
@@ -25,7 +26,11 @@ public class SubChapterTest {
 
     @Test
     public void testSetChapter_NoChapterInSubChapter() {
-        final Chapter chapter = new Chapter("1", "Title", "Desc");
+        final Chapter chapter = new ChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.setChapter(chapter);
 
@@ -38,8 +43,15 @@ public class SubChapterTest {
     @Test
     public void testSetChapter_MoveChapterToAnotherSubChapter() {
         final SubChapter anotherSubChapter = new SubChapterBuilder()
-                .withKey("1").withTitle("Title").withDescription("Desc").build();
-        final Chapter chapter = new Chapter("1", "Title", "Desc");
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
+        final Chapter chapter = new ChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
 
         target.setChapter(chapter);
         anotherSubChapter.setChapter(chapter);
@@ -61,11 +73,16 @@ public class SubChapterTest {
 
     @Test
     public void testHasChapter() {
+        final Chapter chapter = new ChapterBuilder()
+                .withKey("1")
+                .withTitle("Title")
+                .withDescription("Desc")
+                .build();
         final SubChapter target = new SubChapterBuilder()
                 .withKey("1")
                 .withTitle("Title")
                 .withDescription("Desc")
-                .withChapter(new Chapter("1", "Title", "Desc"))
+                .withChapter(chapter)
                 .build();
 
         assertNotNull(target.getChapter());
