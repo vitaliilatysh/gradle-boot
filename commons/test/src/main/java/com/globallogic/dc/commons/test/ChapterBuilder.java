@@ -40,10 +40,6 @@ public class ChapterBuilder {
     }
 
     public Chapter buildDefault() {
-        return new ChapterBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
+        return new Chapter(this.key = "1", this.title = "Title", this.description = "Desc");
     }
 }

@@ -47,10 +47,6 @@ public class SectionBuilder {
     }
 
     public Section buildDefault() {
-        return new SectionBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
+        return new Section(this.key = "1", this.title = "Title", this.description = "Desc");
     }
 }

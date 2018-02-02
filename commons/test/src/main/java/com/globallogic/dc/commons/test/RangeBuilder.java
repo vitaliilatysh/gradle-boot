@@ -54,10 +54,6 @@ public class RangeBuilder {
     }
 
     public Range buildDefault() {
-        return new RangeBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
+        return new Range(this.key = "1", this.title = "Title", this.description = "Desc");
     }
 }

@@ -54,10 +54,6 @@ public class SubChapterBuilder {
     }
 
     public SubChapter buildDefault() {
-        return new SubChapterBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
+        return new SubChapter(this.key = "1", this.title = "Title", this.description = "Desc");
     }
 }

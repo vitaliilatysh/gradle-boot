@@ -52,10 +52,6 @@ public class ItemBuilder {
     }
 
     public Item buildDefault() {
-        return new ItemBuilder()
-                .withKey("1")
-                .withTitle("Title")
-                .withDescription("Desc")
-                .build();
+        return new Item(this.key = "1", this.title = "Title", this.description = "Desc");
     }
 }
