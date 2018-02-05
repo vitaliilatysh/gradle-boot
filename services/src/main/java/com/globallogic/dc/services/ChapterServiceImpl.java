@@ -1,5 +1,7 @@
 package com.globallogic.dc.services;
 
+import com.globallogic.dc.dao.ChapterDao;
+import com.globallogic.dc.dao.ChapterDaoImpl;
 import com.globallogic.dc.model.Chapter;
 
 import java.util.List;
@@ -8,10 +10,10 @@ public class ChapterServiceImpl implements ChapterService {
 
     private static volatile ChapterServiceImpl instance = null;
 
-    public static ChapterServiceImpl getInstance(){
-        if(instance == null){
-            synchronized (ChapterServiceImpl.class){
-                if (instance == null){
+    public static ChapterServiceImpl getInstance() {
+        if (instance == null) {
+            synchronized (ChapterServiceImpl.class) {
+                if (instance == null) {
                     instance = new ChapterServiceImpl();
                 }
             }
@@ -21,11 +23,13 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     public List<Chapter> getChapters() {
-        return null;
+        ChapterDao chapterDao = ChapterDaoImpl.getInstance();
+        return chapterDao.getChapters();
     }
 
     @Override
     public Chapter getChapterById(final String key) {
-        return null;
+        ChapterDao chapterDao = ChapterDaoImpl.getInstance();
+        return chapterDao.getChapterById(key);
     }
 }
