@@ -27,6 +27,9 @@ public abstract class ChapterBase extends AbstractProduct {
         this.subChapters = subChapters;
     }
 
+    public ChapterBase() {
+    }
+
     public List<SubChapter> getSubChapters() {
         return hasSubChapters() ? Collections.unmodifiableList(this.subChapters) : null;
     }

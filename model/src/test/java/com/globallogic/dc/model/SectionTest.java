@@ -1,5 +1,8 @@
 package com.globallogic.dc.model;
 
+import com.globallogic.dc.commons.test.RangeBuilder;
+import com.globallogic.dc.commons.test.SectionBuilder;
+import com.globallogic.dc.commons.test.SubChapterBuilder;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -10,11 +13,14 @@ import static org.junit.Assert.*;
 
 public class SectionTest {
 
+    private final Section target = new SectionBuilder().buildDefault();
+    private final SubChapter subChapter = new SubChapterBuilder().buildDefault();
+    private final Section anotherSection = new SectionBuilder().buildDefault();
+    private final Range range = new RangeBuilder().buildDefault();
+    private final Range anotherRange = new RangeBuilder().buildDefault();
+
     @Test
     public void testSetSubChapter_NoSubChapterInSection() {
-        final Section target = buildSection(false, false);
-        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
-
         target.setSubChapter(subChapter);
 
         assertTrue(target.hasSubChapter());
@@ -25,10 +31,6 @@ public class SectionTest {
 
     @Test
     public void testSetSubChapter_MoveSubChapterToAnotherSection() {
-        final Section target = buildSection(false, true);
-        final Section anotherSection = buildSection(false, false);
-        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
-
         target.setSubChapter(subChapter);
         anotherSection.setSubChapter(subChapter);
 
@@ -43,15 +45,13 @@ public class SectionTest {
 
     @Test
     public void testHasSubChapter_NotSet() {
-        final Section target = buildSection(false, false);
-
         assertNull(target.getSubChapter());
         assertFalse(target.hasSubChapter());
     }
 
     @Test
     public void testHasSubChapter() {
-        final Section target = buildSection(true, false);
+        target.setSubChapter(subChapter);
 
         assertNotNull(target.getSubChapter());
         assertTrue(target.hasSubChapter());
@@ -59,8 +59,6 @@ public class SectionTest {
 
     @Test
     public void testHasRanges_Empty() {
-        final Section target = buildSection(false, false);
-
         assertNull(target.getRanges());
         assertFalse(target.hasRanges());
 
@@ -71,7 +69,7 @@ public class SectionTest {
 
     @Test
     public void testHasRanges() {
-        final Section target = buildSection(false, true);
+        target.addRange(range);
 
         assertNotNull(target.getRanges());
         assertTrue(target.hasRanges());
@@ -79,16 +77,11 @@ public class SectionTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddRange_IllegalArgumentException() {
-        final Section target = buildSection(false, false);
-
         target.addRange(null);
     }
 
     @Test
     public void testAddRange_NoRangeInSection() {
-        final Section target = buildSection(false, false);
-        final Range range = new Range("1", "Title", "Desc");
-
         target.addRange(range);
 
         assertTrue(target.hasRanges());
@@ -101,9 +94,7 @@ public class SectionTest {
 
     @Test
     public void testAddRange_MoveRangeToAnotherSection() {
-        final Section target = buildSection(false, false);
-        final Section anotherSection = new Section("2", "Title", "Desc");
-        final Range range = new Range("1", "Title", "Desc");
+        anotherSection.setKey("2");
 
         target.addRange(range);
         anotherSection.addRange(range);
@@ -122,53 +113,23 @@ public class SectionTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddRanges_IllegalArgumentException() {
-        final Section target = buildSection(false, false);
-
         target.addRanges(null);
     }
 
     @Test
     public void testAddRanges() {
-        final Section target = buildSection(false, false);
-        final Range range1 = new Range("2", "2", "2");
-        final Range range2 = new Range("3", "3", "3");
-        final List<Range> ranges = Arrays.asList(range1, range2);
+        final List<Range> ranges = Arrays.asList(range, anotherRange);
 
         target.addRanges(ranges);
 
         assertTrue(target.hasRanges());
-        assertTrue(target.containsRange(range1));
-        assertTrue(target.containsRange(range2));
+        assertTrue(target.containsRange(range));
+        assertTrue(target.containsRange(anotherRange));
 
-        assertTrue(range1.hasSections());
-        assertTrue(range2.hasSections());
+        assertTrue(range.hasSections());
+        assertTrue(anotherRange.hasSections());
 
-        assertTrue(range1.containsSection(target));
-        assertTrue(range2.containsSection(target));
-    }
-
-    private Section buildSection(final boolean fillSubChapter, final boolean fillRanges) {
-        return this.buildSection("1", "Title", "Desc", fillSubChapter, fillRanges);
-    }
-
-    private Section buildSection(
-            final String key,
-            final String title,
-            final String description,
-            final boolean fillSubChapter,
-            final boolean fillRanges) {
-        final Section result = new Section(key, title, description);
-
-        if (fillRanges) {
-            result.addRanges(Arrays.asList(
-                    new Range("1", "Title", "Desc"),
-                    new Range("2", "Title", "Desc")
-            ));
-        }
-
-        if (fillSubChapter) {
-            result.setSubChapter(new SubChapter("1", "Title", "Desc"));
-        }
-        return result;
+        assertTrue(range.containsSection(target));
+        assertTrue(anotherRange.containsSection(target));
     }
 }

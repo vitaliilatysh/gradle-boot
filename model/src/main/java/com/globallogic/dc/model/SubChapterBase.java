@@ -75,7 +75,7 @@ public abstract class SubChapterBase extends AbstractProduct {
         doAddSection(section);
     }
 
-    protected void addSections(final Collection<Section> sections) {
+    public void addSections(final Collection<Section> sections) {
         if (sections == null) {
             throw new IllegalArgumentException();
         }

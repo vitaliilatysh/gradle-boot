@@ -1,0 +1,5 @@
+group 'com.globallogic.dc.commons.test'
+
+dependencies{
+    testCompile group: 'junit', name: 'junit'
+}

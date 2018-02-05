@@ -1,5 +1,7 @@
 package com.globallogic.dc.model;
 
+import com.globallogic.dc.commons.test.ChapterBuilder;
+import com.globallogic.dc.commons.test.SubChapterBuilder;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -10,10 +12,13 @@ import static org.junit.Assert.*;
 
 public class ChapterTest {
 
+    private final Chapter target = new ChapterBuilder().buildDefault();
+    private final Chapter anotherChapter = new ChapterBuilder().buildDefault();
+    private final SubChapter subChapter = new SubChapterBuilder().buildDefault();
+    private final SubChapter anotherSubChapter = new SubChapterBuilder().buildDefault();
+
     @Test
     public void testHasSubChapters_Empty() {
-        final Chapter target = buildChapter(false);
-
         assertFalse(target.hasSubChapters());
 
         target.addSubChapters(new ArrayList<>());
@@ -23,7 +28,7 @@ public class ChapterTest {
 
     @Test
     public void testHasSubChapters() {
-        final Chapter target = buildChapter(true);
+        target.addSubChapter(subChapter);
 
         assertNotNull(target.getSubChapters());
         assertTrue(target.hasSubChapters());
@@ -31,84 +36,52 @@ public class ChapterTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddSubChapter_IllegalArgumentException() {
-        final Chapter target = buildChapter(false);
-
         target.addSubChapter(null);
     }
 
     @Test
     public void testAddSubChapter_NoSubChapterInChapter() {
-        final Chapter target = buildChapter(false);
-        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
-
         target.addSubChapter(subChapter);
 
         assertTrue(target.hasSubChapters());
+
         assertTrue(target.containsSubChapter(subChapter));
         assertTrue(subChapter.getChapter().equals(target));
+
         assertEquals(1, target.getSubChapters().size());
     }
 
     @Test
     public void testAddSubChapter_MoveSubChapterToAnotherChapter() {
-        final Chapter target = buildChapter(false);
-        final Chapter anotherChapter = buildChapter(false);
-        final SubChapter subChapter = new SubChapter("1", "Title", "Desc");
-
         target.addSubChapter(subChapter);
         anotherChapter.addSubChapter(subChapter);
 
         assertFalse(target.hasSubChapters());
         assertTrue(anotherChapter.hasSubChapters());
+
         assertTrue(anotherChapter.containsSubChapter(subChapter));
         assertTrue(subChapter.getChapter().equals(anotherChapter));
+
         assertEquals(1, anotherChapter.getSubChapters().size());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddSubChapters_IllegalArgumentException() {
-        final Chapter target = buildChapter(false);
-
         target.addSubChapters(null);
     }
 
     @Test
     public void testAddSubChapters() {
-        final Chapter target = buildChapter(false);
-        final SubChapter subChapter1 = new SubChapter("1", "Title", "Desc");
-        final SubChapter subChapter2 = new SubChapter("1", "Title", "Desc");
-        final List<SubChapter> subChapters = Arrays.asList(subChapter1, subChapter2);
+        final List<SubChapter> subChapters = Arrays.asList(subChapter, anotherSubChapter);
 
         target.addSubChapters(subChapters);
 
         assertTrue(target.hasSubChapters());
 
-        assertTrue(target.containsSubChapter(subChapter1));
-        assertTrue(target.containsSubChapter(subChapter2));
+        assertTrue(target.containsSubChapter(subChapter));
+        assertTrue(target.containsSubChapter(anotherSubChapter));
 
-        assertTrue(subChapter1.getChapter().equals(target));
-        assertTrue(subChapter2.getChapter().equals(target));
+        assertTrue(subChapter.getChapter().equals(target));
+        assertTrue(anotherSubChapter.getChapter().equals(target));
     }
-
-    private Chapter buildChapter(final boolean fillSubChapters) {
-        return this.buildChapter("1", "Title", "Desc", fillSubChapters);
-    }
-
-    private Chapter buildChapter(
-            final String key,
-            final String title,
-            final String description,
-            final boolean fillSubChapters) {
-        final Chapter result = new Chapter(key, title, description);
-
-        if (fillSubChapters) {
-            result.addSubChapters(Arrays.asList(
-                    new SubChapter("1", "Title", "Desc"),
-                    new SubChapter("2", "Title", "Desc")));
-        }
-
-        return result;
-    }
-
-
 }
