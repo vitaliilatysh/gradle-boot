@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ChapterServiceImpl implements ChapterService {
 
+    private ChapterDao chapterDao = ChapterDaoImpl.getInstance();
     private static volatile ChapterServiceImpl instance = null;
 
     public static ChapterServiceImpl getInstance() {
@@ -23,13 +24,11 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     public List<Chapter> getChapters() {
-        ChapterDao chapterDao = ChapterDaoImpl.getInstance();
         return chapterDao.getChapters();
     }
 
     @Override
     public Chapter getChapterById(final String key) {
-        ChapterDao chapterDao = ChapterDaoImpl.getInstance();
         return chapterDao.getChapterById(key);
     }
 }
