@@ -27,8 +27,7 @@ public class FileSystemConnectorImpl implements FileSystemConnector{
             final File file =  new File(Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).getFile());
             final Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                rows.add(line);
+                rows.add(scanner.nextLine());
             }
         } catch (java.io.IOException e) {
             e.printStackTrace();
