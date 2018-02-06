@@ -1,12 +1,11 @@
 package com.globallogic.dc.connector;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
 
-public class FileSystemConnectorImpl implements FileSystemConnector{
+public class FileSystemConnectorImpl implements FileSystemConnector {
 
     private static FileSystemConnectorImpl instance;
 
@@ -24,10 +23,10 @@ public class FileSystemConnectorImpl implements FileSystemConnector{
     public List<String> readFile(final String fileName) {
         final List<String> rows = new ArrayList<>();
         try {
-            final File file =  new File(Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).getFile());
-            final Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                rows.add(scanner.nextLine());
+            final BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            String currentLine;
+            while ((currentLine = bufferedReader.readLine()) != null) {
+                rows.add(currentLine);
             }
         } catch (java.io.IOException e) {
             e.printStackTrace();
