@@ -1,6 +1,5 @@
 package com.globallogic.dc.dao;
 
-import com.globallogic.dc.connector.FileSystemConnector;
 import com.globallogic.dc.connector.FileSystemConnectorImpl;
 import com.globallogic.dc.model.Chapter;
 
@@ -28,14 +27,14 @@ public class ChapterDaoImpl implements ChapterDao {
 
     @Override
     public List<Chapter> getChapters() {
-        List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
+        final List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
         rows.remove(0);
         for (String row : rows) {
-            String[] chapterElements = row.split(",");
+            final String[] chapterElements = row.split(",");
 
-            String key = chapterElements[0];
-            String title = chapterElements[1];
-            String description = chapterElements[2];
+            final String key = chapterElements[0];
+            final String title = chapterElements[1];
+            final String description = chapterElements[2];
 
             chapter.setKey(key);
             chapter.setTitle(title);
