@@ -22,7 +22,7 @@ public class FileSystemConnectorImpl implements FileSystemConnector{
     }
 
     public List<String> readFile(final String fileName) {
-        List<String> rows = new ArrayList<>();
+        final List<String> rows = new ArrayList<>();
         try {
             final File file =  new File(Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).getFile());
             final Scanner scanner = new Scanner(file);
