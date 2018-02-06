@@ -1,4 +1,58 @@
 package com.globallogic.dc.connector;
 
+import com.globallogic.dc.model.Chapter;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
+
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+
 public class FileSystemConnector {
+
+    private File file = new File("/Users/vitaliilatysh/java-trainee-latysh/connector/src/main/resources/chapters.csv");
+    private FileReader fileReader;
+    private Chapter chapter = new Chapter();
+    private List<Chapter> chapters = new ArrayList<>();
+    private static FileSystemConnector instance = null;
+
+    public static FileSystemConnector getInstance() {
+        if (instance == null) {
+            synchronized (FileSystemConnector.class) {
+                if (instance == null) {
+                    instance = new FileSystemConnector();
+                }
+            }
+        }
+        return instance;
+    }
+
+
+    public enum Headers {
+        Key, Title, Description
+    }
+
+    public List<Chapter> getChapters() {
+        {
+            try {
+                fileReader = new FileReader(file);
+                Iterable<CSVRecord> records = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(fileReader);
+                for (CSVRecord record : records) {
+                    String key = record.get(Headers.Key);
+                    String title = record.get(Headers.Title);
+                    String description = record.get(Headers.Description);
+
+                    chapter.setKey(key);
+                    chapter.setTitle(title);
+                    chapter.setDescription(description);
+
+                    chapters.add(chapter);
+                }
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return chapters;
+    }
 }
