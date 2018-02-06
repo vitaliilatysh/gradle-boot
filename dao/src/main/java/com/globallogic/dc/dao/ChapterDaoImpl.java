@@ -46,7 +46,22 @@ public class ChapterDaoImpl implements ChapterDao {
     }
 
     @Override
-    public Chapter getChapterById(final String key) {
-        return null;
+    public Chapter getChapterById(final String chapterKey) {
+        final List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
+        rows.remove(0);
+        for (String row : rows) {
+            final String[] chapterElements = row.split(",");
+
+            final String key = chapterElements[0];
+            final String title = chapterElements[1];
+            final String description = chapterElements[2];
+
+            if (chapterKey.equals(key)) {
+                chapter.setKey(key);
+                chapter.setTitle(title);
+                chapter.setDescription(description);
+            }
+        }
+        return chapter;
     }
 }
