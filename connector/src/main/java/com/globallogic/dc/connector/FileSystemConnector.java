@@ -12,10 +12,10 @@ import java.util.Objects;
 
 public class FileSystemConnector {
 
+    private static FileSystemConnector instance = null;
     private File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("chapters.csv")).getFile());
     private Chapter chapter = new Chapter();
     private List<Chapter> chapters = new ArrayList<>();
-    private static FileSystemConnector instance = null;
 
     public static FileSystemConnector getInstance() {
         if (instance == null) {
@@ -26,11 +26,6 @@ public class FileSystemConnector {
             }
         }
         return instance;
-    }
-
-
-    public enum Headers {
-        Key, Title, Description
     }
 
     public List<Chapter> getChapters() {
@@ -54,5 +49,9 @@ public class FileSystemConnector {
             }
         }
         return chapters;
+    }
+
+    public enum Headers {
+        Key, Title, Description
     }
 }

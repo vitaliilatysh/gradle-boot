@@ -29,6 +29,6 @@ public class ChapterServiceMockImpl implements ChapterService {
     public Chapter getChapterById(final String key) {
         Chapter chapter = new Chapter("1", "Title", "Desc");
 
-        return chapter.getKey().equals(key) ? chapter: new Chapter();
+        return chapter.getKey().equals(key) ? chapter : new Chapter();
     }
 }

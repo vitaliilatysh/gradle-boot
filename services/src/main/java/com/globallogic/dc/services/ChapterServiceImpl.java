@@ -8,8 +8,8 @@ import java.util.List;
 
 public class ChapterServiceImpl implements ChapterService {
 
-    private ChapterDao chapterDao = ChapterDaoImpl.getInstance();
     private static volatile ChapterServiceImpl instance = null;
+    private ChapterDao chapterDao = ChapterDaoImpl.getInstance();
 
     public static ChapterServiceImpl getInstance() {
         if (instance == null) {

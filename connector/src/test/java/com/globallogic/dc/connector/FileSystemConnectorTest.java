@@ -12,5 +12,4 @@ public class FileSystemConnectorTest {
     public void testGetChapters() {
         assertEquals(3, fileSystemConnector.getChapters().size());
     }
-
 }

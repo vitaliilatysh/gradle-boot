@@ -1,6 +1,6 @@
 group 'com.globallogic.dc.dao'
 
-dependencies{
+dependencies {
     compile project(':model')
     compile project(':connector')
 }
