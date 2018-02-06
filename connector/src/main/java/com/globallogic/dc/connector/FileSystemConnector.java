@@ -8,11 +8,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FileSystemConnector {
 
-    private File file = new File("/Users/vitaliilatysh/java-trainee-latysh/connector/src/main/resources/chapters.csv");
-    private FileReader fileReader;
+    private File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("chapters.csv")).getFile());
     private Chapter chapter = new Chapter();
     private List<Chapter> chapters = new ArrayList<>();
     private static FileSystemConnector instance = null;
@@ -36,7 +36,7 @@ public class FileSystemConnector {
     public List<Chapter> getChapters() {
         {
             try {
-                fileReader = new FileReader(file);
+                FileReader fileReader = new FileReader(file);
                 Iterable<CSVRecord> records = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(fileReader);
                 for (CSVRecord record : records) {
                     String key = record.get(Headers.Key);
