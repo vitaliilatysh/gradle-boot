@@ -2,6 +2,7 @@ package com.globallogic.dc.connector;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,14 +23,22 @@ public class FileSystemConnectorImpl implements FileSystemConnector {
 
     public List<String> readFile(final String fileName) {
         final List<String> rows = new ArrayList<>();
+        BufferedReader bufferedReader = null;
         try {
-            final BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            bufferedReader = new BufferedReader(new FileReader(fileName));
             String currentLine;
             while ((currentLine = bufferedReader.readLine()) != null) {
                 rows.add(currentLine);
             }
-        } catch (java.io.IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (bufferedReader != null)
+                    bufferedReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return rows;
     }
