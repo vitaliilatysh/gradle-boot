@@ -1,5 +1,6 @@
 package com.globallogic.dc.dao;
 
+import com.globallogic.dc.connector.FileSystemConnector;
 import com.globallogic.dc.model.Chapter;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class ChapterDaoImpl implements ChapterDao {
 
     @Override
     public List<Chapter> getChapters() {
-        return null;
+        return FileSystemConnector.getInstance().getChapters();
     }
 
     @Override

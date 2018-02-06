@@ -1,6 +1,7 @@
-group 'com.globallogic.dc.commons.test'
+group 'com.globallogic.dc.connector'
 
 dependencies {
     compile project(':model')
+
     testCompile group: 'junit', name: 'junit'
 }

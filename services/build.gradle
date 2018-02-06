@@ -1,1 +1,5 @@
 group 'com.globallogic.dc.services'
+
+dependencies {
+    compile project(':dao')
+}
