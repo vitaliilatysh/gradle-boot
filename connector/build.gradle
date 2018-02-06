@@ -1,1 +1,8 @@
 group 'com.globallogic.dc.connector'
+
+dependencies{
+    compile project(':model')
+    compile group: 'org.apache.commons', name: 'commons-csv'
+
+    testCompile group: 'junit', name: 'junit'
+}
