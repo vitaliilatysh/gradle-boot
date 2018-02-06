@@ -3,6 +3,7 @@ package com.globallogic.dc.connector;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class FileSystemConnector {
@@ -21,8 +22,9 @@ public class FileSystemConnector {
         return instance;
     }
 
-    public List<String> getRows(final File file) {
+    public List<String> readFile(final String fileName) {
         try {
+            final File file =  new File(Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).getFile());
             final Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
