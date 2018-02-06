@@ -1,6 +1,7 @@
 package com.globallogic.dc.dao;
 
 import com.globallogic.dc.connector.FileSystemConnector;
+import com.globallogic.dc.connector.FileSystemConnectorImpl;
 import com.globallogic.dc.model.Chapter;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class ChapterDaoImpl implements ChapterDao {
 
     @Override
     public List<Chapter> getChapters() {
-        List<String> rows = new FileSystemConnector().readFile(fileName);
+        List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
         rows.remove(0);
         for (String row : rows) {
             String[] chapterElements = row.split(",");
