@@ -6,19 +6,19 @@ import com.globallogic.dc.model.Chapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChapterDaoImpl implements ChapterDao {
+public class ChapterDaoSplitImpl implements ChapterDao {
 
-    private static volatile ChapterDaoImpl instance = null;
-    private String fileName = "chapters.csv";
+    private static volatile ChapterDaoSplitImpl instance = null;
+    private String fileName = "D:\\projects\\java-trainee-latysh\\connector\\src\\main\\resources\\chapters.csv";
     private Chapter chapter = new Chapter();
     private List<Chapter> chapters = new ArrayList<>();
 
 
-    public static ChapterDaoImpl getInstance() {
+    public static ChapterDaoSplitImpl getInstance() {
         if (instance == null) {
-            synchronized (ChapterDaoImpl.class) {
+            synchronized (ChapterDaoSplitImpl.class) {
                 if (instance == null) {
-                    instance = new ChapterDaoImpl();
+                    instance = new ChapterDaoSplitImpl();
                 }
             }
         }
@@ -50,11 +50,11 @@ public class ChapterDaoImpl implements ChapterDao {
         for (String row : rows) {
             final String[] chapterElements = row.split(",");
 
-            final String key = chapterElements[0];
-            final String title = chapterElements[1];
-            final String description = chapterElements[2];
+            if (chapterElements[0].equals(chapterKey)) {
+                final String key = chapterElements[0];
+                final String title = chapterElements[1];
+                final String description = chapterElements[2];
 
-            if (chapterKey.equals(key)) {
                 chapter.setKey(key);
                 chapter.setTitle(title);
                 chapter.setDescription(description);

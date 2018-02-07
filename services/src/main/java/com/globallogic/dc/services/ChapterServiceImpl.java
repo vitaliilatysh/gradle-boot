@@ -1,7 +1,7 @@
 package com.globallogic.dc.services;
 
 import com.globallogic.dc.dao.ChapterDao;
-import com.globallogic.dc.dao.ChapterDaoImpl;
+import com.globallogic.dc.dao.ChapterDaoSplitImpl;
 import com.globallogic.dc.model.Chapter;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 public class ChapterServiceImpl implements ChapterService {
 
     private static volatile ChapterServiceImpl instance = null;
-    private ChapterDao chapterDao = ChapterDaoImpl.getInstance();
+    private ChapterDao chapterDao = ChapterDaoSplitImpl.getInstance();
 
     public static ChapterServiceImpl getInstance() {
         if (instance == null) {
