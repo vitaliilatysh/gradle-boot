@@ -49,7 +49,7 @@ public class ChapterDaoTokenizerImpl implements ChapterDao {
                     break;
                 }
             }
-            if (chapter.getIdentifier().equals(chapterKey)) {
+            if (chapter.getIdentifier() != null && chapter.getIdentifier().equals(chapterKey)) {
                 break;
             }
         }

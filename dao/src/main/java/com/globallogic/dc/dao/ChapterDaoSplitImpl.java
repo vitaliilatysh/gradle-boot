@@ -59,6 +59,9 @@ public class ChapterDaoSplitImpl implements ChapterDao {
                 chapter.setTitle(title);
                 chapter.setDescription(description);
             }
+            if (chapter.getIdentifier() != null && chapter.getIdentifier().equals(chapterKey)) {
+                break;
+            }
         }
         return chapter;
     }
