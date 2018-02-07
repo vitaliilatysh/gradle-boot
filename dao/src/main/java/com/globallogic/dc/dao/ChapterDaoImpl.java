@@ -28,7 +28,6 @@ public class ChapterDaoImpl implements ChapterDao {
     @Override
     public List<Chapter> getChapters() {
         final List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
-        rows.remove(0);
         for (String row : rows) {
             final String[] chapterElements = row.split(",");
 
@@ -48,7 +47,6 @@ public class ChapterDaoImpl implements ChapterDao {
     @Override
     public Chapter getChapterById(final String chapterKey) {
         final List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
-        rows.remove(0);
         for (String row : rows) {
             final String[] chapterElements = row.split(",");
 
