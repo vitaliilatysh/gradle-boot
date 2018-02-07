@@ -3,6 +3,4 @@ group 'com.globallogic.dc.dao'
 dependencies {
     compile project(':model')
     compile project(':connector')
-
-    testCompile group: 'junit', name: 'junit'
 }
