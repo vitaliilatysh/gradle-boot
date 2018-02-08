@@ -6,13 +6,15 @@ import com.globallogic.dc.model.Chapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChapterDaoIndexOfImpl implements ChapterDao {
+public class ChapterDaoIndexOfImpl extends AbstractFileSystemDAO<Chapter> implements ProductsDao<Chapter> {
 
     private static volatile ChapterDaoIndexOfImpl instance = null;
-    private String fileName = "D:\\projects\\java-trainee-latysh\\connector\\src\\main\\resources\\chapters.csv";
+    private static final String FILE_NAME = "chapters.csv";
     private Chapter chapter = new Chapter();
     private List<Chapter> chapters = new ArrayList<>();
 
+    private ChapterDaoIndexOfImpl() {
+    }
 
     public static ChapterDaoIndexOfImpl getInstance() {
         if (instance == null) {
@@ -26,8 +28,8 @@ public class ChapterDaoIndexOfImpl implements ChapterDao {
     }
 
     @Override
-    public List<Chapter> getChapters() {
-        final List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
+    public List<Chapter> getAll() {
+        final List<String> rows = FileSystemConnectorImpl.getInstance().readFile(getFileName());
         for (String row : rows) {
             final StringBuilder stringBuilder = new StringBuilder();
             final List<String> stringList = new ArrayList<>();
@@ -53,8 +55,8 @@ public class ChapterDaoIndexOfImpl implements ChapterDao {
     }
 
     @Override
-    public Chapter getChapterById(final String chapterKey) {
-        final List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
+    public Chapter getById(final String chapterKey) {
+        final List<String> rows = FileSystemConnectorImpl.getInstance().readFile(getFileName());
         for (String row : rows) {
             final StringBuilder stringBuilder = new StringBuilder();
             final List<String> stringList = new ArrayList<>();
@@ -79,5 +81,15 @@ public class ChapterDaoIndexOfImpl implements ChapterDao {
             }
         }
         return chapter;
+    }
+
+    @Override
+    protected Chapter fromDto(final String dto) {
+        return null;
+    }
+
+    @Override
+    protected String getFileName() {
+        return FILE_NAME;
     }
 }
