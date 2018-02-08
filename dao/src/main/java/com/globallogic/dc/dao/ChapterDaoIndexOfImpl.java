@@ -29,7 +29,6 @@ public class ChapterDaoIndexOfImpl implements ChapterDao {
     public List<Chapter> getChapters() {
         final List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
         for (String row : rows) {
-            Chapter chapter = new Chapter();
             final StringBuilder stringBuilder = new StringBuilder();
             final List<String> stringList = new ArrayList<>();
             stringBuilder.append(row);
@@ -48,12 +47,7 @@ public class ChapterDaoIndexOfImpl implements ChapterDao {
             final String key = stringList.get(0);
             final String title = stringList.get(1);
             final String description = stringList.get(2);
-
-            chapter.setKey(key);
-            chapter.setTitle(title);
-            chapter.setDescription(description);
-
-            chapters.add(chapter);
+            chapters.add(new Chapter(key, title, description));
         }
         return chapters;
     }
@@ -81,10 +75,7 @@ public class ChapterDaoIndexOfImpl implements ChapterDao {
                 final String key = stringList.get(0);
                 final String title = stringList.get(1);
                 final String description = stringList.get(2);
-
-                chapter.setKey(key);
-                chapter.setTitle(title);
-                chapter.setDescription(description);
+                chapter = new Chapter(key, title, description);
             }
         }
         return chapter;

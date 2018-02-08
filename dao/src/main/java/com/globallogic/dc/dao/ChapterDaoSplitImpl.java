@@ -29,17 +29,11 @@ public class ChapterDaoSplitImpl implements ChapterDao {
     public List<Chapter> getChapters() {
         final List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
         for (String row : rows) {
-            Chapter chapter = new Chapter();
             final String[] chapterElements = row.split(",");
             final String key = chapterElements[0];
             final String title = chapterElements[1];
             final String description = chapterElements[2];
-
-            chapter.setKey(key);
-            chapter.setTitle(title);
-            chapter.setDescription(description);
-
-            chapters.add(chapter);
+            chapters.add(new Chapter(key, title, description));
         }
         return chapters;
     }
@@ -54,10 +48,7 @@ public class ChapterDaoSplitImpl implements ChapterDao {
                 final String key = chapterElements[0];
                 final String title = chapterElements[1];
                 final String description = chapterElements[2];
-
-                chapter.setKey(key);
-                chapter.setTitle(title);
-                chapter.setDescription(description);
+                chapter = new Chapter(key, title, description);
             }
             if (chapter.getIdentifier() != null && chapter.getIdentifier().equals(chapterKey)) {
                 break;

@@ -30,17 +30,13 @@ public class ChapterDaoTokenizerImpl implements ChapterDao {
     public List<Chapter> getChapters() {
         final List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
         for (String row : rows) {
-            Chapter chapter = new Chapter();
             final StringTokenizer stringTokenizer = new StringTokenizer(row, ",", false);
             while (stringTokenizer.hasMoreTokens()) {
                 final String key = stringTokenizer.nextToken();
                 final String title = stringTokenizer.nextToken();
                 final String description = stringTokenizer.nextToken();
-                chapter.setKey(key);
-                chapter.setTitle(title);
-                chapter.setDescription(description);
+                chapters.add(new Chapter(key, title, description));
             }
-            chapters.add(chapter);
         }
         return chapters;
     }
@@ -55,9 +51,7 @@ public class ChapterDaoTokenizerImpl implements ChapterDao {
                 if (key.equals(chapterKey)) {
                     final String title = stringTokenizer.nextToken();
                     final String description = stringTokenizer.nextToken();
-                    chapter.setKey(key);
-                    chapter.setTitle(title);
-                    chapter.setDescription(description);
+                    chapter = new Chapter(key, title, description);
                     break;
                 } else {
                     break;
