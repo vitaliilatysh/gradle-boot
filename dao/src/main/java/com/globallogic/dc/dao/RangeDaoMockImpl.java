@@ -1,14 +1,15 @@
 package com.globallogic.dc.dao;
 
 import com.globallogic.dc.model.Range;
-import com.globallogic.dc.model.Section;
-import com.globallogic.dc.model.SubChapter;
 
 import java.util.List;
 
-public class RangeDaoMockImpl implements RangeDao {
+public class RangeDaoMockImpl extends AbstractFileSystemDAO<Range> implements ProductsDao<Range> {
 
     private static volatile RangeDaoMockImpl instance = null;
+
+    private RangeDaoMockImpl() {
+    }
 
     public static RangeDaoMockImpl getInstance() {
         if (instance == null) {
@@ -22,32 +23,22 @@ public class RangeDaoMockImpl implements RangeDao {
     }
 
     @Override
-    public List<SubChapter> getSubChapters() {
+    public List<Range> getAll() {
         return null;
     }
 
     @Override
-    public SubChapter getSubChapterById(final String key) {
+    public Range getById(final String id) {
         return null;
     }
 
     @Override
-    public List<Range> getRanges() {
+    protected Range fromDto(final String dto) {
         return null;
     }
 
     @Override
-    public Range getRangeById(final String key) {
-        return null;
-    }
-
-    @Override
-    public List<Section> getSections() {
-        return null;
-    }
-
-    @Override
-    public Section getSectionById(final String key) {
+    protected String getFileName() {
         return null;
     }
 }

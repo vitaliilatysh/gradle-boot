@@ -4,9 +4,12 @@ import com.globallogic.dc.model.Chapter;
 
 import java.util.List;
 
-public class ChapterDaoMockImpl implements ChapterDao {
+public class ChapterDaoMockImpl extends AbstractFileSystemDAO<Chapter> implements ProductsDao<Chapter> {
 
     private static volatile ChapterDaoMockImpl instance = null;
+
+    private ChapterDaoMockImpl() {
+    }
 
     public static ChapterDaoMockImpl getInstance() {
         if (instance == null) {
@@ -20,12 +23,22 @@ public class ChapterDaoMockImpl implements ChapterDao {
     }
 
     @Override
-    public List<Chapter> getChapters() {
+    public List<Chapter> getAll() {
         return null;
     }
 
     @Override
-    public Chapter getChapterById(final String key) {
+    public Chapter getById(final String id) {
+        return null;
+    }
+
+    @Override
+    protected Chapter fromDto(final String dto) {
+        return null;
+    }
+
+    @Override
+    protected String getFileName() {
         return null;
     }
 }

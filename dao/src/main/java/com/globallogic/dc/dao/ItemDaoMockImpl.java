@@ -4,9 +4,12 @@ import com.globallogic.dc.model.Item;
 
 import java.util.List;
 
-public class ItemDaoMockImpl implements ItemDao {
+public class ItemDaoMockImpl extends AbstractFileSystemDAO<Item> implements ProductsDao<Item> {
 
     private static volatile ItemDaoMockImpl instance = null;
+
+    private ItemDaoMockImpl() {
+    }
 
     public static ItemDaoMockImpl getInstance() {
         if (instance == null) {
@@ -20,22 +23,22 @@ public class ItemDaoMockImpl implements ItemDao {
     }
 
     @Override
-    public List<Item> getItems() {
+    public List<Item> getAll() {
         return null;
     }
 
     @Override
-    public Item getItemById() {
+    public Item getById(final String id) {
         return null;
     }
 
     @Override
-    public List<Item> getRelatedItems() {
+    protected Item fromDto(final String dto) {
         return null;
     }
 
     @Override
-    public Item getRelatedItemById() {
+    protected String getFileName() {
         return null;
     }
 }
