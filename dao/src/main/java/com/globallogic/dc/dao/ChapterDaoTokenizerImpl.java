@@ -31,29 +31,15 @@ public class ChapterDaoTokenizerImpl implements ChapterDao {
         final List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
         for (String row : rows) {
             Chapter chapter = new Chapter();
-            final StringBuilder stringBuilder = new StringBuilder();
-            final List<String> stringList = new ArrayList<>();
-            stringBuilder.append(row);
-            while (stringBuilder.length() != 0) {
-                int index = stringBuilder.indexOf(",");
-                if (index != -1) {
-                    String chapterElement = stringBuilder.substring(0, index);
-                    stringList.add(chapterElement);
-                    stringBuilder.delete(0, index + 1);
-                } else {
-                    String chapterElement = stringBuilder.substring(0, stringBuilder.length());
-                    stringList.add(chapterElement);
-                    stringBuilder.delete(0, stringBuilder.length());
-                }
+            final StringTokenizer stringTokenizer = new StringTokenizer(row, ",", false);
+            while (stringTokenizer.hasMoreTokens()) {
+                final String key = stringTokenizer.nextToken();
+                final String title = stringTokenizer.nextToken();
+                final String description = stringTokenizer.nextToken();
+                chapter.setKey(key);
+                chapter.setTitle(title);
+                chapter.setDescription(description);
             }
-            final String key = stringList.get(0);
-            final String title = stringList.get(1);
-            final String description = stringList.get(2);
-
-            chapter.setKey(key);
-            chapter.setTitle(title);
-            chapter.setDescription(description);
-
             chapters.add(chapter);
         }
         return chapters;
