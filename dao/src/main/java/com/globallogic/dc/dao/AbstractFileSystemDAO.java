@@ -15,23 +15,22 @@ public abstract class AbstractFileSystemDAO<M extends Entity> implements Product
     public List<M> getAll() {
         final List<M> items = new ArrayList<>();
 
-        for (final String row : connector.readFile(getFileName())) {
-            items.add(fromDto(row));
-        }
+        connector.readFile(getFileName())
+                .stream()
+                .forEach(row -> items.add(fromDto(row)));
 
         return items;
     }
 
     @Override
     public M getById(final String id) {
-        for (final String row : connector.readFile(getFileName())) {
-            final M item = fromDto(row);
 
-            if (item.getIdentifier().equals(id)) {
-                return item;
-            }
-        }
-        return null;
+        return connector.readFile(getFileName())
+                .stream()
+                .map(row -> fromDto(row))
+                .filter(item -> item.getIdentifier().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
     protected abstract M fromDto(final String dto);
