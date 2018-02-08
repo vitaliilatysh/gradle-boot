@@ -28,6 +28,9 @@ public class Section extends SectionBase {
         super(key, title, description, subChapter);
     }
 
+    public Section() {
+    }
+
     @Override
     protected void doAddRange(final Range range) {
         if (!range.hasSections() || !range.containsSection(this)) {

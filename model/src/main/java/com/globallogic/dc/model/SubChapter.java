@@ -21,6 +21,9 @@ public class SubChapter extends SubChapterBase {
         super(key, title, description, chapter, sections, ranges);
     }
 
+    public SubChapter() {
+    }
+
     @Override
     protected void doAddRange(final Range range) {
         if (!range.hasSubChapters() || !range.containsSubChapter(this)) {

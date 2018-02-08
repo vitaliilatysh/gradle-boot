@@ -44,6 +44,9 @@ public abstract class ItemBase extends AbstractProduct {
         this.relatedItems = relatedItems;
     }
 
+    public ItemBase() {
+    }
+
     public List<Item> getRelatedItems() {
         return hasRelatedItems() ? Collections.unmodifiableList(this.relatedItems) : null;
     }

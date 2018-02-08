@@ -30,6 +30,9 @@ public class Item extends ItemBase {
         super(key, title, description, range, relatedItems);
     }
 
+    public Item() {
+    }
+
     @Override
     protected void doAddRelatedItem(final Item relatedItem) {
         if (!hasRelatedItems() || !this.containsRelatedItem(relatedItem)) {

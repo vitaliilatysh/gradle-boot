@@ -33,6 +33,9 @@ public abstract class SubChapterBase extends AbstractProduct {
         this.ranges = ranges;
     }
 
+    protected SubChapterBase() {
+    }
+
     public Chapter getChapter() {
         return this.chapter;
     }
