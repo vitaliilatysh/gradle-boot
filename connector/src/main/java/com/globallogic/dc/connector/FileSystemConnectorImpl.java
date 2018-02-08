@@ -8,7 +8,11 @@ import java.util.List;
 
 public class FileSystemConnectorImpl implements FileSystemConnector {
 
+    private static final String FILE_PATH = "D:\\projects\\java-trainee-latysh\\connector\\src\\main\\resources\\";
     private static FileSystemConnectorImpl instance;
+
+    private FileSystemConnectorImpl() {
+    }
 
     public static FileSystemConnectorImpl getInstance() {
         if (instance == null) {
@@ -25,7 +29,7 @@ public class FileSystemConnectorImpl implements FileSystemConnector {
         final List<String> rows = new ArrayList<>();
         BufferedReader bufferedReader = null;
         try {
-            bufferedReader = new BufferedReader(new FileReader(fileName));
+            bufferedReader = new BufferedReader(new FileReader(FILE_PATH.concat(fileName)));
             String currentLine;
             while ((currentLine = bufferedReader.readLine()) != null) {
                 rows.add(currentLine);
