@@ -7,9 +7,5 @@ import java.util.List;
 public interface ItemDao {
     List<Item> getItems();
 
-    Item getItemById();
-
-    List<Item> getRelatedItems();
-
-    Item getRelatedItemById();
+    Item getItemById(final String key);
 }
