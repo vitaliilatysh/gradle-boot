@@ -29,8 +29,8 @@ public class ChapterDaoSplitImpl implements ChapterDao {
     public List<Chapter> getChapters() {
         final List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
         for (String row : rows) {
+            Chapter chapter = new Chapter();
             final String[] chapterElements = row.split(",");
-
             final String key = chapterElements[0];
             final String title = chapterElements[1];
             final String description = chapterElements[2];
