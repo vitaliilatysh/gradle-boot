@@ -1,18 +1,16 @@
 package com.globallogic.dc.dao;
 
-import com.globallogic.dc.connector.FileSystemConnectorImpl;
 import com.globallogic.dc.model.Chapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ChapterDaoSplitImpl implements ChapterDao {
+public class ChapterDaoSplitImpl extends AbstractFileSystemDAO<Chapter> implements ProductsDao<Chapter> {
 
+    private static final String FILE_NAME = "chapters.csv";
     private static volatile ChapterDaoSplitImpl instance = null;
-    private String fileName = "D:\\projects\\java-trainee-latysh\\connector\\src\\main\\resources\\chapters.csv";
-    private Chapter chapter = new Chapter();
-    private List<Chapter> chapters = new ArrayList<>();
 
+    private ChapterDaoSplitImpl() {
+    }
 
     public static ChapterDaoSplitImpl getInstance() {
         if (instance == null) {
@@ -26,34 +24,24 @@ public class ChapterDaoSplitImpl implements ChapterDao {
     }
 
     @Override
-    public List<Chapter> getChapters() {
-        final List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
-        for (String row : rows) {
-            final String[] chapterElements = row.split(",");
-            final String key = chapterElements[0];
-            final String title = chapterElements[1];
-            final String description = chapterElements[2];
-            chapters.add(new Chapter(key, title, description));
-        }
-        return chapters;
+    public List<Chapter> getAll() {
+        return super.getAll();
     }
 
     @Override
-    public Chapter getChapterById(final String chapterKey) {
-        final List<String> rows = new FileSystemConnectorImpl().readFile(fileName);
-        for (String row : rows) {
-            final String[] chapterElements = row.split(",");
+    public Chapter getById(final String id) {
+        return super.getById(id);
+    }
 
-            if (chapterElements[0].equals(chapterKey)) {
-                final String key = chapterElements[0];
-                final String title = chapterElements[1];
-                final String description = chapterElements[2];
-                chapter = new Chapter(key, title, description);
-            }
-            if (chapter.getIdentifier() != null && chapter.getIdentifier().equals(chapterKey)) {
-                break;
-            }
-        }
-        return chapter;
+    @Override
+    protected Chapter fromDto(final String dto) {
+        final String[] fields = dto.split(",");
+
+        return new Chapter(fields[0], fields[1], fields[2]);
+    }
+
+    @Override
+    protected String getFileName() {
+        return FILE_NAME;
     }
 }
