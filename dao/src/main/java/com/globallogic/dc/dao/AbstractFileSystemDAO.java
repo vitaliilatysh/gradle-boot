@@ -16,7 +16,6 @@ public abstract class AbstractFileSystemDAO<M extends Entity> implements Product
         final List<M> items = new ArrayList<>();
 
         connector.readFile(getFileName())
-                .stream()
                 .forEach(row -> items.add(fromDto(row)));
 
         return items;
@@ -27,7 +26,7 @@ public abstract class AbstractFileSystemDAO<M extends Entity> implements Product
 
         return connector.readFile(getFileName())
                 .stream()
-                .map(row -> fromDto(row))
+                .map(this::fromDto)
                 .filter(item -> item.getIdentifier().equals(id))
                 .findFirst()
                 .orElse(null);
