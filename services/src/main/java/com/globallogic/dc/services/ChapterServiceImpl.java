@@ -1,8 +1,8 @@
 package com.globallogic.dc.services;
 
-import com.globallogic.dc.dao.ChapterDaoSplitImpl;
-import com.globallogic.dc.dao.ProductsDao;
 import com.globallogic.dc.model.Chapter;
+import com.globallogic.dc.repository.ProductsDao;
+import com.globallogic.dc.repository.fs.impl.split.ChapterDaoSplitImpl;
 
 import java.util.List;
 
