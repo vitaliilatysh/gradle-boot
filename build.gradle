@@ -1,9 +1,3 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-}
-
 plugins {
     id 'io.spring.dependency-management' version '1.0.4.RELEASE'
     id 'java'
