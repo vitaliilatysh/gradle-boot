@@ -1,0 +1,5 @@
+group 'com.globallogic.dc.repository.fs.impl'
+
+dependencies {
+    compile project(':repositories:repository-api')
+}
