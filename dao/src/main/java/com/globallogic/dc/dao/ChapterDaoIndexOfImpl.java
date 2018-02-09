@@ -1,6 +1,5 @@
 package com.globallogic.dc.dao;
 
-import com.globallogic.dc.connector.FileSystemConnectorImpl;
 import com.globallogic.dc.model.Chapter;
 
 import java.util.ArrayList;
@@ -8,10 +7,8 @@ import java.util.List;
 
 public class ChapterDaoIndexOfImpl extends AbstractFileSystemDAO<Chapter> implements ProductsDao<Chapter> {
 
-    private static volatile ChapterDaoIndexOfImpl instance = null;
     private static final String FILE_NAME = "chapters.csv";
-    private Chapter chapter = new Chapter();
-    private List<Chapter> chapters = new ArrayList<>();
+    private static volatile ChapterDaoIndexOfImpl instance = null;
 
     private ChapterDaoIndexOfImpl() {
     }
@@ -29,63 +26,32 @@ public class ChapterDaoIndexOfImpl extends AbstractFileSystemDAO<Chapter> implem
 
     @Override
     public List<Chapter> getAll() {
-        final List<String> rows = FileSystemConnectorImpl.getInstance().readFile(getFileName());
-        for (String row : rows) {
-            final StringBuilder stringBuilder = new StringBuilder();
-            final List<String> stringList = new ArrayList<>();
-            stringBuilder.append(row);
-            while (stringBuilder.length() != 0) {
-                int index = stringBuilder.indexOf(",");
-                if (index != -1) {
-                    String chapterElement = stringBuilder.substring(0, index);
-                    stringList.add(chapterElement);
-                    stringBuilder.delete(0, index + 1);
-                } else {
-                    String chapterElement = stringBuilder.substring(0, stringBuilder.length());
-                    stringList.add(chapterElement);
-                    stringBuilder.delete(0, stringBuilder.length());
-                }
-            }
-            final String key = stringList.get(0);
-            final String title = stringList.get(1);
-            final String description = stringList.get(2);
-            chapters.add(new Chapter(key, title, description));
-        }
-        return chapters;
+        return super.getAll();
     }
 
     @Override
-    public Chapter getById(final String chapterKey) {
-        final List<String> rows = FileSystemConnectorImpl.getInstance().readFile(getFileName());
-        for (String row : rows) {
-            final StringBuilder stringBuilder = new StringBuilder();
-            final List<String> stringList = new ArrayList<>();
-            stringBuilder.append(row);
-            while (stringBuilder.length() != 0) {
-                int index = stringBuilder.indexOf(",");
-                if (index != -1) {
-                    String chapterElement = stringBuilder.substring(0, index);
-                    stringList.add(chapterElement);
-                    stringBuilder.delete(0, index + 1);
-                } else {
-                    String chapterElement = stringBuilder.substring(0, stringBuilder.length());
-                    stringList.add(chapterElement);
-                    stringBuilder.delete(0, stringBuilder.length());
-                }
-            }
-            if (stringList.get(0).equals(chapterKey)) {
-                final String key = stringList.get(0);
-                final String title = stringList.get(1);
-                final String description = stringList.get(2);
-                chapter = new Chapter(key, title, description);
-            }
-        }
-        return chapter;
+    public Chapter getById(final String id) {
+        return super.getById(id);
     }
 
     @Override
     protected Chapter fromDto(final String dto) {
-        return null;
+        String row = dto;
+        final List<String> elements = new ArrayList<>();
+        String element = row.substring(0, row.indexOf(","));
+        while (true) {
+            elements.add(element);
+            row = row.substring(row.indexOf(",") + 1);
+            if (row.contains(",")) {
+                element = row.substring(0, row.indexOf(","));
+            } else {
+                element = row.substring(0, row.length());
+                elements.add(element);
+                break;
+            }
+
+        }
+        return new Chapter(elements.get(0), elements.get(1), elements.get(2));
     }
 
     @Override
