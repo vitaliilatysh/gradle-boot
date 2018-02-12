@@ -4,5 +4,5 @@ import com.globallogic.dc.model.Chapter;
 
 public interface ChapterDao extends ProductsDao<Chapter> {
 
-    Chapter getChapterById();
+    Chapter getChapterById(String id);
 }

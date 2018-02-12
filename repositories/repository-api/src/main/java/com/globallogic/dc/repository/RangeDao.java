@@ -4,5 +4,5 @@ import com.globallogic.dc.model.Range;
 
 public interface RangeDao extends ProductsDao<Range> {
 
-    Range getRangeById();
+    Range getRangeById(String id);
 }

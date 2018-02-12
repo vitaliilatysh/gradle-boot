@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ItemDao extends ProductsDao<Item> {
 
-    Item getItemById();
+    Item getItemById(String id);
 
-    List<Item> getRelatedItemById();
+    List<Item> getRelatedItemById(String id);
 }
