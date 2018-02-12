@@ -7,6 +7,7 @@ import com.globallogic.dc.repository.ProductsDao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class AbstractFileSystemDAO<M extends Entity> implements ProductsDao<M> {
 
@@ -16,10 +17,10 @@ public abstract class AbstractFileSystemDAO<M extends Entity> implements Product
     public List<M> getAll() {
         final List<M> items = new ArrayList<>();
 
-        connector.readFile(getFileName())
-                .forEach(row -> items.add(fromDto(row)));
-
-        return items;
+        return connector.readFile(getFileName())
+                .stream()
+                .map(this::fromDto)
+                .collect(Collectors.toCollection(() -> items));
     }
 
     @Override
