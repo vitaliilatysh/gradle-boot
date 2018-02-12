@@ -2,14 +2,14 @@ package com.globallogic.dc.services;
 
 import com.globallogic.dc.model.Chapter;
 import com.globallogic.dc.repository.ProductsDao;
-import com.globallogic.dc.repository.fs.impl.split.ChapterDaoSplitImpl;
+import com.globallogic.dc.repository.fs.impl.ChapterDaoImpl;
 
 import java.util.List;
 
 public class ChapterServiceImpl implements ChapterService {
 
     private static volatile ChapterServiceImpl instance = null;
-    private ProductsDao<Chapter> chapterDao = ChapterDaoSplitImpl.getInstance();
+    private ProductsDao<Chapter> chapterDao = ChapterDaoImpl.getInstance();
 
     public static ChapterServiceImpl getInstance() {
         if (instance == null) {
