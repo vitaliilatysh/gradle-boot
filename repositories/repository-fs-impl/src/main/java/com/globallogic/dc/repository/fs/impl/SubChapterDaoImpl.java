@@ -6,6 +6,7 @@ import com.globallogic.dc.repository.SubChapterDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SubChapterDaoImpl extends AbstractFileSystemDAO<SubChapter> implements SubChapterDao {
 
@@ -55,7 +56,11 @@ public class SubChapterDaoImpl extends AbstractFileSystemDAO<SubChapter> impleme
     }
 
     @Override
-    public SubChapter getSubChapterById() {
-        return null;
+    public List<SubChapter> getSubChaptersByChapterId(String id) {
+        return getConnector().readFile(getFileName())
+                .stream()
+                .map(this::fromDto)
+                .filter(item -> item.getChapter().getKey().equals(id))
+                .collect(Collectors.toList());
     }
 }

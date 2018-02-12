@@ -37,4 +37,8 @@ public abstract class AbstractFileSystemDAO<M extends Entity> implements Product
     protected abstract M fromDto(final String dto);
 
     protected abstract String getFileName();
+
+    protected FileSystemConnector getConnector() {
+        return connector;
+    }
 }
