@@ -15,6 +15,14 @@ public class SubChapter extends SubChapterBase {
             final String key,
             final String title,
             final String description,
+            final Chapter chapter) {
+        super(key, title, description, chapter);
+    }
+
+    public SubChapter(
+            final String key,
+            final String title,
+            final String description,
             final Chapter chapter,
             final List<Section> sections,
             final List<Range> ranges) {
