@@ -1,5 +1,1 @@
 group 'com.globallogic.dc.connector'
-
-dependencies {
-    compile project(':model')
-}
