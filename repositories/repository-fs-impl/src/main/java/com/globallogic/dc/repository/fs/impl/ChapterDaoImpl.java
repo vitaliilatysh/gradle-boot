@@ -1,4 +1,4 @@
-package com.globallogic.dc.repository.fs.impl.split;
+package com.globallogic.dc.repository.fs.impl;
 
 import com.globallogic.dc.model.Chapter;
 import com.globallogic.dc.repository.ProductsDao;
@@ -6,19 +6,19 @@ import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
 import java.util.List;
 
-public class ChapterDaoSplitImpl extends AbstractFileSystemDAO<Chapter> implements ProductsDao<Chapter> {
+public class ChapterDaoImpl extends AbstractFileSystemDAO<Chapter> implements ProductsDao<Chapter> {
 
     private static final String FILE_NAME = "chapters.csv";
-    private static volatile ChapterDaoSplitImpl instance = null;
+    private static volatile ChapterDaoImpl instance = null;
 
-    private ChapterDaoSplitImpl() {
+    private ChapterDaoImpl() {
     }
 
-    public static ChapterDaoSplitImpl getInstance() {
+    public static ChapterDaoImpl getInstance() {
         if (instance == null) {
-            synchronized (ChapterDaoSplitImpl.class) {
+            synchronized (ChapterDaoImpl.class) {
                 if (instance == null) {
-                    instance = new ChapterDaoSplitImpl();
+                    instance = new ChapterDaoImpl();
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.globallogic.dc.repository.fs.impl.split;
+package com.globallogic.dc.repository.fs.impl;
 
 import com.globallogic.dc.model.Range;
 import com.globallogic.dc.repository.ProductsDao;
@@ -6,19 +6,19 @@ import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
 import java.util.List;
 
-public class RangeDaoSplitImpl extends AbstractFileSystemDAO<Range> implements ProductsDao<Range> {
+public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements ProductsDao<Range> {
 
     private static final String FILE_NAME = "ranges.csv";
-    private static volatile RangeDaoSplitImpl instance = null;
+    private static volatile RangeDaoImpl instance = null;
 
-    private RangeDaoSplitImpl() {
+    private RangeDaoImpl() {
     }
 
-    public static RangeDaoSplitImpl getInstance() {
+    public static RangeDaoImpl getInstance() {
         if (instance == null) {
-            synchronized (RangeDaoSplitImpl.class) {
+            synchronized (RangeDaoImpl.class) {
                 if (instance == null) {
-                    instance = new RangeDaoSplitImpl();
+                    instance = new RangeDaoImpl();
                 }
             }
         }

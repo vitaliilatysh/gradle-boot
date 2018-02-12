@@ -1,25 +1,24 @@
-package com.globallogic.dc.repository.fs.impl.tokenizer;
+package com.globallogic.dc.repository.fs.impl;
 
 import com.globallogic.dc.model.Item;
 import com.globallogic.dc.repository.ProductsDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
 import java.util.List;
-import java.util.StringTokenizer;
 
-public class ItemDaoTokenizerImpl extends AbstractFileSystemDAO<Item> implements ProductsDao<Item> {
+public class ItemDaoImpl extends AbstractFileSystemDAO<Item> implements ProductsDao<Item> {
 
     private static final String FILE_NAME = "items.csv";
-    private static volatile ItemDaoTokenizerImpl instance = null;
+    private static volatile ItemDaoImpl instance = null;
 
-    private ItemDaoTokenizerImpl() {
+    private ItemDaoImpl() {
     }
 
-    public static ItemDaoTokenizerImpl getInstance() {
+    public static ItemDaoImpl getInstance() {
         if (instance == null) {
-            synchronized (ItemDaoTokenizerImpl.class) {
+            synchronized (ItemDaoImpl.class) {
                 if (instance == null) {
-                    instance = new ItemDaoTokenizerImpl();
+                    instance = new ItemDaoImpl();
                 }
             }
         }
@@ -36,11 +35,10 @@ public class ItemDaoTokenizerImpl extends AbstractFileSystemDAO<Item> implements
         return super.getById(id);
     }
 
-    @Override
     protected Item fromDto(final String dto) {
-        final StringTokenizer stringTokenizer = new StringTokenizer(dto, ",", false);
+        final String[] fields = dto.split(",");
 
-        return new Item(stringTokenizer.nextToken(), stringTokenizer.nextToken(), stringTokenizer.nextToken());
+        return new Item(fields[0], fields[1], fields[2]);
     }
 
     @Override

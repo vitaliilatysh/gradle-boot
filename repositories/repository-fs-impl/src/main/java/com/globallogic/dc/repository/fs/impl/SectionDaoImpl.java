@@ -1,4 +1,4 @@
-package com.globallogic.dc.repository.fs.impl.split;
+package com.globallogic.dc.repository.fs.impl;
 
 import com.globallogic.dc.model.Section;
 import com.globallogic.dc.repository.ProductsDao;
@@ -6,19 +6,19 @@ import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
 import java.util.List;
 
-public class SectionDaoSplitImpl extends AbstractFileSystemDAO<Section> implements ProductsDao<Section> {
+public class SectionDaoImpl extends AbstractFileSystemDAO<Section> implements ProductsDao<Section> {
 
     private static final String FILE_NAME = "sections.csv";
-    private static volatile SectionDaoSplitImpl instance = null;
+    private static volatile SectionDaoImpl instance = null;
 
-    private SectionDaoSplitImpl() {
+    private SectionDaoImpl() {
     }
 
-    public static SectionDaoSplitImpl getInstance() {
+    public static SectionDaoImpl getInstance() {
         if (instance == null) {
-            synchronized (SectionDaoSplitImpl.class) {
+            synchronized (SectionDaoImpl.class) {
                 if (instance == null) {
-                    instance = new SectionDaoSplitImpl();
+                    instance = new SectionDaoImpl();
                 }
             }
         }
