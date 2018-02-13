@@ -6,7 +6,6 @@ import com.globallogic.dc.connector.FileSystemConnectorImpl;
 import com.globallogic.dc.repository.ProductsDao;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -17,12 +16,10 @@ public abstract class AbstractFileSystemDAO<M extends Entity> implements Product
 
     @Override
     public List<M> getAll() {
-        final List<M> items = new ArrayList<>();
-
         return connector.readFile(getFile())
                 .stream()
                 .map(this::fromDto)
-                .collect(Collectors.toCollection(() -> items));
+                .collect(Collectors.toList());
     }
 
     @Override
