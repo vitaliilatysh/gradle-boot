@@ -8,5 +8,5 @@ public interface RangeDao extends ProductsDao<Range> {
 
     List<Range> getRangesBySubChapterId(String id);
 
-    List<Range> getRangesBySectionsId(String id);
+    List<Range> getRangesBySectionId(String id);
 }
