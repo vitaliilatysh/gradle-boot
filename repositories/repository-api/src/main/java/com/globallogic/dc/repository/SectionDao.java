@@ -2,7 +2,9 @@ package com.globallogic.dc.repository;
 
 import com.globallogic.dc.model.Section;
 
+import java.util.List;
+
 public interface SectionDao extends ProductsDao<Section> {
 
-    Section getSectionById(String id);
+    List<Section> getSectionsBySubChapterId(String id);
 }
