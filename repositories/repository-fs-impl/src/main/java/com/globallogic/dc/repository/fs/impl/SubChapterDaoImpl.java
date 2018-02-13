@@ -57,7 +57,7 @@ public class SubChapterDaoImpl extends AbstractFileSystemDAO<SubChapter> impleme
 
     @Override
     public List<SubChapter> getSubChaptersByChapterId(String id) {
-        return getConnector().readFile(getFileName())
+        return getConnector().readFile(getFile())
                 .stream()
                 .map(this::fromDto)
                 .filter(item -> item.getChapter().getKey().equals(id))
