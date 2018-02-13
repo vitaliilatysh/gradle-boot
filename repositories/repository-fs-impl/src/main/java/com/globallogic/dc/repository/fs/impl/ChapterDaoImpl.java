@@ -1,12 +1,12 @@
 package com.globallogic.dc.repository.fs.impl;
 
 import com.globallogic.dc.model.Chapter;
-import com.globallogic.dc.repository.ProductsDao;
+import com.globallogic.dc.repository.ChapterDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
 import java.util.List;
 
-public class ChapterDaoImpl extends AbstractFileSystemDAO<Chapter> implements ProductsDao<Chapter> {
+public class ChapterDaoImpl extends AbstractFileSystemDAO<Chapter> implements ChapterDao {
 
     private static final String FILE_NAME = "chapters.csv";
     private static volatile ChapterDaoImpl instance = null;
