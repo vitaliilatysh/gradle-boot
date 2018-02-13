@@ -88,8 +88,4 @@ public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeD
         }
         return list;
     }
-
-    public static void main(String[] args) {
-        List<Range> ranges = RangeDaoImpl.getInstance().getRangesBySectionId("31");
-    }
 }
