@@ -2,7 +2,11 @@ package com.globallogic.dc.repository;
 
 import com.globallogic.dc.model.Range;
 
+import java.util.List;
+
 public interface RangeDao extends ProductsDao<Range> {
 
-    Range getRangeById(String id);
+    List<Range> getRangesBySubChapterId(String id);
+
+    List<Range> getRangesBySectionsId(String id);
 }
