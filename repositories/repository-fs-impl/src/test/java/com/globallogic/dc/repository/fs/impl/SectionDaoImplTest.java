@@ -13,7 +13,7 @@ public class SectionDaoImplTest {
 
     @Test
     public void testGetSectionsBySubChapterId() {
-        List<Section> sections = sectionDaoImpl.getSectionsBySubChapterId("21");
+        List<Section> sections = sectionDaoImpl.getSectionsBySubChapterId("22");
 
         assertEquals(2, sections.size());
     }

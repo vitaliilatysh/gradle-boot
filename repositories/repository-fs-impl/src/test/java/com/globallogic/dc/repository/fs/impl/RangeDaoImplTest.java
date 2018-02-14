@@ -13,7 +13,7 @@ public class RangeDaoImplTest {
 
     @Test
     public void testGetRangesBySubChapterId() {
-        List<Range> ranges = rangeDaoImpl.getRangesBySubChapterId("22");
+        List<Range> ranges = rangeDaoImpl.getRangesBySubChapterId("24");
 
         assertEquals(2, ranges.size());
     }

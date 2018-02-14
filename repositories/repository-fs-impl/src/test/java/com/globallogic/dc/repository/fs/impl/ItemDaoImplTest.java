@@ -17,4 +17,20 @@ public class ItemDaoImplTest {
 
         assertEquals(2, items.size());
     }
+
+    @Test
+    public void testGetItemsByRelatedItems() {
+        List<Item> items = itemDaoImpl.getItemsByRelatedItemId("54");
+
+        assertEquals(2, items.size());
+
+    }
+
+    @Test
+    public void testGetItemsByStringItems() {
+        List<Item> items = itemDaoImpl.getItemsByStringItemId("Item1");
+
+        assertEquals(2, items.size());
+
+    }
 }
