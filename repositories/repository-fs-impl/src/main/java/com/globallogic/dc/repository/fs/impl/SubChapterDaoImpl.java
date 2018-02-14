@@ -1,17 +1,17 @@
 package com.globallogic.dc.repository.fs.impl;
 
-import com.globallogic.dc.model.Chapter;
 import com.globallogic.dc.model.SubChapter;
 import com.globallogic.dc.repository.SubChapterDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SubChapterDaoImpl extends AbstractFileSystemDAO<SubChapter> implements SubChapterDao {
 
     private static final String FILE_NAME = "subchapters.csv";
-    private static final String RELATIONS_FILE = "subChaptersToChapters.csv";
     private static volatile SubChapterDaoImpl instance = null;
 
     private SubChapterDaoImpl() {
@@ -42,13 +42,8 @@ public class SubChapterDaoImpl extends AbstractFileSystemDAO<SubChapter> impleme
     protected SubChapter fromDto(final String dto) {
         final String[] fields = dto.split(",");
 
-        final SubChapter result = new SubChapter(fields[0], fields[1], fields[2]);
-        final Chapter chapter = new Chapter();
+        return new SubChapter(fields[0], fields[1], fields[2]);
 
-        chapter.setKey(fields[3]);
-        result.setChapter(chapter);
-
-        return result;
     }
 
     @Override
@@ -57,29 +52,28 @@ public class SubChapterDaoImpl extends AbstractFileSystemDAO<SubChapter> impleme
     }
 
     @Override
-    protected String getRelationsFileName() {
-        return RELATIONS_FILE;
-    }
-
-    @Override
     public List<SubChapter> getSubChaptersByChapterId(String id) {
+        final String RELATIONS_FILE = "subChaptersToChapters.csv";
 
-        String[] relationsIds;
-        for (String row : getConnector().readFile(getRelationsFile())) {
-            relationsIds = row.split(",");
-            if (relationsIds[1].equals(id)) {
-
+        List<String> ids = new ArrayList<>();
+        for (String row : getConnector().readFile(new File(Objects.requireNonNull(getClass().getClassLoader().getResource(RELATIONS_FILE)).getFile()))) {
+            String[] rows = row.split(",");
+            if (rows[1].equals(id)) {
+                ids.add(rows[0]);
             }
         }
 
 
-        List<SubChapter> list = new ArrayList<>();
-        for (String s : getConnector().readFile(getFile())) {
-            SubChapter item = fromDto(s);
-            if (item.getChapter().getKey().equals(id)) {
-                list.add(item);
+        List<SubChapter> elements = new ArrayList<>();
+        for (String row : getConnector().readFile(getFile())) {
+            String[] rows = row.split(",");
+            for (String elementId : ids) {
+                if (rows[0].equals(elementId)) {
+                    SubChapter item = fromDto(row);
+                    elements.add(item);
+                }
             }
         }
-        return list;
+        return elements;
     }
 }

@@ -1,14 +1,13 @@
 package com.globallogic.dc.repository.fs.impl;
 
 import com.globallogic.dc.model.Range;
-import com.globallogic.dc.model.Section;
-import com.globallogic.dc.model.SubChapter;
 import com.globallogic.dc.repository.RangeDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
-import java.util.Collections;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeDao {
 
@@ -33,17 +32,7 @@ public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeD
     protected Range fromDto(final String dto) {
         final String[] fields = dto.split(",");
 
-        final Range result = new Range(fields[0], fields[1], fields[2]);
-        final Section section = new Section();
-        final SubChapter subChapter = new SubChapter();
-
-        subChapter.setKey(fields[3]);
-        section.setKey(fields[4]);
-
-        result.setSubChapters(Collections.singletonList(subChapter));
-        result.setSections(Collections.singletonList(section));
-
-        return result;
+        return new Range(fields[0], fields[1], fields[2]);
     }
 
     @Override
@@ -63,19 +52,53 @@ public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeD
 
     @Override
     public List<Range> getRangesBySubChapterId(final String id) {
-        return getConnector().readFile(getFile())
-                .stream()
-                .map(this::fromDto)
-                .filter(r -> r.getSubChapters().stream().anyMatch(subChapter -> subChapter.getIdentifier().equals(id)))
-                .collect(Collectors.toList());
+        final String RELATIONS_FILE = "rangesToSubChapters.csv";
+
+        List<String> ids = new ArrayList<>();
+        for (String row : getConnector().readFile(new File(Objects.requireNonNull(getClass().getClassLoader().getResource(RELATIONS_FILE)).getFile()))) {
+            String[] rows = row.split(",");
+            if (rows[1].equals(id)) {
+                ids.add(rows[0]);
+            }
+        }
+
+
+        List<Range> elements = new ArrayList<>();
+        for (String row : getConnector().readFile(getFile())) {
+            String[] rows = row.split(",");
+            for (String elementId : ids) {
+                if (rows[0].equals(elementId)) {
+                    Range item = fromDto(row);
+                    elements.add(item);
+                }
+            }
+        }
+        return elements;
     }
 
     @Override
     public List<Range> getRangesBySectionId(final String id) {
-        return getConnector().readFile(getFile())
-                .stream()
-                .map(this::fromDto)
-                .filter(range -> range.getSections().stream().anyMatch(section -> section.getIdentifier().equals(id)))
-                .collect(Collectors.toList());
+        final String RELATIONS_FILE = "rangesToSections.csv";
+
+        List<String> ids = new ArrayList<>();
+        for (String row : getConnector().readFile(new File(Objects.requireNonNull(getClass().getClassLoader().getResource(RELATIONS_FILE)).getFile()))) {
+            String[] rows = row.split(",");
+            if (rows[1].equals(id)) {
+                ids.add(rows[0]);
+            }
+        }
+
+
+        List<Range> elements = new ArrayList<>();
+        for (String row : getConnector().readFile(getFile())) {
+            String[] rows = row.split(",");
+            for (String elementId : ids) {
+                if (rows[0].equals(elementId)) {
+                    Range item = fromDto(row);
+                    elements.add(item);
+                }
+            }
+        }
+        return elements;
     }
 }

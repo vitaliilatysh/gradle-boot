@@ -1,12 +1,13 @@
 package com.globallogic.dc.repository.fs.impl;
 
 import com.globallogic.dc.model.Item;
-import com.globallogic.dc.model.Range;
 import com.globallogic.dc.repository.ItemDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class ItemDaoImpl extends AbstractFileSystemDAO<Item> implements ItemDao {
 
@@ -40,13 +41,7 @@ public class ItemDaoImpl extends AbstractFileSystemDAO<Item> implements ItemDao 
     protected Item fromDto(final String dto) {
         final String[] fields = dto.split(",");
 
-        final Item result = new Item(fields[0], fields[1], fields[2]);
-        final Range range = new Range();
-
-        range.setKey(fields[3]);
-        result.setRange(range);
-
-        return result;
+        return new Item(fields[0], fields[1], fields[2]);
     }
 
     @Override
@@ -55,11 +50,80 @@ public class ItemDaoImpl extends AbstractFileSystemDAO<Item> implements ItemDao 
     }
 
     @Override
+    public List<Item> getItemsByRelatedItemId(String id) {
+        final String RELATIONS_FILE = "itemsToRelatedItems.csv";
+
+        List<String> ids = new ArrayList<>();
+        for (String row : getConnector().readFile(new File(Objects.requireNonNull(getClass().getClassLoader().getResource(RELATIONS_FILE)).getFile()))) {
+            String[] rows = row.split(",");
+            if (rows[1].equals(id)) {
+                ids.add(rows[0]);
+            }
+        }
+
+
+        List<Item> elements = new ArrayList<>();
+        for (String row : getConnector().readFile(getFile())) {
+            String[] rows = row.split(",");
+            for (String elementId : ids) {
+                if (rows[0].equals(elementId)) {
+                    Item item = fromDto(row);
+                    elements.add(item);
+                }
+            }
+        }
+        return elements;
+    }
+
+    @Override
+    public List<Item> getItemsByStringItemId(String id) {
+        final String RELATIONS_FILE = "itemsToStringItems.csv";
+
+        List<String> ids = new ArrayList<>();
+        for (String row : getConnector().readFile(new File(Objects.requireNonNull(getClass().getClassLoader().getResource(RELATIONS_FILE)).getFile()))) {
+            String[] rows = row.split(",");
+            if (rows[1].equals(id)) {
+                ids.add(rows[0]);
+            }
+        }
+
+
+        List<Item> elements = new ArrayList<>();
+        for (String row : getConnector().readFile(getFile())) {
+            String[] rows = row.split(",");
+            for (String elementId : ids) {
+                if (rows[0].equals(elementId)) {
+                    Item item = fromDto(row);
+                    elements.add(item);
+                }
+            }
+        }
+        return elements;
+    }
+
+    @Override
     public List<Item> getItemsByRangeId(final String id) {
-        return getConnector().readFile(getFile())
-                .stream()
-                .map(this::fromDto)
-                .filter(item -> item.getRange().getKey().equals(id))
-                .collect(Collectors.toList());
+        final String RELATIONS_FILE = "itemsToRanges.csv";
+
+        List<String> ids = new ArrayList<>();
+        for (String row : getConnector().readFile(new File(Objects.requireNonNull(getClass().getClassLoader().getResource(RELATIONS_FILE)).getFile()))) {
+            String[] rows = row.split(",");
+            if (rows[1].equals(id)) {
+                ids.add(rows[0]);
+            }
+        }
+
+
+        List<Item> elements = new ArrayList<>();
+        for (String row : getConnector().readFile(getFile())) {
+            String[] rows = row.split(",");
+            for (String elementId : ids) {
+                if (rows[0].equals(elementId)) {
+                    Item item = fromDto(row);
+                    elements.add(item);
+                }
+            }
+        }
+        return elements;
     }
 }

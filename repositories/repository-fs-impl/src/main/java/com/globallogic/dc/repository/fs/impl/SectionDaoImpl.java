@@ -1,12 +1,13 @@
 package com.globallogic.dc.repository.fs.impl;
 
 import com.globallogic.dc.model.Section;
-import com.globallogic.dc.model.SubChapter;
 import com.globallogic.dc.repository.SectionDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class SectionDaoImpl extends AbstractFileSystemDAO<Section> implements SectionDao {
 
@@ -41,13 +42,7 @@ public class SectionDaoImpl extends AbstractFileSystemDAO<Section> implements Se
     protected Section fromDto(final String dto) {
         final String[] fields = dto.split(",");
 
-        final Section result = new Section(fields[0], fields[1], fields[2]);
-        final SubChapter subChapter = new SubChapter();
-
-        subChapter.setKey(fields[3]);
-        result.setSubChapter(subChapter);
-
-        return result;
+        return new Section(fields[0], fields[1], fields[2]);
 
     }
 
@@ -58,10 +53,27 @@ public class SectionDaoImpl extends AbstractFileSystemDAO<Section> implements Se
 
     @Override
     public List<Section> getSectionsBySubChapterId(final String id) {
-        return getConnector().readFile(getFile())
-                .stream()
-                .map(this::fromDto)
-                .filter(item -> item.getSubChapter().getKey().equals(id))
-                .collect(Collectors.toList());
+        final String RELATIONS_FILE = "sectionsToSubChapters.csv";
+
+        List<String> ids = new ArrayList<>();
+        for (String row : getConnector().readFile(new File(Objects.requireNonNull(getClass().getClassLoader().getResource(RELATIONS_FILE)).getFile()))) {
+            String[] rows = row.split(",");
+            if (rows[1].equals(id)) {
+                ids.add(rows[0]);
+            }
+        }
+
+
+        List<Section> elements = new ArrayList<>();
+        for (String row : getConnector().readFile(getFile())) {
+            String[] rows = row.split(",");
+            for (String elementId : ids) {
+                if (rows[0].equals(elementId)) {
+                    Section item = fromDto(row);
+                    elements.add(item);
+                }
+            }
+        }
+        return elements;
     }
 }
