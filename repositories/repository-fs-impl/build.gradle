@@ -2,5 +2,8 @@ group 'com.globallogic.dc.repository.fs.impl'
 
 dependencies {
     compile project(':connector')
+    compile project(':model')
     compile project(':repositories:repository-api')
+
+    testCompile group: 'junit', name: 'junit'
 }
