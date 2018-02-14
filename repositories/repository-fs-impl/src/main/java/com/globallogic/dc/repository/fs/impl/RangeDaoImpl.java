@@ -6,9 +6,9 @@ import com.globallogic.dc.model.SubChapter;
 import com.globallogic.dc.repository.RangeDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeDao {
 
@@ -63,29 +63,19 @@ public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeD
 
     @Override
     public List<Range> getRangesBySubChapterId(final String id) {
-        List<Range> list = new ArrayList<>();
-        for (String s : getConnector().readFile(getFile())) {
-            Range item = fromDto(s);
-            for (SubChapter subChapter : item.getSubChapters()) {
-                if (subChapter.getIdentifier().equals(id)) {
-                    list.add(item);
-                }
-            }
-        }
-        return list;
+        return getConnector().readFile(getFile())
+                .stream()
+                .map(this::fromDto)
+                .filter(r -> r.getSubChapters().stream().anyMatch(subChapter -> subChapter.getIdentifier().equals(id)))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Range> getRangesBySectionId(final String id) {
-        List<Range> list = new ArrayList<>();
-        for (String s : getConnector().readFile(getFile())) {
-            Range item = fromDto(s);
-            for (Section section : item.getSections()) {
-                if (section.getIdentifier().equals(id)) {
-                    list.add(item);
-                }
-            }
-        }
-        return list;
+        return getConnector().readFile(getFile())
+                .stream()
+                .map(this::fromDto)
+                .filter(range -> range.getSections().stream().anyMatch(section -> section.getIdentifier().equals(id)))
+                .collect(Collectors.toList());
     }
 }
