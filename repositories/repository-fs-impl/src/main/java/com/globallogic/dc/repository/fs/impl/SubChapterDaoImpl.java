@@ -5,12 +5,13 @@ import com.globallogic.dc.model.SubChapter;
 import com.globallogic.dc.repository.SubChapterDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SubChapterDaoImpl extends AbstractFileSystemDAO<SubChapter> implements SubChapterDao {
 
     private static final String FILE_NAME = "subchapters.csv";
+    private static final String RELATIONS_FILE = "subChaptersToChapters.csv";
     private static volatile SubChapterDaoImpl instance = null;
 
     private SubChapterDaoImpl() {
@@ -56,11 +57,29 @@ public class SubChapterDaoImpl extends AbstractFileSystemDAO<SubChapter> impleme
     }
 
     @Override
+    protected String getRelationsFileName() {
+        return RELATIONS_FILE;
+    }
+
+    @Override
     public List<SubChapter> getSubChaptersByChapterId(String id) {
-        return getConnector().readFile(getFile())
-                .stream()
-                .map(this::fromDto)
-                .filter(item -> item.getChapter().getKey().equals(id))
-                .collect(Collectors.toList());
+
+        String[] relationsIds;
+        for (String row : getConnector().readFile(getRelationsFile())) {
+            relationsIds = row.split(",");
+            if (relationsIds[1].equals(id)) {
+
+            }
+        }
+
+
+        List<SubChapter> list = new ArrayList<>();
+        for (String s : getConnector().readFile(getFile())) {
+            SubChapter item = fromDto(s);
+            if (item.getChapter().getKey().equals(id)) {
+                list.add(item);
+            }
+        }
+        return list;
     }
 }

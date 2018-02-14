@@ -37,8 +37,14 @@ public abstract class AbstractFileSystemDAO<M extends Entity> implements Product
 
     protected abstract String getFileName();
 
+    protected abstract String getRelationsFileName();
+
     protected File getFile() {
         return new File(Objects.requireNonNull(getClass().getClassLoader().getResource(getFileName())).getFile());
+    }
+
+    protected File getRelationsFile() {
+        return new File(Objects.requireNonNull(getClass().getClassLoader().getResource(getRelationsFileName())).getFile());
     }
 
     protected FileSystemConnector getConnector() {
