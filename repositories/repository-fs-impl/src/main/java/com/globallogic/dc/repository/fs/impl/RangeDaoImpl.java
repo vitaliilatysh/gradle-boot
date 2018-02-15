@@ -4,14 +4,15 @@ import com.globallogic.dc.model.Range;
 import com.globallogic.dc.repository.RangeDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeDao {
 
-    private static final String FILE_NAME = "ranges.csv";
+    private static final String FILENAME_RANGES = "ranges.csv";
+    private static final String RANGES_TO_SUB_CHAPTERS = "rangesToSubChapters.csv";
+    private static final String RANGES_TO_SECTIONS = "rangesToSections.csv";
+
     private static volatile RangeDaoImpl instance = null;
 
     private RangeDaoImpl() {
@@ -37,7 +38,7 @@ public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeD
 
     @Override
     protected String getFileName() {
-        return FILE_NAME;
+        return FILENAME_RANGES;
     }
 
     @Override
@@ -52,19 +53,16 @@ public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeD
 
     @Override
     public List<Range> getRangesBySubChapterId(final String id) {
-        final String RELATIONS_FILE = "rangesToSubChapters.csv";
-
         List<String> ids = new ArrayList<>();
-        for (String row : getConnector().readFile(new File(Objects.requireNonNull(getClass().getClassLoader().getResource(RELATIONS_FILE)).getFile()))) {
+        for (String row : getConnector().readFile(RANGES_TO_SUB_CHAPTERS)) {
             String[] rows = row.split(",");
             if (rows[1].equals(id)) {
                 ids.add(rows[0]);
             }
         }
 
-
         List<Range> elements = new ArrayList<>();
-        for (String row : getConnector().readFile(getFile())) {
+        for (String row : getConnector().readFile(getFileName())) {
             String[] rows = row.split(",");
             for (String elementId : ids) {
                 if (rows[0].equals(elementId)) {
@@ -78,19 +76,16 @@ public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeD
 
     @Override
     public List<Range> getRangesBySectionId(final String id) {
-        final String RELATIONS_FILE = "rangesToSections.csv";
-
         List<String> ids = new ArrayList<>();
-        for (String row : getConnector().readFile(new File(Objects.requireNonNull(getClass().getClassLoader().getResource(RELATIONS_FILE)).getFile()))) {
+        for (String row : getConnector().readFile(RANGES_TO_SECTIONS)) {
             String[] rows = row.split(",");
             if (rows[1].equals(id)) {
                 ids.add(rows[0]);
             }
         }
 
-
         List<Range> elements = new ArrayList<>();
-        for (String row : getConnector().readFile(getFile())) {
+        for (String row : getConnector().readFile(getFileName())) {
             String[] rows = row.split(",");
             for (String elementId : ids) {
                 if (rows[0].equals(elementId)) {
