@@ -4,7 +4,6 @@ import com.globallogic.dc.model.Range;
 import com.globallogic.dc.repository.RangeDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -55,52 +54,33 @@ public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeD
 
     @Override
     public List<Range> getRangesBySubChapterId(final String id) {
-        List<String> ids = getConnector().readFile(RANGES_TO_SUB_CHAPTERS)
+        return getConnector().readFile(getFileName())
                 .stream()
                 .map(row -> row.split(","))
-                .filter(row -> row[1].equals(id))
-                .map(row -> row[0])
+                .filter(row -> getConnector().readFile(RANGES_TO_SUB_CHAPTERS)
+                        .stream()
+                        .map(line -> line.split(","))
+                        .filter(line -> line[1].equals(id))
+                        .map(line -> line[0])
+                        .collect(toList())
+                        .contains(row[0]))
+                .map(row -> fromDto(row[0].concat(",".concat(row[1])).concat(",".concat(row[2]))))
                 .collect(toList());
-
-        List<Range> elements = getConnector().readFile(getFileName())
-                .stream()
-                .map(row -> row.split(","))
-                .filter(row -> row[0].equals(ids.get(0)))
-                .map(row -> fromDto(row))
-                .collect(toList());
-
-//        List<Range> elements
-//            String[] rows = row.split(",");
-//            for (String elementId : ids) {
-//                if (rows[0].equals(elementId)) {
-//                    Range item = fromDto(row);
-//                    elements.add(item);
-//                }
-//            }
-//        }
-        return elements;
     }
 
     @Override
     public List<Range> getRangesBySectionId(final String id) {
-        List<String> ids = new ArrayList<>();
-        for (String row : getConnector().readFile(RANGES_TO_SECTIONS)) {
-            String[] rows = row.split(",");
-            if (rows[1].equals(id)) {
-                ids.add(rows[0]);
-            }
-        }
-
-        List<Range> elements = new ArrayList<>();
-        for (String row : getConnector().readFile(getFileName())) {
-            String[] rows = row.split(",");
-            for (String elementId : ids) {
-                if (rows[0].equals(elementId)) {
-                    Range item = fromDto(row);
-                    elements.add(item);
-                }
-            }
-        }
-        return elements;
+        return getConnector().readFile(getFileName())
+                .stream()
+                .map(row -> row.split(","))
+                .filter(row -> getConnector().readFile(RANGES_TO_SECTIONS)
+                        .stream()
+                        .map(line -> line.split(","))
+                        .filter(line -> line[1].equals(id))
+                        .map(line -> line[0])
+                        .collect(toList())
+                        .contains(row[0]))
+                .map(row -> fromDto(row[0].concat(",".concat(row[1])).concat(",".concat(row[2]))))
+                .collect(toList());
     }
 }
