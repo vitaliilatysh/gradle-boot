@@ -5,9 +5,7 @@ import com.globallogic.dc.connector.FileSystemConnector;
 import com.globallogic.dc.connector.FileSystemConnectorImpl;
 import com.globallogic.dc.repository.ProductsDao;
 
-import java.io.File;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public abstract class AbstractFileSystemDAO<M extends Entity> implements ProductsDao<M> {
@@ -16,7 +14,7 @@ public abstract class AbstractFileSystemDAO<M extends Entity> implements Product
 
     @Override
     public List<M> getAll() {
-        return connector.readFile(getFile())
+        return connector.readFile(getFileName())
                 .stream()
                 .map(this::fromDto)
                 .collect(Collectors.toList());
@@ -25,7 +23,7 @@ public abstract class AbstractFileSystemDAO<M extends Entity> implements Product
     @Override
     public M getById(final String id) {
 
-        return connector.readFile(getFile())
+        return connector.readFile(getFileName())
                 .stream()
                 .map(this::fromDto)
                 .filter(item -> item.getIdentifier().equals(id))
@@ -36,10 +34,6 @@ public abstract class AbstractFileSystemDAO<M extends Entity> implements Product
     protected abstract M fromDto(final String dto);
 
     protected abstract String getFileName();
-
-    protected File getFile() {
-        return new File(Objects.requireNonNull(getClass().getClassLoader().getResource(getFileName())).getFile());
-    }
 
     protected FileSystemConnector getConnector() {
         return connector;
