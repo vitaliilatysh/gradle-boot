@@ -30,7 +30,9 @@ public class FileSystemConnectorImpl implements FileSystemConnector {
     }
 
     public List<String> readFile(final String fileName) {
-        if (isBlank(fileName)) throw new IllegalArgumentException("File should be specified.");
+        if (isBlank(fileName)) {
+            throw new IllegalArgumentException("File should be specified.");
+        }
 
         final List<String> rows = new ArrayList<>();
         BufferedReader bufferedReader = null;
