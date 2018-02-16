@@ -52,7 +52,7 @@ public abstract class AbstractFileSystemDAO<M extends Entity> implements Product
                         .map(line -> line[0])
                         .collect(toList())
                         .contains(row[0]))
-                .map(row -> fromDto(row[0].concat(",".concat(row[1])).concat(",".concat(row[2]))))
+                .map(row -> fromDto(String.join(",", row)))
                 .collect(toList());
     }
 }
