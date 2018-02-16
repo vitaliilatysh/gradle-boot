@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ChapterDaoImpl extends AbstractFileSystemDAO<Chapter> implements ChapterDao {
 
-    private static final String FILE_NAME = "chapters.csv";
+    private static final String CHAPTERS = "chapters.csv";
     private static volatile ChapterDaoImpl instance = null;
 
     private ChapterDaoImpl() {
@@ -44,6 +44,6 @@ public class ChapterDaoImpl extends AbstractFileSystemDAO<Chapter> implements Ch
 
     @Override
     protected String getFileName() {
-        return FILE_NAME;
+        return CHAPTERS;
     }
 }
