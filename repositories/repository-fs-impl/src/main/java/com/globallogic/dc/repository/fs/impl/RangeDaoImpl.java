@@ -8,7 +8,7 @@ import java.util.List;
 
 public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeDao {
 
-    private static final String FILENAME_RANGES = "ranges.csv";
+    private static final String RANGES = "ranges.csv";
     private static final String RANGES_TO_SUB_CHAPTERS = "rangesToSubChapters.csv";
     private static final String RANGES_TO_SECTIONS = "rangesToSections.csv";
 
@@ -37,7 +37,7 @@ public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeD
 
     @Override
     protected String getFileName() {
-        return FILENAME_RANGES;
+        return RANGES;
     }
 
     @Override
