@@ -39,6 +39,9 @@ public abstract class SectionBase extends AbstractProduct {
         this.subChapter = subChapter;
     }
 
+    protected SectionBase() {
+    }
+
     public List<Range> getRanges() {
         return hasRanges() ? Collections.unmodifiableList(this.ranges) : null;
     }

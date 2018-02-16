@@ -42,6 +42,9 @@ public abstract class RangeBase extends AbstractProduct {
         this.items = items;
     }
 
+    protected RangeBase() {
+    }
+
     public List<SubChapter> getSubChapters() {
         return hasSubChapters() ? Collections.unmodifiableList(this.subChapters) : null;
     }

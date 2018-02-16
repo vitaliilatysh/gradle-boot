@@ -29,6 +29,9 @@ public class Range extends RangeBase {
         super(key, title, description, items);
     }
 
+    public Range() {
+    }
+
     @Override
     protected void doAddSubChapter(final SubChapter subChapter) {
         if (!hasSubChapters() || !this.containsSubChapter(subChapter)) {

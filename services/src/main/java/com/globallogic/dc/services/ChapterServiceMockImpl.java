@@ -9,6 +9,9 @@ public class ChapterServiceMockImpl implements ChapterService {
 
     private static volatile ChapterServiceMockImpl instance = null;
 
+    private ChapterServiceMockImpl() {
+    }
+
     public static ChapterServiceMockImpl getInstance() {
         if (instance == null) {
             synchronized (ChapterServiceMockImpl.class) {

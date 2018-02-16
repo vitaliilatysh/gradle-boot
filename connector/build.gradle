@@ -1,7 +1,5 @@
 group 'com.globallogic.dc.connector'
 
-dependencies {
-    compile project(':model')
-
-    testCompile group: 'junit', name: 'junit'
+dependencies{
+    compile group: 'org.apache.commons', name: 'commons-lang3'
 }
