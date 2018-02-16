@@ -4,7 +4,6 @@ import com.globallogic.dc.model.SubChapter;
 import com.globallogic.dc.repository.SubChapterDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SubChapterDaoImpl extends AbstractFileSystemDAO<SubChapter> implements SubChapterDao {
@@ -53,24 +52,6 @@ public class SubChapterDaoImpl extends AbstractFileSystemDAO<SubChapter> impleme
 
     @Override
     public List<SubChapter> getSubChaptersByChapterId(String id) {
-        List<String> ids = new ArrayList<>();
-        for (String row : getConnector().readFile(SUB_CHAPTERS_TO_CHAPTERS)) {
-            String[] rows = row.split(",");
-            if (rows[1].equals(id)) {
-                ids.add(rows[0]);
-            }
-        }
-
-        List<SubChapter> elements = new ArrayList<>();
-        for (String row : getConnector().readFile(getFileName())) {
-            String[] rows = row.split(",");
-            for (String elementId : ids) {
-                if (rows[0].equals(elementId)) {
-                    SubChapter item = fromDto(row);
-                    elements.add(item);
-                }
-            }
-        }
-        return elements;
+        return processRelations(id, SUB_CHAPTERS_TO_CHAPTERS);
     }
 }

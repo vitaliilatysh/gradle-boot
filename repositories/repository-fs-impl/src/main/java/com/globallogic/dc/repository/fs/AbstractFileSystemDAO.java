@@ -8,6 +8,8 @@ import com.globallogic.dc.repository.ProductsDao;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 public abstract class AbstractFileSystemDAO<M extends Entity> implements ProductsDao<M> {
 
     private FileSystemConnector connector = FileSystemConnectorImpl.getInstance();
@@ -37,5 +39,20 @@ public abstract class AbstractFileSystemDAO<M extends Entity> implements Product
 
     protected FileSystemConnector getConnector() {
         return connector;
+    }
+
+    protected List<M> processRelations(final String id, final String fileName) {
+        return getConnector().readFile(getFileName())
+                .stream()
+                .map(row -> row.split(","))
+                .filter(row -> getConnector().readFile(fileName)
+                        .stream()
+                        .map(line -> line.split(","))
+                        .filter(line -> line[1].equals(id))
+                        .map(line -> line[0])
+                        .collect(toList())
+                        .contains(row[0]))
+                .map(row -> fromDto(row[0].concat(",".concat(row[1])).concat(",".concat(row[2]))))
+                .collect(toList());
     }
 }

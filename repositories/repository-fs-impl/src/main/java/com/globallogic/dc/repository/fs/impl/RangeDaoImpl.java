@@ -6,8 +6,6 @@ import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeDao {
 
     private static final String FILENAME_RANGES = "ranges.csv";
@@ -54,33 +52,11 @@ public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeD
 
     @Override
     public List<Range> getRangesBySubChapterId(final String id) {
-        return getConnector().readFile(getFileName())
-                .stream()
-                .map(row -> row.split(","))
-                .filter(row -> getConnector().readFile(RANGES_TO_SUB_CHAPTERS)
-                        .stream()
-                        .map(line -> line.split(","))
-                        .filter(line -> line[1].equals(id))
-                        .map(line -> line[0])
-                        .collect(toList())
-                        .contains(row[0]))
-                .map(row -> fromDto(row[0].concat(",".concat(row[1])).concat(",".concat(row[2]))))
-                .collect(toList());
+        return processRelations(id, RANGES_TO_SUB_CHAPTERS);
     }
 
     @Override
     public List<Range> getRangesBySectionId(final String id) {
-        return getConnector().readFile(getFileName())
-                .stream()
-                .map(row -> row.split(","))
-                .filter(row -> getConnector().readFile(RANGES_TO_SECTIONS)
-                        .stream()
-                        .map(line -> line.split(","))
-                        .filter(line -> line[1].equals(id))
-                        .map(line -> line[0])
-                        .collect(toList())
-                        .contains(row[0]))
-                .map(row -> fromDto(row[0].concat(",".concat(row[1])).concat(",".concat(row[2]))))
-                .collect(toList());
+        return processRelations(id, RANGES_TO_SECTIONS);
     }
 }
