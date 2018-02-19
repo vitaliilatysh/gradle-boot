@@ -21,6 +21,7 @@ allprojects {
     dependencyManagement {
         dependencies {
             dependency group: 'junit', name: 'junit', version: '4.12'
+            dependency group: 'org.springframework', name: 'spring-core', version: '5.0.3.RELEASE'
 
             dependency group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
             dependency group: 'org.apache.commons', name: 'commons-collections4', version: '4.0'
