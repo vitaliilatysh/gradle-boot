@@ -2,20 +2,20 @@ package com.globallogic.dc.repository.fs;
 
 import com.globallogic.dc.commons.model.Entity;
 import com.globallogic.dc.connector.FileSystemConnector;
-import com.globallogic.dc.connector.FileSystemConnectorImpl;
-import com.globallogic.dc.connector.config.FileSystemConnectorConfig;
 import com.globallogic.dc.repository.ProductsDao;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
+@ComponentScan(basePackages = {"com.globallogic.dc.connector", "com.globallogic.dc.repository.fs.impl"})
 public abstract class AbstractFileSystemDAO<M extends Entity> implements ProductsDao<M> {
 
-    private AnnotationConfigApplicationContext container = new AnnotationConfigApplicationContext(FileSystemConnectorConfig.class);
-    private FileSystemConnectorImpl connector = container.getBean(FileSystemConnectorImpl.class);
+    @Autowired
+    private FileSystemConnector connector;
 
     @Override
     public List<M> getAll() {
