@@ -8,22 +8,6 @@ import java.util.List;
 
 public class ItemDaoMockImpl extends AbstractFileSystemDAO<Item> implements ProductsDao<Item> {
 
-    private static volatile ItemDaoMockImpl instance = null;
-
-    private ItemDaoMockImpl() {
-    }
-
-    public static ItemDaoMockImpl getInstance() {
-        if (instance == null) {
-            synchronized (ItemDaoMockImpl.class) {
-                if (instance == null) {
-                    instance = new ItemDaoMockImpl();
-                }
-            }
-        }
-        return instance;
-    }
-
     @Override
     public List<Item> getAll() {
         return null;

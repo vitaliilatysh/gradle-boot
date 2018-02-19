@@ -9,21 +9,6 @@ import java.util.List;
 public class ChapterDaoImpl extends AbstractFileSystemDAO<Chapter> implements ChapterDao {
 
     private static final String CHAPTERS = "chapters.csv";
-    private static volatile ChapterDaoImpl instance = null;
-
-    private ChapterDaoImpl() {
-    }
-
-    public static ChapterDaoImpl getInstance() {
-        if (instance == null) {
-            synchronized (ChapterDaoImpl.class) {
-                if (instance == null) {
-                    instance = new ChapterDaoImpl();
-                }
-            }
-        }
-        return instance;
-    }
 
     @Override
     public List<Chapter> getAll() {

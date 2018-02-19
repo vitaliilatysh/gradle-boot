@@ -8,22 +8,6 @@ import java.util.List;
 
 public class RangeDaoMockImpl extends AbstractFileSystemDAO<Range> implements ProductsDao<Range> {
 
-    private static volatile RangeDaoMockImpl instance = null;
-
-    private RangeDaoMockImpl() {
-    }
-
-    public static RangeDaoMockImpl getInstance() {
-        if (instance == null) {
-            synchronized (RangeDaoMockImpl.class) {
-                if (instance == null) {
-                    instance = new RangeDaoMockImpl();
-                }
-            }
-        }
-        return instance;
-    }
-
     @Override
     public List<Range> getAll() {
         return null;

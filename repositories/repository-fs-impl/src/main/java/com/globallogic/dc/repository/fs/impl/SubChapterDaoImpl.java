@@ -11,22 +11,6 @@ public class SubChapterDaoImpl extends AbstractFileSystemDAO<SubChapter> impleme
     private static final String SUB_CHAPTERS = "subchapters.csv";
     private static final String SUB_CHAPTERS_TO_CHAPTERS = "subChaptersToChapters.csv";
 
-    private static volatile SubChapterDaoImpl instance = null;
-
-    private SubChapterDaoImpl() {
-    }
-
-    public static SubChapterDaoImpl getInstance() {
-        if (instance == null) {
-            synchronized (SubChapterDaoImpl.class) {
-                if (instance == null) {
-                    instance = new SubChapterDaoImpl();
-                }
-            }
-        }
-        return instance;
-    }
-
     @Override
     public SubChapter getById(final String id) {
         return super.getById(id);

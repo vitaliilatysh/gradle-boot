@@ -13,22 +13,6 @@ public class ItemDaoImpl extends AbstractFileSystemDAO<Item> implements ItemDao 
     private static final String ITEMS_TO_STRING_ITEMS = "itemsToStringItems.csv";
     private static final String ITEMS_TO_RELATED_ITEMS = "itemsToRelatedItems.csv";
 
-    private static volatile ItemDaoImpl instance = null;
-
-    private ItemDaoImpl() {
-    }
-
-    public static ItemDaoImpl getInstance() {
-        if (instance == null) {
-            synchronized (ItemDaoImpl.class) {
-                if (instance == null) {
-                    instance = new ItemDaoImpl();
-                }
-            }
-        }
-        return instance;
-    }
-
     @Override
     public List<Item> getAll() {
         return super.getAll();

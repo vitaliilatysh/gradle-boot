@@ -12,22 +12,6 @@ public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeD
     private static final String RANGES_TO_SUB_CHAPTERS = "rangesToSubChapters.csv";
     private static final String RANGES_TO_SECTIONS = "rangesToSections.csv";
 
-    private static volatile RangeDaoImpl instance = null;
-
-    private RangeDaoImpl() {
-    }
-
-    public static RangeDaoImpl getInstance() {
-        if (instance == null) {
-            synchronized (RangeDaoImpl.class) {
-                if (instance == null) {
-                    instance = new RangeDaoImpl();
-                }
-            }
-        }
-        return instance;
-    }
-
     @Override
     protected Range fromDto(final String dto) {
         final String[] fields = dto.split(",");

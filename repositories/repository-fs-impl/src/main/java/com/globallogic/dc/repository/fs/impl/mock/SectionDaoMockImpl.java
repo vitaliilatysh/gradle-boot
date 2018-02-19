@@ -8,22 +8,6 @@ import java.util.List;
 
 public class SectionDaoMockImpl extends AbstractFileSystemDAO<Section> implements ProductsDao<Section> {
 
-    private static volatile SectionDaoMockImpl instance = null;
-
-    private SectionDaoMockImpl() {
-    }
-
-    public static SectionDaoMockImpl getInstance() {
-        if (instance == null) {
-            synchronized (SectionDaoMockImpl.class) {
-                if (instance == null) {
-                    instance = new SectionDaoMockImpl();
-                }
-            }
-        }
-        return instance;
-    }
-
     @Override
     public List<Section> getAll() {
         return null;

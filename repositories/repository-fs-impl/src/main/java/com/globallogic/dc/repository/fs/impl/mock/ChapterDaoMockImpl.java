@@ -8,22 +8,6 @@ import java.util.List;
 
 public class ChapterDaoMockImpl extends AbstractFileSystemDAO<Chapter> implements ProductsDao<Chapter> {
 
-    private static volatile ChapterDaoMockImpl instance = null;
-
-    private ChapterDaoMockImpl() {
-    }
-
-    public static ChapterDaoMockImpl getInstance() {
-        if (instance == null) {
-            synchronized (ChapterDaoMockImpl.class) {
-                if (instance == null) {
-                    instance = new ChapterDaoMockImpl();
-                }
-            }
-        }
-        return instance;
-    }
-
     @Override
     public List<Chapter> getAll() {
         return null;

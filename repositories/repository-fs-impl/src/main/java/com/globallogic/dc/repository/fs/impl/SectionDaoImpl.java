@@ -10,21 +10,6 @@ public class SectionDaoImpl extends AbstractFileSystemDAO<Section> implements Se
 
     private static final String SECTIONS = "sections.csv";
     private static final String SECTIONS_TO_SUB_CHAPTERS = "sectionsToSubChapters.csv";
-    private static volatile SectionDaoImpl instance = null;
-
-    private SectionDaoImpl() {
-    }
-
-    public static SectionDaoImpl getInstance() {
-        if (instance == null) {
-            synchronized (SectionDaoImpl.class) {
-                if (instance == null) {
-                    instance = new SectionDaoImpl();
-                }
-            }
-        }
-        return instance;
-    }
 
     @Override
     public List<Section> getAll() {

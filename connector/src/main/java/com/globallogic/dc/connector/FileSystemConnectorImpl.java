@@ -13,21 +13,6 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class FileSystemConnectorImpl implements FileSystemConnector {
 
     private static final String BASE_CSV_PATH = System.getenv("BASE_CSV_PATH");
-    private static FileSystemConnectorImpl instance;
-
-    private FileSystemConnectorImpl() {
-    }
-
-    public static FileSystemConnectorImpl getInstance() {
-        if (instance == null) {
-            synchronized (FileSystemConnectorImpl.class) {
-                if (instance == null) {
-                    instance = new FileSystemConnectorImpl();
-                }
-            }
-        }
-        return instance;
-    }
 
     public List<String> readFile(final String fileName) {
         if (isBlank(fileName)) {
