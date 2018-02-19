@@ -2,16 +2,18 @@ package com.globallogic.dc.services;
 
 import com.globallogic.dc.model.Chapter;
 import com.globallogic.dc.repository.ProductsDao;
-import com.globallogic.dc.repository.fs.impl.ChapterDaoImpl;
-import com.globallogic.dc.services.config.ServiceConfig;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
+@ComponentScan(basePackages = "com.globallogic.dc.repository.fs.impl")
 public class ChapterServiceImpl implements ChapterService {
 
-    private AnnotationConfigApplicationContext container = new AnnotationConfigApplicationContext(ServiceConfig.class);
-    private ProductsDao<Chapter> chapterDao = container.getBean(ChapterDaoImpl.class);
+    @Autowired
+    private ProductsDao<Chapter> chapterDao;
 
     @Override
     public List<Chapter> getChapters() {
