@@ -3,9 +3,11 @@ package com.globallogic.dc.repository.fs.impl;
 import com.globallogic.dc.model.Item;
 import com.globallogic.dc.repository.ItemDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ItemDaoImpl extends AbstractFileSystemDAO<Item> implements ItemDao {
 
     private static final String ITEMS = "items.csv";

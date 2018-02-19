@@ -3,9 +3,11 @@ package com.globallogic.dc.repository.fs.impl.mock;
 import com.globallogic.dc.model.Section;
 import com.globallogic.dc.repository.ProductsDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class SectionDaoMockImpl extends AbstractFileSystemDAO<Section> implements ProductsDao<Section> {
 
     @Override

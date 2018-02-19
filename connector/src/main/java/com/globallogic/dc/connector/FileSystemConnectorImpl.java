@@ -1,5 +1,7 @@
 package com.globallogic.dc.connector;
 
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,6 +12,7 @@ import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
+@Component
 public class FileSystemConnectorImpl implements FileSystemConnector {
 
     private static final String BASE_CSV_PATH = System.getenv("BASE_CSV_PATH");
