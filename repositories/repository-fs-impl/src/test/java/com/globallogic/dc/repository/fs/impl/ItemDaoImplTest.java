@@ -1,7 +1,9 @@
 package com.globallogic.dc.repository.fs.impl;
 
 import com.globallogic.dc.model.Item;
+import com.globallogic.dc.repository.fs.config.DaoConfig;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.List;
 
@@ -9,7 +11,8 @@ import static org.junit.Assert.assertEquals;
 
 public class ItemDaoImplTest {
 
-    private ItemDaoImpl itemDaoImpl = ItemDaoImpl.getInstance();
+    private AnnotationConfigApplicationContext container = new AnnotationConfigApplicationContext(DaoConfig.class);
+    private ItemDaoImpl itemDaoImpl = container.getBean(ItemDaoImpl.class);
 
     @Test
     public void testGetItemsByRangeId() {
