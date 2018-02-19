@@ -1,18 +1,23 @@
 package com.globallogic.dc.repository.fs.impl;
 
+import com.globallogic.dc.connector.FileSystemConnectorImpl;
 import com.globallogic.dc.model.Section;
-import com.globallogic.dc.repository.fs.config.DaoConfig;
 import org.junit.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {SectionDaoImpl.class, FileSystemConnectorImpl.class})
 public class SectionDaoImplTest {
 
-    private AnnotationConfigApplicationContext container = new AnnotationConfigApplicationContext(DaoConfig.class);
-    private SectionDaoImpl sectionDaoImpl = container.getBean(SectionDaoImpl.class);
+    @Autowired
+    private SectionDaoImpl sectionDaoImpl;
 
     @Test
     public void testGetSectionsBySubChapterId() {

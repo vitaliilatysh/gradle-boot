@@ -1,18 +1,23 @@
 package com.globallogic.dc.repository.fs.impl;
 
+import com.globallogic.dc.connector.FileSystemConnectorImpl;
 import com.globallogic.dc.model.Range;
-import com.globallogic.dc.repository.fs.config.DaoConfig;
 import org.junit.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {RangeDaoImpl.class, FileSystemConnectorImpl.class})
 public class RangeDaoImplTest {
 
-    private AnnotationConfigApplicationContext container = new AnnotationConfigApplicationContext(DaoConfig.class);
-    private RangeDaoImpl rangeDaoImpl = container.getBean(RangeDaoImpl.class);
+    @Autowired
+    private RangeDaoImpl rangeDaoImpl;
 
     @Test
     public void testGetRangesBySubChapterId() {
