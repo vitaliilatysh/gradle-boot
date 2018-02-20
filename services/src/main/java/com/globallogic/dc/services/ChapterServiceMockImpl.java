@@ -1,12 +1,12 @@
 package com.globallogic.dc.services;
 
 import com.globallogic.dc.model.Chapter;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 
-@Component
+@Service
 public class ChapterServiceMockImpl implements ChapterService {
 
     public List<Chapter> getChapters() {
