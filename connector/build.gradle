@@ -2,4 +2,6 @@ group 'com.globallogic.dc.connector'
 
 dependencies{
     compile group: 'org.apache.commons', name: 'commons-lang3'
+
+    compile group: 'org.springframework', name: 'spring-context'
 }

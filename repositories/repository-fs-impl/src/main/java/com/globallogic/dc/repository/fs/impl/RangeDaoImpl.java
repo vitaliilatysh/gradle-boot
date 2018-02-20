@@ -3,30 +3,16 @@ package com.globallogic.dc.repository.fs.impl;
 import com.globallogic.dc.model.Range;
 import com.globallogic.dc.repository.RangeDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeDao {
 
     private static final String RANGES = "ranges.csv";
     private static final String RANGES_TO_SUB_CHAPTERS = "rangesToSubChapters.csv";
     private static final String RANGES_TO_SECTIONS = "rangesToSections.csv";
-
-    private static volatile RangeDaoImpl instance = null;
-
-    private RangeDaoImpl() {
-    }
-
-    public static RangeDaoImpl getInstance() {
-        if (instance == null) {
-            synchronized (RangeDaoImpl.class) {
-                if (instance == null) {
-                    instance = new RangeDaoImpl();
-                }
-            }
-        }
-        return instance;
-    }
 
     @Override
     protected Range fromDto(final String dto) {

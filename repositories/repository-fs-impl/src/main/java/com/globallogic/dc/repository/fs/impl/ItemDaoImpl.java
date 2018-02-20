@@ -3,31 +3,17 @@ package com.globallogic.dc.repository.fs.impl;
 import com.globallogic.dc.model.Item;
 import com.globallogic.dc.repository.ItemDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class ItemDaoImpl extends AbstractFileSystemDAO<Item> implements ItemDao {
 
     private static final String ITEMS = "items.csv";
     private static final String ITEMS_TO_RANGES = "itemsToRanges.csv";
     private static final String ITEMS_TO_STRING_ITEMS = "itemsToStringItems.csv";
     private static final String ITEMS_TO_RELATED_ITEMS = "itemsToRelatedItems.csv";
-
-    private static volatile ItemDaoImpl instance = null;
-
-    private ItemDaoImpl() {
-    }
-
-    public static ItemDaoImpl getInstance() {
-        if (instance == null) {
-            synchronized (ItemDaoImpl.class) {
-                if (instance == null) {
-                    instance = new ItemDaoImpl();
-                }
-            }
-        }
-        return instance;
-    }
 
     @Override
     public List<Item> getAll() {

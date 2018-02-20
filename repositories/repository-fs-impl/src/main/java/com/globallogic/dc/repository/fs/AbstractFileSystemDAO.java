@@ -2,17 +2,20 @@ package com.globallogic.dc.repository.fs;
 
 import com.globallogic.dc.commons.model.Entity;
 import com.globallogic.dc.connector.FileSystemConnector;
-import com.globallogic.dc.connector.FileSystemConnectorImpl;
 import com.globallogic.dc.repository.ProductsDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
+@ComponentScan(basePackages = {"com.globallogic.dc.connector", "com.globallogic.dc.repository.fs.impl"})
 public abstract class AbstractFileSystemDAO<M extends Entity> implements ProductsDao<M> {
 
-    private FileSystemConnector connector = FileSystemConnectorImpl.getInstance();
+    @Autowired
+    private FileSystemConnector connector;
 
     @Override
     public List<M> getAll() {
@@ -52,7 +55,7 @@ public abstract class AbstractFileSystemDAO<M extends Entity> implements Product
                         .map(line -> line[0])
                         .collect(toList())
                         .contains(row[0]))
-                .map(row -> fromDto(row[0].concat(",".concat(row[1])).concat(",".concat(row[2]))))
+                .map(row -> fromDto(String.join(",", row)))
                 .collect(toList());
     }
 }

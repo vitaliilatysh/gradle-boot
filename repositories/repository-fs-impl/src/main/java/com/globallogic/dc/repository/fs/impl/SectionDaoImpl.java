@@ -3,28 +3,15 @@ package com.globallogic.dc.repository.fs.impl;
 import com.globallogic.dc.model.Section;
 import com.globallogic.dc.repository.SectionDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class SectionDaoImpl extends AbstractFileSystemDAO<Section> implements SectionDao {
 
     private static final String SECTIONS = "sections.csv";
     private static final String SECTIONS_TO_SUB_CHAPTERS = "sectionsToSubChapters.csv";
-    private static volatile SectionDaoImpl instance = null;
-
-    private SectionDaoImpl() {
-    }
-
-    public static SectionDaoImpl getInstance() {
-        if (instance == null) {
-            synchronized (SectionDaoImpl.class) {
-                if (instance == null) {
-                    instance = new SectionDaoImpl();
-                }
-            }
-        }
-        return instance;
-    }
 
     @Override
     public List<Section> getAll() {

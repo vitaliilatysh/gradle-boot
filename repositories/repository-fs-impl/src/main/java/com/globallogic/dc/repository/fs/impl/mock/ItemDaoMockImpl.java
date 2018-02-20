@@ -3,26 +3,12 @@ package com.globallogic.dc.repository.fs.impl.mock;
 import com.globallogic.dc.model.Item;
 import com.globallogic.dc.repository.ProductsDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class ItemDaoMockImpl extends AbstractFileSystemDAO<Item> implements ProductsDao<Item> {
-
-    private static volatile ItemDaoMockImpl instance = null;
-
-    private ItemDaoMockImpl() {
-    }
-
-    public static ItemDaoMockImpl getInstance() {
-        if (instance == null) {
-            synchronized (ItemDaoMockImpl.class) {
-                if (instance == null) {
-                    instance = new ItemDaoMockImpl();
-                }
-            }
-        }
-        return instance;
-    }
 
     @Override
     public List<Item> getAll() {

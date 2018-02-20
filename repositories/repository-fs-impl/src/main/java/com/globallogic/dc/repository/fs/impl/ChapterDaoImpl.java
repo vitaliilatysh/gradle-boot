@@ -3,27 +3,14 @@ package com.globallogic.dc.repository.fs.impl;
 import com.globallogic.dc.model.Chapter;
 import com.globallogic.dc.repository.ChapterDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class ChapterDaoImpl extends AbstractFileSystemDAO<Chapter> implements ChapterDao {
 
     private static final String CHAPTERS = "chapters.csv";
-    private static volatile ChapterDaoImpl instance = null;
-
-    private ChapterDaoImpl() {
-    }
-
-    public static ChapterDaoImpl getInstance() {
-        if (instance == null) {
-            synchronized (ChapterDaoImpl.class) {
-                if (instance == null) {
-                    instance = new ChapterDaoImpl();
-                }
-            }
-        }
-        return instance;
-    }
 
     @Override
     public List<Chapter> getAll() {

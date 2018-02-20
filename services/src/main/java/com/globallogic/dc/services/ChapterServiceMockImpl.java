@@ -1,27 +1,13 @@
 package com.globallogic.dc.services;
 
 import com.globallogic.dc.model.Chapter;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 
+@Service
 public class ChapterServiceMockImpl implements ChapterService {
-
-    private static volatile ChapterServiceMockImpl instance = null;
-
-    private ChapterServiceMockImpl() {
-    }
-
-    public static ChapterServiceMockImpl getInstance() {
-        if (instance == null) {
-            synchronized (ChapterServiceMockImpl.class) {
-                if (instance == null) {
-                    instance = new ChapterServiceMockImpl();
-                }
-            }
-        }
-        return instance;
-    }
 
     public List<Chapter> getChapters() {
         return Arrays.asList(
