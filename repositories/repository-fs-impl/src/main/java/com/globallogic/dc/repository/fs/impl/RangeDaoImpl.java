@@ -3,11 +3,11 @@ package com.globallogic.dc.repository.fs.impl;
 import com.globallogic.dc.model.Range;
 import com.globallogic.dc.repository.RangeDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Component
+@Repository
 public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeDao {
 
     private static final String RANGES = "ranges.csv";
