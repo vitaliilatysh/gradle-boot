@@ -5,9 +5,12 @@ import com.globallogic.dc.services.ChapterServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -22,8 +25,10 @@ public class ChapterController {
         this.chapterService = chapterService;
     }
 
-    @GetMapping(value = "/chapters", produces = "application/json")
-    public List<Chapter> getAllChapters() {
+    @GetMapping(value = "/chapters", produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    List<Chapter> getAllChapters(HttpServletResponse response) {
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         return chapterService.getChapters();
     }
 }
