@@ -24,7 +24,8 @@ allprojects {
             dependency group: 'org.springframework', name: 'spring-context', version: '5.0.4.RELEASE'
             dependency group: 'org.springframework', name: 'spring-test', version: '5.0.4.RELEASE'
             dependency group: 'org.springframework', name: 'spring-webmvc', version: '5.0.4.RELEASE'
-
+            dependency group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.0'
+            dependency  group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
             dependency group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
             dependency group: 'org.apache.commons', name: 'commons-collections4', version: '4.0'
         }

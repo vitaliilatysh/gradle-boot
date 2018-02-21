@@ -5,6 +5,7 @@ dependencies{
     compile group: 'org.springframework', name: 'spring-context'
     compile group: 'org.springframework', name: 'spring-webmvc'
     compile group: 'org.springframework', name: 'spring-test'
-
+    compile group: 'javax.servlet', name: 'javax.servlet-api'
+    compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl'
     testCompile group: 'junit', name: 'junit'
 }
