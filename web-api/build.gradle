@@ -1,0 +1,10 @@
+group 'com.globallogic.dc.controllers'
+
+dependencies{
+    compile project (':services')
+    compile group: 'org.springframework', name: 'spring-context'
+    compile group: 'org.springframework', name: 'spring-webmvc'
+    compile group: 'org.springframework', name: 'spring-test'
+
+    testCompile group: 'junit', name: 'junit'
+}
