@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("ChapterServiceImpl")
 public class ChapterServiceImpl implements ChapterService {
 
     private final ProductsDao<Chapter> chapterDao;
