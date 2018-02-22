@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("RangeDaoImpl")
 public class RangeDaoImpl extends AbstractFileSystemDAO<Range> implements RangeDao {
 
     private static final String RANGES = "ranges.csv";
