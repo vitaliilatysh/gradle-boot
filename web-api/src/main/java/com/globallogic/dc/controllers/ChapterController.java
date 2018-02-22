@@ -1,7 +1,7 @@
 package com.globallogic.dc.controllers;
 
 import com.globallogic.dc.model.Chapter;
-import com.globallogic.dc.services.ChapterServiceImpl;
+import com.globallogic.dc.services.impl.ChapterServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

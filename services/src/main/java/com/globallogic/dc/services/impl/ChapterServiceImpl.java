@@ -1,7 +1,8 @@
-package com.globallogic.dc.services;
+package com.globallogic.dc.services.impl;
 
 import com.globallogic.dc.model.Chapter;
 import com.globallogic.dc.repository.ProductsDao;
+import com.globallogic.dc.services.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;

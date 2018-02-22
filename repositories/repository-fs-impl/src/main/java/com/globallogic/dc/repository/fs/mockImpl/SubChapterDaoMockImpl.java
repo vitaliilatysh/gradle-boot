@@ -1,4 +1,4 @@
-package com.globallogic.dc.repository.fs.impl.mock;
+package com.globallogic.dc.repository.fs.mockImpl;
 
 import com.globallogic.dc.model.SubChapter;
 import com.globallogic.dc.repository.ProductsDao;

@@ -1,6 +1,6 @@
-package com.globallogic.dc.repository.fs.impl.mock;
+package com.globallogic.dc.repository.fs.mockImpl;
 
-import com.globallogic.dc.model.Range;
+import com.globallogic.dc.model.Item;
 import com.globallogic.dc.repository.ProductsDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 import org.springframework.stereotype.Repository;
@@ -8,20 +8,20 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class RangeDaoMockImpl extends AbstractFileSystemDAO<Range> implements ProductsDao<Range> {
+public class ItemDaoMockImpl extends AbstractFileSystemDAO<Item> implements ProductsDao<Item> {
 
     @Override
-    public List<Range> getAll() {
+    public List<Item> getAll() {
         return null;
     }
 
     @Override
-    public Range getById(final String id) {
+    public Item getById(final String id) {
         return null;
     }
 
     @Override
-    protected Range fromDto(final String dto) {
+    protected Item fromDto(final String dto) {
         return null;
     }
 
