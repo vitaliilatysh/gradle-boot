@@ -8,5 +8,11 @@ public interface ItemService {
 
     List<Item> getItems();
 
-    Item getItemById(String key);
+    Item getItemById(String id);
+
+    List<Item> getItemsByRelatedItemId(String id);
+
+    List<Item> getItemsByStringItemId(String id);
+
+    List<Item> getItemsByRangeId(String id);
 }
