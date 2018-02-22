@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -25,10 +24,9 @@ public class ChapterController {
         this.chapterService = chapterService;
     }
 
-    @GetMapping(value = "/chapters", produces = "application/json; charset=utf-8")
+    @GetMapping(value = "/chapters", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    List<Chapter> getAllChapters(HttpServletResponse response) {
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+    List<Chapter> getAllChapters() {
         return chapterService.getChapters();
     }
 }
