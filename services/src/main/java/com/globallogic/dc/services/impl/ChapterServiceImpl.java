@@ -1,7 +1,7 @@
 package com.globallogic.dc.services.impl;
 
 import com.globallogic.dc.model.Chapter;
-import com.globallogic.dc.repository.ProductsDao;
+import com.globallogic.dc.repository.fs.impl.ChapterDaoImpl;
 import com.globallogic.dc.services.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,12 +12,9 @@ import java.util.List;
 @Service("ChapterServiceImpl")
 public class ChapterServiceImpl implements ChapterService {
 
-    private final ProductsDao<Chapter> chapterDao;
-
     @Autowired
-    public ChapterServiceImpl(@Qualifier("ChapterDaoImpl") ProductsDao<Chapter> chapterDao) {
-        this.chapterDao = chapterDao;
-    }
+    @Qualifier("ChapterDaoImpl")
+    private ChapterDaoImpl chapterDao;
 
     @Override
     public List<Chapter> getChapters() {

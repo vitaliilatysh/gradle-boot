@@ -8,9 +8,9 @@ public interface RangeService {
 
     List<Range> getRanges();
 
-    Range getRangeById(String id);
+    Range getRangeById(final String id);
 
-    List<Range> getRangesBySubChapterId(String id);
+    List<Range> getRangesBySubChapterId(final String id);
 
-    List<Range> getRangesBySectionId(String id);
+    List<Range> getRangesBySectionId(final String id);
 }

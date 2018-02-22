@@ -8,7 +8,7 @@ public interface SectionService {
 
     List<Section> getSections();
 
-    Section getSectionById(String id);
+    Section getSectionById(final String id);
 
-    List<Section> getSectionsBySubChapterId(String id);
+    List<Section> getSectionsBySubChapterId(final String id);
 }
