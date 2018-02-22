@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,8 +24,7 @@ public class ChapterController {
     }
 
     @GetMapping(value = "/chapters", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    List<Chapter> getAllChapters() {
+    public List<Chapter> getAllChapters() {
         return chapterService.getChapters();
     }
 }
