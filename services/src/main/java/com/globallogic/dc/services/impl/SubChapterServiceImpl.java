@@ -14,15 +14,20 @@ public class SubChapterServiceImpl implements SubChapterService {
 
     @Autowired
     @Qualifier("SubChapterDaoImpl")
-    private SubChapterDaoImpl subChapterDao;
+    private SubChapterDaoImpl subChapterDaoImpl;
 
     @Override
     public List<SubChapter> getSubChapters() {
-        return subChapterDao.getAll();
+        return subChapterDaoImpl.getAll();
     }
 
     @Override
     public SubChapter getSubChapterById(final String id) {
-        return subChapterDao.getById(id);
+        return subChapterDaoImpl.getById(id);
+    }
+
+    @Override
+    public List<SubChapter> getSubChaptersByChapterId(final String id) {
+        return subChapterDaoImpl.getSubChaptersByChapterId(id);
     }
 }

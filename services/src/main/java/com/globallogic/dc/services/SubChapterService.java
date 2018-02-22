@@ -8,5 +8,7 @@ public interface SubChapterService {
 
     List<SubChapter> getSubChapters();
 
-    SubChapter getSubChapterById(final String id);
+    SubChapter getSubChapterById(String id);
+
+    List<SubChapter> getSubChaptersByChapterId(String id);
 }

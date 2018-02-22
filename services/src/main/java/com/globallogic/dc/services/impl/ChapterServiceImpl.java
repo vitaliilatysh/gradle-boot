@@ -14,15 +14,15 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Autowired
     @Qualifier("ChapterDaoImpl")
-    private ChapterDaoImpl chapterDao;
+    private ChapterDaoImpl chapterDaoImpl;
 
     @Override
     public List<Chapter> getChapters() {
-        return chapterDao.getAll();
+        return chapterDaoImpl.getAll();
     }
 
     @Override
     public Chapter getChapterById(final String key) {
-        return chapterDao.getById(key);
+        return chapterDaoImpl.getById(key);
     }
 }

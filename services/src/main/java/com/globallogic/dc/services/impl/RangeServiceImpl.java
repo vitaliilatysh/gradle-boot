@@ -14,25 +14,25 @@ public class RangeServiceImpl implements RangeService {
 
     @Autowired
     @Qualifier("RangeDaoImpl")
-    private RangeDaoImpl rangeDao;
+    private RangeDaoImpl rangeDaoImpl;
 
     @Override
     public List<Range> getRanges() {
-        return rangeDao.getAll();
+        return rangeDaoImpl.getAll();
     }
 
     @Override
     public Range getRangeById(final String id) {
-        return rangeDao.getById(id);
+        return rangeDaoImpl.getById(id);
     }
 
     @Override
     public List<Range> getRangesBySubChapterId(final String id) {
-        return rangeDao.getRangesBySubChapterId(id);
+        return rangeDaoImpl.getRangesBySubChapterId(id);
     }
 
     @Override
     public List<Range> getRangesBySectionId(final String id) {
-        return rangeDao.getRangesBySectionId(id);
+        return rangeDaoImpl.getRangesBySectionId(id);
     }
 }

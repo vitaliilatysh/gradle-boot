@@ -14,20 +14,20 @@ public class SectionServiceImpl implements SectionService {
 
     @Autowired
     @Qualifier("SectionDaoImpl")
-    private SectionDaoImpl sectionDao;
+    private SectionDaoImpl sectionDaoImpl;
 
     @Override
     public List<Section> getSections() {
-        return sectionDao.getAll();
+        return sectionDaoImpl.getAll();
     }
 
     @Override
     public Section getSectionById(final String id) {
-        return sectionDao.getById(id);
+        return sectionDaoImpl.getById(id);
     }
 
     @Override
     public List<Section> getSectionsBySubChapterId(final String id) {
-        return sectionDao.getSectionsBySubChapterId(id);
+        return sectionDaoImpl.getSectionsBySubChapterId(id);
     }
 }

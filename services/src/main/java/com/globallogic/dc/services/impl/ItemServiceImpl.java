@@ -14,30 +14,30 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     @Qualifier("ItemDaoImpl")
-    private ItemDaoImpl itemDao;
+    private ItemDaoImpl itemDaoImpl;
 
     @Override
     public List<Item> getItems() {
-        return itemDao.getAll();
+        return itemDaoImpl.getAll();
     }
 
     @Override
     public Item getItemById(final String id) {
-        return itemDao.getById(id);
+        return itemDaoImpl.getById(id);
     }
 
     @Override
     public List<Item> getItemsByRelatedItemId(final String id) {
-        return itemDao.getItemsByRelatedItemId(id);
+        return itemDaoImpl.getItemsByRelatedItemId(id);
     }
 
     @Override
     public List<Item> getItemsByStringItemId(final String id) {
-        return itemDao.getItemsByStringItemId(id);
+        return itemDaoImpl.getItemsByStringItemId(id);
     }
 
     @Override
     public List<Item> getItemsByRangeId(final String id) {
-        return itemDao.getItemsByRangeId(id);
+        return itemDaoImpl.getItemsByRangeId(id);
     }
 }

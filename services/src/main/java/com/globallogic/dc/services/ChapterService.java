@@ -8,5 +8,5 @@ public interface ChapterService {
 
     List<Chapter> getChapters();
 
-    Chapter getChapterById(final String key);
+    Chapter getChapterById(String key);
 }
