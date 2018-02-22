@@ -3,8 +3,6 @@ package com.globallogic.dc.controllers;
 import com.globallogic.dc.model.Chapter;
 import com.globallogic.dc.services.impl.ChapterServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@ComponentScan(basePackages = {"com.globallogic.dc.controllers", "com.globallogic.dc.services"})
-@Configuration
 public class ChapterController {
 
     private final ChapterServiceImpl chapterService;
