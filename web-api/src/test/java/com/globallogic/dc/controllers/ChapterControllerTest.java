@@ -48,4 +48,14 @@ public class ChapterControllerTest {
                 .andExpect(jsonPath("$[2].title", is("Title")))
                 .andExpect(jsonPath("$[2].description", is("Desc")));
     }
+
+    @Test
+    public void testGetChapterById() throws Exception {
+        mockMvc.perform(get("/chapters/12"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.key", is("12")))
+                .andExpect(jsonPath("$.title", is("Title")))
+                .andExpect(jsonPath("$.description", is("Desc")));
+    }
 }
