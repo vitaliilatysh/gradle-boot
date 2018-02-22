@@ -1,5 +1,6 @@
 package com.globallogic.dc.services;
 
+import com.globallogic.dc.services.config.ServiceConfig;
 import com.globallogic.dc.services.impl.ChapterServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ChapterServiceImpl.class})
+@ContextConfiguration(classes = ServiceConfig.class)
 public class ChapterServiceImplTest {
 
     @Autowired

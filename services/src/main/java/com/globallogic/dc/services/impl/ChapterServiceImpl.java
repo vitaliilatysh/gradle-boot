@@ -5,15 +5,11 @@ import com.globallogic.dc.repository.ProductsDao;
 import com.globallogic.dc.services.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@ComponentScan(basePackages = {"com.globallogic.dc.services", "com.globallogic.dc.repository"})
-@Configuration
 public class ChapterServiceImpl implements ChapterService {
 
     private final ProductsDao<Chapter> chapterDao;
