@@ -21,4 +21,9 @@ public class ChapterServiceImplTest {
     public void testGetChapters() {
         assertEquals(3, chapterServiceImpl.getChapters().size());
     }
+
+    @Test
+    public void testGetChapterById() {
+        assertEquals("12", chapterServiceImpl.getChapterById("12").getKey());
+    }
 }
