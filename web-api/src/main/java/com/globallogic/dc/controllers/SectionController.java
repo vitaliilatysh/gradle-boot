@@ -1,14 +1,10 @@
 package com.globallogic.dc.controllers;
 
 import com.globallogic.dc.model.Section;
-import com.globallogic.dc.services.impl.SectionServiceImpl;
+import com.globallogic.dc.services.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,21 +13,20 @@ import java.util.List;
 public class SectionController {
 
     @Autowired
-    @Qualifier("SectionServiceImpl")
-    private SectionServiceImpl sectionServiceImpl;
+    private SectionService sectionServiceImpl;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Section> getSections() {
         return sectionServiceImpl.getSections();
     }
 
-    @GetMapping(value = "/section", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Section getSectionById(@RequestParam("id") final String id) {
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Section getSectionById(@PathVariable("id") final String id) {
         return sectionServiceImpl.getSectionById(id);
     }
 
-    @GetMapping(value = "/subChapter", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Section> getSectionsBySubChapterId(@RequestParam("id") final String id) {
+    @GetMapping(params = "subChapter", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Section> getSectionsBySubChapterId(@RequestParam("subChapter") final String id) {
         return sectionServiceImpl.getSectionsBySubChapterId(id);
     }
 }

@@ -1,6 +1,5 @@
 package com.globallogic.dc.controllers;
 
-import com.globallogic.dc.controllers.config.ControllerConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ControllerConfig.class)
+@ContextConfiguration(classes = AppConig.class)
 public class ChapterControllerTest {
 
     @Autowired
@@ -51,7 +50,7 @@ public class ChapterControllerTest {
 
     @Test
     public void testGetChapterById() throws Exception {
-        mockMvc.perform(get("/chapters/chapter?id=12"))
+        mockMvc.perform(get("/chapters/12"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.key", is("12")))

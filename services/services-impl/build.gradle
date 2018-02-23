@@ -1,0 +1,10 @@
+group 'com.globallogic.dc.services.impl'
+
+dependencies {
+    compile project(':services:services-api')
+    compile project(':repositories:repository-api')
+    compile group: 'org.springframework', name: 'spring-context'
+    compile group: 'org.springframework', name: 'spring-test'
+
+    testCompile group: 'junit', name: 'junit'
+}

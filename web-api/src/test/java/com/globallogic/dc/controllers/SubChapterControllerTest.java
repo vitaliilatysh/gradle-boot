@@ -54,7 +54,7 @@ public class SubChapterControllerTest {
 
     @Test
     public void testGetSubChapterById() throws Exception {
-        mockMvc.perform(get("/subChapters/subChapter?id=21"))
+        mockMvc.perform(get("/subChapters/21"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.key", is("21")))
@@ -64,7 +64,7 @@ public class SubChapterControllerTest {
 
     @Test
     public void testGetSubChaptersByChapterId() throws Exception {
-        mockMvc.perform(get("/subChapters/chapter?id=12"))
+        mockMvc.perform(get("/subChapters?chapter=12"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0].key", is("21")))

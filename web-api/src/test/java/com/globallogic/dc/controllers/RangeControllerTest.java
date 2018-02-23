@@ -54,7 +54,7 @@ public class RangeControllerTest {
 
     @Test
     public void testGetRangeById() throws Exception {
-        mockMvc.perform(get("/ranges/range?id=41"))
+        mockMvc.perform(get("/ranges/41"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.key", is("41")))
@@ -64,7 +64,7 @@ public class RangeControllerTest {
 
     @Test
     public void testGetRangesBySubChapterId() throws Exception {
-        mockMvc.perform(get("/ranges/subChapter?id=23"))
+        mockMvc.perform(get("/ranges?subChapter=23"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0].key", is("45")))
@@ -74,7 +74,7 @@ public class RangeControllerTest {
 
     @Test
     public void testGetRangesBySectionId() throws Exception {
-        mockMvc.perform(get("/ranges/section?id=31"))
+        mockMvc.perform(get("/ranges?section=31"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0].key", is("41")))

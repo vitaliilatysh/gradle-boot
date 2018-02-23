@@ -54,7 +54,7 @@ public class ItemControllerTest {
 
     @Test
     public void testGetItemById() throws Exception {
-        mockMvc.perform(get("/items/item?id=51"))
+        mockMvc.perform(get("/items/51"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.key", is("51")))
@@ -64,7 +64,7 @@ public class ItemControllerTest {
 
     @Test
     public void getItemsByRelatedItemId() throws Exception {
-        mockMvc.perform(get("/items/relatedItem?id=52"))
+        mockMvc.perform(get("/items?relatedItem=52"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0].key", is("51")))
@@ -74,7 +74,7 @@ public class ItemControllerTest {
 
     @Test
     public void getItemsByStringItemId() throws Exception {
-        mockMvc.perform(get("/items/stringItem?id=Item1"))
+        mockMvc.perform(get("/items?stringItem=Item1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0].key", is("51")))
@@ -84,7 +84,7 @@ public class ItemControllerTest {
 
     @Test
     public void getItemsByRangeId() throws Exception {
-        mockMvc.perform(get("/items/range?id=42"))
+        mockMvc.perform(get("/items?range=42"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0].key", is("53")))

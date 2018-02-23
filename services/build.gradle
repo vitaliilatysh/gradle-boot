@@ -1,7 +1,1 @@
 group 'com.globallogic.dc.services'
-
-dependencies {
-    compile project(':repositories:repository-fs-impl')
-
-    testCompile group: 'junit', name: 'junit'
-}

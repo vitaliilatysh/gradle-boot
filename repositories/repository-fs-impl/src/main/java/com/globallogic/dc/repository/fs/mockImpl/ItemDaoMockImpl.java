@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("ItemDaoMockImpl")
 public class ItemDaoMockImpl extends AbstractFileSystemDAO<Item> implements ProductsDao<Item> {
 
     @Override

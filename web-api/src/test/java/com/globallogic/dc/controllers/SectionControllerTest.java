@@ -54,7 +54,7 @@ public class SectionControllerTest {
 
     @Test
     public void testGetSectionById() throws Exception {
-        mockMvc.perform(get("/sections/section?id=31"))
+        mockMvc.perform(get("/sections/31"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.key", is("31")))
@@ -64,7 +64,7 @@ public class SectionControllerTest {
 
     @Test
     public void getSectionsBySubChapterId() throws Exception {
-        mockMvc.perform(get("/sections/subChapter?id=22"))
+        mockMvc.perform(get("/sections?subChapter=22"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0].key", is("32")))

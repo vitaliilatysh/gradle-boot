@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("RangeDaoMockImpl")
 public class RangeDaoMockImpl extends AbstractFileSystemDAO<Range> implements ProductsDao<Range> {
 
     @Override
