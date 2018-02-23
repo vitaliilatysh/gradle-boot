@@ -6,25 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/chapters")
 public class ChapterController {
 
     @Autowired
     @Qualifier("ChapterServiceImpl")
-    private ChapterServiceImpl chapterService;
+    private ChapterServiceImpl chapterServiceImpl;
 
-    @GetMapping(value = "/chapters", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Chapter> getAllChapters() {
-        return chapterService.getChapters();
+        return chapterServiceImpl.getChapters();
     }
 
-    @GetMapping(value = "/chapters/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Chapter getChapterById(@PathVariable("id") final String id) {
-        return chapterService.getChapterById(id);
+    @GetMapping(value = "/chapter", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Chapter getChapterById(@RequestParam("id") final String id) {
+        return chapterServiceImpl.getChapterById(id);
     }
 }

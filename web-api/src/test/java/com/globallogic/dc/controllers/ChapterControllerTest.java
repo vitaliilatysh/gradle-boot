@@ -51,7 +51,7 @@ public class ChapterControllerTest {
 
     @Test
     public void testGetChapterById() throws Exception {
-        mockMvc.perform(get("/chapters/12"))
+        mockMvc.perform(get("/chapters/chapter?id=12"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.key", is("12")))
