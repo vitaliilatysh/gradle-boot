@@ -1,5 +1,6 @@
 package com.globallogic.dc.controllers;
 
+import com.globallogic.dc.config.AppConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AppConig.class)
+@ContextConfiguration(classes = AppConfig.class)
 public class ChapterControllerTest {
 
     @Autowired
