@@ -13,30 +13,30 @@ import java.util.List;
 public class ItemController {
 
     @Autowired
-    private ItemService itemServiceImpl;
+    private ItemService itemService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Item> getItems() {
-        return itemServiceImpl.getItems();
+        return itemService.getItems();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Item getItemById(@PathVariable("id") final String id) {
-        return itemServiceImpl.getItemById(id);
+        return itemService.getItemById(id);
     }
 
     @GetMapping(params = "relatedItem", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Item> getItemsByRelatedItemId(@RequestParam("relatedItem") final String id) {
-        return itemServiceImpl.getItemsByRelatedItemId(id);
+        return itemService.getItemsByRelatedItemId(id);
     }
 
     @GetMapping(params = "stringItem", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Item> getItemsByStringItemId(@RequestParam("stringItem") final String id) {
-        return itemServiceImpl.getItemsByStringItemId(id);
+        return itemService.getItemsByStringItemId(id);
     }
 
     @GetMapping(params = "range", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Item> getItemsByRangeId(@RequestParam("range") final String id) {
-        return itemServiceImpl.getItemsByRangeId(id);
+        return itemService.getItemsByRangeId(id);
     }
 }

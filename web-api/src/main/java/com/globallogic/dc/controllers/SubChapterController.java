@@ -13,20 +13,20 @@ import java.util.List;
 public class SubChapterController {
 
     @Autowired
-    private SubChapterService subChapterServiceImpl;
+    private SubChapterService subChapterService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<SubChapter> getSubChapters() {
-        return subChapterServiceImpl.getSubChapters();
+        return subChapterService.getSubChapters();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public SubChapter getSubChapterById(@PathVariable("id") final String id) {
-        return subChapterServiceImpl.getSubChapterById(id);
+        return subChapterService.getSubChapterById(id);
     }
 
     @GetMapping(params = "chapter", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<SubChapter> getSubChaptersByChapterId(@RequestParam("chapter") final String id) {
-        return subChapterServiceImpl.getSubChaptersByChapterId(id);
+        return subChapterService.getSubChaptersByChapterId(id);
     }
 }

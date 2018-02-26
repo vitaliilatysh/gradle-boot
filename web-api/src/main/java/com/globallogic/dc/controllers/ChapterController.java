@@ -16,15 +16,15 @@ import java.util.List;
 public class ChapterController {
 
     @Autowired
-    private ChapterService chapterServiceImpl;
+    private ChapterService chapterService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Chapter> getAllChapters() {
-        return chapterServiceImpl.getChapters();
+        return chapterService.getChapters();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Chapter getChapterById(@PathVariable("id") final String id) {
-        return chapterServiceImpl.getChapterById(id);
+        return chapterService.getChapterById(id);
     }
 }

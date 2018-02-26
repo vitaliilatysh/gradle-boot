@@ -13,20 +13,20 @@ import java.util.List;
 public class SectionController {
 
     @Autowired
-    private SectionService sectionServiceImpl;
+    private SectionService sectionService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Section> getSections() {
-        return sectionServiceImpl.getSections();
+        return sectionService.getSections();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Section getSectionById(@PathVariable("id") final String id) {
-        return sectionServiceImpl.getSectionById(id);
+        return sectionService.getSectionById(id);
     }
 
     @GetMapping(params = "subChapter", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Section> getSectionsBySubChapterId(@RequestParam("subChapter") final String id) {
-        return sectionServiceImpl.getSectionsBySubChapterId(id);
+        return sectionService.getSectionsBySubChapterId(id);
     }
 }

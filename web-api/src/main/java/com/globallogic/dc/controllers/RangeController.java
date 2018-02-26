@@ -13,25 +13,25 @@ import java.util.List;
 public class RangeController {
 
     @Autowired
-    private RangeService rangeServiceImpl;
+    private RangeService rangeService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Range> getRanges() {
-        return rangeServiceImpl.getRanges();
+        return rangeService.getRanges();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Range getRangeById(@PathVariable("id") final String id) {
-        return rangeServiceImpl.getRangeById(id);
+        return rangeService.getRangeById(id);
     }
 
     @GetMapping(params = "subChapter", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Range> getRangesBySubChapterId(@RequestParam("subChapter") final String id) {
-        return rangeServiceImpl.getRangesBySubChapterId(id);
+        return rangeService.getRangesBySubChapterId(id);
     }
 
     @GetMapping(params = "section", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Range> getRangesBySectionId(@RequestParam("section") final String id) {
-        return rangeServiceImpl.getRangesBySectionId(id);
+        return rangeService.getRangesBySectionId(id);
     }
 }
