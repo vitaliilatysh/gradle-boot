@@ -12,20 +12,20 @@ import java.util.List;
 public class SubChapterServiceImpl implements SubChapterService {
 
     @Autowired
-    private SubChapterDao subChapterDaoImpl;
+    private SubChapterDao subChapterDao;
 
     @Override
     public List<SubChapter> getSubChapters() {
-        return subChapterDaoImpl.getAll();
+        return subChapterDao.getAll();
     }
 
     @Override
     public SubChapter getSubChapterById(final String id) {
-        return subChapterDaoImpl.getById(id);
+        return subChapterDao.getById(id);
     }
 
     @Override
     public List<SubChapter> getSubChaptersByChapterId(final String id) {
-        return subChapterDaoImpl.getSubChaptersByChapterId(id);
+        return subChapterDao.getSubChaptersByChapterId(id);
     }
 }

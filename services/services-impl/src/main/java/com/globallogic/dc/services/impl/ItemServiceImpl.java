@@ -12,30 +12,30 @@ import java.util.List;
 public class ItemServiceImpl implements ItemService {
 
     @Autowired
-    private ItemDao itemDaoImpl;
+    private ItemDao itemDao;
 
     @Override
     public List<Item> getItems() {
-        return itemDaoImpl.getAll();
+        return itemDao.getAll();
     }
 
     @Override
     public Item getItemById(final String id) {
-        return itemDaoImpl.getById(id);
+        return itemDao.getById(id);
     }
 
     @Override
     public List<Item> getItemsByRelatedItemId(final String id) {
-        return itemDaoImpl.getItemsByRelatedItemId(id);
+        return itemDao.getItemsByRelatedItemId(id);
     }
 
     @Override
     public List<Item> getItemsByStringItemId(final String id) {
-        return itemDaoImpl.getItemsByStringItemId(id);
+        return itemDao.getItemsByStringItemId(id);
     }
 
     @Override
     public List<Item> getItemsByRangeId(final String id) {
-        return itemDaoImpl.getItemsByRangeId(id);
+        return itemDao.getItemsByRangeId(id);
     }
 }

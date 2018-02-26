@@ -12,15 +12,15 @@ import java.util.List;
 public class ChapterServiceImpl implements ChapterService {
 
     @Autowired
-    private ChapterDao chapterDaoImpl;
+    private ChapterDao chapterDao;
 
     @Override
     public List<Chapter> getChapters() {
-        return chapterDaoImpl.getAll();
+        return chapterDao.getAll();
     }
 
     @Override
     public Chapter getChapterById(final String key) {
-        return chapterDaoImpl.getById(key);
+        return chapterDao.getById(key);
     }
 }

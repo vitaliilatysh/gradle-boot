@@ -12,25 +12,25 @@ import java.util.List;
 public class RangeServiceImpl implements RangeService {
 
     @Autowired
-    private RangeDao rangeDaoImpl;
+    private RangeDao rangeDao;
 
     @Override
     public List<Range> getRanges() {
-        return rangeDaoImpl.getAll();
+        return rangeDao.getAll();
     }
 
     @Override
     public Range getRangeById(final String id) {
-        return rangeDaoImpl.getById(id);
+        return rangeDao.getById(id);
     }
 
     @Override
     public List<Range> getRangesBySubChapterId(final String id) {
-        return rangeDaoImpl.getRangesBySubChapterId(id);
+        return rangeDao.getRangesBySubChapterId(id);
     }
 
     @Override
     public List<Range> getRangesBySectionId(final String id) {
-        return rangeDaoImpl.getRangesBySectionId(id);
+        return rangeDao.getRangesBySectionId(id);
     }
 }

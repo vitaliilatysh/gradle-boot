@@ -12,20 +12,20 @@ import java.util.List;
 public class SectionServiceImpl implements SectionService {
 
     @Autowired
-    private SectionDao sectionDaoImpl;
+    private SectionDao sectionDao;
 
     @Override
     public List<Section> getSections() {
-        return sectionDaoImpl.getAll();
+        return sectionDao.getAll();
     }
 
     @Override
     public Section getSectionById(final String id) {
-        return sectionDaoImpl.getById(id);
+        return sectionDao.getById(id);
     }
 
     @Override
     public List<Section> getSectionsBySubChapterId(final String id) {
-        return sectionDaoImpl.getSectionsBySubChapterId(id);
+        return sectionDao.getSectionsBySubChapterId(id);
     }
 }
