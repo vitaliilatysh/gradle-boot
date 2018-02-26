@@ -4,6 +4,5 @@ dependencies {
     compile project(':commons:model')
     compile project(':commons:test')
     compile group: 'org.apache.commons', name: 'commons-collections4'
-
     testCompile group: 'junit', name: 'junit'
 }

@@ -1,8 +1,8 @@
 group 'com.globallogic.dc.controllers'
 
 dependencies {
-    compile project(':services:services-api')
-    compile project(':services:services-impl')
+    compile project(':services:service-api')
+    compile project(':services:service-impl')
     compile group: 'org.springframework', name: 'spring-context'
     compile group: 'org.springframework', name: 'spring-webmvc'
     compile group: 'org.springframework', name: 'spring-test'

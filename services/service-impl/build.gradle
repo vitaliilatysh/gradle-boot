@@ -1,7 +1,7 @@
 group 'com.globallogic.dc.services.impl'
 
 dependencies {
-    compile project(':services:services-api')
+    compile project(':services:service-api')
     compile project(':repositories:repository-api')
     compile project(':repositories:repository-fs-impl')
     compile group: 'org.springframework', name: 'spring-context'
