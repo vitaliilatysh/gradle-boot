@@ -1,11 +1,6 @@
 group 'com.globallogic.dc.config'
 
-dependencies{
-    compile project (':connector')
-    compile project (':repositories:repository-api')
-    compile project (':repositories:repository-fs-impl')
-    compile project (':services:services-api')
-    compile project (':services:services-impl')
-    compile project (':web-api')
+dependencies {
+    compile project(':connector')
     compile group: 'org.springframework', name: 'spring-context'
 }

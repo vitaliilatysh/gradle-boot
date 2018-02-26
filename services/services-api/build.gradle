@@ -1,6 +1,6 @@
 group 'com.globallogic.dc.services.api'
 
-dependencies{
+dependencies {
     compile project(':model')
     compile group: 'org.springframework', name: 'spring-context'
 }

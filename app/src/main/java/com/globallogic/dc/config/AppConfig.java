@@ -5,10 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = {
-        "com.globallogic.dc.connector",
-        "com.globallogic.dc.controllers",
-        "com.globallogic.dc.repository.fs.impl",
-        "com.globallogic.dc.services"
+        "com.globallogic.dc.connector"
 }
 )
 public class AppConfig {

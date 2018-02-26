@@ -1,7 +1,6 @@
 group 'com.globallogic.dc.repository.fs.impl'
 
 dependencies {
-    compile project (':app')
     compile project(':connector')
     compile project(':model')
     compile project(':repositories:repository-api')
