@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("ChapterDaoImpl")
+@Repository
 public class ChapterDaoImpl extends AbstractFileSystemDAO<Chapter> implements ChapterDao {
 
     private static final String CHAPTERS = "chapters.csv";

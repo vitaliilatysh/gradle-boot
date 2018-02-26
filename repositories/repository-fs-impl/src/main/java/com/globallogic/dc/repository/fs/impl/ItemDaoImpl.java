@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("ItemDaoImpl")
+@Repository
 public class ItemDaoImpl extends AbstractFileSystemDAO<Item> implements ItemDao {
 
     private static final String ITEMS = "items.csv";
