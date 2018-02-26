@@ -1,8 +1,6 @@
 package com.globallogic.dc.controllers;
 
-import com.globallogic.dc.connector.FileSystemConnectorImpl;
-import com.globallogic.dc.repository.fs.impl.ChapterDaoImpl;
-import com.globallogic.dc.services.impl.ChapterServiceImpl;
+import com.globallogic.dc.controllers.config.ControllerConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ChapterController.class, ChapterDaoImpl.class, ChapterServiceImpl.class, FileSystemConnectorImpl.class})
+@ContextConfiguration(classes = ControllerConfig.class)
 public class ChapterControllerTest {
 
     @Autowired

@@ -1,8 +1,8 @@
 package com.globallogic.dc.repository.fs.impl;
 
-import com.globallogic.dc.connector.FileSystemConnectorImpl;
 import com.globallogic.dc.model.Item;
 import com.globallogic.dc.repository.ItemDao;
+import com.globallogic.dc.repository.fs.config.RepositoryConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ItemDaoImpl.class, FileSystemConnectorImpl.class})
+@ContextConfiguration(classes = RepositoryConfig.class)
 public class ItemDaoImplTest {
 
     @Autowired
