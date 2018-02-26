@@ -1,6 +1,8 @@
 package com.globallogic.dc.controllers;
 
-import com.globallogic.dc.config.AppConfig;
+import com.globallogic.dc.connector.FileSystemConnectorImpl;
+import com.globallogic.dc.repository.fs.impl.ItemDaoImpl;
+import com.globallogic.dc.services.impl.ItemServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AppConfig.class)
+@ContextConfiguration(classes = {ItemController.class, ItemServiceImpl.class, ItemDaoImpl.class, FileSystemConnectorImpl.class})
 public class ItemControllerTest {
 
     @Autowired

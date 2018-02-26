@@ -1,6 +1,6 @@
 package com.globallogic.dc.repository.fs.impl;
 
-import com.globallogic.dc.config.AppConfig;
+import com.globallogic.dc.connector.FileSystemConnectorImpl;
 import com.globallogic.dc.model.Section;
 import com.globallogic.dc.repository.SectionDao;
 import org.junit.Test;
@@ -14,15 +14,15 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AppConfig.class)
+@ContextConfiguration(classes = {SectionDaoImpl.class, FileSystemConnectorImpl.class})
 public class SectionDaoImplTest {
 
     @Autowired
-    private SectionDao sectionDaoImpl;
+    private SectionDao sectionDao;
 
     @Test
     public void testGetSectionsBySubChapterId() {
-        List<Section> sections = sectionDaoImpl.getSectionsBySubChapterId("22");
+        List<Section> sections = sectionDao.getSectionsBySubChapterId("22");
 
         assertEquals(2, sections.size());
     }
