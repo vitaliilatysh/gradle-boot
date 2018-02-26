@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("SectionServiceImpl")
+@Service
 public class SectionServiceImpl implements SectionService {
 
     @Autowired

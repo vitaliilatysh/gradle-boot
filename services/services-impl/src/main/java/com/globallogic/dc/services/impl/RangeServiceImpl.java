@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("RangeServiceImpl")
+@Service
 public class RangeServiceImpl implements RangeService {
 
     @Autowired
