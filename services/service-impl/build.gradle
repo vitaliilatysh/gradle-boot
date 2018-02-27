@@ -8,4 +8,5 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-test'
 
     testCompile group: 'junit', name: 'junit'
+    testCompile group: 'org.mockito', name:'mockito-core'
 }
