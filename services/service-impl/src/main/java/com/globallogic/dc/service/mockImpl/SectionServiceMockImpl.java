@@ -1,4 +1,4 @@
-package com.globallogic.dc.services.mockImpl;
+package com.globallogic.dc.service.mockImpl;
 
 import org.springframework.stereotype.Service;
 

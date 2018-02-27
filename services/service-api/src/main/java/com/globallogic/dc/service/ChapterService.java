@@ -1,4 +1,4 @@
-package com.globallogic.dc.services;
+package com.globallogic.dc.service;
 
 import com.globallogic.dc.model.Chapter;
 

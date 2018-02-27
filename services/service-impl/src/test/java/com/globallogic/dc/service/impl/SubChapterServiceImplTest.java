@@ -1,8 +1,7 @@
-package com.globallogic.dc.services.impl;
+package com.globallogic.dc.service.impl;
 
-import com.globallogic.dc.connector.FileSystemConnectorImpl;
-import com.globallogic.dc.repository.fs.impl.SubChapterDaoImpl;
-import com.globallogic.dc.services.SubChapterService;
+import com.globallogic.dc.service.SubChapterService;
+import com.globallogic.dc.service.config.ServiceConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {SubChapterServiceImpl.class, SubChapterDaoImpl.class, FileSystemConnectorImpl.class})
+@ContextConfiguration(classes = ServiceConfig.class)
 public class SubChapterServiceImplTest {
 
     @Autowired

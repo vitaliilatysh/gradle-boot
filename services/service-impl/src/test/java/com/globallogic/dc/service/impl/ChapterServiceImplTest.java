@@ -1,7 +1,7 @@
-package com.globallogic.dc.services.impl;
+package com.globallogic.dc.service.impl;
 
-import com.globallogic.dc.services.ChapterService;
-import com.globallogic.dc.services.config.ServiceConfig;
+import com.globallogic.dc.service.ChapterService;
+import com.globallogic.dc.service.config.ServiceConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

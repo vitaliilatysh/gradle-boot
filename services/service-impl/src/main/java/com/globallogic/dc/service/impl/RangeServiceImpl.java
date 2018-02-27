@@ -1,8 +1,8 @@
-package com.globallogic.dc.services.impl;
+package com.globallogic.dc.service.impl;
 
 import com.globallogic.dc.model.Range;
 import com.globallogic.dc.repository.RangeDao;
-import com.globallogic.dc.services.RangeService;
+import com.globallogic.dc.service.RangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

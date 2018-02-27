@@ -1,8 +1,8 @@
-package com.globallogic.dc.services.impl;
+package com.globallogic.dc.service.impl;
 
 import com.globallogic.dc.model.Item;
 import com.globallogic.dc.repository.ItemDao;
-import com.globallogic.dc.services.ItemService;
+import com.globallogic.dc.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

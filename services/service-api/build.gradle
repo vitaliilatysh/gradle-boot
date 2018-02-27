@@ -1,4 +1,4 @@
-group 'com.globallogic.dc.services.api'
+group 'com.globallogic.dc.service.api'
 
 dependencies {
     compile project(':model')

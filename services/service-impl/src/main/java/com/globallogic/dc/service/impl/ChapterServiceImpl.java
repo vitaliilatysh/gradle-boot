@@ -1,17 +1,14 @@
-package com.globallogic.dc.services.impl;
+package com.globallogic.dc.service.impl;
 
 import com.globallogic.dc.model.Chapter;
 import com.globallogic.dc.repository.ChapterDao;
-import com.globallogic.dc.repository.fs.impl.ChapterDaoImpl;
-import com.globallogic.dc.services.ChapterService;
+import com.globallogic.dc.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.util.List;
 
 @Service
-@ContextConfiguration(classes = ChapterDaoImpl.class)
 public class ChapterServiceImpl implements ChapterService {
 
     @Autowired
