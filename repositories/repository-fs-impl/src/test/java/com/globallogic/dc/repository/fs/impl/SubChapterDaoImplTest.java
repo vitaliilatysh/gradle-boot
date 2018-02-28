@@ -52,6 +52,9 @@ public class SubChapterDaoImplTest {
 
     @Test
     public void testGetSubChaptersByChapterId() {
+        when(subChapterDao.getSubChaptersByChapterId("12")).thenReturn(Arrays.asList(
+                new SubChapter("21", "Title", "Desc"),
+                new SubChapter("22", "Title", "Desc")));
         List<SubChapter> subChapters = subChapterDao.getSubChaptersByChapterId("12");
 
         assertEquals(2, subChapters.size());
