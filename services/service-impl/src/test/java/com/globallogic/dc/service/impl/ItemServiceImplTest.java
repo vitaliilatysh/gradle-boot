@@ -1,29 +1,37 @@
 package com.globallogic.dc.service.impl;
 
-import com.globallogic.dc.service.ItemService;
-import com.globallogic.dc.service.config.ServiceConfig;
+import com.globallogic.dc.repository.ItemDao;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ServiceConfig.class)
+@RunWith(MockitoJUnitRunner.class)
 public class ItemServiceImplTest {
 
-    @Autowired
-    private ItemService itemService;
+    @Mock
+    private ItemDao itemDao;
+
+    @InjectMocks
+    private ItemServiceImpl itemService;
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
-    public void testGetChapters() {
+    public void testGetItems() {
         assertEquals(4, itemService.getItems().size());
     }
 
     @Test
-    public void testGetChapterById() {
+    public void testGetItemById() {
         assertEquals("51", itemService.getItemById("51").getKey());
     }
 
