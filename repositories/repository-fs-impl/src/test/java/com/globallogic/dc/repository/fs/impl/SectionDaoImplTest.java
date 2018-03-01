@@ -1,15 +1,16 @@
 package com.globallogic.dc.repository.fs.impl;
 
+import com.globallogic.dc.connector.FileSystemConnector;
 import com.globallogic.dc.model.Section;
-import com.globallogic.dc.repository.SectionDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -18,21 +19,29 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class SectionDaoImplTest {
 
+    private List<String> sections;
+
     @Mock
-    private SectionDao sectionDao;
+    private FileSystemConnector fileSystemConnector;
+
+    @InjectMocks
+    private SectionDaoImpl sectionDao;
 
     @Before
-    public void setup() {
+    public void setUp() {
+        sections = new ArrayList<>();
+        sections.add("31,Title,Desc");
+        sections.add("32,Title,Desc");
+        sections.add("33,Title,Desc");
+        sections.add("34,Title,Desc");
+
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testGetSections() {
-        when(sectionDao.getAll()).thenReturn(Arrays.asList(
-                new Section("31", "Title", "Desc"),
-                new Section("32", "Title", "Desc"),
-                new Section("33", "Title", "Desc"),
-                new Section("34", "Title", "Desc")));
+        when(fileSystemConnector.readFile("sections.csv")).thenReturn(sections);
+
         List<Section> sections = sectionDao.getAll();
 
         assertEquals(4, sections.size());
@@ -40,8 +49,8 @@ public class SectionDaoImplTest {
 
     @Test
     public void testGetSectionById() {
-        when(sectionDao.getById("32")).thenReturn(
-                new Section("32", "Title", "Desc"));
+        when(fileSystemConnector.readFile("sections.csv")).thenReturn(sections);
+
         Section section = sectionDao.getById("32");
 
         assertEquals("32", section.getIdentifier());
@@ -51,9 +60,14 @@ public class SectionDaoImplTest {
 
     @Test
     public void testGetSectionsBySubChapterId() {
-        when(sectionDao.getSectionsBySubChapterId("22")).thenReturn(Arrays.asList(
-                new Section("32", "Title", "Desc"),
-                new Section("33", "Title", "Desc")));
+        List<String> sectionsToSubChapters = new ArrayList<>();
+        sectionsToSubChapters.add("31,21");
+        sectionsToSubChapters.add("32,22");
+        sectionsToSubChapters.add("33,22");
+
+        when(fileSystemConnector.readFile("sections.csv")).thenReturn(sections);
+        when(fileSystemConnector.readFile("sectionsToSubChapters.csv")).thenReturn(sectionsToSubChapters);
+
         List<Section> sections = sectionDao.getSectionsBySubChapterId("22");
 
         assertEquals(2, sections.size());

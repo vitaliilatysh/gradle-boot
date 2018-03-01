@@ -1,15 +1,16 @@
 package com.globallogic.dc.repository.fs.impl;
 
+import com.globallogic.dc.connector.FileSystemConnector;
 import com.globallogic.dc.model.SubChapter;
-import com.globallogic.dc.repository.SubChapterDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -18,21 +19,27 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class SubChapterDaoImplTest {
 
+    private List<String> subChapters;
     @Mock
-    private SubChapterDao subChapterDao;
+    private FileSystemConnector fileSystemConnector;
+
+    @InjectMocks
+    private SubChapterDaoImpl subChapterDao;
 
     @Before
-    public void setup() {
+    public void setUp() {
+        subChapters = new ArrayList<>();
+        subChapters.add("21,Title,Desc");
+        subChapters.add("22,Title,Desc");
+        subChapters.add("23,Title,Desc");
+        subChapters.add("24,Title,Desc");
+        
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testGetSubChapters() {
-        when(subChapterDao.getAll()).thenReturn(Arrays.asList(
-                new SubChapter("21", "Title", "Desc"),
-                new SubChapter("22", "Title", "Desc"),
-                new SubChapter("23", "Title", "Desc"),
-                new SubChapter("24", "Title", "Desc")));
+        when(fileSystemConnector.readFile("subchapters.csv")).thenReturn(subChapters);
 
         List<SubChapter> subChapters = subChapterDao.getAll();
 
@@ -41,8 +48,8 @@ public class SubChapterDaoImplTest {
 
     @Test
     public void testGetSubChapterById() {
-        when(subChapterDao.getById("22")).thenReturn(
-                new SubChapter("22", "Title", "Desc"));
+        when(fileSystemConnector.readFile("subchapters.csv")).thenReturn(subChapters);
+
         SubChapter subChapter = subChapterDao.getById("22");
 
         assertEquals("22", subChapter.getIdentifier());
@@ -52,9 +59,15 @@ public class SubChapterDaoImplTest {
 
     @Test
     public void testGetSubChaptersByChapterId() {
-        when(subChapterDao.getSubChaptersByChapterId("12")).thenReturn(Arrays.asList(
-                new SubChapter("21", "Title", "Desc"),
-                new SubChapter("22", "Title", "Desc")));
+        List<String> subChaptersToChapters = new ArrayList<>();
+        subChaptersToChapters.add("21,12");
+        subChaptersToChapters.add("22,12");
+        subChaptersToChapters.add("23,13");
+        subChaptersToChapters.add("24,14");
+
+        when(fileSystemConnector.readFile("subchapters.csv")).thenReturn(subChapters);
+        when(fileSystemConnector.readFile("subChaptersToChapters.csv")).thenReturn(subChaptersToChapters);
+
         List<SubChapter> subChapters = subChapterDao.getSubChaptersByChapterId("12");
 
         assertEquals(2, subChapters.size());

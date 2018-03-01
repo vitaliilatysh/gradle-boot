@@ -1,15 +1,16 @@
 package com.globallogic.dc.repository.fs.impl;
 
+import com.globallogic.dc.connector.FileSystemConnector;
 import com.globallogic.dc.model.Chapter;
-import com.globallogic.dc.repository.ChapterDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -18,20 +19,27 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ChapterDaoImplTest {
 
+    private List<String> chapters;
+
     @Mock
-    private ChapterDao chapterDao;
+    private FileSystemConnector fileSystemConnector;
+
+    @InjectMocks
+    private ChapterDaoImpl chapterDao;
 
     @Before
-    public void setup() {
+    public void setUp() {
+        chapters = new ArrayList<>();
+        chapters.add("12,Title,Desc");
+        chapters.add("13,Title,Desc");
+        chapters.add("14,Title,Desc");
+
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testGetChapters() {
-        when(chapterDao.getAll()).thenReturn(Arrays.asList(
-                new Chapter("12", "Title", "Desc"),
-                new Chapter("13", "Title", "Desc"),
-                new Chapter("14", "Title", "Desc")));
+        when(fileSystemConnector.readFile("chapters.csv")).thenReturn(chapters);
 
         List<Chapter> chapters = chapterDao.getAll();
 
@@ -40,8 +48,8 @@ public class ChapterDaoImplTest {
 
     @Test
     public void testGetChapterById() {
-        when(chapterDao.getById("12")).thenReturn(
-                new Chapter("12", "Title", "Desc"));
+        when(fileSystemConnector.readFile("chapters.csv")).thenReturn(chapters);
+
         Chapter chapter = chapterDao.getById("12");
 
         assertEquals("12", chapter.getIdentifier());
