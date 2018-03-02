@@ -5,8 +5,4 @@ dependencies {
     compile project(':repositories:repository-api')
     compile project(':repositories:repository-fs-impl')
     compile group: 'org.springframework', name: 'spring-context'
-    compile group: 'org.springframework', name: 'spring-test'
-
-    testCompile group: 'junit', name: 'junit'
-    testCompile group: 'org.mockito', name:'mockito-core'
 }
