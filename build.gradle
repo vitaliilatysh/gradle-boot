@@ -10,11 +10,6 @@ group 'com.globallogic.dc'
 subprojects {
     apply plugin: 'java'
 
-    group 'com.globallogic.dc'
-
-    repositories {
-        jcenter()
-    }
     dependencies {
         compile group: 'org.springframework', name: 'spring-test'
         testCompile group: 'junit', name: 'junit'
