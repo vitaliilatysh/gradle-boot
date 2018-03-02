@@ -81,7 +81,7 @@ public class ItemControllerTest {
     }
 
     @Test
-    public void getItemsByRelatedItemId() throws Exception {
+    public void testGetItemsByRelatedItemId() throws Exception {
         when(itemService.getItemsByRelatedItemId("54")).thenReturn(Arrays.asList(
                 new Item("52", "Title", "Desc"),
                 new Item("53", "Title", "Desc")));
@@ -98,7 +98,7 @@ public class ItemControllerTest {
     }
 
     @Test
-    public void getItemsByStringItemId() throws Exception {
+    public void testGetItemsByStringItemId() throws Exception {
         when(itemService.getItemsByStringItemId("Item1")).thenReturn(Arrays.asList(
                 new Item("51", "Title", "Desc"),
                 new Item("54", "Title", "Desc")));
@@ -115,7 +115,7 @@ public class ItemControllerTest {
     }
 
     @Test
-    public void getItemsByRangeId() throws Exception {
+    public void testGetItemsByRangeId() throws Exception {
         when(itemService.getItemsByRangeId("42")).thenReturn(Arrays.asList(
                 new Item("51", "Title", "Desc"),
                 new Item("52", "Title", "Desc")));

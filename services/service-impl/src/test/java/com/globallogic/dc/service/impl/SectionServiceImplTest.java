@@ -45,7 +45,7 @@ public class SectionServiceImplTest {
     }
 
     @Test
-    public void getSectionsBySubChapterId() {
+    public void testGetSectionsBySubChapterId() {
         when(sectionDao.getSectionsBySubChapterId("22")).thenReturn(Arrays.asList(
                 new Section("32", "Title", "Desc"),
                 new Section("33", "Title", "Desc")));

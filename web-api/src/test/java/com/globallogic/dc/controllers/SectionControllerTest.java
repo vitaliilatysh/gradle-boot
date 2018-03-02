@@ -81,7 +81,7 @@ public class SectionControllerTest {
     }
 
     @Test
-    public void getSectionsBySubChapterId() throws Exception {
+    public void testGetSectionsBySubChapterId() throws Exception {
         when(sectionService.getSectionsBySubChapterId("22")).thenReturn(Arrays.asList(
                 new Section("32", "Title", "Desc"),
                 new Section("33", "Title", "Desc")));
