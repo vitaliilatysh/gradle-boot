@@ -2,6 +2,6 @@ group 'com.globallogic.dc.model'
 
 dependencies {
     compile project(':commons:model')
-    compile project(':commons:test')
+    testCompile project (':commons:test')
     compile group: 'org.apache.commons', name: 'commons-collections4'
 }

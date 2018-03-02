@@ -7,16 +7,6 @@ plugins {
 
 group 'com.globallogic.dc'
 
-subprojects {
-    apply plugin: 'java'
-
-    dependencies {
-        compile group: 'org.springframework', name: 'spring-test'
-        testCompile group: 'junit', name: 'junit'
-        testCompile group: 'org.mockito', name: 'mockito-core'
-    }
-}
-
 allprojects {
     version '0.0.1'
 

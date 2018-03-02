@@ -4,5 +4,6 @@ dependencies {
     compile project(':connector')
     compile project(':model')
     compile project(':repositories:repository-api')
+    testCompile project(':commons:test')
     compile group: 'org.springframework', name: 'spring-context'
 }
