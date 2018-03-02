@@ -33,7 +33,7 @@ public class SubChapterDaoImplTest {
         subChapters.add("22,Title,Desc");
         subChapters.add("23,Title,Desc");
         subChapters.add("24,Title,Desc");
-        
+
         MockitoAnnotations.initMocks(this);
     }
 

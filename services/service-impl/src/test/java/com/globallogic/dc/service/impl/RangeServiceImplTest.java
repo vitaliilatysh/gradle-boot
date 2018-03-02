@@ -1,39 +1,67 @@
 package com.globallogic.dc.service.impl;
 
-import com.globallogic.dc.service.RangeService;
-import com.globallogic.dc.service.config.ServiceConfig;
+import com.globallogic.dc.model.Range;
+import com.globallogic.dc.repository.RangeDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ServiceConfig.class)
+@RunWith(MockitoJUnitRunner.class)
 public class RangeServiceImplTest {
 
-    @Autowired
-    private RangeService rangeService;
+    @Mock
+    private RangeDao rangeDao;
+
+    @InjectMocks
+    private RangeServiceImpl rangeService;
 
     @Test
     public void testGetRanges() {
+        List<Range> ranges = new ArrayList<>();
+        ranges.add(new Range("41", "Title", "Desc"));
+        ranges.add(new Range("42", "Title", "Desc"));
+        ranges.add(new Range("43", "Title", "Desc"));
+        ranges.add(new Range("44", "Title", "Desc"));
+        ranges.add(new Range("45", "Title", "Desc"));
+        ranges.add(new Range("46", "Title", "Desc"));
+
+        when(rangeDao.getAll()).thenReturn(ranges);
+
         assertEquals(6, rangeService.getRanges().size());
     }
 
     @Test
     public void testGetRangeById() {
+        when(rangeDao.getById("41")).thenReturn(new Range("41", "Title", "Desc"));
+
         assertEquals("41", rangeService.getRangeById("41").getKey());
     }
 
     @Test
     public void testGetRangesBySubChapterId() {
+        when(rangeDao.getRangesBySubChapterId("24")).thenReturn(Arrays.asList(
+                new Range("44", "Title", "Desc"),
+                new Range("45", "Title", "Desc")));
+
         assertEquals(2, rangeService.getRangesBySubChapterId("24").size());
     }
 
     @Test
     public void testGetRangesBySectionId() {
-        assertEquals(2, rangeService.getRangesBySectionId("31").size());
+        when(rangeDao.getRangesBySectionId("31")).thenReturn(Arrays.asList(
+                new Range("41", "Title", "Desc"),
+                new Range("42", "Title", "Desc"),
+                new Range("43", "Title", "Desc")));
+
+        assertEquals(3, rangeService.getRangesBySectionId("31").size());
     }
 }

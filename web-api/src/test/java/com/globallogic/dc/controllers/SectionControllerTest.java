@@ -1,26 +1,34 @@
 package com.globallogic.dc.controllers;
 
-import com.globallogic.dc.controllers.config.ControllerConfig;
+import com.globallogic.dc.model.Section;
+import com.globallogic.dc.service.SectionService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ControllerConfig.class)
+@RunWith(MockitoJUnitRunner.class)
 public class SectionControllerTest {
 
-    @Autowired
+    @Mock
+    private SectionService sectionService;
+
+    @InjectMocks
     private SectionController sectionController;
 
     private MockMvc mockMvc;
@@ -34,6 +42,14 @@ public class SectionControllerTest {
 
     @Test
     public void testGetSections() throws Exception {
+        List<Section> sections = new ArrayList<>();
+        sections.add(new Section("31", "Title", "Desc"));
+        sections.add(new Section("32", "Title", "Desc"));
+        sections.add(new Section("33", "Title", "Desc"));
+        sections.add(new Section("34", "Title", "Desc"));
+
+        when(sectionService.getSections()).thenReturn(sections);
+
         mockMvc.perform(get("/sections"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -54,6 +70,8 @@ public class SectionControllerTest {
 
     @Test
     public void testGetSectionById() throws Exception {
+        when(sectionService.getSectionById("31")).thenReturn(new Section("31", "Title", "Desc"));
+
         mockMvc.perform(get("/sections/31"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -64,6 +82,10 @@ public class SectionControllerTest {
 
     @Test
     public void getSectionsBySubChapterId() throws Exception {
+        when(sectionService.getSectionsBySubChapterId("22")).thenReturn(Arrays.asList(
+                new Section("32", "Title", "Desc"),
+                new Section("33", "Title", "Desc")));
+
         mockMvc.perform(get("/sections?subChapter=22"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))

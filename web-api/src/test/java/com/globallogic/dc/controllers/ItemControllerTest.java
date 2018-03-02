@@ -1,26 +1,34 @@
 package com.globallogic.dc.controllers;
 
-import com.globallogic.dc.controllers.config.ControllerConfig;
+import com.globallogic.dc.model.Item;
+import com.globallogic.dc.service.ItemService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ControllerConfig.class)
+@RunWith(MockitoJUnitRunner.class)
 public class ItemControllerTest {
 
-    @Autowired
+    @Mock
+    private ItemService itemService;
+
+    @InjectMocks
     private ItemController itemController;
 
     private MockMvc mockMvc;
@@ -34,6 +42,14 @@ public class ItemControllerTest {
 
     @Test
     public void testGetItems() throws Exception {
+        List<Item> items = new ArrayList<>();
+        items.add(new Item("51", "Title", "Desc"));
+        items.add(new Item("52", "Title", "Desc"));
+        items.add(new Item("53", "Title", "Desc"));
+        items.add(new Item("54", "Title", "Desc"));
+
+        when(itemService.getItems()).thenReturn(items);
+
         mockMvc.perform(get("/items"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -54,6 +70,8 @@ public class ItemControllerTest {
 
     @Test
     public void testGetItemById() throws Exception {
+        when(itemService.getItemById("51")).thenReturn(new Item("51", "Title", "Desc"));
+
         mockMvc.perform(get("/items/51"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -64,31 +82,52 @@ public class ItemControllerTest {
 
     @Test
     public void getItemsByRelatedItemId() throws Exception {
-        mockMvc.perform(get("/items?relatedItem=52"))
+        when(itemService.getItemsByRelatedItemId("54")).thenReturn(Arrays.asList(
+                new Item("52", "Title", "Desc"),
+                new Item("53", "Title", "Desc")));
+
+        mockMvc.perform(get("/items?relatedItem=54"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$[0].key", is("51")))
+                .andExpect(jsonPath("$[0].key", is("52")))
                 .andExpect(jsonPath("$[0].title", is("Title")))
-                .andExpect(jsonPath("$[0].description", is("Desc")));
+                .andExpect(jsonPath("$[0].description", is("Desc")))
+                .andExpect(jsonPath("$[1].key", is("53")))
+                .andExpect(jsonPath("$[1].title", is("Title")))
+                .andExpect(jsonPath("$[1].description", is("Desc")));
     }
 
     @Test
     public void getItemsByStringItemId() throws Exception {
+        when(itemService.getItemsByStringItemId("Item1")).thenReturn(Arrays.asList(
+                new Item("51", "Title", "Desc"),
+                new Item("54", "Title", "Desc")));
+
         mockMvc.perform(get("/items?stringItem=Item1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0].key", is("51")))
                 .andExpect(jsonPath("$[0].title", is("Title")))
-                .andExpect(jsonPath("$[0].description", is("Desc")));
+                .andExpect(jsonPath("$[0].description", is("Desc")))
+                .andExpect(jsonPath("$[1].key", is("54")))
+                .andExpect(jsonPath("$[1].title", is("Title")))
+                .andExpect(jsonPath("$[1].description", is("Desc")));
     }
 
     @Test
     public void getItemsByRangeId() throws Exception {
+        when(itemService.getItemsByRangeId("42")).thenReturn(Arrays.asList(
+                new Item("51", "Title", "Desc"),
+                new Item("52", "Title", "Desc")));
+
         mockMvc.perform(get("/items?range=42"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$[0].key", is("53")))
+                .andExpect(jsonPath("$[0].key", is("51")))
                 .andExpect(jsonPath("$[0].title", is("Title")))
-                .andExpect(jsonPath("$[0].description", is("Desc")));
+                .andExpect(jsonPath("$[0].description", is("Desc")))
+                .andExpect(jsonPath("$[1].key", is("52")))
+                .andExpect(jsonPath("$[1].title", is("Title")))
+                .andExpect(jsonPath("$[1].description", is("Desc")));
     }
 }
