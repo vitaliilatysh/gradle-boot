@@ -1,5 +1,6 @@
 package com.globallogic.dc.service.impl;
 
+import com.globallogic.dc.commons.test.ItemBuilder;
 import com.globallogic.dc.model.Item;
 import com.globallogic.dc.repository.ItemDao;
 import org.junit.Before;
@@ -10,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,11 +33,7 @@ public class ItemServiceImplTest {
 
     @Test
     public void testGetItems() {
-        List<Item> items = new ArrayList<>();
-        items.add(new Item("51", "Title", "Desc"));
-        items.add(new Item("52", "Title", "Desc"));
-        items.add(new Item("53", "Title", "Desc"));
-        items.add(new Item("54", "Title", "Desc"));
+        List<Item> items = new ItemBuilder().buildAllItems();
 
         when(itemDao.getAll()).thenReturn(items);
 

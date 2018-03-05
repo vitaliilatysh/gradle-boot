@@ -3,6 +3,7 @@ package com.globallogic.dc.commons.test;
 import com.globallogic.dc.model.Item;
 import com.globallogic.dc.model.Range;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ItemBuilder {
@@ -53,5 +54,13 @@ public class ItemBuilder {
 
     public Item buildDefault() {
         return new Item(this.key = "1", this.title = "Title", this.description = "Desc");
+    }
+
+    public List<Item> buildAllItems() {
+        return Arrays.asList(
+                new Item(this.key = "51", this.title = "Title", this.description = "Desc"),
+                new Item(this.key = "52", this.title = "Title", this.description = "Desc"),
+                new Item(this.key = "53", this.title = "Title", this.description = "Desc"),
+                new Item(this.key = "54", this.title = "Title", this.description = "Desc"));
     }
 }

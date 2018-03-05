@@ -3,6 +3,7 @@ package com.globallogic.dc.commons.test;
 import com.globallogic.dc.model.Chapter;
 import com.globallogic.dc.model.SubChapter;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ChapterBuilder {
@@ -41,5 +42,12 @@ public class ChapterBuilder {
 
     public Chapter buildDefault() {
         return new Chapter(this.key = "1", this.title = "Title", this.description = "Desc");
+    }
+
+    public List<Chapter> buildAllChapters() {
+        return Arrays.asList(
+                new Chapter(this.key = "12", this.title = "Title", this.description = "Desc"),
+                new Chapter(this.key = "13", this.title = "Title", this.description = "Desc"),
+                new Chapter(this.key = "14", this.title = "Title", this.description = "Desc"));
     }
 }

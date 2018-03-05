@@ -1,5 +1,6 @@
 package com.globallogic.dc.controllers;
 
+import com.globallogic.dc.commons.test.RangeBuilder;
 import com.globallogic.dc.model.Range;
 import com.globallogic.dc.service.RangeService;
 import org.junit.Before;
@@ -12,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,18 +42,14 @@ public class RangeControllerTest {
 
     @Test
     public void testGetRanges() throws Exception {
-        List<Range> ranges = new ArrayList<>();
-        ranges.add(new Range("41", "Title", "Desc"));
-        ranges.add(new Range("42", "Title", "Desc"));
-        ranges.add(new Range("43", "Title", "Desc"));
-        ranges.add(new Range("44", "Title", "Desc"));
+        List<Range> ranges = new RangeBuilder().buildAllRanges();
 
         when(rangeService.getRanges()).thenReturn(ranges);
 
         mockMvc.perform(get("/ranges"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$", hasSize(4)))
+                .andExpect(jsonPath("$", hasSize(6)))
                 .andExpect(jsonPath("$[0].key", is("41")))
                 .andExpect(jsonPath("$[0].title", is("Title")))
                 .andExpect(jsonPath("$[0].description", is("Desc")))
@@ -65,7 +61,13 @@ public class RangeControllerTest {
                 .andExpect(jsonPath("$[2].description", is("Desc")))
                 .andExpect(jsonPath("$[3].key", is("44")))
                 .andExpect(jsonPath("$[3].title", is("Title")))
-                .andExpect(jsonPath("$[3].description", is("Desc")));
+                .andExpect(jsonPath("$[3].description", is("Desc")))
+                .andExpect(jsonPath("$[4].key", is("45")))
+                .andExpect(jsonPath("$[4].title", is("Title")))
+                .andExpect(jsonPath("$[4].description", is("Desc")))
+                .andExpect(jsonPath("$[5].key", is("46")))
+                .andExpect(jsonPath("$[5].title", is("Title")))
+                .andExpect(jsonPath("$[5].description", is("Desc")));
     }
 
     @Test

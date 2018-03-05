@@ -1,5 +1,6 @@
 package com.globallogic.dc.controllers;
 
+import com.globallogic.dc.commons.test.ItemBuilder;
 import com.globallogic.dc.model.Item;
 import com.globallogic.dc.service.ItemService;
 import org.junit.Before;
@@ -12,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,11 +42,7 @@ public class ItemControllerTest {
 
     @Test
     public void testGetItems() throws Exception {
-        List<Item> items = new ArrayList<>();
-        items.add(new Item("51", "Title", "Desc"));
-        items.add(new Item("52", "Title", "Desc"));
-        items.add(new Item("53", "Title", "Desc"));
-        items.add(new Item("54", "Title", "Desc"));
+        List<Item> items = new ItemBuilder().buildAllItems();
 
         when(itemService.getItems()).thenReturn(items);
 

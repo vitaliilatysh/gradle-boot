@@ -1,5 +1,6 @@
 package com.globallogic.dc.service.impl;
 
+import com.globallogic.dc.commons.test.SubChapterBuilder;
 import com.globallogic.dc.model.SubChapter;
 import com.globallogic.dc.repository.SubChapterDao;
 import org.junit.Test;
@@ -8,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,11 +26,7 @@ public class SubChapterServiceImplTest {
 
     @Test
     public void testGetSubChapters() {
-        List<SubChapter> subChapters = new ArrayList<>();
-        subChapters.add(new SubChapter("21", "Title", "Desc"));
-        subChapters.add(new SubChapter("22", "Title", "Desc"));
-        subChapters.add(new SubChapter("23", "Title", "Desc"));
-        subChapters.add(new SubChapter("24", "Title", "Desc"));
+        List<SubChapter> subChapters = new SubChapterBuilder().buildAllSubChapters();
 
         when(subChapterDao.getAll()).thenReturn(subChapters);
 

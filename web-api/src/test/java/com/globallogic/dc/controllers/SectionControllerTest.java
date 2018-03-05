@@ -1,5 +1,6 @@
 package com.globallogic.dc.controllers;
 
+import com.globallogic.dc.commons.test.SectionBuilder;
 import com.globallogic.dc.model.Section;
 import com.globallogic.dc.service.SectionService;
 import org.junit.Before;
@@ -12,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,11 +42,7 @@ public class SectionControllerTest {
 
     @Test
     public void testGetSections() throws Exception {
-        List<Section> sections = new ArrayList<>();
-        sections.add(new Section("31", "Title", "Desc"));
-        sections.add(new Section("32", "Title", "Desc"));
-        sections.add(new Section("33", "Title", "Desc"));
-        sections.add(new Section("34", "Title", "Desc"));
+        List<Section> sections = new SectionBuilder().buildAllSections();
 
         when(sectionService.getSections()).thenReturn(sections);
 

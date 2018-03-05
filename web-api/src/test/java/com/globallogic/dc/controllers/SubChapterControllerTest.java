@@ -1,5 +1,6 @@
 package com.globallogic.dc.controllers;
 
+import com.globallogic.dc.commons.test.SubChapterBuilder;
 import com.globallogic.dc.model.SubChapter;
 import com.globallogic.dc.service.SubChapterService;
 import org.junit.Before;
@@ -12,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,11 +42,7 @@ public class SubChapterControllerTest {
 
     @Test
     public void testGetSubChapters() throws Exception {
-        List<SubChapter> subChapters = new ArrayList<>();
-        subChapters.add(new SubChapter("21", "Title", "Desc"));
-        subChapters.add(new SubChapter("22", "Title", "Desc"));
-        subChapters.add(new SubChapter("23", "Title", "Desc"));
-        subChapters.add(new SubChapter("24", "Title", "Desc"));
+        List<SubChapter> subChapters = new SubChapterBuilder().buildAllSubChapters();
 
         when(subChapterService.getSubChapters()).thenReturn(subChapters);
         mockMvc.perform(get("/subChapters"))

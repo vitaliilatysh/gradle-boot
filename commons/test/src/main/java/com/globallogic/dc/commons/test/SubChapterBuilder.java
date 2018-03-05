@@ -5,6 +5,7 @@ import com.globallogic.dc.model.Range;
 import com.globallogic.dc.model.Section;
 import com.globallogic.dc.model.SubChapter;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SubChapterBuilder {
@@ -55,5 +56,13 @@ public class SubChapterBuilder {
 
     public SubChapter buildDefault() {
         return new SubChapter(this.key = "1", this.title = "Title", this.description = "Desc");
+    }
+
+    public List<SubChapter> buildAllSubChapters() {
+        return Arrays.asList(
+                new SubChapter(this.key = "21", this.title = "Title", this.description = "Desc"),
+                new SubChapter(this.key = "22", this.title = "Title", this.description = "Desc"),
+                new SubChapter(this.key = "23", this.title = "Title", this.description = "Desc"),
+                new SubChapter(this.key = "24", this.title = "Title", this.description = "Desc"));
     }
 }
