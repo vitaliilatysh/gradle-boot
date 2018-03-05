@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/subChapters")
+@RequestMapping(value = "/subChapters", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SubChapterController {
 
     @Autowired
     private SubChapterService subChapterService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public List<SubChapter> getSubChapters() {
         return subChapterService.getSubChapters();
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}")
     public SubChapter getSubChapterById(@PathVariable("id") final String id) {
         return subChapterService.getSubChapterById(id);
     }
 
-    @GetMapping(params = "chapter", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(params = "chapter")
     public List<SubChapter> getSubChaptersByChapterId(@RequestParam("chapter") final String id) {
         return subChapterService.getSubChaptersByChapterId(id);
     }

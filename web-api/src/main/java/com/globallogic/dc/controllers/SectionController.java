@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/sections")
+@RequestMapping(value = "/sections", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SectionController {
 
     @Autowired
     private SectionService sectionService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public List<Section> getSections() {
         return sectionService.getSections();
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}")
     public Section getSectionById(@PathVariable("id") final String id) {
         return sectionService.getSectionById(id);
     }
 
-    @GetMapping(params = "subChapter", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(params = "subChapter")
     public List<Section> getSectionsBySubChapterId(@RequestParam("subChapter") final String id) {
         return sectionService.getSectionsBySubChapterId(id);
     }

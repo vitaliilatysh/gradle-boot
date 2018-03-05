@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/chapters")
+@RequestMapping(value = "/chapters", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ChapterController {
 
     @Autowired
     private ChapterService chapterService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public List<Chapter> getAllChapters() {
         return chapterService.getChapters();
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}")
     public Chapter getChapterById(@PathVariable("id") final String id) {
         return chapterService.getChapterById(id);
     }
