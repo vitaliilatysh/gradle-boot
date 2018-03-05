@@ -3,6 +3,6 @@ group 'com.globallogic.dc.commons.test'
 dependencies {
     compile project(':model')
     compile group: 'org.springframework', name: 'spring-test'
-    testCompile group: 'junit', name: 'junit'
-    testCompile group: 'org.mockito', name: 'mockito-core'
+    compile group: 'junit', name: 'junit'
+    compile group: 'org.mockito', name: 'mockito-core'
 }
