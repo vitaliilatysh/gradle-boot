@@ -1,6 +1,7 @@
 group 'com.globallogic.dc.config'
 
 dependencies {
+    compile project(':web-api')
     compile group: 'org.springframework', name: 'spring-context'
     compile group: 'org.springframework.boot', name: 'spring-boot'
     compile group:'org.springframework.boot', name:'spring-boot-starter-web'
