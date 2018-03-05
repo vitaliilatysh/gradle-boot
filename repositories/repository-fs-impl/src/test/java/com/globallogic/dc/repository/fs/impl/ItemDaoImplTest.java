@@ -1,7 +1,8 @@
 package com.globallogic.dc.repository.fs.impl;
 
-import com.globallogic.dc.connector.FileSystemConnectorImpl;
 import com.globallogic.dc.model.Item;
+import com.globallogic.dc.repository.ItemDao;
+import com.globallogic.dc.repository.fs.config.RepositoryConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +14,22 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ItemDaoImpl.class, FileSystemConnectorImpl.class})
+@ContextConfiguration(classes = RepositoryConfig.class)
 public class ItemDaoImplTest {
 
     @Autowired
-    private ItemDaoImpl itemDaoImpl;
+    private ItemDao itemDao;
 
     @Test
     public void testGetItemsByRangeId() {
-        List<Item> items = itemDaoImpl.getItemsByRangeId("41");
+        List<Item> items = itemDao.getItemsByRangeId("41");
 
         assertEquals(2, items.size());
     }
 
     @Test
     public void testGetItemsByRelatedItems() {
-        List<Item> items = itemDaoImpl.getItemsByRelatedItemId("54");
+        List<Item> items = itemDao.getItemsByRelatedItemId("54");
 
         assertEquals(2, items.size());
 
@@ -36,7 +37,7 @@ public class ItemDaoImplTest {
 
     @Test
     public void testGetItemsByStringItems() {
-        List<Item> items = itemDaoImpl.getItemsByStringItemId("Item1");
+        List<Item> items = itemDao.getItemsByStringItemId("Item1");
 
         assertEquals(2, items.size());
 

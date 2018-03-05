@@ -4,14 +4,14 @@ import com.globallogic.dc.commons.model.Entity;
 import com.globallogic.dc.connector.FileSystemConnector;
 import com.globallogic.dc.repository.ProductsDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-@ComponentScan(basePackages = {"com.globallogic.dc.connector", "com.globallogic.dc.repository.fs.impl"})
+@Repository
 public abstract class AbstractFileSystemDAO<M extends Entity> implements ProductsDao<M> {
 
     @Autowired

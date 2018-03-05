@@ -1,0 +1,5 @@
+group 'com.globallogic.dc.config'
+
+dependencies {
+    compile group: 'org.springframework', name: 'spring-context'
+}
