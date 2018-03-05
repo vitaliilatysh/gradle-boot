@@ -1,29 +1,51 @@
 package com.globallogic.dc.service.impl;
 
-import com.globallogic.dc.service.ChapterService;
-import com.globallogic.dc.service.config.ServiceConfig;
+import com.globallogic.dc.model.Chapter;
+import com.globallogic.dc.repository.ChapterDao;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ServiceConfig.class)
+@RunWith(MockitoJUnitRunner.class)
 public class ChapterServiceImplTest {
 
-    @Autowired
-    private ChapterService chapterService;
+    @Mock
+    private ChapterDao chapterDao;
+
+    @InjectMocks
+    private ChapterServiceImpl chapterService;
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testGetChapters() {
+        List<Chapter> chapters = new ArrayList<>();
+        chapters.add(new Chapter("12", "Title", "Desc"));
+        chapters.add(new Chapter("13", "Title", "Desc"));
+        chapters.add(new Chapter("14", "Title", "Desc"));
+
+        when(chapterDao.getAll()).thenReturn(chapters);
+
         assertEquals(3, chapterService.getChapters().size());
     }
 
     @Test
     public void testGetChapterById() {
+        when(chapterDao.getById("12")).thenReturn(new Chapter("12", "Title", "Desc"));
+
         assertEquals("12", chapterService.getChapterById("12").getKey());
     }
 }

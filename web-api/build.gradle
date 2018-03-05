@@ -3,12 +3,11 @@ group 'com.globallogic.dc.controllers'
 dependencies {
     compile project(':services:service-api')
     compile project(':services:service-impl')
+    testCompile project(':commons:test')
     compile group: 'org.springframework', name: 'spring-context'
     compile group: 'org.springframework', name: 'spring-webmvc'
-    compile group: 'org.springframework', name: 'spring-test'
     compile group: 'javax.servlet', name: 'javax.servlet-api'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind'
     compile group: 'com.jayway.jsonpath', name: 'json-path'
-    testCompile group: 'junit', name: 'junit'
     testCompile group: 'org.hamcrest', name: 'hamcrest-library'
 }

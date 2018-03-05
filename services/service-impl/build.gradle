@@ -4,8 +4,6 @@ dependencies {
     compile project(':services:service-api')
     compile project(':repositories:repository-api')
     compile project(':repositories:repository-fs-impl')
+    testCompile project(':commons:test')
     compile group: 'org.springframework', name: 'spring-context'
-    compile group: 'org.springframework', name: 'spring-test'
-
-    testCompile group: 'junit', name: 'junit'
 }

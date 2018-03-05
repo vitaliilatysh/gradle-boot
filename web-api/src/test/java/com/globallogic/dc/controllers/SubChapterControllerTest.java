@@ -1,26 +1,34 @@
 package com.globallogic.dc.controllers;
 
-import com.globallogic.dc.controllers.config.ControllerConfig;
+import com.globallogic.dc.model.SubChapter;
+import com.globallogic.dc.service.SubChapterService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ControllerConfig.class)
+@RunWith(MockitoJUnitRunner.class)
 public class SubChapterControllerTest {
 
-    @Autowired
+    @Mock
+    private SubChapterService subChapterService;
+
+    @InjectMocks
     private SubChapterController subChapterController;
 
     private MockMvc mockMvc;
@@ -34,6 +42,13 @@ public class SubChapterControllerTest {
 
     @Test
     public void testGetSubChapters() throws Exception {
+        List<SubChapter> subChapters = new ArrayList<>();
+        subChapters.add(new SubChapter("21", "Title", "Desc"));
+        subChapters.add(new SubChapter("22", "Title", "Desc"));
+        subChapters.add(new SubChapter("23", "Title", "Desc"));
+        subChapters.add(new SubChapter("24", "Title", "Desc"));
+
+        when(subChapterService.getSubChapters()).thenReturn(subChapters);
         mockMvc.perform(get("/subChapters"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -54,6 +69,8 @@ public class SubChapterControllerTest {
 
     @Test
     public void testGetSubChapterById() throws Exception {
+        when(subChapterService.getSubChapterById("21")).thenReturn(new SubChapter("21", "Title", "Desc"));
+
         mockMvc.perform(get("/subChapters/21"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -64,6 +81,10 @@ public class SubChapterControllerTest {
 
     @Test
     public void testGetSubChaptersByChapterId() throws Exception {
+        when(subChapterService.getSubChaptersByChapterId("12")).thenReturn(Arrays.asList(
+                new SubChapter("21", "Title", "Desc"),
+                new SubChapter("22", "Title", "Desc")));
+
         mockMvc.perform(get("/subChapters?chapter=12"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
