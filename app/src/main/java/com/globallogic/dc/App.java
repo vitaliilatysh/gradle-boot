@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootConfiguration
-@ComponentScan(basePackages = "com.globallogic.dc.config")
+@ComponentScan
 @EnableAutoConfiguration
 public class App {
     public static void main(String[] args) {
