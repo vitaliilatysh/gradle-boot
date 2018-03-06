@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
         "com.globallogic.dc.connector",
         "com.globallogic.dc.repository.fs.config",
         "com.globallogic.dc.service.config",
-        "com.globallogic.dc.controllers.config"
+        "com.globallogic.dc.controllers"
 })
 @EnableAutoConfiguration
 public class App {
