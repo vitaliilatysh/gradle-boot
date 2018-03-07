@@ -1,4 +1,4 @@
-package com.globallogic.dc.repository;
+package com.globallogic.dc.repository.api;
 
 import java.util.List;
 

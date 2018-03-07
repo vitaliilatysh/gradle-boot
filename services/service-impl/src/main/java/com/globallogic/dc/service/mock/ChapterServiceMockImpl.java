@@ -1,7 +1,7 @@
 package com.globallogic.dc.service.mock;
 
 import com.globallogic.dc.model.Chapter;
-import com.globallogic.dc.service.ChapterService;
+import com.globallogic.dc.service.api.ChapterService;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;

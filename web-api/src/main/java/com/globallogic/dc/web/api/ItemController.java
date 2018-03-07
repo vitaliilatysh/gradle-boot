@@ -1,7 +1,7 @@
 package com.globallogic.dc.web.api;
 
 import com.globallogic.dc.model.Item;
-import com.globallogic.dc.service.ItemService;
+import com.globallogic.dc.service.api.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

@@ -2,7 +2,7 @@ package com.globallogic.dc.web.api;
 
 import com.globallogic.dc.commons.test.SubChapterBuilder;
 import com.globallogic.dc.model.SubChapter;
-import com.globallogic.dc.service.SubChapterService;
+import com.globallogic.dc.service.api.SubChapterService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,7 @@
 package com.globallogic.dc.repository.fs.mock;
 
 import com.globallogic.dc.model.Range;
-import com.globallogic.dc.repository.ProductsDao;
+import com.globallogic.dc.repository.api.ProductsDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 import org.springframework.stereotype.Repository;
 

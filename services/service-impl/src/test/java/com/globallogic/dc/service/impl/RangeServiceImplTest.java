@@ -2,7 +2,7 @@ package com.globallogic.dc.service.impl;
 
 import com.globallogic.dc.commons.test.RangeBuilder;
 import com.globallogic.dc.model.Range;
-import com.globallogic.dc.repository.RangeDao;
+import com.globallogic.dc.repository.api.RangeDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

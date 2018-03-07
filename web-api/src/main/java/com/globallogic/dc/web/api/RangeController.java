@@ -1,7 +1,7 @@
 package com.globallogic.dc.web.api;
 
 import com.globallogic.dc.model.Range;
-import com.globallogic.dc.service.RangeService;
+import com.globallogic.dc.service.api.RangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

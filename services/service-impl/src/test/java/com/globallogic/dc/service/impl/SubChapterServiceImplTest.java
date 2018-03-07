@@ -2,7 +2,7 @@ package com.globallogic.dc.service.impl;
 
 import com.globallogic.dc.commons.test.SubChapterBuilder;
 import com.globallogic.dc.model.SubChapter;
-import com.globallogic.dc.repository.SubChapterDao;
+import com.globallogic.dc.repository.api.SubChapterDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

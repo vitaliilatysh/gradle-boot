@@ -2,7 +2,7 @@ package com.globallogic.dc.web.api;
 
 import com.globallogic.dc.commons.test.RangeBuilder;
 import com.globallogic.dc.model.Range;
-import com.globallogic.dc.service.RangeService;
+import com.globallogic.dc.service.api.RangeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

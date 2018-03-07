@@ -2,7 +2,7 @@ package com.globallogic.dc.web.api;
 
 import com.globallogic.dc.commons.test.ItemBuilder;
 import com.globallogic.dc.model.Item;
-import com.globallogic.dc.service.ItemService;
+import com.globallogic.dc.service.api.ItemService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

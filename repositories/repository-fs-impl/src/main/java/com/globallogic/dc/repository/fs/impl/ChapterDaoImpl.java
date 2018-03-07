@@ -1,7 +1,7 @@
 package com.globallogic.dc.repository.fs.impl;
 
 import com.globallogic.dc.model.Chapter;
-import com.globallogic.dc.repository.ChapterDao;
+import com.globallogic.dc.repository.api.ChapterDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 import org.springframework.stereotype.Repository;
 

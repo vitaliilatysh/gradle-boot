@@ -2,7 +2,7 @@ package com.globallogic.dc.repository.fs;
 
 import com.globallogic.dc.commons.model.Entity;
 import com.globallogic.dc.connector.FileSystemConnector;
-import com.globallogic.dc.repository.ProductsDao;
+import com.globallogic.dc.repository.api.ProductsDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

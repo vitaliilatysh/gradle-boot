@@ -1,7 +1,7 @@
 package com.globallogic.dc.web.api;
 
 import com.globallogic.dc.model.Section;
-import com.globallogic.dc.service.SectionService;
+import com.globallogic.dc.service.api.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

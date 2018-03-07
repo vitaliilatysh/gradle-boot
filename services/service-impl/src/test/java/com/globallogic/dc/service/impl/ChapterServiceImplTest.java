@@ -2,7 +2,7 @@ package com.globallogic.dc.service.impl;
 
 import com.globallogic.dc.commons.test.ChapterBuilder;
 import com.globallogic.dc.model.Chapter;
-import com.globallogic.dc.repository.ChapterDao;
+import com.globallogic.dc.repository.api.ChapterDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -2,7 +2,7 @@ package com.globallogic.dc.web.api;
 
 import com.globallogic.dc.commons.test.SectionBuilder;
 import com.globallogic.dc.model.Section;
-import com.globallogic.dc.service.SectionService;
+import com.globallogic.dc.service.api.SectionService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

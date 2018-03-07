@@ -2,7 +2,7 @@ package com.globallogic.dc.service.impl;
 
 import com.globallogic.dc.commons.test.SectionBuilder;
 import com.globallogic.dc.model.Section;
-import com.globallogic.dc.repository.SectionDao;
+import com.globallogic.dc.repository.api.SectionDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

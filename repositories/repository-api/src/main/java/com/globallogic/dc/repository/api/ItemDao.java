@@ -1,14 +1,10 @@
-package com.globallogic.dc.service;
+package com.globallogic.dc.repository.api;
 
 import com.globallogic.dc.model.Item;
 
 import java.util.List;
 
-public interface ItemService {
-
-    List<Item> getItems();
-
-    Item getItemById(String id);
+public interface ItemDao extends ProductsDao<Item> {
 
     List<Item> getItemsByRelatedItemId(String id);
 
