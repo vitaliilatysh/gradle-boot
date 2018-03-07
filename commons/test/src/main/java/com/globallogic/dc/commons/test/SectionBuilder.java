@@ -48,14 +48,14 @@ public class SectionBuilder {
     }
 
     public Section buildDefault() {
-        return new Section(this.key = "1", this.title = "Title", this.description = "Desc");
+        return new Section("1", "Title", "Desc");
     }
 
     public List<Section> buildAllSections() {
         return Arrays.asList(
-                new Section(this.key = "31", this.title = "Title", this.description = "Desc"),
-                new Section(this.key = "32", this.title = "Title", this.description = "Desc"),
-                new Section(this.key = "33", this.title = "Title", this.description = "Desc"),
-                new Section(this.key = "34", this.title = "Title", this.description = "Desc"));
+                new Section("31", "Title", "Desc"),
+                new Section("32", "Title", "Desc"),
+                new Section("33", "Title", "Desc"),
+                new Section("34", "Title", "Desc"));
     }
 }

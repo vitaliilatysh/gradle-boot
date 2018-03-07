@@ -53,14 +53,14 @@ public class ItemBuilder {
     }
 
     public Item buildDefault() {
-        return new Item(this.key = "1", this.title = "Title", this.description = "Desc");
+        return new Item("1", "Title", "Desc");
     }
 
     public List<Item> buildAllItems() {
         return Arrays.asList(
-                new Item(this.key = "51", this.title = "Title", this.description = "Desc"),
-                new Item(this.key = "52", this.title = "Title", this.description = "Desc"),
-                new Item(this.key = "53", this.title = "Title", this.description = "Desc"),
-                new Item(this.key = "54", this.title = "Title", this.description = "Desc"));
+                new Item("51", "Title", "Desc"),
+                new Item("52", "Title", "Desc"),
+                new Item("53", "Title", "Desc"),
+                new Item("54", "Title", "Desc"));
     }
 }

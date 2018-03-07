@@ -55,14 +55,14 @@ public class SubChapterBuilder {
     }
 
     public SubChapter buildDefault() {
-        return new SubChapter(this.key = "1", this.title = "Title", this.description = "Desc");
+        return new SubChapter("1", "Title", "Desc");
     }
 
     public List<SubChapter> buildAllSubChapters() {
         return Arrays.asList(
-                new SubChapter(this.key = "21", this.title = "Title", this.description = "Desc"),
-                new SubChapter(this.key = "22", this.title = "Title", this.description = "Desc"),
-                new SubChapter(this.key = "23", this.title = "Title", this.description = "Desc"),
-                new SubChapter(this.key = "24", this.title = "Title", this.description = "Desc"));
+                new SubChapter("21", "Title", "Desc"),
+                new SubChapter("22", "Title", "Desc"),
+                new SubChapter("23", "Title", "Desc"),
+                new SubChapter("24", "Title", "Desc"));
     }
 }

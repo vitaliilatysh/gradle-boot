@@ -55,17 +55,17 @@ public class RangeBuilder {
     }
 
     public Range buildDefault() {
-        return new Range(this.key = "1", this.title = "Title", this.description = "Desc");
+        return new Range("1", "Title", "Desc");
     }
 
     public List<Range> buildAllRanges() {
         return Arrays.asList(
-                new Range(this.key = "41", this.title = "Title", this.description = "Desc"),
-                new Range(this.key = "42", this.title = "Title", this.description = "Desc"),
-                new Range(this.key = "43", this.title = "Title", this.description = "Desc"),
-                new Range(this.key = "44", this.title = "Title", this.description = "Desc"),
-                new Range(this.key = "45", this.title = "Title", this.description = "Desc"),
-                new Range(this.key = "46", this.title = "Title", this.description = "Desc"));
+                new Range("41", "Title", "Desc"),
+                new Range("42", "Title", "Desc"),
+                new Range("43", "Title", "Desc"),
+                new Range("44", "Title", "Desc"),
+                new Range("45", "Title", "Desc"),
+                new Range("46", "Title", "Desc"));
     }
 
 }
