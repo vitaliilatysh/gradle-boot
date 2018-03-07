@@ -1,7 +1,8 @@
 package com.globallogic.dc.service.impl;
 
+import com.globallogic.dc.commons.test.ChapterBuilder;
 import com.globallogic.dc.model.Chapter;
-import com.globallogic.dc.repository.ChapterDao;
+import com.globallogic.dc.repository.api.ChapterDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,9 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -32,12 +30,7 @@ public class ChapterServiceImplTest {
 
     @Test
     public void testGetChapters() {
-        List<Chapter> chapters = new ArrayList<>();
-        chapters.add(new Chapter("12", "Title", "Desc"));
-        chapters.add(new Chapter("13", "Title", "Desc"));
-        chapters.add(new Chapter("14", "Title", "Desc"));
-
-        when(chapterDao.getAll()).thenReturn(chapters);
+        when(chapterDao.getAll()).thenReturn(new ChapterBuilder().buildAllChapters());
 
         assertEquals(3, chapterService.getChapters().size());
     }

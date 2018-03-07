@@ -1,8 +1,8 @@
 package com.globallogic.dc.service.impl;
 
 import com.globallogic.dc.model.SubChapter;
-import com.globallogic.dc.repository.SubChapterDao;
-import com.globallogic.dc.service.SubChapterService;
+import com.globallogic.dc.repository.api.SubChapterDao;
+import com.globallogic.dc.service.api.SubChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

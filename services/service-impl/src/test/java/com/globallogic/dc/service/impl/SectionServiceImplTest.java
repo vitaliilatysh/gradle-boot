@@ -1,16 +1,15 @@
 package com.globallogic.dc.service.impl;
 
+import com.globallogic.dc.commons.test.SectionBuilder;
 import com.globallogic.dc.model.Section;
-import com.globallogic.dc.repository.SectionDao;
+import com.globallogic.dc.repository.api.SectionDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -26,13 +25,7 @@ public class SectionServiceImplTest {
 
     @Test
     public void testGetSections() {
-        List<Section> sections = new ArrayList<>();
-        sections.add(new Section("31", "Title", "Desc"));
-        sections.add(new Section("32", "Title", "Desc"));
-        sections.add(new Section("33", "Title", "Desc"));
-        sections.add(new Section("34", "Title", "Desc"));
-
-        when(sectionDao.getAll()).thenReturn(sections);
+        when(sectionDao.getAll()).thenReturn(new SectionBuilder().buildAllSections());
 
         assertEquals(4, sectionService.getSections().size());
     }

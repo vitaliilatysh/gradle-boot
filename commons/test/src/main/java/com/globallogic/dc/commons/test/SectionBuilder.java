@@ -4,6 +4,7 @@ import com.globallogic.dc.model.Range;
 import com.globallogic.dc.model.Section;
 import com.globallogic.dc.model.SubChapter;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SectionBuilder {
@@ -47,6 +48,14 @@ public class SectionBuilder {
     }
 
     public Section buildDefault() {
-        return new Section(this.key = "1", this.title = "Title", this.description = "Desc");
+        return new Section("1", "Title", "Desc");
+    }
+
+    public List<Section> buildAllSections() {
+        return Arrays.asList(
+                new Section("31", "Title", "Desc"),
+                new Section("32", "Title", "Desc"),
+                new Section("33", "Title", "Desc"),
+                new Section("34", "Title", "Desc"));
     }
 }

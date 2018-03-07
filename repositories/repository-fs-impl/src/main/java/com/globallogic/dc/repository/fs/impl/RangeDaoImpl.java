@@ -1,7 +1,7 @@
 package com.globallogic.dc.repository.fs.impl;
 
 import com.globallogic.dc.model.Range;
-import com.globallogic.dc.repository.RangeDao;
+import com.globallogic.dc.repository.api.RangeDao;
 import com.globallogic.dc.repository.fs.AbstractFileSystemDAO;
 import org.springframework.stereotype.Repository;
 

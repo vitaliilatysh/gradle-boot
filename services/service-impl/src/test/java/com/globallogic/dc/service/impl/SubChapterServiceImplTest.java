@@ -1,16 +1,15 @@
 package com.globallogic.dc.service.impl;
 
+import com.globallogic.dc.commons.test.SubChapterBuilder;
 import com.globallogic.dc.model.SubChapter;
-import com.globallogic.dc.repository.SubChapterDao;
+import com.globallogic.dc.repository.api.SubChapterDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -26,13 +25,7 @@ public class SubChapterServiceImplTest {
 
     @Test
     public void testGetSubChapters() {
-        List<SubChapter> subChapters = new ArrayList<>();
-        subChapters.add(new SubChapter("21", "Title", "Desc"));
-        subChapters.add(new SubChapter("22", "Title", "Desc"));
-        subChapters.add(new SubChapter("23", "Title", "Desc"));
-        subChapters.add(new SubChapter("24", "Title", "Desc"));
-
-        when(subChapterDao.getAll()).thenReturn(subChapters);
+        when(subChapterDao.getAll()).thenReturn(new SubChapterBuilder().buildAllSubChapters());
 
         assertEquals(4, subChapterService.getSubChapters().size());
     }

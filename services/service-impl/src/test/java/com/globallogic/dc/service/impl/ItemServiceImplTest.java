@@ -1,7 +1,8 @@
 package com.globallogic.dc.service.impl;
 
+import com.globallogic.dc.commons.test.ItemBuilder;
 import com.globallogic.dc.model.Item;
-import com.globallogic.dc.repository.ItemDao;
+import com.globallogic.dc.repository.api.ItemDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,9 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -33,13 +32,7 @@ public class ItemServiceImplTest {
 
     @Test
     public void testGetItems() {
-        List<Item> items = new ArrayList<>();
-        items.add(new Item("51", "Title", "Desc"));
-        items.add(new Item("52", "Title", "Desc"));
-        items.add(new Item("53", "Title", "Desc"));
-        items.add(new Item("54", "Title", "Desc"));
-
-        when(itemDao.getAll()).thenReturn(items);
+        when(itemDao.getAll()).thenReturn(new ItemBuilder().buildAllItems());
 
         assertEquals(4, itemService.getItems().size());
     }

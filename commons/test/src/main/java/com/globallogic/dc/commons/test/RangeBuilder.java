@@ -5,6 +5,7 @@ import com.globallogic.dc.model.Range;
 import com.globallogic.dc.model.Section;
 import com.globallogic.dc.model.SubChapter;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class RangeBuilder {
@@ -54,6 +55,17 @@ public class RangeBuilder {
     }
 
     public Range buildDefault() {
-        return new Range(this.key = "1", this.title = "Title", this.description = "Desc");
+        return new Range("1", "Title", "Desc");
     }
+
+    public List<Range> buildAllRanges() {
+        return Arrays.asList(
+                new Range("41", "Title", "Desc"),
+                new Range("42", "Title", "Desc"),
+                new Range("43", "Title", "Desc"),
+                new Range("44", "Title", "Desc"),
+                new Range("45", "Title", "Desc"),
+                new Range("46", "Title", "Desc"));
+    }
+
 }

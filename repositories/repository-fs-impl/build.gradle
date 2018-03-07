@@ -6,4 +6,5 @@ dependencies {
     compile project(':repositories:repository-api')
     testCompile project(':commons:test')
     compile group: 'org.springframework', name: 'spring-context'
+    compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure'
 }

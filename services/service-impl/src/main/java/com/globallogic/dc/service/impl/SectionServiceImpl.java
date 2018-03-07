@@ -1,8 +1,8 @@
 package com.globallogic.dc.service.impl;
 
 import com.globallogic.dc.model.Section;
-import com.globallogic.dc.repository.SectionDao;
-import com.globallogic.dc.service.SectionService;
+import com.globallogic.dc.repository.api.SectionDao;
+import com.globallogic.dc.service.api.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
