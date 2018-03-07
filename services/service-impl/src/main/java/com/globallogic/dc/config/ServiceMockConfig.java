@@ -6,6 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = "com.globallogic.dc.service.mock")
-@ConditionalOnProperty(name = "dc.mock.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "dc.service.mock.enabled", havingValue = "true")
 public class ServiceMockConfig {
 }

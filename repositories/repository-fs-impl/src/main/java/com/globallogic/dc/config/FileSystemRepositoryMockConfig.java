@@ -6,6 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = "com.globallogic.dc.repository.fs.mock")
-@ConditionalOnProperty(name = "dc.mock.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "dc.repository.mock.enabled", havingValue = "true")
 public class FileSystemRepositoryMockConfig {
 }
