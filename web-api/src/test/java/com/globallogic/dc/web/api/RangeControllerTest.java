@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -42,9 +41,7 @@ public class RangeControllerTest {
 
     @Test
     public void testGetRanges() throws Exception {
-        List<Range> ranges = new RangeBuilder().buildAllRanges();
-
-        when(rangeService.getRanges()).thenReturn(ranges);
+        when(rangeService.getRanges()).thenReturn(new RangeBuilder().buildAllRanges());
 
         mockMvc.perform(get("/ranges"))
                 .andExpect(status().isOk())

@@ -12,7 +12,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -33,9 +32,7 @@ public class ItemServiceImplTest {
 
     @Test
     public void testGetItems() {
-        List<Item> items = new ItemBuilder().buildAllItems();
-
-        when(itemDao.getAll()).thenReturn(items);
+        when(itemDao.getAll()).thenReturn(new ItemBuilder().buildAllItems());
 
         assertEquals(4, itemService.getItems().size());
     }

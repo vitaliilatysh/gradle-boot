@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -42,9 +41,7 @@ public class SectionControllerTest {
 
     @Test
     public void testGetSections() throws Exception {
-        List<Section> sections = new SectionBuilder().buildAllSections();
-
-        when(sectionService.getSections()).thenReturn(sections);
+        when(sectionService.getSections()).thenReturn(new SectionBuilder().buildAllSections());
 
         mockMvc.perform(get("/sections"))
                 .andExpect(status().isOk())

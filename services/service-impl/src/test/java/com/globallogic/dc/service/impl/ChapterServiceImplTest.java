@@ -11,8 +11,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -32,9 +30,7 @@ public class ChapterServiceImplTest {
 
     @Test
     public void testGetChapters() {
-        List<Chapter> chapters = new ChapterBuilder().buildAllChapters();
-
-        when(chapterDao.getAll()).thenReturn(chapters);
+        when(chapterDao.getAll()).thenReturn(new ChapterBuilder().buildAllChapters());
 
         assertEquals(3, chapterService.getChapters().size());
     }

@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -42,9 +41,7 @@ public class SubChapterControllerTest {
 
     @Test
     public void testGetSubChapters() throws Exception {
-        List<SubChapter> subChapters = new SubChapterBuilder().buildAllSubChapters();
-
-        when(subChapterService.getSubChapters()).thenReturn(subChapters);
+        when(subChapterService.getSubChapters()).thenReturn(new SubChapterBuilder().buildAllSubChapters());
         mockMvc.perform(get("/subChapters"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))

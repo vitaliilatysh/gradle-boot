@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -26,9 +25,7 @@ public class SubChapterServiceImplTest {
 
     @Test
     public void testGetSubChapters() {
-        List<SubChapter> subChapters = new SubChapterBuilder().buildAllSubChapters();
-
-        when(subChapterDao.getAll()).thenReturn(subChapters);
+        when(subChapterDao.getAll()).thenReturn(new SubChapterBuilder().buildAllSubChapters());
 
         assertEquals(4, subChapterService.getSubChapters().size());
     }

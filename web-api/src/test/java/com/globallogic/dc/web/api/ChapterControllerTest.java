@@ -13,8 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.List;
-
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
@@ -40,9 +38,7 @@ public class ChapterControllerTest {
 
     @Test
     public void testGetChapters() throws Exception {
-        List<Chapter> chapters = new ChapterBuilder().buildAllChapters();
-
-        when(chapterService.getChapters()).thenReturn(chapters);
+        when(chapterService.getChapters()).thenReturn(new ChapterBuilder().buildAllChapters());
 
         mockMvc.perform(get("/chapters"))
                 .andExpect(status().isOk())

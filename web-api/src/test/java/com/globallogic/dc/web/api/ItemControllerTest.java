@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -42,9 +41,7 @@ public class ItemControllerTest {
 
     @Test
     public void testGetItems() throws Exception {
-        List<Item> items = new ItemBuilder().buildAllItems();
-
-        when(itemService.getItems()).thenReturn(items);
+        when(itemService.getItems()).thenReturn(new ItemBuilder().buildAllItems());
 
         mockMvc.perform(get("/items"))
                 .andExpect(status().isOk())

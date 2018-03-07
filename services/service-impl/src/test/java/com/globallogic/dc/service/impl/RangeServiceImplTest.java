@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -26,9 +25,7 @@ public class RangeServiceImplTest {
 
     @Test
     public void testGetRanges() {
-        List<Range> ranges = new RangeBuilder().buildAllRanges();
-
-        when(rangeDao.getAll()).thenReturn(ranges);
+        when(rangeDao.getAll()).thenReturn(new RangeBuilder().buildAllRanges());
 
         assertEquals(6, rangeService.getRanges().size());
     }
