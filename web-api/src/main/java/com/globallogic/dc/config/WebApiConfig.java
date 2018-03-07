@@ -5,5 +5,5 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = "com.globallogic.dc.web.api")
-public class ControllerConfig {
+public class WebApiConfig {
 }
