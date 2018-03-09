@@ -4,6 +4,7 @@ dependencies {
     compile project(':connector')
     compile project(':repositories:repository-fs-impl')
     compile project(':services:service-impl')
+    compile project(':swagger-api')
     compile project(':web-api')
     compile group: 'org.springframework', name: 'spring-context'
     compile group: 'org.springframework.boot', name: 'spring-boot'
