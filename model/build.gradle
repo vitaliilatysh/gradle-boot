@@ -4,4 +4,5 @@ dependencies {
     compile project(':commons:model')
     testCompile project (':commons:test')
     compile group: 'org.apache.commons', name: 'commons-collections4'
+    compile group: 'io.springfox', name:'springfox-swagger2'
 }
