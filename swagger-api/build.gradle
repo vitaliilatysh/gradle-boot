@@ -2,6 +2,7 @@ group 'com.globallogic.dc.swagger'
 
 dependencies {
     compile group: 'org.springframework', name: 'spring-context'
+    compile group: 'org.springframework', name: 'spring-web'
     compile group: 'io.springfox', name:'springfox-swagger2'
     compile group: 'io.springfox', name:'springfox-swagger-ui'
 }
