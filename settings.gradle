@@ -1,5 +1,6 @@
 rootProject.name = 'java-trainee-latysh'
-include 'app'
+include 'applications:application-common'
+include 'applications:application-complete'
 include 'commons:model'
 include 'commons:test'
 include 'connector'
