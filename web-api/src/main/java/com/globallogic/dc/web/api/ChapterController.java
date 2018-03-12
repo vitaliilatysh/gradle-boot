@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api(tags = "/chapters", description = "Operations about chapters")
+@Api(tags = "/api/chapters", description = "Operations about chapters")
 @RestController
-@RequestMapping(value = "/chapters", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/chapters", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ChapterController {
 
     @Autowired

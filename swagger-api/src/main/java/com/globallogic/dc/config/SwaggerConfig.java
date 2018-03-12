@@ -18,8 +18,9 @@ public class SwaggerConfig {
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select().apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
-                .paths(PathSelectors.regex("/.*"))
+                .paths(PathSelectors.regex("/api.*"))
                 .build()
+                .enableUrlTemplating(true)
                 .apiInfo(apiInfo());
     }
 
