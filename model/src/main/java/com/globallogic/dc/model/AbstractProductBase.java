@@ -1,13 +1,19 @@
 package com.globallogic.dc.model;
 
 import com.globallogic.dc.commons.model.Entity;
+import io.swagger.annotations.ApiModelProperty;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public abstract class AbstractProductBase extends Entity<String> {
 
+    @ApiModelProperty(required = true)
     private String key;
+
+    @ApiModelProperty(required = true)
     private String title;
+
+    @ApiModelProperty(required = true)
     private String description;
 
     public AbstractProductBase(

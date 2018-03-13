@@ -1,4 +1,4 @@
-group 'com.globallogic.dc.config'
+group 'com.globallogic.dc.application.common'
 
 dependencies {
     compile project(':connector')
